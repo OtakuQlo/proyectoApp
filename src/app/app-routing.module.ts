@@ -10,7 +10,11 @@ const routes: Routes = [
     path: '',
     redirectTo: 'home',
     pathMatch: 'full'
+  },  {
+    path: 'inicio-sesion',
+    loadChildren: () => import('./Pages/inicio-sesion/inicio-sesion.module').then( m => m.InicioSesionPageModule)
   },
+
 ];
 
 @NgModule({
