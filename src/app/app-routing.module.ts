@@ -4,7 +4,7 @@ import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 const routes: Routes = [
   {
     path: 'home',
-    loadChildren: () => import('./home/home.module').then( m => m.HomePageModule)
+    loadChildren: () => import('./home/home.module').then(m => m.HomePageModule)
   },
   {
     path: '',
@@ -13,35 +13,36 @@ const routes: Routes = [
   },
   {
     path: 'inicio-sesion',
-    loadChildren: () => import('./Pages/inicio-sesion/inicio-sesion.module').then( m => m.InicioSesionPageModule)
+    loadChildren: () => import('./Pages/inicio-sesion/inicio-sesion.module').then(m => m.InicioSesionPageModule)
   },
   {
     path: 'pagina-principal',
-    loadChildren: () => import('./Pages/pagina-principal/pagina-principal.module').then( m => m.PaginaPrincipalPageModule)
+    loadChildren: () => import('./Pages/pagina-principal/pagina-principal.module').then(m => m.PaginaPrincipalPageModule)
+  },
+  {
+    path: 'pagina-producto',
+    loadChildren: () => import('./Pages/pagina-producto/pagina-producto.module').then(m => m.PaginaProductoPageModule)
   },
   {
     path: 'perfil',
-    loadChildren: () => import('./Pages/perfil/perfil.module').then( m => m.PerfilPageModule)
+    loadChildren: () => import('./Pages/perfil/perfil.module').then(m => m.PerfilPageModule)
   },
   {
     path: 'modificar-perfil',
-    loadChildren: () => import('./Pages/modificar-perfil/modificar-perfil.module').then( m => m.ModificarPerfilPageModule)
+    loadChildren: () => import('./Pages/modificar-perfil/modificar-perfil.module').then(m => m.ModificarPerfilPageModule)
   },
   {
     path: '**',
-    loadChildren: () => import('./Pages/not-found/not-found.module').then( m => m.NotFoundPageModule)
-  },  {
+    loadChildren: () => import('./Pages/not-found/not-found.module').then(m => m.NotFoundPageModule)
+  },
+  {
     path: 'recu-contra',
-    loadChildren: () => import('./Pages/recu-contra/recu-contra.module').then( m => m.RecuContraPageModule)
+    loadChildren: () => import('./Pages/recu-contra/recu-contra.module').then(m => m.RecuContraPageModule)
   },
   {
     path: 'cambiar-contra',
-    loadChildren: () => import('./Pages/cambiar-contra/cambiar-contra.module').then( m => m.CambiarContraPageModule)
+    loadChildren: () => import('./Pages/cambiar-contra/cambiar-contra.module').then(m => m.CambiarContraPageModule)
   },
-
-  
-
-  
 
 
 

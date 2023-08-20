@@ -1,0 +1,66 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-button slot="start" style="width: 20px; height: 20px;">
+      <ion-menu-button></ion-menu-button>
+    </ion-button>
+    <ion-breadcrumbs>
+      <ion-breadcrumb href="#home">Home</ion-breadcrumb>
+      <ion-breadcrumb>Auto Bacán</ion-breadcrumb>
+    </ion-breadcrumbs>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">paginaProducto</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <ion-row size="4">
+    <ion-col size="12">
+      <swiper-container style="width: 90%; height: 90%;">
+        <swiper-slide><ion-img
+            src="https://acroadtrip.blob.core.windows.net/catalogo-imagenes/m/RT_V_6b8d809e846542f9a8b4ecf1114fdd33.jpg"
+            alt="No image"></ion-img></swiper-slide>
+        <swiper-slide><ion-img
+            src="https://acroadtrip.blob.core.windows.net/catalogo-imagenes/m/RT_V_6b8d809e846542f9a8b4ecf1114fdd33.jpg"
+            alt="No image"></ion-img></swiper-slide>
+        <swiper-slide><ion-img
+            src="https://acroadtrip.blob.core.windows.net/catalogo-imagenes/m/RT_V_6b8d809e846542f9a8b4ecf1114fdd33.jpg"
+            alt="No image"></ion-img></swiper-slide>
+      </swiper-container>
+    </ion-col>
+  </ion-row>
+  <ion-row size="8">
+    <ion-col size="12">
+      <h3>Auto Bacán</h3>
+      <p>$ Precio</p>
+      <p>Nombre vendedor</p>
+      <p>Dirección</p>
+      <p>Numero de contacto</p>
+      <p></p>
+    </ion-col>
+
+    <ion-col size="12">
+      <ion-row size="1">Caracteristicas</ion-row>
+      <ion-row size="11" style="margin-top: 5px;">Lista con las caracteristicas</ion-row>
+    </ion-col>
+    <ion-col size="12">Descripción</ion-col>
+  </ion-row>
+  <ion-row >
+    <ion-col size="4" offset="1">
+      <ion-button>Contactar</ion-button>
+    </ion-col>
+    <ion-col size="4" offset="1">
+      <ion-button>Compartir</ion-button>
+    </ion-col>
+  </ion-row>
+  <ion-row>
+    <ion-col size="5" style="font-size: 10px;">
+      <p>Publicacion: #1242142361</p>
+    </ion-col>
+    <ion-col size="2" style="font-size: 10px;">
+      <p>Reportar</p>
+    </ion-col>
+  </ion-row>
+</ion-content>
