@@ -8,11 +8,16 @@ const routes: Routes = [
   },
   {
     path: '',
-    redirectTo: 'home',
+    redirectTo: 'pagina-principal',
     pathMatch: 'full'
-  },  {
+  },
+  {
     path: 'inicio-sesion',
     loadChildren: () => import('./Pages/inicio-sesion/inicio-sesion.module').then( m => m.InicioSesionPageModule)
+  },
+  {
+    path: 'pagina-principal',
+    loadChildren: () => import('./Pages/pagina-principal/pagina-principal.module').then( m => m.PaginaPrincipalPageModule)
   },
 
 ];

@@ -1,0 +1,87 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+      <ion-button slot="start" style="width: 20px; height: 20px;">
+        <ion-menu-button></ion-menu-button>
+      </ion-button>
+      <ion-breadcrumbs>
+        <ion-breadcrumb href="#home">Home</ion-breadcrumb>
+      </ion-breadcrumbs>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">Pagina Principal</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        <ion-searchbar show-clear-button="focus">
+        </ion-searchbar>
+      </ion-col>
+    </ion-row>
+    <ion-row class="ion-justify-content-center ion-text-center">
+      <ion-col > Maybe un slider con los ultimos autos publicados?</ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col size="6">
+        <ion-card>
+          <ion-card-header>
+            <ion-img
+              src="https://acroadtrip.blob.core.windows.net/catalogo-imagenes/m/RT_V_6b8d809e846542f9a8b4ecf1114fdd33.jpg"
+              alt="No Image"></ion-img>
+          </ion-card-header>
+          <ion-card-content>
+            <div class="ion-text-center">
+              <p>Auto Bacán</p>
+            </div>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+      <ion-col size="6">
+        <ion-card>
+          <ion-card-header>
+            <ion-img
+              src="https://acroadtrip.blob.core.windows.net/catalogo-imagenes/m/RT_V_6b8d809e846542f9a8b4ecf1114fdd33.jpg"></ion-img>
+          </ion-card-header>
+          <ion-card-content>
+            <div class="ion-text-center">
+              <p>Auto Bacán 2</p>
+            </div>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+      <ion-col size="6">
+        <ion-card>
+          <ion-card-header>
+            <ion-img
+              src="https://acroadtrip.blob.core.windows.net/catalogo-imagenes/m/RT_V_6b8d809e846542f9a8b4ecf1114fdd33.jpg"></ion-img>
+          </ion-card-header>
+          <ion-card-content>
+            <div class="ion-text-center">
+              <p>Auto Bacán 3</p>
+            </div>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+      <ion-col size="6">
+        <ion-card>
+          <ion-card-header>
+            <ion-img
+              src="https://acroadtrip.blob.core.windows.net/catalogo-imagenes/m/RT_V_6b8d809e846542f9a8b4ecf1114fdd33.jpg"></ion-img>
+          </ion-card-header>
+          <ion-card-content>
+            <div class="ion-text-center">
+              <p>Auto Bacán 4</p>
+            </div>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+    <ion-row class="ion-text-center">
+      <ion-col> Slider con las marcas?</ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>
