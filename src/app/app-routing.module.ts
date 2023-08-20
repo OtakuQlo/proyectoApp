@@ -19,6 +19,31 @@ const routes: Routes = [
     path: 'pagina-principal',
     loadChildren: () => import('./Pages/pagina-principal/pagina-principal.module').then( m => m.PaginaPrincipalPageModule)
   },
+  {
+    path: 'perfil',
+    loadChildren: () => import('./Pages/perfil/perfil.module').then( m => m.PerfilPageModule)
+  },
+  {
+    path: 'modificar-perfil',
+    loadChildren: () => import('./Pages/modificar-perfil/modificar-perfil.module').then( m => m.ModificarPerfilPageModule)
+  },
+  {
+    path: '**',
+    loadChildren: () => import('./Pages/not-found/not-found.module').then( m => m.NotFoundPageModule)
+  },  {
+    path: 'recu-contra',
+    loadChildren: () => import('./Pages/recu-contra/recu-contra.module').then( m => m.RecuContraPageModule)
+  },
+  {
+    path: 'cambiar-contra',
+    loadChildren: () => import('./Pages/cambiar-contra/cambiar-contra.module').then( m => m.CambiarContraPageModule)
+  },
+
+  
+
+  
+
+
 
 ];
 

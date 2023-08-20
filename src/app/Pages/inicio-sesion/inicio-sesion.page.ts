@@ -12,4 +12,6 @@ export class InicioSesionPage implements OnInit {
   ngOnInit() {
   }
 
+  
+
 }

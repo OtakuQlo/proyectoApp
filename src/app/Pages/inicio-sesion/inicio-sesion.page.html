@@ -1,35 +1,31 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>InicioSesion</ion-title>
+    <ion-title>Crear usuario</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content >
   <ion-grid>
     <ion-row>
-      <ion-title class="ion-margin-bottom ion-margin-top">
-        Crear Usuario
-      </ion-title>
     </ion-row>
     <ion-row>
       <ion-col size="1"></ion-col>
       <ion-col size="10" class="ion-margin-top" class="ion-text-center">
+        
         <ion-input label="Nombre" labelPlacement="floating" [counter]="true" maxlength="100"></ion-input>
         <ion-input label="Apellido" labelPlacement="floating" [counter]="true" maxlength="100"></ion-input>
         <ion-input label="Rut" labelPlacement="floating" [counter]="true" maxlength="20"></ion-input>
         <ion-input label="Correo electronico" labelPlacement="floating" [counter]="true" maxlength="20"></ion-input>
         <ion-input label="Contraseña" labelPlacement="floating" [counter]="true" maxlength="100"></ion-input>
         <ion-input label="Contraseña contraseña" labelPlacement="floating" [counter]="true" maxlength="100"></ion-input>
-        <ion-list class="ion-margin-top">
-          <ion-item>
-            <ion-select placeholder="Select a Fruit">
-              <div slot="label">Favorite Fruit <ion-text color="danger">(Required)</ion-text></div>
-              <ion-select-option value="apple">Apple</ion-select-option>
-              <ion-select-option value="banana">Banana</ion-select-option>
-              <ion-select-option value="orange">Orange</ion-select-option>
-            </ion-select>
-          </ion-item>
-        </ion-list>
+
+        <ion-item class="ion-margin-top">
+          <ion-select label="Pregunta" label-placement="stacked">
+            <ion-select-option value="1">¿Como se llama tu primera mascota?</ion-select-option>
+            <ion-select-option value="2">¿Como se llama tu hospital de nacimiento?</ion-select-option>
+            <ion-select-option value="3">¿Como se llama tu madre?</ion-select-option>
+          </ion-select>
+        </ion-item>
         
         <ion-button shape="round" class="ion-margin-top" fill="outline">Crear cuenta</ion-button>
         
@@ -42,13 +38,3 @@
 
 
 
-<ion-list>
-  <ion-item>
-    <ion-select placeholder="Select a Fruit">
-      <div slot="label">Favorite Fruit <ion-text color="danger">(Required)</ion-text></div>
-      <ion-select-option value="apple">Apple</ion-select-option>
-      <ion-select-option value="banana">Banana</ion-select-option>
-      <ion-select-option value="orange">Orange</ion-select-option>
-    </ion-select>
-  </ion-item>
-</ion-list>

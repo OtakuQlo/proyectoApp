@@ -1,24 +1,23 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ToastController } from '@ionic/angular';
 
 @Component({
-  selector: 'app-home',
-  templateUrl: 'home.page.html',
-  styleUrls: ['home.page.scss'],
+  selector: 'app-modificar-perfil',
+  templateUrl: './modificar-perfil.page.html',
+  styleUrls: ['./modificar-perfil.page.scss'],
 })
-export class HomePage {
+export class ModificarPerfilPage implements OnInit {
 
-  constructor(private router:Router,private toastController: ToastController) {}
+  constructor(private router:Router,private toastController: ToastController) { }
 
-  irCrearUsuario(){
-    this.router.navigate(['/inicio-sesion']);
+  ngOnInit() {
   }
-
   irPaginaPrinicipal(){
-    this.router.navigate(['/perfil']);
+    this.router.navigate(['/pagina-principal']);
     this.presentToast('bottom');
   }
+
   async presentToast(position: 'top' | 'middle' | 'bottom') {
     const toast = await this.toastController.create({
       message: 'Bienvenido a Satiscar',
