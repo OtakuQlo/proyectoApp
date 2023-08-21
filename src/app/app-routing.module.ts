@@ -32,8 +32,8 @@ const routes: Routes = [
     loadChildren: () => import('./Pages/modificar-perfil/modificar-perfil.module').then(m => m.ModificarPerfilPageModule)
   },
   {
-    path: '**',
-    loadChildren: () => import('./Pages/not-found/not-found.module').then(m => m.NotFoundPageModule)
+    path: 'perfil-admin',
+    loadChildren: () => import('./Pages/perfil-admin/perfil-admin.module').then( m => m.PerfilAdminPageModule)
   },
   {
     path: 'recu-contra',
@@ -43,6 +43,16 @@ const routes: Routes = [
     path: 'cambiar-contra',
     loadChildren: () => import('./Pages/cambiar-contra/cambiar-contra.module').then(m => m.CambiarContraPageModule)
   },
+  {
+    path: 'modificar-perfil-admin',
+    loadChildren: () => import('./Pages/modificar-perfil-admin/modificar-perfil-admin.module').then( m => m.ModificarPerfilAdminPageModule)
+  },
+  {
+    path: '**',
+    loadChildren: () => import('./Pages/not-found/not-found.module').then(m => m.NotFoundPageModule)
+  },
+
+
 
 
 

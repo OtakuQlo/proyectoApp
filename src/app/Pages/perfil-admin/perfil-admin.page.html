@@ -1,0 +1,47 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>Perfil-Admin</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+
+  <ion-grid>
+    <ion-row>
+      <ion-col size="1"></ion-col>
+      <ion-col size="10" > 
+      <ion-avatar class="avatar">
+        <img alt="persona" src="https://ionicframework.com/docs/img/demos/avatar.svg" />
+      </ion-avatar>
+      <ion-card>
+        <ion-card-header>
+          <ion-card-title>Miguel Pérez</ion-card-title>
+          
+        </ion-card-header>
+      
+        <ion-card-content>
+          <ion-card-subtitle>Rut: 11.111.111-1</ion-card-subtitle>
+          <ion-card-subtitle>Correo: correoreal@gmail.com</ion-card-subtitle>
+          <ion-card-subtitle>Dirección: Los olmos #1111</ion-card-subtitle>
+          <div class="ion-text-center">
+          <ion-button fill="clear" (click)="irModificarPerfilAdmin()">Modificar datos</ion-button>
+          </div>
+        </ion-card-content>
+      </ion-card>
+      
+    </ion-col>
+      <ion-col size="1"></ion-col>
+    </ion-row>
+
+
+    <ion-row class="ion-text-center">
+      <ion-col size="1"></ion-col>
+      <ion-col size="10"> 
+        <ion-button fill="outline" id="boton" class="ion-margin-top" shape="round" >Cambiar contraseña</ion-button>
+      </ion-col>
+      <ion-col size="1"></ion-col>
+    </ion-row>
+  </ion-grid>
+  
+  
+</ion-content>
