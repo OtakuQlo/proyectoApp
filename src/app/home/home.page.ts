@@ -10,14 +10,25 @@ import { ToastController } from '@ionic/angular';
 export class HomePage {
 
   constructor(private router:Router,private toastController: ToastController) {}
+  
 
   irCrearUsuario(){
     this.router.navigate(['/inicio-sesion']);
   }
 
   irPaginaPrinicipal(){
-    this.router.navigate(['/perfil']);
-    this.presentToast('bottom');
+    
+    // this.router.navigate(['/perfil']);
+    // this.presentToast('bottom');
+     
+    
+    console.log(rut);
+
+    
+    
+    
+    
+     
   }
   async presentToast(position: 'top' | 'middle' | 'bottom') {
     const toast = await this.toastController.create({
