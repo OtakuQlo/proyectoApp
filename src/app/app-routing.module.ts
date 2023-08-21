@@ -48,9 +48,15 @@ const routes: Routes = [
     loadChildren: () => import('./Pages/modificar-perfil-admin/modificar-perfil-admin.module').then( m => m.ModificarPerfilAdminPageModule)
   },
   {
+    path: 'panel-admin',
+    loadChildren: () => import('./Pages/panel-admin/panel-admin.module').then( m => m.PanelAdminPageModule)
+  },
+  {
     path: '**',
     loadChildren: () => import('./Pages/not-found/not-found.module').then(m => m.NotFoundPageModule)
   },
+  
+
 
 
 

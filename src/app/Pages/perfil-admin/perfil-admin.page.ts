@@ -18,4 +18,9 @@ export class PerfilAdminPage implements OnInit {
 
   }
 
+  irPanelAdmin(){
+    this.router.navigate(['/panel-admin']);
+
+  }
+
 }
