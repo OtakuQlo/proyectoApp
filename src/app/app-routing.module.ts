@@ -48,9 +48,21 @@ const routes: Routes = [
     loadChildren: () => import('./Pages/modificar-perfil-admin/modificar-perfil-admin.module').then( m => m.ModificarPerfilAdminPageModule)
   },
   {
+    path: 'recu-pregunta',
+    loadChildren: () => import('./Pages/recu-pregunta/recu-pregunta.module').then( m => m.RecuPreguntaPageModule)
+  },
+  {
+    path: 'ingresarcontra',
+    loadChildren: () => import('./Pages/ingresarcontra/ingresarcontra.module').then( m => m.IngresarcontraPageModule)
+  },
+
+  {
     path: '**',
     loadChildren: () => import('./Pages/not-found/not-found.module').then(m => m.NotFoundPageModule)
   },
+  
+
+
 
 
 
