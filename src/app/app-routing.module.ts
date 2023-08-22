@@ -62,7 +62,11 @@ const routes: Routes = [
   {
     path: '**',
     loadChildren: () => import('./Pages/not-found/not-found.module').then(m => m.NotFoundPageModule)
+  },  {
+    path: 'anadir-producto',
+    loadChildren: () => import('./Pages/anadir-producto/anadir-producto.module').then( m => m.AnadirProductoPageModule)
   },
+
   
 
 ];

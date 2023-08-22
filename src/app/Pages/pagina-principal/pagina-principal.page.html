@@ -1,6 +1,6 @@
-<ion-header [translucent]="true">
+<ion-header [translucent]="true" style="height: 50px;">
   <ion-toolbar>
-      <ion-button slot="start" style="width: 20px; height: 20px;">
+      <ion-button slot="start" style="width: 20px; height: 20px; margin-left: 8px;" color="light">
         <ion-menu-button></ion-menu-button>
       </ion-button>
       <ion-breadcrumbs>
@@ -18,16 +18,16 @@
   <ion-grid>
     <ion-row>
       <ion-col>
-        <ion-searchbar show-clear-button="focus" [(ngModel)]="busqueda">
+        <ion-searchbar show-clear-button="focus" [(ngModel)]="busqueda" >
         </ion-searchbar>
       </ion-col>
     </ion-row>
     <ion-row class="ion-justify-content-center ion-text-center">
-      <ion-col> Maybe un slider con los ultimos autos publicados?</ion-col>
+      <ion-col>Maybe un slider con los ultimos autos publicados?</ion-col>
     </ion-row>
     <ion-row>
-      <ion-col size="6">
-        <ion-card [routerLink]="['/pagina-producto']">
+      <ion-col size="6" >
+        <ion-card [routerLink]="['/pagina-producto']" >
           <ion-card-header>
             <ion-img
               src="https://acroadtrip.blob.core.windows.net/catalogo-imagenes/m/RT_V_6b8d809e846542f9a8b4ecf1114fdd33.jpg"
@@ -57,7 +57,7 @@
         <ion-card>
           <ion-card-header>
             <ion-img
-              src="https://acroadtrip.blob.core.windows.net/catalogo-imagenes/m/RT_V_6b8d809e846542f9a8b4ecf1114fdd33.jpg"></ion-img>
+              src="https://acroadtrip.blob.core.windows.net/catalogo-imagenes/m/RT_V_05a99b23df054e0eb2c93b3885eaa13e.jpg"></ion-img>
           </ion-card-header>
           <ion-card-content>
             <div class="ion-text-center">
