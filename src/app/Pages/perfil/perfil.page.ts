@@ -9,9 +9,14 @@ import { Router } from '@angular/router';
 export class PerfilPage implements OnInit {
 
   constructor(private router: Router) { }
-
   ngOnInit() {
-  }
+    }
+
+  
+    nombre: string =  "Miguel";
+    apellido: string = "Pérez";
+  
+
 
   irModificarPerfil(){
     this.router.navigate(['/modificar-perfil']);

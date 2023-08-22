@@ -1,15 +1,17 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { ToastController } from '@ionic/angular';
+import { AlertController, ToastController } from '@ionic/angular';
 
 @Component({
   selector: 'app-home',
   templateUrl: 'home.page.html',
   styleUrls: ['home.page.scss'],
 })
-export class HomePage {
+export class HomePage{
 
-  constructor(private router:Router,private toastController: ToastController) {}
+  constructor(private router:Router,private toastController: ToastController,private alertController: AlertController) {}
+  rut: string = '';
+  pass: string = '';
   
 
   irCrearUsuario(){
@@ -18,18 +20,24 @@ export class HomePage {
 
   irPaginaPrinicipal(){
     
-    // this.router.navigate(['/perfil']);
-    // this.presentToast('bottom');
-     
-    
-    console.log(rut);
+    if (this.rut != "21294525-0" || this.pass != "123") {
+      this.presentAlert();
+    }else{
+      this.router.navigate(['/perfil']);
+      this.presentToast('bottom');
+    }
 
-    
-    
-    
-    
      
   }
+  irRecuContra(){
+    this.router.navigate(['/recu-contra']);
+  }
+  irCrearCuenta(){
+    this.router.navigate(['/inicio-sesion']);
+  }
+
+
+
   async presentToast(position: 'top' | 'middle' | 'bottom') {
     const toast = await this.toastController.create({
       message: 'Bienvenido a Satiscar',
@@ -38,6 +46,16 @@ export class HomePage {
     });
 
     await toast.present();
+  }
+
+  async presentAlert() {
+    const alert = await this.alertController.create({
+      header: 'Datos erroneos',
+      message: 'Los datos ingresados no son validos',
+      buttons: ['Confirmar'],
+    });
+
+    await alert.present();
   }
 
 }
