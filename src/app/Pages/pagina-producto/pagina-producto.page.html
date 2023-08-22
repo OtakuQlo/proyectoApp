@@ -12,74 +12,80 @@
       <ion-title size="large">paginaProducto</ion-title>
     </ion-toolbar>
   </ion-header>
-  <ion-row>
-    <ion-col>
-      <ion-breadcrumbs>
-        <ion-breadcrumb href="#home" style="font-size: 12px;">Home</ion-breadcrumb>
-        <ion-breadcrumb style="font-size: 12px;">{{auto1[0]}}</ion-breadcrumb>
-      </ion-breadcrumbs>
-    </ion-col>
-    <ion-col size="12">
-      <swiper-container style="width: 320px;">
-        <swiper-slide><ion-img
-            src="https://acroadtrip.blob.core.windows.net/catalogo-imagenes/m/RT_V_6b8d809e846542f9a8b4ecf1114fdd33.jpg"
-            alt="No image"></ion-img></swiper-slide>
-        <swiper-slide><ion-img
-            src="https://acroadtrip.blob.core.windows.net/catalogo-imagenes/m/RT_V_6b8d809e846542f9a8b4ecf1114fdd33.jpg"
-            alt="No image"></ion-img></swiper-slide>
-        <swiper-slide><ion-img
-            src="https://acroadtrip.blob.core.windows.net/catalogo-imagenes/m/RT_V_6b8d809e846542f9a8b4ecf1114fdd33.jpg"
-            alt="No image"></ion-img></swiper-slide>
-      </swiper-container>
-    </ion-col>
-  </ion-row>
-  <ion-row>
-    <ion-col size="12" class="ion-text-start">
-      <ion-card color="light">
-        <ion-card-content>
-          <ion-row>
-            <h1>{{auto1[0]}}</h1>
-          </ion-row>
-          <ion-row>
-            <h2>${{auto1[1]}}</h2>
-          </ion-row>
-          <div style="font-size: 13px;">
-            <ion-row>Vendedor: {{auto1[2]}}</ion-row>
-            <ion-row>{{auto1[3]}}</ion-row>
-            <ion-row>Numero de contacto : +569{{auto1[4]}}</ion-row>
-          </div>
-        </ion-card-content>
-      </ion-card>
-    </ion-col>
-    <ion-col size="12" class="ion-text-start">
-      <ion-card color="light">
-        <ion-card-content>
-          <ion-row>
-            <h2>Caracteristicas</h2>
-          </ion-row>
-          <div style="font-size: 13px;">
-            <ion-row>Lista con las caracteristicas</ion-row>
-          </div>
-        </ion-card-content>
-      </ion-card>
-    </ion-col>
-    <ion-col size="12" class="ion-text-start">
-      <ion-card color="light">
-        <ion-card-content>
-          <div style="font-size: 13px;">
-            <ion-row><h2>Descripción</h2></ion-row>
-            <ion-row>{{auto1[5]}}</ion-row>
-          </div>
-        </ion-card-content>
-      </ion-card>
-    </ion-col>
-  </ion-row>
-  <ion-row class="ion-justify-content-center">
-    <ion-col size="4">
-      <ion-button style="font-size: 12px; width: 105px;" fill="outline" id="botonContac" shape="round">Contactar</ion-button>
-    </ion-col>
-    <ion-col size="4" >
-      <ion-button color="danger" style="font-size: 12px; width: 105px;" fill="outline" id="botonReportar" shape="round">Reportar</ion-button>
-    </ion-col>
-  </ion-row>
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        <ion-breadcrumbs>
+          <ion-breadcrumb href="#home" style="font-size: 12px;">Home</ion-breadcrumb>
+          <ion-breadcrumb style="font-size: 12px;">{{auto1[0]}}</ion-breadcrumb>
+        </ion-breadcrumbs>
+      </ion-col>
+      <ion-col size="12">
+        <swiper-container style="width: 320px;">
+          <swiper-slide><ion-img
+              src="https://acroadtrip.blob.core.windows.net/catalogo-imagenes/m/RT_V_6b8d809e846542f9a8b4ecf1114fdd33.jpg"
+              alt="No image"></ion-img></swiper-slide>
+          <swiper-slide><ion-img
+              src="https://acroadtrip.blob.core.windows.net/catalogo-imagenes/m/RT_V_6b8d809e846542f9a8b4ecf1114fdd33.jpg"
+              alt="No image"></ion-img></swiper-slide>
+          <swiper-slide><ion-img
+              src="https://acroadtrip.blob.core.windows.net/catalogo-imagenes/m/RT_V_6b8d809e846542f9a8b4ecf1114fdd33.jpg"
+              alt="No image"></ion-img></swiper-slide>
+        </swiper-container>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col size="12" class="ion-text-start">
+        <ion-card color="light">
+          <ion-card-content>
+            <ion-row>
+              <h1>{{auto1[0]}}</h1>
+            </ion-row>
+            <ion-row>
+              <h2>${{auto1[1]}}</h2>
+            </ion-row>
+            <div style="font-size: 13px;">
+              <ion-row>Vendedor: {{auto1[2]}}</ion-row>
+              <ion-row>{{auto1[3]}}</ion-row>
+              <ion-row>Numero de contacto : +569{{auto1[4]}}</ion-row>
+            </div>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+      <ion-col size="12" class="ion-text-start">
+        <ion-card color="light">
+          <ion-card-content>
+            <ion-row>
+              <h2>Caracteristicas</h2>
+            </ion-row>
+            <div style="font-size: 13px;">
+              <ion-row>Lista con las caracteristicas</ion-row>
+            </div>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+      <ion-col size="12" class="ion-text-start">
+        <ion-card color="light">
+          <ion-card-content>
+            <div style="font-size: 13px;">
+              <ion-row>
+                <h2>Descripción</h2>
+              </ion-row>
+              <ion-row>{{auto1[5]}}</ion-row>
+            </div>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+    <ion-row class="ion-justify-content-center">
+      <ion-col size="4">
+        <ion-button style="font-size: 12px; width: 105px;" fill="outline" id="botonContac"
+          shape="round">Contactar</ion-button>
+      </ion-col>
+      <ion-col size="4">
+        <ion-button color="danger" style="font-size: 12px; width: 105px;" fill="outline" id="botonReportar"
+          shape="round">Reportar</ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 </ion-content>

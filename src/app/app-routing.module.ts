@@ -59,12 +59,14 @@ const routes: Routes = [
     path: 'ingresarcontra',
     loadChildren: () => import('./Pages/ingresarcontra/ingresarcontra.module').then( m => m.IngresarcontraPageModule)
   },
+
+  {
+    path: 'anadir-producto',
+    loadChildren: () => import('./Pages/anadir-producto/anadir-producto.module').then( m => m.AnadirProductoPageModule)
+  },
   {
     path: '**',
     loadChildren: () => import('./Pages/not-found/not-found.module').then(m => m.NotFoundPageModule)
-  },  {
-    path: 'anadir-producto',
-    loadChildren: () => import('./Pages/anadir-producto/anadir-producto.module').then( m => m.AnadirProductoPageModule)
   },
 
   

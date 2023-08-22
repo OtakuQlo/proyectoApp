@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
+
 @Component({
   selector: 'app-anadir-producto',
   templateUrl: './anadir-producto.page.html',
@@ -8,7 +9,13 @@ import { Component, OnInit } from '@angular/core';
 export class AnadirProductoPage implements OnInit {
 
   constructor() { }
-
+  nombreV: string = "";
+  precioV: number = 0;
+  colorV: string ="";
+  marcaV: string ="";
+  anosV: number= 0;
+  descrpV: string = "";
+  kilometrajeV: number = 0; 
   ngOnInit() {
   }
 
