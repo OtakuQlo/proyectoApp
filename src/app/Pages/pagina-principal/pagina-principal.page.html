@@ -18,7 +18,7 @@
   <ion-grid>
     <ion-row>
       <ion-col>
-        <ion-searchbar show-clear-button="focus">
+        <ion-searchbar show-clear-button="focus" [(ngModel)]="busqueda">
         </ion-searchbar>
       </ion-col>
     </ion-row>
@@ -35,7 +35,20 @@
           </ion-card-header>
           <ion-card-content>
             <div class="ion-text-center">
-              <p>Auto Bacán</p>
+              <p>{{auto1[0]}}</p>
+            </div>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+      <ion-col size="6">
+        <ion-card>
+          <ion-card-header>
+            <ion-img
+              src="https://acroadtrip.blob.core.windows.net/catalogo-imagenes/m/RT_V_05a99b23df054e0eb2c93b3885eaa13e.jpg"></ion-img>
+          </ion-card-header>
+          <ion-card-content>
+            <div class="ion-text-center">
+              <p>{{auto2[0]}}</p>
             </div>
           </ion-card-content>
         </ion-card>
@@ -48,7 +61,7 @@
           </ion-card-header>
           <ion-card-content>
             <div class="ion-text-center">
-              <p>Auto Bacán 2</p>
+              <p>{{auto1[0]}}</p>
             </div>
           </ion-card-content>
         </ion-card>
@@ -61,20 +74,7 @@
           </ion-card-header>
           <ion-card-content>
             <div class="ion-text-center">
-              <p>Auto Bacán 3</p>
-            </div>
-          </ion-card-content>
-        </ion-card>
-      </ion-col>
-      <ion-col size="6">
-        <ion-card>
-          <ion-card-header>
-            <ion-img
-              src="https://acroadtrip.blob.core.windows.net/catalogo-imagenes/m/RT_V_6b8d809e846542f9a8b4ecf1114fdd33.jpg"></ion-img>
-          </ion-card-header>
-          <ion-card-content>
-            <div class="ion-text-center">
-              <p>Auto Bacán 4</p>
+              <p>{{auto2[0]}}</p>
             </div>
           </ion-card-content>
         </ion-card>
