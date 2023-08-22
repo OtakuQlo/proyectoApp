@@ -10,8 +10,8 @@
     <ion-row>
       <ion-col size="1"></ion-col>
       <ion-col size="10" > 
-      <ion-avatar class="avatar">
-        <img alt="persona" src="https://ionicframework.com/docs/img/demos/avatar.svg" />
+      <ion-avatar >
+        <img alt="persona" src="{{imagen}}" />
       </ion-avatar>
       <ion-card>
         <ion-card-header>
@@ -20,9 +20,9 @@
         </ion-card-header>
       
         <ion-card-content>
-          <ion-card-subtitle>Rut: 11.111.111-1</ion-card-subtitle>
-          <ion-card-subtitle>Correo: correoreal@gmail.com</ion-card-subtitle>
-          <ion-card-subtitle>Dirección: Los olmos #1111</ion-card-subtitle>
+          <ion-card-subtitle>Rut: {{rut}}</ion-card-subtitle>
+          <ion-card-subtitle>Correo: {{correo}}</ion-card-subtitle>
+          <ion-card-subtitle>Dirección: {{direccion}}</ion-card-subtitle>
           <div class="ion-text-center">
           <ion-button fill="clear" (click)="irModificarPerfil()">Modificar datos</ion-button>
           </div>

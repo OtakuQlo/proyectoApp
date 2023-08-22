@@ -11,15 +11,15 @@
       <ion-col size="1"></ion-col>
       <ion-col size="10">
         <ion-item class="ion-margin-top">
-          <ion-select label="Pregunta" label-placement="stacked">
+          <ion-select label="Pregunta" label-placement="stacked" [(ngModel)] = "opcion">
             <ion-select-option value="1">¿Como se llama tu primera mascota?</ion-select-option>
             <ion-select-option value="2">¿Como se llama tu hospital de nacimiento?</ion-select-option>
             <ion-select-option value="3">¿Como se llama tu madre?</ion-select-option>
           </ion-select>
         </ion-item>
-        <ion-input label="Respuesta" labelPlacement="floating" class="ion-margin-top"></ion-input>
+        <ion-input label="Respuesta" labelPlacement="floating" class="ion-margin-top" [(ngModel)] = "respuesta"></ion-input>
         <div class="ion-text-center">
-          <ion-button fill="outline" id="boton" class="ion-margin-top" shape="round" class="ion-margin-top">Confirmar</ion-button>
+          <ion-button fill="outline" id="boton" class="ion-margin-top" shape="round" class="ion-margin-top" (click) = irCambiarContra()>Confirmar</ion-button>
         </div>
         </ion-col>
       <ion-col size="1"></ion-col>

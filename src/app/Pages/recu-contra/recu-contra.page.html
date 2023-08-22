@@ -14,8 +14,8 @@
       <ion-col size="10">
         
         
-        <ion-input label="Ingrese su correo" labelPlacement="floating"></ion-input>
-        <ion-button fill="outline" id="boton" class="ion-margin-top" shape="round">Confirmar</ion-button>
+        <ion-input label="Ingrese su correo" labelPlacement="floating" [(ngModel)] = "input"></ion-input>
+        <ion-button fill="outline" id="boton" class="ion-margin-top" shape="round" (click) = "irRecuPregunta()">Confirmar</ion-button>
       
       </ion-col>
       <ion-col size="1"></ion-col>

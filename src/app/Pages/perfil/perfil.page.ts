@@ -15,8 +15,10 @@ export class PerfilPage implements OnInit {
   
     nombre: string =  "Miguel";
     apellido: string = "Pérez";
-  
-
+    imagen: string = "https://ionicframework.com/docs/img/demos/avatar.svg";
+    rut: string = "11.111.111-1";
+    correo: string = "correoreal@gmail.com";
+    direccion: string = "Los olmos #1111";
 
   irModificarPerfil(){
     this.router.navigate(['/modificar-perfil']);
