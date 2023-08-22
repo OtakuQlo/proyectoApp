@@ -12,7 +12,7 @@ export class HomePage{
   constructor(private router:Router,private toastController: ToastController,private alertController: AlertController) {}
   rut: string = '';
   pass: string = '';
-  
+
 
   irCrearUsuario(){
     this.router.navigate(['/inicio-sesion']);

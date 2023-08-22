@@ -24,5 +24,8 @@ export class PerfilPage implements OnInit {
     this.router.navigate(['/modificar-perfil']);
 
   }
+  irIngresarContra(){
+    this.router.navigate(['/ingresarcontra']);
+  }
 
 }
