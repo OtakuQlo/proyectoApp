@@ -7,7 +7,7 @@ import { IonicModule } from '@ionic/angular';
 import { PaginaProductoPageRoutingModule } from './pagina-producto-routing.module';
 
 import { PaginaProductoPage } from './pagina-producto.page';
-
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 
 
 @NgModule({
@@ -17,6 +17,7 @@ import { PaginaProductoPage } from './pagina-producto.page';
     IonicModule,
     PaginaProductoPageRoutingModule
   ],
-  declarations: [PaginaProductoPage]
+  declarations: [PaginaProductoPage],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class PaginaProductoPageModule {}
