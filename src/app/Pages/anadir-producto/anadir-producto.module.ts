@@ -9,6 +9,7 @@ import { AnadirProductoPageRoutingModule } from './anadir-producto-routing.modul
 import { AnadirProductoPage } from './anadir-producto.page';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 
+
 @NgModule({
   imports: [
     CommonModule,

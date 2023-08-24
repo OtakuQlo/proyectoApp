@@ -8,9 +8,11 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { TopBarComponent } from './Components/top-bar/top-bar.component';
+
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent,TopBarComponent],
   imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule],
   providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
   bootstrap: [AppComponent],

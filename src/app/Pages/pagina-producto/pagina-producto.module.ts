@@ -9,7 +9,6 @@ import { PaginaProductoPageRoutingModule } from './pagina-producto-routing.modul
 import { PaginaProductoPage } from './pagina-producto.page';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 
-
 @NgModule({
   imports: [
     CommonModule,

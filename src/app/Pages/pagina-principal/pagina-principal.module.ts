@@ -7,6 +7,7 @@ import { IonicModule } from '@ionic/angular';
 import { PaginaPrincipalPageRoutingModule } from './pagina-principal-routing.module';
 
 import { PaginaPrincipalPage } from './pagina-principal.page';
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 
 @NgModule({
   imports: [
@@ -15,6 +16,8 @@ import { PaginaPrincipalPage } from './pagina-principal.page';
     IonicModule,
     PaginaPrincipalPageRoutingModule
   ],
-  declarations: [PaginaPrincipalPage]
+  declarations: [PaginaPrincipalPage],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA]
+  
 })
 export class PaginaPrincipalPageModule {}
