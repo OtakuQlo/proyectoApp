@@ -27,5 +27,7 @@ export class PerfilPage implements OnInit {
   irIngresarContra(){
     this.router.navigate(['/ingresarcontra']);
   }
-
+  irAnadirAuto(){
+    this.router.navigate(['/anadir-producto'])
+  }
 }
