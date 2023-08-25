@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-perfil',
@@ -7,18 +7,28 @@ import { Router } from '@angular/router';
   styleUrls: ['./perfil.page.scss'],
 })
 export class PerfilPage implements OnInit {
+  nombre: string =  '';
+    apellido: string = "";
+    imagen: string = "https://ionicframework.com/docs/img/demos/avatar.svg";
+    rut: string = "";
+    correo: string = "";
+    direccion: string = "";
 
-  constructor(private router: Router) { }
+  constructor(private router: Router,private activedRouter: ActivatedRoute) { 
+    this.activedRouter.queryParams.subscribe(param =>{
+      if(this.router.getCurrentNavigation()?.extras.state){
+        this.nombre = this.router.getCurrentNavigation()?.extras.state?.['nombre'];
+        this.apellido = this.router.getCurrentNavigation()?.extras.state?.['apellido'];
+        this.rut = this.router.getCurrentNavigation()?.extras.state?.['rut'];
+        this.direccion = this.router.getCurrentNavigation()?.extras.state?.['direccion'];
+        this.correo = this.router.getCurrentNavigation()?.extras.state?.['correo'];
+      }
+    })
+  }
   ngOnInit() {
     }
 
   
-    nombre: string =  "Miguel";
-    apellido: string = "Pérez";
-    imagen: string = "https://ionicframework.com/docs/img/demos/avatar.svg";
-    rut: string = "11.111.111-1";
-    correo: string = "correoreal@gmail.com";
-    direccion: string = "Los olmos #1111";
 
   irModificarPerfil(){
     this.router.navigate(['/modificar-perfil']);

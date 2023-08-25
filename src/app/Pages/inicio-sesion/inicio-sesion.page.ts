@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { NavigationExtras, Router } from '@angular/router';
 import { validateRut } from '@fdograph/rut-utilities';
 import { ToastController } from '@ionic/angular';
 
@@ -32,7 +32,7 @@ export class InicioSesionPage implements OnInit {
   telefono: string = '';
   respuesta: string = '';
   pregunta: string = '0';
-
+  direccion:string = '';
 
   // variables label
   labelNombre: string = '';
@@ -44,6 +44,7 @@ export class InicioSesionPage implements OnInit {
   labelRespuesta: string = '';
   labelContra: string = '';
   labelContra2: string = '';
+  labelDireccion:string = '';
  
 
 
@@ -133,8 +134,26 @@ export class InicioSesionPage implements OnInit {
       this.labelTelefono = '';
     }
 
+    if(this.direccion.length < 5 || this.direccion.length > 200){
+      bandera = false;
+      this.direccion = '';
+      this.labelDireccion = 'La dirección debe ser de minimo 5 caracteres y maximo 20';
+    }else{
+      this.labelDireccion = '';
+    }
+
     if(bandera){
-      this.router.navigate(['/perfil']);
+      let navigationExtra: NavigationExtras = {
+        state: {
+          nombre: this.nombre,
+          apellido: this.apellido,
+          rut: this.rut,
+          correo: this.correo,
+          direccion: this.direccion,
+          rol: 1
+        }
+      }
+      this.router.navigate(['/perfil'], navigationExtra);
       this.presentToast('bottom');
     }
     
