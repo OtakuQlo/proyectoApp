@@ -11,12 +11,38 @@
     <ion-row class="ion-text-center">
       <ion-col><h4>¿Por qué quieres reportar el Auto?</h4></ion-col>
     </ion-row>
-    <ion-row>
-      <ion-radio-group value="end" id="tipoReporte" [(ngModel)]="tipoReporte">
-        <ion-col><ion-radio value="1" color="medium" ></ion-radio></ion-col>
-        <ion-col><p>Los datos que utiliza</p></ion-col>
+    <ion-row class="ion-justify-content-center">
+        <ion-card>
+          <ion-card-content>
+            <ion-radio-group value="end" id="tipoReporte" [(ngModel)]="tipoReporte">
+              <ion-col>
+                <ion-radio value="1" color="medium" labelPlacement="end">El vehículo es robado o es de mi pertenencia.</ion-radio>
+              </ion-col>
+              <ion-col>
+                <ion-radio value="2" color="medium" labelPlacement="end">La publicación es inapropiada.</ion-radio>
+              </ion-col>
+              <ion-col>
+                <ion-radio value="3" color="medium" labelPlacement="end">La piblicación incita el odio.</ion-radio>
+              </ion-col>
+              <ion-col>
+                <ion-radio value="4" color="medium" labelPlacement="end">La publicación denota ser falsa.</ion-radio>
+              </ion-col>
+              <ion-col>
+                <ion-radio value="5" color="medium" labelPlacement="end">La publicación es spam.</ion-radio>
+              </ion-col>
+            </ion-radio-group>
+          </ion-card-content>
+        </ion-card>
+        <ion-col class="textarea" size="10">
+          <ion-textarea label="Descripción" labelPlacement="stacked" [counter]="true" maxlength="500" helperText="Agregue una descripción a tu resporte" [autoGrow]="true"></ion-textarea>
+        </ion-col>
+
+        <ion-col size="7">
+          <ion-button fill="outline" id="boton" shape="round" class="botonreporte" >Enviar reporte</ion-button>
+        </ion-col>
       
-      </ion-radio-group>
+      
+      
     </ion-row>
   </ion-grid>
 </ion-content>
