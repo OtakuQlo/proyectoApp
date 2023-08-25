@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { NavigationExtras ,Router } from '@angular/router';
 import { AlertController, ToastController } from '@ionic/angular';
 
 @Component({
@@ -20,12 +20,43 @@ export class HomePage{
 
   irPaginaPrinicipal(){
     
-    if (this.rut != "21294525-0" || this.pass != "123") {
-      this.presentAlert();
-    }else{
-      this.router.navigate(['/perfil']);
+    if (this.rut == "21294525-0" || this.pass == "!Miguel123") {
+      let navigationExtra: NavigationExtras = {
+        state: {
+          nombre: "Miguel",
+          apellido: "Pérez",
+          rut:'21294525-0',
+          correo: "correoreal@duocuc.cl",
+          direccion: "Yacare #1185",
+          rol: 1
+          }
+        }
+      this.router.navigate(['/perfil'],navigationExtra);
       this.presentToast('bottom');
     }
+    else{
+      
+    }
+
+    // Cuenta administrador gabo
+    if (this.rut == "20966130-6" && this.pass == "!Manuel123") {
+      let navigationExtra: NavigationExtras = {
+        state: {
+        nombre: "Manuel",
+        apellido: "Rivera",
+        rut:'20966130-6',
+        correo: "correoreal2@duocuc.cl",
+        direccion: "Los olmos #1111",
+        rol: 2
+
+      }
+
+      }
+      this.router.navigate(['/perfil'],navigationExtra);
+      this.presentToast('bottom');
+    }
+
+    
 
      
   }
