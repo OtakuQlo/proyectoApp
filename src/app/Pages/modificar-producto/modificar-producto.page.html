@@ -1,0 +1,87 @@
+<ion-header [translucent]="true" style="height: 50px;">
+  <ion-toolbar>
+    <ion-button slot="start" style="width: 40px; height: 20px; margin-left: 8px;" color="light">
+      <ion-menu-button id="menu"></ion-menu-button>
+    </ion-button>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-grid>
+    <ion-row>
+      <ion-col size="12">
+        <ion-row>
+          <swiper-container style="width: 275px;">
+            <swiper-slide><ion-img
+                src="https://acroadtrip.blob.core.windows.net/catalogo-imagenes/m/RT_V_6b8d809e846542f9a8b4ecf1114fdd33.jpg"
+                alt="No image"></ion-img>
+            </swiper-slide>
+            <swiper-slide><ion-img
+                src="https://acroadtrip.blob.core.windows.net/catalogo-imagenes/m/RT_V_6b8d809e846542f9a8b4ecf1114fdd33.jpg"
+                alt="No image"></ion-img>
+            </swiper-slide>
+            <swiper-slide><ion-img
+                src="https://acroadtrip.blob.core.windows.net/catalogo-imagenes/m/RT_V_6b8d809e846542f9a8b4ecf1114fdd33.jpg"
+                alt="No image"></ion-img>
+            </swiper-slide>
+          </swiper-container>
+        </ion-row>
+        <ion-row class="ion-justify-content-center">
+          <ion-button type="file" style="font-size: 13px; width: 150px;" fill="outline" id="botonAgregarImg"
+            shape="round">Agregar Imagen</ion-button>
+        </ion-row>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <ion-card>
+          <ion-card-content style="font-size: 15px;">
+            <ion-input label="Ingrese el modelo del Vehiculo" labelPlacement="stacked" id="modeloV"
+              [(ngModel)]="modeloV"></ion-input>
+            <ion-input label="Ingrese el precio" labelPlacement="stacked" id="precioV"
+              [(ngModel)]="precioV" fill="clear"></ion-input>
+            <ion-item style="margin-left: -16px; padding-right: -23px;">
+              <ion-select label="Escoja un color" label-placement="stacked" interface="action-sheet" id="colorV"
+                [(ngModel)]="colorV">
+                <ion-select-option value="Rojo">Rojo</ion-select-option>
+                <ion-select-option value="Blanco">Blanco</ion-select-option>
+                <ion-select-option value="Gris">Gris</ion-select-option>
+                <ion-select-option value="Negro">Negro</ion-select-option>
+              </ion-select>
+            </ion-item>
+            <ion-item style="margin-left: -16px; padding-right: -23px;">
+              <ion-select label="Escoja una marca" label-placement="stacked" interface="action-sheet" id="marcaV"
+                [(ngModel)]="marcaV">
+                <ion-select-option value="Chevrolet">Chevrolet</ion-select-option>
+                <ion-select-option value="Hyundai">Hyundai</ion-select-option>
+                <ion-select-option value="Alfa Romeo">Alfa Romeo</ion-select-option>
+                <ion-select-option value="Subaru">Subaru</ion-select-option>
+              </ion-select>
+            </ion-item>
+            <ion-item style="margin-left: -16px; padding-right: -23px;">
+              <ion-select label="Tipo de transmisión" label-placement="stacked" interface="action-sheet" id="transmisionV"
+                [(ngModel)]="transmisionV">
+                <ion-select-option value="Manual">Manual</ion-select-option>
+                <ion-select-option value="Semiautomatica">Semiautomatica</ion-select-option>
+                <ion-select-option value="Automatica">Automatica</ion-select-option>
+              </ion-select>
+            </ion-item>
+            <ion-input label="Ingrese los años de uso" labelPlacement="stacked" id="anosV"
+              [(ngModel)]="anosV" fill="clear"> </ion-input>
+            <ion-input label="Ingrese el kilometraje del vehiculo" labelPlacement="stacked" id="kilometrajeV"
+              [(ngModel)]="kilometrajeV" fill="clear"></ion-input>
+            <ion-textarea label="Descripción" labelPlacement="stacked" [counter]="true" maxlength="500"
+              helperText="Agregue una descripción" [autoGrow]="true"
+              errorText="Porfavor escriba una descripción minima de 10 caracteres" id="descrpV"
+              [(ngModel)]="descrpV"></ion-textarea>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+      
+    </ion-row>
+    <ion-row class="ion-justify-content-center">
+        <ion-button (click)="irPaginaPrincipal()" style="font-size: 13px; width: 160px;" fill="outline" id="botonPublicar" shape="round">Publicar
+          Vehiculo</ion-button>
+      </ion-row>
+  </ion-grid>
+</ion-content>

@@ -68,9 +68,18 @@ const routes: Routes = [
     loadChildren: () => import('./Pages/reportar-auto/reportar-auto.module').then( m => m.ReportarAutoPageModule)
   },
   {
+    path: 'publicaciones',
+    loadChildren: () => import('./Pages/publicaciones/publicaciones.module').then( m => m.PublicacionesPageModule)
+  },
+  {
+    path: 'modificar-producto',
+    loadChildren: () => import('./Pages/modificar-producto/modificar-producto.module').then( m => m.ModificarProductoPageModule)
+  },
+ {
     path: '**',
     loadChildren: () => import('./Pages/not-found/not-found.module').then(m => m.NotFoundPageModule)
   },
+
 
 
   

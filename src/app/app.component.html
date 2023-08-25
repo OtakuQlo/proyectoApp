@@ -1,6 +1,5 @@
 <ion-app>
-  
-  <ion-menu contentId="menu" auto-hide="true">
+  <ion-menu contentId="menu">
     <ion-content>
       <ion-header>
         <ion-toolbar>
@@ -19,6 +18,10 @@
       <ion-item [routerLink]="['/anadir-producto']">
         <ion-img alt="Icono de Inicio" src="./../assets/icon/etiqueta-de-precio.png" style="height: 30px; width: 30px;"></ion-img>
         <ion-label style="font-size: 15px; margin-left: 5px;">Vender</ion-label>
+      </ion-item>
+      <ion-item [routerLink]="['/publicaciones']">
+        <ion-img alt="Icono de Inicio" src="./../assets/icon/promocion.png" style="height: 25px; width: 30px;"></ion-img>
+        <ion-label style="font-size: 15px; margin-left: 5px;">Publicaciones</ion-label>
       </ion-item>
       <ion-item>
         <ion-img alt="Icono de Inicio" src="./../assets/icon/acerca-de.png" style="height: 25px; width: 30px;"></ion-img>
