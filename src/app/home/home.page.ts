@@ -28,9 +28,9 @@ export class HomePage{
           rut:'21294525-0',
           correo: "correoreal@duocuc.cl",
           direccion: "Yacare #1185",
-          rol: 1
-          }
+          rol: 1,
         }
+      }
       this.router.navigate(['/perfil'],navigationExtra);
       this.presentToast('bottom');
     }
@@ -47,7 +47,7 @@ export class HomePage{
         rut:'20966130-6',
         correo: "correoreal2@duocuc.cl",
         direccion: "Los olmos #1111",
-        rol: 2
+        rol: 2,
 
       }
 

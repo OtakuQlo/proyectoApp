@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, NavigationExtras, Router } from '@angular/router';
 
 @Component({
   selector: 'app-panel-admin',
@@ -7,6 +7,8 @@ import { Router } from '@angular/router';
   styleUrls: ['./panel-admin.page.scss'],
 })
 export class PanelAdminPage implements OnInit {
+  rol: string = '';
+
   userRequests = [
     { productName: 'Solicitud de Producto 1' },
     { productName: 'Solicitud de Producto 2' },
@@ -14,18 +16,29 @@ export class PanelAdminPage implements OnInit {
   ];
 
   userReports = [
-    { productName: 'Reporte de Producto 1' },
+    { productName: 'la publicacion es Spam Alfa Romeo Giulia' },
     { productName: 'Reporte de Producto 2' },
     // ... Más datos de ejemplo
   ];
 
-  constructor(private router: Router) { }
+  constructor(private router: Router,private activedRouter: ActivatedRoute) { 
+    this.activedRouter.queryParams.subscribe(param =>{
+      if(this.router.getCurrentNavigation()?.extras.state){
+        this.rol = this.router.getCurrentNavigation()?.extras.state?.['rol'];
+      }
+    })
+  }
 
   ngOnInit() {
   }
 
   irPaginaProducto(){
-    this.router.navigate(['/pagina-producto']);
+    let navigationExtra: NavigationExtras = {
+      state: {
+      rol: this.rol
+      }
+    }
+    this.router.navigate(['/pagina-producto'],navigationExtra);
 
   }
 

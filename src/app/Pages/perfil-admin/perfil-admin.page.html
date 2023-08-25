@@ -7,42 +7,29 @@
 <ion-content [fullscreen]="true">
 
   <ion-grid>
-    <ion-row>
-      <ion-col size="1"></ion-col>
-      <ion-col size="10" > 
-      <ion-avatar class="avatar">
-        <img alt="persona" src="https://ionicframework.com/docs/img/demos/avatar.svg" />
-      </ion-avatar>
-      <ion-card>
-        <ion-card-header>
-          <ion-card-title>Miguel Pérez</ion-card-title>
-          
-        </ion-card-header>
-      
-        <ion-card-content>
-          <ion-card-subtitle>Rut: 11.111.111-1</ion-card-subtitle>
-          <ion-card-subtitle>Correo: correoreal@gmail.com</ion-card-subtitle>
-          <ion-card-subtitle>Dirección: Los olmos #1111</ion-card-subtitle>
-          <div class="ion-text-center">
-          <ion-button fill="clear" (click)="irModificarPerfilAdmin()">Modificar datos</ion-button>
-          <ion-button fill="clear" (click)="irPanelAdmin()">Perfil Admin</ion-button>
-          </div>
-        </ion-card-content>
-      </ion-card>
-      
-    </ion-col>
-      <ion-col size="1"></ion-col>
-    </ion-row>
-
-
-    <ion-row class="ion-text-center">
-      <ion-col size="1"></ion-col>
-      <ion-col size="10"> 
-        <ion-button fill="outline" id="boton" class="ion-margin-top" shape="round" >Cambiar contraseña</ion-button>
+    <ion-row class="ion-justify-content-center">
+      <ion-col size="3">
+        <ion-avatar>
+          <img alt="persona" src="{{imagen}}"/>
+        </ion-avatar>
       </ion-col>
-      <ion-col size="1"></ion-col>
+    </ion-row>
+    <ion-row class="ion-justify-content-center">
+      <ion-col size="10" > 
+        <ion-card>
+          <ion-card-header>
+            <ion-card-title>{{nombre}} {{apellido}}</ion-card-title> 
+          </ion-card-header>
+          <ion-card-content>
+            <ion-card-subtitle>Rut: {{rut}}</ion-card-subtitle>
+            <ion-card-subtitle>Correo: {{correo}}</ion-card-subtitle>
+            <ion-card-subtitle>Dirección: {{direccion}}</ion-card-subtitle>
+            <div class="ion-text-center">
+              <ion-button fill="clear" (click)="irPanelAdmin()">Panel Admin</ion-button>
+            </div>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
     </ion-row>
   </ion-grid>
-  
-  
 </ion-content>

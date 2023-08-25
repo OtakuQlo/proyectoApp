@@ -1,6 +1,11 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>Perfil</ion-title>
+    <p *ngIf="rol=='1'">
+      <ion-title>Perfil</ion-title>
+    </p>
+    <p *ngIf="rol=='2'">
+      <ion-title>Perfil-Admin</ion-title>
+    </p>
   </ion-toolbar>
 </ion-header>
 
@@ -21,34 +26,41 @@
       
       <ion-col size="10" > 
       
-      <ion-card>
-        <ion-card-header>
-          <ion-card-title>{{nombre}} {{apellido}}</ion-card-title>
-          
-        </ion-card-header>
+        <ion-card>
+          <ion-card-header>
+            <ion-card-title>{{nombre}} {{apellido}}</ion-card-title>
+            
+          </ion-card-header>
+        
+          <ion-card-content>
+            <ion-card-subtitle>Rut: {{rut}}</ion-card-subtitle>
+            <ion-card-subtitle>Correo: {{correo}}</ion-card-subtitle>
+            <ion-card-subtitle>Dirección: {{direccion}}</ion-card-subtitle>
+            <div class="ion-text-center">
+              <p *ngIf="rol=='1'">
+                <ion-button fill="clear" (click)="irModificarPerfil()">Modificar datos</ion-button>
+              </p>
+              <p *ngIf="rol=='2'">
+                <ion-button fill="clear" (click)="irPanelAdmin()">Panel Admin</ion-button>
+              </p>
+            </div>
+          </ion-card-content>
+        </ion-card>
       
-        <ion-card-content>
-          <ion-card-subtitle>Rut: {{rut}}</ion-card-subtitle>
-          <ion-card-subtitle>Correo: {{correo}}</ion-card-subtitle>
-          <ion-card-subtitle>Dirección: {{direccion}}</ion-card-subtitle>
-          <div class="ion-text-center">
-          <ion-button fill="clear" (click)="irModificarPerfil()">Modificar datos</ion-button>
-          </div>
-        </ion-card-content>
-      </ion-card>
-      
-    </ion-col>
+      </ion-col>
       
 
     </ion-row>
-    <ion-row class="ion-text-center">
-      <ion-col size="12"> 
-        <ion-button fill="outline" id="boton" style="width: 195px;" shape="round" (click) = "irIngresarContra()">Cambiar contraseña</ion-button>
-      </ion-col>
-      <ion-col size="12">
-        <ion-button id="agregarV" fill="outline" style="width: 195px;" shape="round" (click) ="irAnadirAuto()">Vender Auto</ion-button>
-      </ion-col>
-    </ion-row>
+    <p *ngIf="rol=='1'">
+      <ion-row class="ion-text-center">
+        <ion-col size="12"> 
+          <ion-button fill="outline" id="boton" style="width: 195px;" shape="round" (click) = "irIngresarContra()">Cambiar contraseña</ion-button>
+        </ion-col>
+        <ion-col size="12">
+          <ion-button id="agregarV" fill="outline" style="width: 195px;" shape="round" (click) ="irAnadirAuto()">Vender Auto</ion-button>
+        </ion-col>
+      </ion-row>
+    </p>
   </ion-grid>
   
   
