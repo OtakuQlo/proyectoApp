@@ -19,7 +19,7 @@ export class PaginaProductoPage implements OnInit {
   }
   
   irReportar(){
-    this.router.navigate(['/pagina-reportar']);
+    this.router.navigate(['/reportar-auto']);
   };
 
 }
