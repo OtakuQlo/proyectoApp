@@ -1,0 +1,22 @@
+<ion-header [translucent]="true" style="height: 50px;">
+  <ion-toolbar>
+    <ion-button auto-hide="false" slot="start" style="width: 20px; height: 20px; margin-left: 8px;" color="light">
+      <ion-menu-button></ion-menu-button>
+    </ion-button>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-grid>
+    <ion-row class="ion-text-center">
+      <ion-col><h4>¿Por qué quieres reportar el Auto?</h4></ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-radio-group value="end" id="tipoReporte" [(ngModel)]="tipoReporte">
+        <ion-col><ion-radio value="1" color="medium" ></ion-radio></ion-col>
+        <ion-col><p>Los datos que utiliza</p></ion-col>
+      
+      </ion-radio-group>
+    </ion-row>
+  </ion-grid>
+</ion-content>
