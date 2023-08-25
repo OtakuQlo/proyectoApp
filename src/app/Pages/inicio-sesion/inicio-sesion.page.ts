@@ -56,7 +56,7 @@ export class InicioSesionPage implements OnInit {
     if(!this.regexname.test(this.nombre)){
       bandera = false;
       this.nombre = '';
-      this.labelNombre = 'Debe ingresar un nombre valido.';
+      this.labelNombre = 'El nombre debe ser sin caracteres epeciales ni numeros.';
     }else{
       this.labelNombre = '';
     }
@@ -65,7 +65,7 @@ export class InicioSesionPage implements OnInit {
     if(!this.regexname.test(this.apellido)){
       bandera = false;
       this.apellido = '';
-      this.labelApellido = 'Debe ingresar un apellido valido.';
+      this.labelApellido = 'El Apellido debe ser sin caracteres especiales ni numeros.';
     }else{
       this.labelApellido = '';
     }
@@ -74,7 +74,7 @@ export class InicioSesionPage implements OnInit {
     if (!validateRut(this.rut)) {
       bandera = false;
       this.rut = '';
-      this.labelRut = 'Debe ingresar un rut valido.';
+      this.labelRut = 'Debe ingresar un rut sin puntos y con guion';
     }else{
       this.labelRut = '';
     }
@@ -83,7 +83,7 @@ export class InicioSesionPage implements OnInit {
     if(!this.regexpass.test(this.contra)){
       bandera = false;
       this.contra = '';
-      this.labelContra = 'Debe ingresar una contraseña con carateres especiales, mayuscula y numero con minimo de 8 y maximo de 50';
+      this.labelContra = 'Debe ingresar una contraseña con carateres especiales, mayuscula y numero con minimo de 8 y maximo de 50 caracteres';
 
     }else{
       this.labelContra = '';
@@ -93,7 +93,7 @@ export class InicioSesionPage implements OnInit {
     if(this.contra != this.contra2){
       bandera = false;
       this.contra2 = '';
-      this.labelContra2 = 'Las contraseñas deben ser iguales';
+      this.labelContra2 = 'Deben coincidir las contraseñas';
     }else{
         this.labelContra2 = '';
     }

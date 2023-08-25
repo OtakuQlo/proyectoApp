@@ -26,21 +26,26 @@
       <ion-col size="1"></ion-col>
       <ion-col size="10" class="ion-margin-top" class="ion-text-center">
         
-        <ion-input label="Nombre" labelPlacement="floating" [counter]="true" maxlength="100" [(ngModel)] = "nombre" placeholder="Sin caracteres especiales ni numeros."></ion-input>
+        <ion-input label="Nombre" labelPlacement="floating" [counter]="true" maxlength="100" [(ngModel)] = "nombre" placeholder="Ej: Miguel"></ion-input>
         <ion-label >{{labelNombre}}</ion-label>
-        <ion-input label="Apellido" labelPlacement="floating" [counter]="true" maxlength="100" [(ngModel)] = "apellido" placeholder="Sin caracteres especiales ni numeros."></ion-input>
+
+        <ion-input label="Apellido" labelPlacement="floating" [counter]="true" maxlength="100" [(ngModel)] = "apellido" placeholder="Ej: Pérez"></ion-input>
         <ion-label >{{labelApellido}}</ion-label>
-        <ion-input label="Rut" labelPlacement="floating" [counter]="true" maxlength="10" [(ngModel)] = "rut" placeholder="Debe ser sin punto y con guion."></ion-input>
+
+        <ion-input label="Rut" labelPlacement="floating" [counter]="true" maxlength="10" [(ngModel)] = "rut" placeholder="Ej: 21294525-0"></ion-input>
         <ion-label >{{labelRut}}</ion-label>
         
         
-        <ion-input label="Correo electronico" labelPlacement="floating" [counter]="true"  [(ngModel)] = "correo" [counter]="true" maxlength="100" placeholder="Ingrese su correo."></ion-input>
+        <ion-input label="Correo electronico" labelPlacement="floating" [counter]="true"  [(ngModel)] = "correo" [counter]="true" maxlength="100" placeholder="ej: correoreal@duocuc.cl"></ion-input>
         <ion-label >{{labelCorreo}}</ion-label>
-        <ion-input label="Telefono" labelPlacement="floating" [counter]="true" maxlength="8" [(ngModel)] = "telefono" placeholder="Ingrese su numero sin el 9 inicial."></ion-input>
+
+        <ion-input label="Telefono" labelPlacement="floating" [counter]="true" maxlength="8" [(ngModel)] = "telefono" placeholder="Ej: 12345678"></ion-input>
         <ion-label >{{labelTelefono}}</ion-label>
-        <ion-input label="Contraseña" labelPlacement="floating" [counter]="true" maxlength="50" type="password" [(ngModel)] = "contra" placeholder="Debe tener mayus, numeros y caracter"></ion-input>
+
+        <ion-input label="Contraseña" labelPlacement="floating" [counter]="true" maxlength="50" type="password" [(ngModel)] = "contra" placeholder="Ej: !Miguel123"></ion-input>
         <ion-label >{{labelContra}}</ion-label>
-        <ion-input label="Contraseña contraseña" labelPlacement="floating" [counter]="true" maxlength="50" type="password" [(ngModel)] = "contra2" placeholder="Debe igual a la otra contraseña"></ion-input>
+
+        <ion-input label="Contraseña contraseña" labelPlacement="floating" [counter]="true" maxlength="50" type="password" [(ngModel)] = "contra2" placeholder="Ej: !Miguel123"></ion-input>
         <ion-label >{{labelContra2}}</ion-label>
 
         <ion-item class="ion-margin-top ion-margin-bottom">
@@ -52,7 +57,7 @@
         </ion-item>
         <ion-label >{{labelPregunta}}</ion-label>
 
-        <ion-input label="Respuesta" labelPlacement="floating" [counter]="true" maxlength="200" class="ion-margin-top" [(ngModel)] = "respuesta" placeholder="ingrese una respuesta"></ion-input>
+        <ion-input label="Respuesta" labelPlacement="floating" [counter]="true" maxlength="200" class="ion-margin-top" [(ngModel)] = "respuesta" placeholder="Ej: San Jose"></ion-input>
         <ion-label >{{labelRespuesta}}</ion-label>
         <ion-button shape="round" class="ion-margin-top" fill="outline" (click) = "irPaginaPrincipal()">Crear cuenta</ion-button>
         
