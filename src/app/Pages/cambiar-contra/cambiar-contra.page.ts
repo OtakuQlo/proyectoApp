@@ -10,17 +10,40 @@ import { AlertController, ToastController } from '@ionic/angular';
 export class CambiarContraPage implements OnInit {
 
   constructor(private router: Router,private toastController: ToastController,private alertController: AlertController) { }
+  // variables
   contra1 : string = '';
   contra2 : string = '';
+
+  // variables label
+  labelContra: string = '';
+  labelContra2: string = '';
+
+  // regex
+  regexpass: RegExp = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%#*?^&])[A-Za-z\d@$!#%*^?&]{8,50}$/;
+
   ngOnInit() {
   }
   
   irHome(){
-    if (this.contra1 != "123" || this.contra1 != this.contra2){
-      this.presentAlert();
-    }else{
+    // la bandera si está en verdadero permite que se envien los datos en caso contrario no lo permite
+    let bandera: boolean = true;
+
+    if (!this.regexpass.test(this.contra1)) {
+      this.labelContra = 'Debe ingresar una contraseña con carateres especiales, mayuscula y numero con minimo de 8 y maximo de 50 caracteres';
+      bandera = false;
+    }
+    if (this.contra2 != this.contra1) {
+      this.labelContra2 = 'Deben coincidir las contraseñas';
+      bandera = false;
+    }
+
+
+    if (bandera == true){
       this.router.navigate(['/pagina-principal']);
       this.presentToast('bottom');
+      
+    }else{
+      this.presentAlert();
     }
 
   }
@@ -37,7 +60,7 @@ export class CambiarContraPage implements OnInit {
   async presentAlert() {
     const alert = await this.alertController.create({
       header: 'Contraseñas erroneas',
-      message: 'Las contraseñas no coinciden',
+      message: '',
       buttons: ['Confirmar'],
     });
 
