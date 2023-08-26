@@ -1,26 +1,57 @@
 <ion-header [translucent]="true" style="height: 50px;">
   <ion-toolbar>
-      <ion-button slot="start" style="width: 20px; height: 20px; margin-left: 8px;" color="light">
-        <ion-menu-button></ion-menu-button>
-      </ion-button>
+    <app-top-bar></app-top-bar>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Pagina Principal</ion-title>
-    </ion-toolbar>
-  </ion-header>
   <ion-grid>
     <ion-row>
       <ion-col>
-        <ion-searchbar show-clear-button="focus" [(ngModel)]="busqueda" >
+        <ion-searchbar show-clear-button="focus" [(ngModel)]="busqueda" style="margin-bottom: -20px;">
         </ion-searchbar>
       </ion-col>
-    </ion-row>
+    </ion-row >
     <ion-row class="ion-justify-content-center ion-text-center">
-      <ion-col>Maybe un slider con los ultimos autos publicados?</ion-col>
+      <ion-col size="10">
+        <ion-row class="ion-justify-content-center" style="margin-bottom: -15px;">
+          <ion-col size="10"><h3>Ultimas publicaciones</h3></ion-col>
+        </ion-row>
+        <ion-row>
+          <swiper-container style="width: 320px;">
+          <swiper-slide>
+            <ion-card [routerLink]="['/pagina-producto']" style="width: 270px; height: 270px;">
+              <ion-card-header>
+                <ion-img
+                  src="https://acroadtrip.blob.core.windows.net/catalogo-imagenes/m/RT_V_6b8d809e846542f9a8b4ecf1114fdd33.jpg"
+                  alt="No Image"></ion-img>
+              </ion-card-header>
+              <ion-card-content>
+                <div class="ion-text-center">
+                  <p>{{auto1[0]}}</p>
+                  <p>{{auto1[1] | currency : 'CLP' : '$'}}</p>
+                </div>
+              </ion-card-content>
+            </ion-card>
+          </swiper-slide>
+          <swiper-slide>
+            <ion-card [routerLink]="['/pagina-producto']" style="width: 270px; height: 270px;">
+              <ion-card-header>
+                <ion-img
+                  src="https://acroadtrip.blob.core.windows.net/catalogo-imagenes/m/RT_V_6b8d809e846542f9a8b4ecf1114fdd33.jpg"
+                  alt="No Image"></ion-img>
+              </ion-card-header>
+              <ion-card-content>
+                <div class="ion-text-center">
+                  <p>{{auto1[0]}}</p>
+                  <p>{{auto1[1] | currency : 'CLP' : '$'}}</p>
+                </div>
+              </ion-card-content>
+            </ion-card>
+          </swiper-slide>
+        </swiper-container>
+        </ion-row>
+      </ion-col>
     </ion-row>
     <ion-row>
       <ion-col size="6" >
@@ -33,6 +64,7 @@
           <ion-card-content>
             <div class="ion-text-center">
               <p>{{auto1[0]}}</p>
+              <p>{{auto1[1] | currency : 'CLP' : '$'}}</p>
             </div>
           </ion-card-content>
         </ion-card>
@@ -46,39 +78,57 @@
           <ion-card-content>
             <div class="ion-text-center">
               <p>{{auto2[0]}}</p>
-            </div>
-          </ion-card-content>
-        </ion-card>
-      </ion-col>
-      <ion-col size="6">
-        <ion-card>
-          <ion-card-header>
-            <ion-img
-              src="https://acroadtrip.blob.core.windows.net/catalogo-imagenes/m/RT_V_05a99b23df054e0eb2c93b3885eaa13e.jpg"></ion-img>
-          </ion-card-header>
-          <ion-card-content>
-            <div class="ion-text-center">
-              <p>{{auto1[0]}}</p>
-            </div>
-          </ion-card-content>
-        </ion-card>
-      </ion-col>
-      <ion-col size="6">
-        <ion-card>
-          <ion-card-header>
-            <ion-img
-              src="https://acroadtrip.blob.core.windows.net/catalogo-imagenes/m/RT_V_6b8d809e846542f9a8b4ecf1114fdd33.jpg"></ion-img>
-          </ion-card-header>
-          <ion-card-content>
-            <div class="ion-text-center">
-              <p>{{auto2[0]}}</p>
+              <p>{{auto2[1] | currency : 'CLP' : '$'}}</p>
             </div>
           </ion-card-content>
         </ion-card>
       </ion-col>
     </ion-row>
     <ion-row class="ion-text-center">
-      <ion-col> Slider con las marcas?</ion-col>
+      <ion-col>
+        <swiper-container>
+        <swiper-slide>
+          <ion-row class="ion-text-center ion-justify-content-center">
+            <ion-col size="2" >
+              <img src="https://www.fierrosclasicos.com/wp-content/uploads/2015/03/2.png" alt="Logo Alfa Romeo">
+              <p style="font-size: 10px;">Alfa Romeo</p>
+            </ion-col>
+            <ion-col size="2" offset="1">
+              <img src="https://www.pruebaderuta.com/wp-content/uploads/2015/11/Audi_logo.png" alt="Logo Alfa Romeo" style="margin-top: 15px;">
+              <p style="font-size: 10px;">Audi</p>
+            </ion-col>
+            <ion-col size="2" offset="1">
+              <img src="https://i.pinimg.com/originals/76/68/30/766830f3dc2cde506362d8a7ce5dcb19.png" alt="Logo Alfa Romeo">
+              <p style="font-size: 10px;">Volkswagen</p>
+            </ion-col>
+            <ion-col size="2" offset="1">
+              <img src="https://arc-anglerfish-arc2-prod-copesa.s3.amazonaws.com/public/3DJA6Y4D4FFFRG44AEH345HFJE.png" alt="Logo Alfa Romeo" style="margin-top: 15px;">
+              <p style="font-size: 10px;">Chevrolet</p>
+            </ion-col>
+          </ion-row>
+        </swiper-slide>
+        <swiper-slide>
+          <ion-row class="ion-text-center ion-justify-content-center">
+            <ion-col size="2" >
+              <img src="https://assets.stickpng.com/images/580b57fcd9996e24bc43c46e.png" alt="Logo Alfa Romeo">
+              <p style="font-size: 10px;">BMW</p>
+            </ion-col>
+            <ion-col size="2" offset="1">
+              <img src="https://memolira.com/wp-content/uploads/2016/07/KIA-logo-e1596055381793.png" alt="Logo Alfa Romeo" style="margin-top: 18px;">
+              <p style="font-size: 10px;">Kia</p>
+            </ion-col>
+            <ion-col size="2" offset="1">
+              <img src="https://www.purosautos.com/wp-content/uploads/2017/11/toyota-.png" alt="Logo Alfa Romeo" style="margin-top: 7px;">
+              <p style="font-size: 10px;">Toyota</p>
+            </ion-col>
+            <ion-col size="2" offset="1">
+              <img src="https://repuestos.dercocenter.cl/datos/marcas-autos/marca-auto-suzuki.png" alt="Logo Alfa Romeo">
+              <p style="font-size: 10px;">Suzuki</p>
+            </ion-col>
+          </ion-row>
+        </swiper-slide>
+      </swiper-container>
+      </ion-col>
     </ion-row>
     <ion-row class="ion-justify-content-center">
       <ion-col size="5" style="font-size: 10px;" class="ion-text-center">

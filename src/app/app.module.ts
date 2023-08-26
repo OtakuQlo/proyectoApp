@@ -13,7 +13,7 @@ import { TopBarComponent } from './Components/top-bar/top-bar.component';
 
 
 @NgModule({
-  declarations: [AppComponent,TopBarComponent],
+  declarations: [AppComponent],
   imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule],
   providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
   bootstrap: [AppComponent],

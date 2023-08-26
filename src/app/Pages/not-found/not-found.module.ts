@@ -7,12 +7,15 @@ import { IonicModule } from '@ionic/angular';
 import { NotFoundPageRoutingModule } from './not-found-routing.module';
 
 import { NotFoundPage } from './not-found.page';
+import { ComponentsModule } from 'src/app/Components/components.module';
+
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
+    ComponentsModule,
     NotFoundPageRoutingModule
   ],
   declarations: [NotFoundPage]
