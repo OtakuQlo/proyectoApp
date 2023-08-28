@@ -1,13 +1,14 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <app-top-bar></app-top-bar>
+<ion-header>
+  <ion-toolbar color="celeste">
+    <ion-title>Página no encontrada</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">NotFound</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content class="ion-padding">
+  <div class="not-found-container">
+    <ion-icon name="alert-circle-outline" class="not-found-icon" color="gris"></ion-icon>
+    <p class="not-found-message">Lo sentimos, la página que estás buscando no pudo ser encontrada.</p>
+    <img alt="persona" src="https://static.coopeuch.cl/media/wysiwyg/ILUST-404_3.png" />
+    <ion-button expand="block" routerLink="/">Volver a la página de inicio</ion-button>
+  </div>
 </ion-content>
