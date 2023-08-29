@@ -8,13 +8,14 @@ import { AnadirProductoPageRoutingModule } from './anadir-producto-routing.modul
 
 import { AnadirProductoPage } from './anadir-producto.page';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
-
+import { ComponentsModule } from 'src/app/Components/components.module';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
+    ComponentsModule,
     AnadirProductoPageRoutingModule
   ],
   declarations: [AnadirProductoPage],

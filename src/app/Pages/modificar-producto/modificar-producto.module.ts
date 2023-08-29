@@ -8,13 +8,14 @@ import { ModificarProductoPageRoutingModule } from './modificar-producto-routing
 
 import { ModificarProductoPage } from './modificar-producto.page';
 import { CUSTOM_ELEMENTS_SCHEMA} from '@angular/core';
-
+import { ComponentsModule } from 'src/app/Components/components.module';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
+    ComponentsModule,
     ModificarProductoPageRoutingModule
   ],
   declarations: [ModificarProductoPage],
