@@ -35,6 +35,7 @@ export class PerfilPage implements OnInit {
     let navigationExtra: NavigationExtras = {
       state: {
       rol: this.rol
+  
       }
     }
     this.router.navigate(['/panel-admin'],navigationExtra);
