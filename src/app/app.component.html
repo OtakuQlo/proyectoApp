@@ -28,7 +28,17 @@
         <ion-label style="font-size: 15px; margin-left: 5px;">Acerca de nosotros</ion-label>
       </ion-item>
     </ion-content>
+
+    <ion-footer>
+      <ion-item  [routerLink]="['/home']">
+        <ion-img alt="Icono de Inicio" src="./../assets/icon/cerrar-sesion.png" style="height: 25px; width: 30px;" ></ion-img>
+        <ion-label style="font-size: 15px; margin-left: 5px;">Cerrar sesión</ion-label>
+      </ion-item>
+    </ion-footer>
+
   </ion-menu>
+
+  
 
   <ion-router-outlet id="menu"></ion-router-outlet>
 </ion-app>

@@ -40,16 +40,12 @@ export class ModificarPerfilPage implements OnInit {
     // validacion nombre
     if(!this.regexname.test(this.nombre)){
       bandera = false;
-      this.nombre = '';
       this.labelNombre = 'Debe ingresar un nombre valido.';
-    }else{
-      this.labelNombre = '';
     }
 
     // validacion apellido
     if(!this.regexname.test(this.apellido)){
       bandera = false;
-      this.apellido = '';
       this.labelApellido = 'Debe ingresar un apellido valido.';
     }else{
       this.labelApellido = '';
@@ -57,14 +53,13 @@ export class ModificarPerfilPage implements OnInit {
     // validacion correo
     if (!this.regexCorreo.test(this.correo)) {
       bandera = false;
-      this.correo = '';
       this.labelCorreo = 'Debe ingresar un correo valido';
     }else{
       this.labelCorreo = '';
     }
     if(!this.regexTelefono.test(this.telefono)){
       bandera = false;
-      this.telefono = '';
+  
       this.labelTelefono = 'El telefono debe ser tener 8 numeros.';
     }else{
       this.labelTelefono = '';

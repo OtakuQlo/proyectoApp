@@ -56,7 +56,6 @@ export class InicioSesionPage implements OnInit {
     // validacion nombre
     if(!this.regexname.test(this.nombre)){
       bandera = false;
-      this.nombre = '';
       this.labelNombre = 'El nombre debe ser sin caracteres epeciales ni numeros.';
     }else{
       this.labelNombre = '';
@@ -65,7 +64,6 @@ export class InicioSesionPage implements OnInit {
     // validacion apellido
     if(!this.regexname.test(this.apellido)){
       bandera = false;
-      this.apellido = '';
       this.labelApellido = 'El Apellido debe ser sin caracteres especiales ni numeros.';
     }else{
       this.labelApellido = '';
@@ -74,7 +72,6 @@ export class InicioSesionPage implements OnInit {
     // validacion this.rut
     if (!validateRut(this.rut)) {
       bandera = false;
-      this.rut = '';
       this.labelRut = 'Debe ingresar un rut sin puntos y con guion';
     }else{
       this.labelRut = '';
@@ -102,7 +99,6 @@ export class InicioSesionPage implements OnInit {
     // validacion correo
     if (!this.regexCorreo.test(this.correo)) {
       bandera = false;
-      this.correo = '';
       this.labelCorreo = 'Debe ingresar un correo valido';
     }else{
       this.labelCorreo = '';
@@ -119,7 +115,6 @@ export class InicioSesionPage implements OnInit {
     // validacion respuesta
     if(this.respuesta.length < 5 || this.respuesta.length > 200){
       bandera = false;
-      this.respuesta = '';
       this.labelRespuesta = 'Debe ingresar una respuesta de minimo 5 caracteres y maximo 200';
     }else{
       this.labelRespuesta = '';
@@ -128,15 +123,14 @@ export class InicioSesionPage implements OnInit {
     // validacion telefono
     if(!this.regexTelefono.test(this.telefono)){
       bandera = false;
-      this.telefono = '';
       this.labelTelefono = 'El telefono debe ser tener 8 numeros.';
     }else{
       this.labelTelefono = '';
     }
 
+    // Validar direccion
     if(this.direccion.length < 5 || this.direccion.length > 200){
       bandera = false;
-      this.direccion = '';
       this.labelDireccion = 'La dirección debe ser de minimo 5 caracteres y maximo 20';
     }else{
       this.labelDireccion = '';
