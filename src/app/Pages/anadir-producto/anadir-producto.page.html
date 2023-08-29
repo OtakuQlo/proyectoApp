@@ -63,8 +63,8 @@
             </ion-item>
             <ion-item style="margin-left: -16px; padding-right: -23px;">
               <ion-select label="Tipo de transmisión" label-placement="stacked" interface="action-sheet" id="transmisionV"
-                [(ngModel)]="transmisionV">
-                <ion-select-option value="Manual">Manual</ion-select-option>
+                [(ngModel)]="transmisionV" >
+                <ion-select-option value="Manual" *ngFor="let i of arrTrans ">Manual</ion-select-option>
                 <ion-select-option value="Semiautomatica">Semiautomatica</ion-select-option>
                 <ion-select-option value="Automatica">Automatica</ion-select-option>
               </ion-select>
