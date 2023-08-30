@@ -13,8 +13,7 @@
     <ion-item *ngFor="let request of userRequests" class="request-item">
       <ion-label>{{ request.productName }}</ion-label>
       <ion-buttons slot="end">
-        <ion-button (click)="acceptRequest(request)" color="success">Aceptar</ion-button>
-        <ion-button (click)="rejectRequest(request)" color="danger">Rechazar</ion-button>
+        <ion-button (click)="irPaginaProducto1()" color="warning">Ver</ion-button>
       </ion-buttons>
     </ion-item>
   </ion-list>

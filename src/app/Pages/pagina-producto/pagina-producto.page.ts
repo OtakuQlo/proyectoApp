@@ -11,6 +11,7 @@ import { AlertController } from '@ionic/angular';
 })
 export class PaginaProductoPage implements OnInit {
   rol: string = '';
+  verificador: string = '';
 
   auto1 : [string,string,string,string,number,string] = ["Alfa Romeo Giulia", "32.900.000","Miguel Perez","Avenida Generica 1234",
   78784471,"La marca italiana regresa al segmento D de los sedanes con esta berlina de corte deportivo y tracción trasera, un vehículo premium muy agresivo y atractivo a la vista, a lo que debemos sumar la presencia de una cabina con estupendos acabados."];
@@ -19,6 +20,7 @@ export class PaginaProductoPage implements OnInit {
     this.activedRouter.queryParams.subscribe(param =>{
       if(this.router.getCurrentNavigation()?.extras.state){
         this.rol = this.router.getCurrentNavigation()?.extras.state?.['rol'];
+        this.verificador = this.router.getCurrentNavigation()?.extras.state?.['verificador'];
       }
     })
   }
@@ -46,6 +48,37 @@ export class PaginaProductoPage implements OnInit {
         },
         {
           text: 'Eliminar',
+          handler: () => {
+            console.log('Eliminar clicked');
+            this.router.navigate(['/pagina-principal']);
+          },
+        },
+      ],
+    });
+
+    await alert.present();
+  }
+
+  async presentSolicitudAlert(action: string) {
+    const message =
+      action === 'aceptar'
+        ? '¿Estás seguro de que deseas aceptar esta solicitud?'
+        : '¿Estás seguro de que deseas rechazar esta solicitud?';
+
+    const alert = await this.alertController.create({
+      header: 'Confirmación',
+      message: message,
+      buttons: [
+        {
+          text: 'Cancelar',
+          role: 'cancel',
+          cssClass: 'secondary',
+          handler: () => {
+            console.log('Cancel clicked');
+          },
+        },
+        {
+          text: 'Aceptar',
           handler: () => {
             console.log('Eliminar clicked');
             this.router.navigate(['/pagina-principal']);

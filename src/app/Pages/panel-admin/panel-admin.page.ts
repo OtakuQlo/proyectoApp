@@ -32,6 +32,17 @@ export class PanelAdminPage implements OnInit {
   ngOnInit() {
   }
 
+  irPaginaProducto1(){
+    let navigationExtra: NavigationExtras = {
+      state: {
+      rol: this.rol,
+      verificador: "solicitud"
+      }
+    }
+    this.router.navigate(['/pagina-producto'],navigationExtra);
+
+  }
+
   irPaginaProducto(){
     let navigationExtra: NavigationExtras = {
       state: {
