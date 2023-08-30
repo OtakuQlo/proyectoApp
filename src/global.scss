@@ -24,3 +24,20 @@
 @import "@ionic/angular/css/text-alignment.css";
 @import "@ionic/angular/css/text-transformation.css";
 @import "@ionic/angular/css/flex-utils.css";
+
+/* src/global.scss */
+
+/* Color de fondo */
+ion-content {
+    --ion-background-color: #f2fff5;
+}
+  
+/* Color de letra */
+ion-input, ion-button {
+    color: #3c7b7f;
+}
+  
+/* Color de botones*/
+ion-button {
+    --border-color: #abd9c5;
+}
