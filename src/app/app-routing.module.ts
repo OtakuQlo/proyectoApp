@@ -80,10 +80,6 @@ const routes: Routes = [
     loadChildren: () => import('./Pages/not-found/not-found.module').then(m => m.NotFoundPageModule)
   },
 
-
-
-  
-
 ];
 
 @NgModule({

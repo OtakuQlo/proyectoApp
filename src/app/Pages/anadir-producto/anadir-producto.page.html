@@ -39,49 +39,57 @@
       <ion-col>
         <ion-card>
           <ion-card-content style="font-size: 15px;">
-            <ion-input label="Ingrese el modelo del Vehiculo" labelPlacement="stacked" id="modeloV"
-              [(ngModel)]="modeloV"></ion-input>
+            <ion-item>
+              <ion-input label="Ingrese el modelo del Vehiculo" labelPlacement="floating" id="modeloV"
+                [clearInput]="true" [(ngModel)]="modeloV">
+              </ion-input>
+            </ion-item>
             <ion-label color="danger" style="font-size: 11px;">{{labelModelo}}</ion-label>
 
-            <ion-input label="Ingrese el precio" labelPlacement="floating" id="precioV"
-              [(ngModel)]="precioV" fill="clear"></ion-input>
+            <ion-item>
+              <ion-input label="Ingrese el precio" labelPlacement="floating" id="precioV" [(ngModel)]="precioV"
+                [clearInput]="true"></ion-input>
+            </ion-item>
             <ion-label color="danger" style="font-size: 11px;">{{labelPrecio}}</ion-label>
 
-            <ion-item style="margin-left: -16px; padding-right: -23px;">
-              <ion-select label="Escoja un color" label-placement="stacked" interface="action-sheet" id="colorV"
-                [(ngModel)]="colorV">
-                <ion-select-option value="{{i}}" *ngFor="let i of arrColor">{{i}}</ion-select-option>
-              </ion-select>
-              
+            <ion-item style="margin-top: 10px;">
+              <mat-label>Seleccione un color</mat-label>
+              <mat-select interface="action-sheet" id="colorV" [(ngModel)]="colorV">
+                <mat-option value="{{i}}" *ngFor="let i of arrColor">{{i}}</mat-option>
+              </mat-select>
             </ion-item>
             <ion-label color="danger" style="font-size: 11px;">{{labelColor}}</ion-label>
 
-            <ion-item style="margin-left: -16px; padding-right: -23px;">
-              <ion-select label="Escoja una marca" label-placement="stacked" interface="action-sheet" id="marcaV"
-                [(ngModel)]="marcaV">
-                <ion-select-option value="{{x}}" *ngFor="let x of arrMarca">{{x}}</ion-select-option>
-              </ion-select>
+            <ion-item style="margin-top: 10px;">
+              <mat-label>Seleccione una marca</mat-label>
+              <mat-select interface="action-sheet" id="marcaV" [(ngModel)]="marcaV">
+                <mat-option value="{{x}}" *ngFor="let x of arrMarca">{{x}}</mat-option>
+              </mat-select>
             </ion-item>
             <ion-label color="danger" style="font-size: 11px;">{{labelMarca}}</ion-label>
 
-            <ion-item style="margin-left: -16px; padding-right: -23px;">
-              <ion-select label="Tipo de transmisión" label-placement="stacked" interface="action-sheet" id="transmisionV"
-                [(ngModel)]="transmisionV" >
-                <ion-select-option value="{{a}}" *ngFor="let a of arrTrans ">{{a}}</ion-select-option>
-              </ion-select>
+            <ion-item style="margin-top: 10px;">
+              <mat-label>Tipo de transmisión</mat-label>
+              <mat-select interface="action-sheet" id="transmisionV" [(ngModel)]="transmisionV">
+                <mat-option value="{{a}}" *ngFor="let a of arrTrans ">{{a}}</mat-option>
+              </mat-select>
             </ion-item>
             <ion-label color="danger" style="font-size: 11px;">{{labelTrans}}</ion-label>
 
-            <ion-input label="Ingrese los años de uso" labelPlacement="floating" id="anosV"
-              [(ngModel)]="anosV" fill="clear"> </ion-input>
-              <ion-label color="danger" style="font-size: 11px;">{{labelAnos}}</ion-label>
+            <ion-item>
+              <ion-input label="Ingrese los años de uso" labelPlacement="floating" id="anosV" [(ngModel)]="anosV"
+                [clearInput]="true"></ion-input>
+            </ion-item>
+            <ion-label color="danger" style="font-size: 11px;">{{labelAnos}}</ion-label>
 
-            <ion-input label="Ingrese el kilometraje del vehiculo" labelPlacement="floating" id="kilometrajeV"
-              [(ngModel)]="kilometrajeV" fill="clear"></ion-input>
+            <ion-item>
+              <ion-input label="Ingrese el kilometraje del vehiculo" labelPlacement="floating" id="kilometrajeV"
+                [(ngModel)]="kilometrajeV" [clearInput]="true"></ion-input>
+            </ion-item>
             <ion-label color="danger" style="font-size: 11px;">{{labelKilometraje}}</ion-label>
 
-            <ion-textarea label="Descripción" labelPlacement="stacked" [counter]="true" maxlength="500"
-              helperText="Agregue una descripción" [autoGrow]="true"
+            <ion-textarea label="Descripción" labelPlacement="floating" [counter]="true" maxlength="500"
+              helperText="Agregue una descripción" [autoGrow]="true" [Grow]="1"
               errorText="Porfavor escriba una descripción minima de 10 caracteres" id="descrpV"
               [(ngModel)]="descrpV"></ion-textarea>
             <ion-label color="danger" style="font-size: 11px;">{{labelDescrp}}</ion-label>
@@ -89,12 +97,13 @@
           </ion-card-content>
         </ion-card>
       </ion-col>
-      
+
     </ion-row>
     <ion-row class="ion-justify-content-center">
-        <ion-button (click)="irPaginaPrincipal()" style="font-size: 13px; width: 160px;" fill="outline" id="botonPublicar" shape="round">Publicar
-          Vehiculo</ion-button>
-      </ion-row>
+      <ion-button (click)="irPaginaPrincipal()" style="font-size: 13px; width: 160px;" fill="outline" id="botonPublicar"
+        shape="round">Publicar
+        Vehiculo</ion-button>
+    </ion-row>
   </ion-grid>
 
 </ion-content>

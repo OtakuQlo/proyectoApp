@@ -11,55 +11,59 @@
         <ion-searchbar show-clear-button="focus" [(ngModel)]="busqueda" style="margin-bottom: -20px;">
         </ion-searchbar>
       </ion-col>
-    </ion-row >
-    <ion-row class="ion-justify-content-center ion-text-center">
-      <ion-col size="10">
-        <ion-row class="ion-justify-content-center" style="margin-bottom: -15px;">
-          <ion-col size="10"><h3>Ultimas publicaciones</h3></ion-col>
+    </ion-row>
+    <ion-row class="ion-justify-content-center">
+      <ion-col size="12">
+        <ion-row style="margin-bottom: -15px;" class="ion-justify-content-center ion-text-center">
+          <ion-col size="8">
+            <h3>Ultimas publicaciones</h3>
+          </ion-col>
         </ion-row>
         <ion-row>
-          <swiper-container style="width: 320px;">
-          <swiper-slide>
-            <ion-card [routerLink]="['/pagina-producto']" style="width: 270px; height: 270px;">
-              <ion-card-header>
-                <ion-img
-                  src="https://acroadtrip.blob.core.windows.net/catalogo-imagenes/m/RT_V_6b8d809e846542f9a8b4ecf1114fdd33.jpg"
-                  alt="No Image"></ion-img>
-              </ion-card-header>
-              <ion-card-content>
-                <div class="ion-text-center">
-                  <p>{{auto1[0]}}</p>
-                  <p>{{auto1[1] | currency : 'CLP' : '$'}}</p>
-                </div>
-              </ion-card-content>
-            </ion-card>
-          </swiper-slide>
-          <swiper-slide>
-            <ion-card [routerLink]="['/pagina-producto']" style="width: 270px; height: 270px;">
-              <ion-card-header>
-                <ion-img
-                  src="https://acroadtrip.blob.core.windows.net/catalogo-imagenes/m/RT_V_6b8d809e846542f9a8b4ecf1114fdd33.jpg"
-                  alt="No Image"></ion-img>
-              </ion-card-header>
-              <ion-card-content>
-                <div class="ion-text-center">
-                  <p>{{auto1[0]}}</p>
-                  <p>{{auto1[1] | currency : 'CLP' : '$'}}</p>
-                </div>
-              </ion-card-content>
-            </ion-card>
-          </swiper-slide>
-        </swiper-container>
+          <ion-col size="12">
+            <swiper-container>
+              <swiper-slide (click)="play()" >
+                <ion-card id="modal-trigger">
+                  <ion-card-header>
+                    <ion-img
+                      src="https://acroadtrip.blob.core.windows.net/catalogo-imagenes/m/RT_V_6b8d809e846542f9a8b4ecf1114fdd33.jpg"
+                      alt="No Image"></ion-img>
+                  </ion-card-header>
+                  <ion-card-content>
+                    <div class="ion-text-center">
+                      <p>{{auto1[0]}}</p>
+                      <p>{{auto1[1] | currency : 'CLP' : '$'}}</p>
+                    </div>
+                  </ion-card-content>
+                </ion-card>
+              </swiper-slide>
+              <swiper-slide (click)="play()">
+                <ion-card id="modal-trigger">
+                  <ion-card-header>
+                    <ion-img
+                      src="https://acroadtrip.blob.core.windows.net/catalogo-imagenes/m/RT_V_6b8d809e846542f9a8b4ecf1114fdd33.jpg"
+                      alt="No Image"></ion-img>
+                  </ion-card-header>
+                  <ion-card-content>
+                    <div class="ion-text-center">
+                      <p>{{auto1[0]}}</p>
+                      <p>{{auto1[1] | currency : 'CLP' : '$'}}</p>
+                    </div>
+                  </ion-card-content>
+                </ion-card>
+              </swiper-slide>
+            </swiper-container>
+          </ion-col>
         </ion-row>
       </ion-col>
     </ion-row>
     <ion-row>
-      <ion-col size="6" >
-        <ion-card [routerLink]="['/pagina-producto']" >
+      <ion-col size="6" (click)="play()">
+        <ion-card id="modal-trigger">
           <ion-card-header>
             <ion-img
               src="https://acroadtrip.blob.core.windows.net/catalogo-imagenes/m/RT_V_6b8d809e846542f9a8b4ecf1114fdd33.jpg"
-              alt="No Image" ></ion-img>
+              alt="No Image"></ion-img>
           </ion-card-header>
           <ion-card-content>
             <div class="ion-text-center">
@@ -68,6 +72,165 @@
             </div>
           </ion-card-content>
         </ion-card>
+        <!-- <ion-modal trigger="modal-trigger" #modal>
+          <ng-template>
+            <ion-header>
+              <ion-toolbar>
+                <ion-title>Modal</ion-title>
+                <ion-buttons slot="end">
+                  <ion-button (click)="closeModal()">Close</ion-button>
+                </ion-buttons>
+              </ion-toolbar>
+            </ion-header>
+            <ion-content [fullscreen]="true">
+              <ion-grid>
+                <ion-row>
+                  <ion-col size="12">
+                    <swiper-container style="width: 320px;">
+                      <swiper-slide>
+                        <ion-img
+                          src="https://acroadtrip.blob.core.windows.net/catalogo-imagenes/m/RT_V_6b8d809e846542f9a8b4ecf1114fdd33.jpg"
+                          alt="No image"></ion-img>
+                      </swiper-slide>
+                      <swiper-slide>
+                        <ion-img
+                          src="https://acroadtrip.blob.core.windows.net/catalogo-imagenes/m/RT_V_6b8d809e846542f9a8b4ecf1114fdd33.jpg"
+                          alt="No image"></ion-img>
+                      </swiper-slide>
+                      <swiper-slide>
+                        <ion-img
+                          src="https://acroadtrip.blob.core.windows.net/catalogo-imagenes/m/RT_V_6b8d809e846542f9a8b4ecf1114fdd33.jpg"
+                          alt="No image"></ion-img>
+                      </swiper-slide>
+                    </swiper-container>
+                  </ion-col>
+                </ion-row>
+                <ion-row>
+                  <ion-col size="12" class="ion-text-start">
+                    <ion-card color="light">
+                      <ion-card-content>
+                        <ion-row>
+                          <h1>{{auto1[0]}}</h1>
+                        </ion-row>
+                        <ion-row>
+                          <h2>${{auto1[1]}}</h2>
+                        </ion-row>
+                        <div style="font-size: 13px;">
+                          <ion-row>Vendedor: {{auto1[2]}}</ion-row>
+                          <ion-row>{{auto1[3]}}</ion-row>
+                          <ion-row>Numero de contacto : +569{{auto1[4]}}</ion-row>
+                        </div>
+                      </ion-card-content>
+                    </ion-card>
+                  </ion-col>
+                  <ion-col size="12" class="ion-text-start">
+                    <ion-card color="light">
+                      <ion-card-content>
+                        <ion-row>
+                          <h2>Caracteristicas</h2>
+                        </ion-row>
+                        <div style="font-size: 13px;">
+                          <ion-row>Lista con las caracteristicas</ion-row>
+                          <ion-row>
+                            <ion-col>
+                              <ion-item>
+            
+                              </ion-item>
+                            </ion-col>
+                          </ion-row>
+                        </div>
+                      </ion-card-content>
+                    </ion-card>
+                  </ion-col>
+                  <ion-col size="12" class="ion-text-start">
+                    <ion-card color="light">
+                      <ion-card-content>
+                        <div style="font-size: 13px;">
+                          <ion-row>
+                            <h2>Descripción</h2>
+                          </ion-row>
+                          <ion-row>{{auto1[5]}}</ion-row>
+                        </div>
+                      </ion-card-content>
+                    </ion-card>
+                  </ion-col>
+                </ion-row>
+                <ion-row class="ion-justify-content-center">
+                  <p *ngIf="rol!='2'">
+                    <ion-col size="4">
+                      <ion-button (click)="irReportar()" color="danger" style="font-size: 12px; width: 105px;" fill="outline" id="botonReportar"
+                        shape="round">Reportar</ion-button>
+                    </ion-col>
+                  </p>
+                  <ion-row *ngIf="rol == '2' && verificador != 'solicitud'">
+                    <ion-col size="12" class="ion-text-start">
+                      <ion-card color="light">
+                        <ion-card-content>
+                          <div style="font-size: 13px;">
+                            <ion-row>
+                              <h2>Reportes</h2>
+                            </ion-row>
+                            <ion-row>
+                              <ion-col>
+                                <ion-label>La publicación es Spam Alfa Romeo Giulia</ion-label>
+                              </ion-col>
+                              <ion-col>
+                                <ion-button color="danger" fill="outline" shape="round" (click)="presentConfirmationAlert('reporte')">Eliminar Reporte</ion-button>
+                              </ion-col>
+                            </ion-row>
+                          </div>
+                        </ion-card-content>
+                      </ion-card>
+                    </ion-col>
+                  </ion-row>
+                    <ion-row *ngIf="rol == '2' && verificador != 'solicitud'">
+                      <ion-col size="12" class="ion-text-start">
+                        <ion-card color="light">
+                          <ion-card-content>
+                            <ion-row>
+                              <ion-col size="4">
+                                <ion-button color="danger" fill="outline" shape="round" (click)="presentConfirmationAlert('producto')">Eliminar Producto</ion-button>
+                              </ion-col>
+                            </ion-row>
+                          </ion-card-content>
+                        </ion-card>
+                      </ion-col>
+                    </ion-row>
+                    <ion-row *ngIf="rol == '2' && verificador == 'solicitud'">
+                      <ion-col size="12" class="ion-text-start">
+                        <ion-card color="light">
+                          <ion-card-content>
+                            <div style="font-size: 13px;">
+                              <ion-row>
+                                <h2>Solicitud</h2>
+                              </ion-row>
+                            </div>
+                          </ion-card-content>
+                        </ion-card>
+                      </ion-col>
+                    </ion-row>
+                    <ion-row *ngIf="rol == '2' && verificador == 'solicitud'">
+                      <ion-col size="12" class="ion-text-start">
+                        <ion-card color="light">
+                          <ion-card-content>
+                            <ion-row>
+                              <ion-col size="4">
+                                <ion-button color="success" fill="outline" shape="round" (click)="presentSolicitudAlert('aceptar')">Aceptar</ion-button>
+                              </ion-col>
+                              <ion-col size="2"></ion-col>
+                              <ion-col size="4">
+                                <ion-button color="danger" fill="outline" shape="round" (click)="presentSolicitudAlert('rechazar')">Rechazar</ion-button>
+                              </ion-col>
+                            </ion-row>
+                          </ion-card-content>
+                        </ion-card>
+                      </ion-col>
+                    </ion-row>
+                </ion-row>
+              </ion-grid>
+            </ion-content>
+          </ng-template>
+        </ion-modal> -->
       </ion-col>
       <ion-col size="6">
         <ion-card>
@@ -87,51 +250,50 @@
     <ion-row class="ion-text-center">
       <ion-col>
         <swiper-container>
-        <swiper-slide>
-          <ion-row class="ion-text-center ion-justify-content-center">
-            <ion-col size="2" >
-              <img src="https://www.fierrosclasicos.com/wp-content/uploads/2015/03/2.png" alt="Logo Alfa Romeo">
-              <p style="font-size: 10px;">Alfa Romeo</p>
-            </ion-col>
-            <ion-col size="2" offset="1">
-              <img src="https://www.pruebaderuta.com/wp-content/uploads/2015/11/Audi_logo.png" alt="Logo Alfa Romeo" style="margin-top: 15px;">
-              <p style="font-size: 10px;">Audi</p>
-            </ion-col>
-            <ion-col size="2" offset="1">
-              <img src="https://i.pinimg.com/originals/76/68/30/766830f3dc2cde506362d8a7ce5dcb19.png" alt="Logo Alfa Romeo">
-              <p style="font-size: 10px;">Volkswagen</p>
-            </ion-col>
-            <ion-col size="2" offset="1">
-              <img src="https://arc-anglerfish-arc2-prod-copesa.s3.amazonaws.com/public/3DJA6Y4D4FFFRG44AEH345HFJE.png" alt="Logo Alfa Romeo" style="margin-top: 15px;">
-              <p style="font-size: 10px;">Chevrolet</p>
-            </ion-col>
-          </ion-row>
-        </swiper-slide>
-        <swiper-slide>
-          <ion-row class="ion-text-center ion-justify-content-center">
-            <ion-col size="2" >
-              <img src="https://assets.stickpng.com/images/580b57fcd9996e24bc43c46e.png" alt="Logo Alfa Romeo">
-              <p style="font-size: 10px;">BMW</p>
-            </ion-col>
-            <ion-col size="2" offset="1">
-              <img src="https://memolira.com/wp-content/uploads/2016/07/KIA-logo-e1596055381793.png" alt="Logo Alfa Romeo" style="margin-top: 18px;">
-              <p style="font-size: 10px;">Kia</p>
-            </ion-col>
-            <ion-col size="2" offset="1">
-              <img src="https://www.purosautos.com/wp-content/uploads/2017/11/toyota-.png" alt="Logo Alfa Romeo" style="margin-top: 7px;">
-              <p style="font-size: 10px;">Toyota</p>
-            </ion-col>
-            <ion-col size="2" offset="1">
-              <img src="https://repuestos.dercocenter.cl/datos/marcas-autos/marca-auto-suzuki.png" alt="Logo Alfa Romeo">
-              <p style="font-size: 10px;">Suzuki</p>
-            </ion-col>
-          </ion-row>
-        </swiper-slide>
-      </swiper-container>
+          <swiper-slide>
+            <ion-row class="ion-text-center ion-justify-content-center">
+              <ion-col size="2">
+                <img src="https://www.fierrosclasicos.com/wp-content/uploads/2015/03/2.png" alt="Logo Alfa Romeo">
+              </ion-col>
+              <ion-col size="2" offset="1">
+                <img src="https://www.pruebaderuta.com/wp-content/uploads/2015/11/Audi_logo.png" alt="Logo Alfa Romeo"
+                  style="margin-top: 15px;">
+              </ion-col>
+              <ion-col size="2" offset="1">
+                <img src="https://i.pinimg.com/originals/76/68/30/766830f3dc2cde506362d8a7ce5dcb19.png"
+                  alt="Logo Alfa Romeo">
+              </ion-col>
+              <ion-col size="2" offset="1">
+                <img
+                  src="https://arc-anglerfish-arc2-prod-copesa.s3.amazonaws.com/public/3DJA6Y4D4FFFRG44AEH345HFJE.png"
+                  alt="Logo Alfa Romeo" style="margin-top: 15px;">
+              </ion-col>
+            </ion-row>
+          </swiper-slide>
+          <swiper-slide>
+            <ion-row class="ion-text-center ion-justify-content-center">
+              <ion-col size="2">
+                <img src="https://assets.stickpng.com/images/580b57fcd9996e24bc43c46e.png" alt="Logo Alfa Romeo">
+              </ion-col>
+              <ion-col size="2" offset="1">
+                <img src="https://memolira.com/wp-content/uploads/2016/07/KIA-logo-e1596055381793.png"
+                  alt="Logo Alfa Romeo" style="margin-top: 18px;">
+              </ion-col>
+              <ion-col size="2" offset="1">
+                <img src="https://www.purosautos.com/wp-content/uploads/2017/11/toyota-.png" alt="Logo Alfa Romeo"
+                  style="margin-top: 7px;">
+              </ion-col>
+              <ion-col size="2" offset="1">
+                <img src="https://repuestos.dercocenter.cl/datos/marcas-autos/marca-auto-suzuki.png"
+                  alt="Logo Alfa Romeo">
+              </ion-col>
+            </ion-row>
+          </swiper-slide>
+        </swiper-container>
       </ion-col>
     </ion-row>
     <ion-row class="ion-justify-content-center">
-      <ion-col size="5" style="font-size: 10px;" class="ion-text-center">
+      <ion-col size="5" class="ion-text-center">
         <p>¿Necesitas ayuda? Contactanos</p>
       </ion-col>
     </ion-row>

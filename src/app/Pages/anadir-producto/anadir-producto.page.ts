@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { AlertController, ToastController } from '@ionic/angular';
 
 
+
 @Component({
   selector: 'app-anadir-producto',
   templateUrl: './anadir-producto.page.html',
@@ -10,16 +11,16 @@ import { AlertController, ToastController } from '@ionic/angular';
 })
 
 export class AnadirProductoPage implements OnInit {
-
+  
   constructor(private router:Router,private toastController: ToastController,private AlertController:AlertController) { }
 
   modeloV: string = "";
-  precioV: number = 0;
+  precioV : string = "";
   colorV: string ="";
   marcaV: string ="";
-  anosV: number= 0;
+  anosV : string = "";
   descrpV: string = "";
-  kilometrajeV: number = 0; 
+  kilometrajeV : string = ""; 
   transmisionV: string ="";
 
   regexname: RegExp = /^[a-zA-ZÀ-ÿ\u00f1\u00d1]+(\s*[a-zA-ZÀ-ÿ\u00f1\u00d1]*)*[a-zA-ZÀ-ÿ\u00f1\u00d1]{1,100}$/;
@@ -44,6 +45,7 @@ export class AnadirProductoPage implements OnInit {
   }
 
   irPaginaPrincipal(){
+
     if(!this.regexname.test(this.modeloV)){
       this.pass = 1;
       this.labelModelo = 'El modelo debe contener como minimo 2 caracteres no especiales.';
@@ -55,14 +57,13 @@ export class AnadirProductoPage implements OnInit {
       this.pass = 1;
       this.labelDescrp = 'La descripcion debe contener como minimo 10 caracteres.';
     }else{
-      this.pass = 0;
+      this.labelDescrp = '';
     }
 
     if (this.transmisionV == "") {
       this.pass = 1;
       this.labelTrans = 'Porfavor seleccione una opción.'
     }else{
-      this.pass = 0;
       this.labelTrans = '';
     }
 
@@ -70,7 +71,6 @@ export class AnadirProductoPage implements OnInit {
       this.pass = 1;
       this.labelColor = 'Porfavor seleccione una opción.'
     }else{
-      this.pass = 0;
       this.labelColor = '';
     }
 
@@ -78,40 +78,32 @@ export class AnadirProductoPage implements OnInit {
       this.pass = 1;
       this.labelMarca = 'Porfavor seleccione una opción.'
     }else{
-      this.pass = 0;
       this.labelMarca = '';
     }
 
-    if(this.anosV != 0 && this.anosV > 0){
-      this.pass = 0;
-    }
-
-    if (this.kilometrajeV == 0) {
+    if (parseInt(this.kilometrajeV) == 0 || this.kilometrajeV == "" || this.regexname.test(this.kilometrajeV) ) {
       this.pass = 1;
       this.labelKilometraje = 'Ingrese el kilometraje del Auto.';
-      if(this.kilometrajeV > 320000){
+      if(parseInt(this.kilometrajeV) > 320000){
         this.pass = 1;
         this.labelKilometraje = 'El auto no puede ser publicado si su kilometraje pasa los 320000.';
       }
     }
     else{
-      this.pass = 0;
       this.labelKilometraje = '';
     }
 
-    if(this.anosV == 0 ){
+    if(parseInt(this.anosV) == 0 || this.anosV == "" || this.regexname.test(this.anosV)){
       this.pass = 1;
       this.labelAnos = 'Debe ingresar como minimo 1 año.';
     }else{
-      this.pass = 0;
       this.labelAnos = '';
     }
 
-    if(this.precioV == 0){
+    if(parseInt(this.precioV) == 0 || this.precioV == "" || this.regexname.test(this.precioV)){
       this.pass = 1;
-      this.labelPrecio = 'Ingrese un precio para su Auto en venta.'
+      this.labelPrecio = 'Ingrese un precio para su Auto en venta.';
     }else{
-      this.pass = 0;
       this.labelPrecio = '';
     }
 

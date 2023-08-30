@@ -9,6 +9,8 @@ import { AnadirProductoPageRoutingModule } from './anadir-producto-routing.modul
 import { AnadirProductoPage } from './anadir-producto.page';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { ComponentsModule } from 'src/app/Components/components.module';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatSelectModule } from '@angular/material/select';
 
 @NgModule({
   imports: [
@@ -16,7 +18,9 @@ import { ComponentsModule } from 'src/app/Components/components.module';
     FormsModule,
     IonicModule,
     ComponentsModule,
-    AnadirProductoPageRoutingModule
+    AnadirProductoPageRoutingModule,
+    MatFormFieldModule, 
+    MatSelectModule
   ],
   declarations: [AnadirProductoPage],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
