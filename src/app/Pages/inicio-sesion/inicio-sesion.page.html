@@ -50,15 +50,19 @@
 
         <ion-input label="Contraseña contraseña" labelPlacement="floating" [counter]="true" maxlength="50" type="password" [(ngModel)] = "contra2" placeholder="Ej: !Miguel123"></ion-input>
         <ion-label >{{labelContra2}}</ion-label>
-
-        <ion-item class="ion-margin-top ion-margin-bottom">
-          <ion-select label="Pregunta" label-placement="stacked" [(ngModel)] = "pregunta" placeholder="Ingrese una pregunta" okText="Aceptar" cancelText="Cancelar">
-            <ion-select-option value="1">¿Como se llama tu primera mascota?</ion-select-option>
-            <ion-select-option value="2">¿Como se llama tu hospital de nacimiento?</ion-select-option>
-            <ion-select-option value="3">¿Como se llama tu madre?</ion-select-option>
-          </ion-select>
-        </ion-item>
-        <ion-label >{{labelPregunta}}</ion-label>
+        
+        <mat-form-field>
+          <mat-label>Pregunta</mat-label>
+          <mat-select [(ngModel)]="pregunta">
+            <mat-option value="1">¿Como se llama tu primera mascota</mat-option>
+            <mat-option value="2">¿Como se llama el ospital donde naciste?</mat-option>
+            <mat-option value="3">¿Como se llama tu madre?</mat-option>
+          </mat-select>
+        </mat-form-field>
+      
+        <div>
+        <ion-label class="labelpregunta">{{labelPregunta}}</ion-label>
+        </div>
 
         <ion-input label="Respuesta" labelPlacement="floating" [counter]="true" maxlength="200" class="ion-margin-top" [(ngModel)] = "respuesta" placeholder="Ej: San Jose"></ion-input>
         <ion-label >{{labelRespuesta}}</ion-label>

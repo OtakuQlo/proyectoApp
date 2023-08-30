@@ -105,11 +105,12 @@ export class InicioSesionPage implements OnInit {
     }
     
     // validacion pregunta
-    if(parseInt(this.pregunta)<1){
+    if(parseInt(this.pregunta) == 0){
       bandera = false;
       this.labelPregunta = 'Debe ingresar una opcion';
     }else{
       this.labelPregunta = '';
+      this.pregunta = 'coño';
     }
 
     // validacion respuesta
