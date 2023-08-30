@@ -16,7 +16,7 @@ export class PanelAdminPage implements OnInit {
   ];
 
   userReports = [
-    { productName: 'la publicacion es Spam Alfa Romeo Giulia' },
+    { productName: 'Reporte de Producto 1' },
     { productName: 'Reporte de Producto 2' },
     // ... Más datos de ejemplo
   ];
