@@ -20,41 +20,48 @@ export class HomePage{
 
   irPaginaPrinicipal(){
     
-    if (this.rut == "21294525-0" || this.pass == "!Miguel123") {
-      let navigationExtra: NavigationExtras = {
-        state: {
-          nombre: "Miguel",
-          apellido: "Pérez",
-          rut:'21294525-0',
-          correo: "correoreal@duocuc.cl",
-          direccion: "Yacare #1185",
-          rol: 1,
-        }
-      }
-      this.router.navigate(['/perfil'],navigationExtra);
-      this.presentToast('bottom');
-    }
-    else{
-      
-    }
+    
+    
 
     // Cuenta administrador gabo
-    if (this.rut == "20966130-6" && this.pass == "!Manuel123") {
-      let navigationExtra: NavigationExtras = {
-        state: {
-        nombre: "Manuel",
-        apellido: "Rivera",
-        rut:'20966130-6',
-        correo: "correoreal2@duocuc.cl",
-        direccion: "Los olmos #1111",
-        rol: 2,
 
+    if (this.rut == "20966130-6" && this.pass == "!Manuel123"  || this.rut == "21294525-0" && this.pass == "!Miguel123") {
+      if (this.rut == "21294525-0" && this.pass == "!Miguel123") {
+        let navigationExtra: NavigationExtras = {
+          state: {
+            nombre: "Miguel",
+            apellido: "Pérez",
+            rut:'21294525-0',
+            correo: "correoreal@duocuc.cl",
+            direccion: "Yacare #1185",
+            rol: 1,
+          }
+        }
+        this.router.navigate(['/perfil'],navigationExtra);
+        this.presentToast('bottom');
       }
+      if (this.rut == "20966130-6" && this.pass == "!Manuel123") {
+        let navigationExtra: NavigationExtras = {
+          state: {
+          nombre: "Manuel",
+          apellido: "Rivera",
+          rut:'20966130-6',
+          correo: "correoreal2@duocuc.cl",
+          direccion: "Los olmos #1111",
+          rol: 2,
+  
+        }
+  
+        }
+        this.router.navigate(['/perfil'],navigationExtra);
+        this.presentToast('bottom');
+      }
+    }else{
 
-      }
-      this.router.navigate(['/perfil'],navigationExtra);
-      this.presentToast('bottom');
+      console.log("waos")
+      
     }
+    
 
     
 
