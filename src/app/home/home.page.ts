@@ -58,7 +58,7 @@ export class HomePage{
       }
     }else{
 
-      console.log("waos")
+      this.presentAlert();
       
     }
     
