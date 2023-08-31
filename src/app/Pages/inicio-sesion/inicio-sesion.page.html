@@ -5,21 +5,17 @@
 </ion-header>
 
 <ion-content>
-  <ion-grid>
+  <ion-grid class=" ion-margin-top">
     <ion-row class="ion-justify-content-center" >
-      <ion-col size="4">
           <ion-avatar class="avatar">
             <img alt="persona" src="https://ionicframework.com/docs/img/demos/avatar.svg" />
           </ion-avatar>
-        </ion-col>
     </ion-row>
 
-    <ion-row class="ion-justify-content-center">
-      <ion-col size="4" offset="1.5">
+    <ion-row class="ion-justify-content-center  ion-margin-top">
           <ion-fab-button>
             <ion-icon name="camera"></ion-icon>
           </ion-fab-button>
-        </ion-col>
     </ion-row>
 
     <ion-row>
@@ -55,7 +51,7 @@
           <mat-label>Pregunta</mat-label>
           <mat-select [(ngModel)]="pregunta">
             <mat-option value="1">¿Como se llama tu primera mascota</mat-option>
-            <mat-option value="2">¿Como se llama el ospital donde naciste?</mat-option>
+            <mat-option value="2">¿Como se llama el hospital donde naciste?</mat-option>
             <mat-option value="3">¿Como se llama tu madre?</mat-option>
           </mat-select>
         </mat-form-field>
