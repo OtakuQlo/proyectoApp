@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, NavigationExtras, Router } from '@angular/router';
+import { MenuController } from '@ionic/angular';
 
 @Component({
   selector: 'app-perfil',
@@ -15,7 +16,7 @@ export class PerfilPage implements OnInit {
   direccion: string = "";
   rol: string = "";
 
-  constructor(private router: Router,private activedRouter: ActivatedRoute) { 
+  constructor(private router: Router,private activedRouter: ActivatedRoute,private menu: MenuController,) { 
     this.activedRouter.queryParams.subscribe(param =>{
       if(this.router.getCurrentNavigation()?.extras.state){
         this.nombre = this.router.getCurrentNavigation()?.extras.state?.['nombre'];
@@ -26,9 +27,16 @@ export class PerfilPage implements OnInit {
         this.rol = this.router.getCurrentNavigation()?.extras.state?.['rol'];
       }
     })
+    this.menu.enable(true);
+    
   }
   ngOnInit() {
-    }
+    
+  }
+
+  ngAfterViewInit(){
+    this.menu.enable(true);
+  }
 
   
   irPanelAdmin(){

@@ -1,6 +1,6 @@
 import { Component, ElementRef, OnInit, QueryList, ViewChild, ViewChildren } from '@angular/core';
 import { ActivatedRoute, Route, Router } from '@angular/router';
-import { AlertController, AnimationController, IonCard, IonModal } from '@ionic/angular';
+import { AlertController, AnimationController, IonCard, IonModal, MenuController } from '@ionic/angular';
 
 @Component({
   selector: 'app-pagina-principal',
@@ -44,7 +44,7 @@ export class PaginaPrincipalPage implements OnInit {
   autos = [this.autoModelo];
   cardC: any;
 
-  constructor(private animationCtrl: AnimationController, private router: Router, private activedRouter: ActivatedRoute, private alertController: AlertController) {
+  constructor(private animationCtrl: AnimationController, private router: Router, private activedRouter: ActivatedRoute, private alertController: AlertController, private menu: MenuController) {
     /*this.activedRouter.queryParams.subscribe(param =>{
       if(this.router.getCurrentNavigation()?.extras.state){
         this.rol = this.router.getCurrentNavigation()?.extras.state?.['rol'];
@@ -53,8 +53,12 @@ export class PaginaPrincipalPage implements OnInit {
     })
     */
   }
-
+  
+  ngAfterViewInit(){
+    this.menu.enable(true);
+  }
   ngOnInit() {
+    this.menu.enable(true);
     /* 
       const enterAnimation = (baseEl: HTMLElement) => {
       const root = baseEl.shadowRoot;

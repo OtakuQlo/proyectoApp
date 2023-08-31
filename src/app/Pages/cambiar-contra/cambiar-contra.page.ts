@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { AlertController, ToastController } from '@ionic/angular';
+import { AlertController, MenuController, ToastController } from '@ionic/angular';
 
 @Component({
   selector: 'app-cambiar-contra',
@@ -9,7 +9,7 @@ import { AlertController, ToastController } from '@ionic/angular';
 })
 export class CambiarContraPage implements OnInit {
 
-  constructor(private router: Router,private toastController: ToastController,private alertController: AlertController) { }
+  constructor(private router: Router,private toastController: ToastController,private alertController: AlertController, private menu: MenuController) { }
   // variables
   contra1 : string = '';
   contra2 : string = '';
@@ -22,8 +22,11 @@ export class CambiarContraPage implements OnInit {
   regexpass: RegExp = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%#*?^&])[A-Za-z\d@$!#%*^?&]{8,50}$/;
 
   ngOnInit() {
+    this.menu.enable(false);
   }
-  
+  ngAfterViewInit(){
+    this.menu.enable(false);
+  }
   irHome(){
     // la bandera si está en verdadero permite que se envien los datos en caso contrario no lo permite
     let bandera: boolean = true;
@@ -41,9 +44,6 @@ export class CambiarContraPage implements OnInit {
     if (bandera == true){
       this.router.navigate(['/pagina-principal']);
       this.presentToast('bottom');
-      
-    }else{
-      this.presentAlert();
     }
 
   }

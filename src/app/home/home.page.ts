@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { NavigationExtras ,Router } from '@angular/router';
 import { AlertController, ToastController } from '@ionic/angular';
 
+import { MenuController } from '@ionic/angular';
+
 @Component({
   selector: 'app-home',
   templateUrl: 'home.page.html',
@@ -9,11 +11,18 @@ import { AlertController, ToastController } from '@ionic/angular';
 })
 export class HomePage{
 
-  constructor(private router:Router,private toastController: ToastController,private alertController: AlertController) {}
+  constructor(private router:Router,private toastController: ToastController,private alertController: AlertController,private menu: MenuController) {
+    
+  }
   rut: string = '';
   pass: string = '';
 
-
+  ngOnInit() {
+    this.menu.enable(false);
+  }
+  ngAfterViewInit(){
+    this.menu.enable(false);
+  }
   irCrearUsuario(){
     this.router.navigate(['/inicio-sesion']);
   }

@@ -15,7 +15,7 @@ export class IngresarcontraPage implements OnInit {
   }
   
   irCambiarContra(){
-    if (this.contra != "123") {
+    if (this.contra != "!Miguel123") {
       this.presentAlert();
     }else{
       this.router.navigate(['/cambiar-contra']);

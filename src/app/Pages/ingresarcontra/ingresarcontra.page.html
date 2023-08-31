@@ -1,6 +1,8 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>Cambiar contraseña</ion-title>
+    <ion-buttons slot = "start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
@@ -10,9 +12,10 @@
       
       <ion-col size="10">
 
-        <p class="ion-margin-bottom" style="margin-bottom: 50px;">Ingresa tu contraseña para poder modificarla</p>
-        
-        <ion-input label="Ingrese su contraseña actual" labelPlacement="floating" type="password" [(ngModel)] = "contra" class=></ion-input>
+        <p class="ion-margin-bottom" style="margin-bottom: 50px; font-size: 14px;">Ingresa tu contraseña para poder modificarla</p>
+        <ion-item>
+          <ion-input label="Ingrese su contraseña actual" labelPlacement="floating" type="password" [(ngModel)] = "contra" class=></ion-input>
+        </ion-item>
         <div class="ion-text-center">
         <ion-button fill="outline" id="boton" class="ion-margin-top" shape="round" (click) = "irCambiarContra()">Confirmar</ion-button>
         </div>

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AlertController } from '@ionic/angular';
-
+import { MenuController } from '@ionic/angular';
 @Component({
   selector: 'app-recu-contra',
   templateUrl: './recu-contra.page.html',
@@ -10,9 +10,10 @@ import { AlertController } from '@ionic/angular';
 export class RecuContraPage implements OnInit {
   correo = "mi.perezf@duocuc.cl"
   input = '';
-  constructor(private alertController: AlertController,private router:Router) { }
+  constructor(private alertController: AlertController,private router:Router,private menu: MenuController) { }
 
   ngOnInit() {
+    this.menu.enable(false);
   }
   
   irRecuPregunta(){
