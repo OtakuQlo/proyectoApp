@@ -41,6 +41,8 @@ export class ModificarPerfilPage implements OnInit {
     if(!this.regexname.test(this.nombre)){
       bandera = false;
       this.labelNombre = 'Debe ingresar un nombre valido.';
+    }else{
+      this.labelNombre = '';
     }
 
     // validacion apellido
