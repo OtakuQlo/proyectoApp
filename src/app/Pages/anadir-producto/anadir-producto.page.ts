@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { AlertController, ToastController } from '@ionic/angular';
+import {  ToastController } from '@ionic/angular';
 
 
 
@@ -12,7 +12,7 @@ import { AlertController, ToastController } from '@ionic/angular';
 
 export class AnadirProductoPage implements OnInit {
   
-  constructor(private router:Router,private toastController: ToastController,private AlertController:AlertController) { }
+  constructor(private router:Router,private toastController: ToastController) { }
 
   modeloV: string = "";
   precioV : string = "";

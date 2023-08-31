@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { AlertController } from '@ionic/angular';
+import { AlertController, AnimationController, IonModal, ToastController } from '@ionic/angular';
 
 
 
@@ -10,17 +10,19 @@ import { AlertController } from '@ionic/angular';
   styleUrls: ['./pagina-producto.page.scss'],
 })
 export class PaginaProductoPage implements OnInit {
+  @ViewChild('modal', { static: true }) modal!: IonModal;
   rol: string = '';
   verificador: string = '';
+  tipoReporte: number = 0;
+  errorLabel: string = '';
+  auto1: [string, string, string, string, number, string] = ["Alfa Romeo Giulia", "32.900.000", "Miguel Perez", "Avenida Generica 1234",
+    78784471, "La marca italiana regresa al segmento D de los sedanes con esta berlina de corte deportivo y tracción trasera, un vehículo premium muy agresivo y atractivo a la vista, a lo que debemos sumar la presencia de una cabina con estupendos acabados."];
 
-  auto1 : [string,string,string,string,number,string] = ["Alfa Romeo Giulia", "32.900.000","Miguel Perez","Avenida Generica 1234",
-  78784471,"La marca italiana regresa al segmento D de los sedanes con esta berlina de corte deportivo y tracción trasera, un vehículo premium muy agresivo y atractivo a la vista, a lo que debemos sumar la presencia de una cabina con estupendos acabados."];
-  
-  arrCarac : string[] = ["Rojo","Alfa Romeo","Semiautomatica"];
+  arrCarac: string[] = ["Rojo", "Alfa Romeo", "Semiautomatica"];
 
-  constructor(private router: Router,private activedRouter: ActivatedRoute,private alertController: AlertController) { 
-    this.activedRouter.queryParams.subscribe(param =>{
-      if(this.router.getCurrentNavigation()?.extras.state){
+  constructor(private router: Router, private activedRouter: ActivatedRoute, private alertController: AlertController, private toastController: ToastController, private animationCtrl: AnimationController) {
+    this.activedRouter.queryParams.subscribe(param => {
+      if (this.router.getCurrentNavigation()?.extras.state) {
         this.rol = this.router.getCurrentNavigation()?.extras.state?.['rol'];
         this.verificador = this.router.getCurrentNavigation()?.extras.state?.['verificador'];
       }
@@ -28,6 +30,40 @@ export class PaginaProductoPage implements OnInit {
   }
 
   ngOnInit() {
+    const enterAnimation = (baseEl: HTMLElement) => {
+      const root = baseEl.shadowRoot;
+
+      const backdropAnimation = this.animationCtrl
+        .create()
+        .addElement(root!.querySelector('ion-backdrop')!)
+        .fromTo('opacity', '0.01', 'var(--backdrop-opacity)');
+
+      const wrapperAnimation = this.animationCtrl
+        .create()
+        .addElement(root!.querySelector('.modal-wrapper')!)
+        .keyframes([
+          { offset: 0, opacity: '0', transform: 'scale(0)' },
+          { offset: 1, opacity: '0.99', transform: 'scale(1)' },
+        ]);
+
+      return this.animationCtrl
+        .create()
+        .addElement(baseEl)
+        .easing('ease-out')
+        .duration(500)
+        .addAnimation([backdropAnimation, wrapperAnimation]);
+    };
+
+    const leaveAnimation = (baseEl: HTMLElement) => {
+      return enterAnimation(baseEl).direction('reverse');
+    };
+
+    this.modal.enterAnimation = enterAnimation;
+    this.modal.leaveAnimation = leaveAnimation;
+  }
+
+  closeModal() {
+    this.modal.dismiss();
   }
 
   async presentConfirmationAlert(action: string) {
@@ -91,9 +127,27 @@ export class PaginaProductoPage implements OnInit {
 
     await alert.present();
   }
-  
-  irReportar(){
-    this.router.navigate(['/reportar-auto']);
+
+  mandarReporte() {
+    if(this.tipoReporte == 0){
+      this.errorLabel = 'Porfavor escoja una opcion para reportar'
+    }else{
+      this.errorLabel = '';
+      this.tipoReporte = 0;
+      this.router.navigate(['/pagina-principal']);
+      this.presentToast('bottom');
+      this.closeModal();
+    }
   };
+
+  async presentToast(position: 'top' | 'middle' | 'bottom') {
+    const toast = await this.toastController.create({
+      message: 'Tu reporte ha sido enviado',
+      duration: 1500,
+      position: position,
+    });
+
+    await toast.present();
+  }
 
 }
