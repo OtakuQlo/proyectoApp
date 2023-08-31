@@ -1,6 +1,8 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>Recuperar contraseña</ion-title>
+    <ion-buttons slot = "start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
@@ -10,6 +12,9 @@
     <ion-row>
       <ion-col size="1"></ion-col>
       <ion-col size="10">
+        <div style="margin-bottom: 50px;">
+          <ion-label >Ingrese su pregunta con respuesta para continuar con recuperación de contraseña.</ion-label>
+        </div>
         <ion-item class="ion-margin-top">
           <ion-select label="Pregunta" label-placement="stacked" [(ngModel)] = "opcion">
             <ion-select-option value="1">¿Como se llama tu primera mascota?</ion-select-option>
@@ -17,7 +22,11 @@
             <ion-select-option value="3">¿Como se llama tu madre?</ion-select-option>
           </ion-select>
         </ion-item>
-        <ion-input label="Respuesta" labelPlacement="floating" class="ion-margin-top" [(ngModel)] = "respuesta"></ion-input>
+
+        <ion-item>
+          <ion-input label="Respuesta" labelPlacement="floating" class="ion-margin-top" [(ngModel)] = "respuesta"></ion-input>
+        </ion-item>
+        
         <div class="ion-text-center">
           <ion-button fill="outline" id="boton" class="ion-margin-top" shape="round" class="ion-margin-top" (click) = irCambiarContra()>Confirmar</ion-button>
         </div>

@@ -1,6 +1,8 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>Recuperar contraseña</ion-title>
+    <ion-buttons slot = "start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
@@ -12,10 +14,13 @@
     <ion-row>
       <ion-col size="1"></ion-col>
       <ion-col size="10">
-        
-        
-        <ion-input label="Ingrese su correo" labelPlacement="floating" [(ngModel)] = "input"></ion-input>
-        <ion-button fill="outline" id="boton" class="ion-margin-top" shape="round" (click) = "irRecuPregunta()">Confirmar</ion-button>
+        <div style="margin-bottom: 50px;">
+          <ion-label >Ingrese su correo para recuperar su contraseña</ion-label>
+        </div>
+      <ion-item >
+        <ion-input label="Ingrese su correo" labelPlacement="floating" [(ngModel)] = "input" ></ion-input>
+      </ion-item>
+        <ion-button fill = "outline" id = "boton" class="ion-margin-top" shape="round" (click) = "irRecuPregunta()">Confirmar</ion-button>
       
       </ion-col>
       <ion-col size="1"></ion-col>
