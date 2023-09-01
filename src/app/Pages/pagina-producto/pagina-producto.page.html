@@ -74,10 +74,7 @@
       </ion-col>
     </ion-row>
     <ion-row class="ion-justify-content-center">
-      <!--<ion-col size="4">
-        <ion-button style="font-size: 12px; width: 105px;" fill="outline" id="botonContac"
-          shape="round">Contactar</ion-button>
-      </ion-col>-->
+
       <ion-col size="4">
         <ion-button color="danger" style="font-size: 12px; width: 105px;" fill="outline" id="modal-trigger"
           shape="round">Reportar</ion-button>
@@ -123,19 +120,15 @@
                   <ion-textarea label="Descripción (opcional)" labelPlacement="stacked" [counter]="true" maxlength="500"
                     helperText="Agregue una descripción a tu resporte" [autoGrow]="true"></ion-textarea>
                 </ion-col>
-                <ion-row class="ion-justify-content-center">
-                  <ion-col size="7">
-                    <ion-button fill="outline" id="boton" shape="round" class="botonreporte"
-                      (click)="mandarReporte()">Enviar
-                      reporte</ion-button>
-                  </ion-col>
-                </ion-row>
-                <ion-row class="ion-justify-content-center">
-                  <ion-col size="7" >
-                    <ion-button fill="outline" id="boton" shape="round" (click)="closeModal()" color="danger">Cancelar
-                      reporte</ion-button>
-                  </ion-col>
-                </ion-row>
+              </ion-row>
+              <ion-row class="ion-justify-content-center">
+                <ion-button fill="outline" id="boton" shape="round" class="botonreporte"
+                  (click)="mandarReporte()">Enviar
+                  reporte</ion-button>
+              </ion-row>
+              <ion-row class="ion-justify-content-center">
+                <ion-button fill="outline" id="boton" shape="round" (click)="closeModal()" color="danger">Cancelar
+                  reporte</ion-button>
               </ion-row>
             </ion-grid>
           </ion-content>
