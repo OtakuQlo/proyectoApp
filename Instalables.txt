@@ -1,0 +1,9 @@
+npm i -g @ionic/cli
+npm install
+npm install --save @fdograph/rut-utilities
+npm install swiper@latest
+npm install -g @angular/cli
+ng add @angular/material
+
+
+

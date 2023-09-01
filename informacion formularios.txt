@@ -1,0 +1,9 @@
+cuenta nortmal: 21294525-0 !Miguel123
+Cuenta admin: 20966130-6 !Manuel123
+
+correo recuperar contra: mi.perezf@duocuc.cl
+pregunta recu contra: cual es el nombre de tu primera mascota
+respuesta pregunta: perrito
+
+contraseña para cambiar: !Miguel123
+
