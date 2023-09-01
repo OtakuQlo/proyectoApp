@@ -82,6 +82,7 @@ export class PaginaProductoPage implements OnInit {
           cssClass: 'secondary',
           handler: () => {
             console.log('Cancel clicked');
+            this.presentToast('bottom', 'Acción cancelada');
           },
         },
         {
@@ -89,6 +90,8 @@ export class PaginaProductoPage implements OnInit {
           handler: () => {
             console.log('Eliminar clicked');
             this.router.navigate(['/pagina-principal']);
+            this.presentToast('bottom', 'El elemento ha sido eliminado');
+            this.presentToast('bottom', 'El elemento ha sido eliminado');
           },
         },
       ],
@@ -113,6 +116,7 @@ export class PaginaProductoPage implements OnInit {
           cssClass: 'secondary',
           handler: () => {
             console.log('Cancel clicked');
+            this.presentToast('bottom', 'Acción cancelada');
           },
         },
         {
@@ -120,6 +124,7 @@ export class PaginaProductoPage implements OnInit {
           handler: () => {
             console.log('Eliminar clicked');
             this.router.navigate(['/pagina-principal']);
+            this.presentToast('bottom', 'Acción aceptada');
           },
         },
       ],
@@ -129,25 +134,24 @@ export class PaginaProductoPage implements OnInit {
   }
 
   mandarReporte() {
-    if(this.tipoReporte == 0){
-      this.errorLabel = 'Porfavor escoja una opcion para reportar'
-    }else{
+    if (this.tipoReporte == 0) {
+      this.errorLabel = 'Porfavor escoja una opcion para reportar';
+    } else {
       this.errorLabel = '';
-      this.tipoReporte = 0;
       this.router.navigate(['/pagina-principal']);
-      this.presentToast('bottom');
+      let toastMessage = 'El producto ha sido reportado';
+      this.presentToast('bottom', toastMessage);
       this.closeModal();
     }
   };
 
-  async presentToast(position: 'top' | 'middle' | 'bottom') {
+  async presentToast(position: 'top' | 'middle' | 'bottom', message: string) {
     const toast = await this.toastController.create({
-      message: 'Tu reporte ha sido enviado',
+      message: message,
       duration: 1500,
       position: position,
     });
 
     await toast.present();
   }
-
 }
