@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { AlertController } from '@ionic/angular';
+import { AlertController, MenuController } from '@ionic/angular';
 
 @Component({
   selector: 'app-ingresarcontra',
@@ -9,9 +9,13 @@ import { AlertController } from '@ionic/angular';
 })
 export class IngresarcontraPage implements OnInit {
 
-  constructor(private router:Router,private alertController: AlertController) { }
+  constructor(private router:Router,private alertController: AlertController, private menu: MenuController) { }
   contra: string= '';
   ngOnInit() {
+    this.menu.enable(false);
+  }
+  ngAfterViewInit(){
+    this.menu.enable(false);
   }
   
   irCambiarContra(){

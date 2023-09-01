@@ -34,10 +34,14 @@ export class CambiarContraPage implements OnInit {
     if (!this.regexpass.test(this.contra1)) {
       this.labelContra = 'Debe ingresar una contraseña con carateres especiales, mayuscula y numero con minimo de 8 y maximo de 50 caracteres';
       bandera = false;
+    }else{
+      this.labelContra = '';
     }
     if (this.contra2 != this.contra1) {
       this.labelContra2 = 'Deben coincidir las contraseñas';
       bandera = false;
+    }else{
+      this.labelContra2 = '';
     }
 
 

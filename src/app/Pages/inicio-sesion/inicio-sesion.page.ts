@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NavigationExtras, Router } from '@angular/router';
 import { validateRut } from '@fdograph/rut-utilities';
-import { ToastController } from '@ionic/angular';
+import { MenuController, ToastController } from '@ionic/angular';
 
 @Component({
   selector: 'app-inicio-sesion',
@@ -10,9 +10,13 @@ import { ToastController } from '@ionic/angular';
 })
 export class InicioSesionPage implements OnInit {
 
-  constructor(private router:Router,private toastController: ToastController) { }
+  constructor(private router:Router,private toastController: ToastController, private menu: MenuController) { }
 
   ngOnInit() {
+    this.menu.enable(false);
+  }
+  ngAfterViewInit(){
+    this.menu.enable(false);
   }
   // regex
   regexpass: RegExp = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%#*?^&])[A-Za-z\d@$!#%*^?&]{8,50}$/;
