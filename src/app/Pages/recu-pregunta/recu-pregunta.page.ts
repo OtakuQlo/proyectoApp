@@ -17,7 +17,7 @@ export class RecuPreguntaPage implements OnInit {
   opcion: number = 0 ;
   respuesta: string = '';
   op: number = 1;
-  res: string = "mimi";
+  res: string = "perrito";
 
 
   irCambiarContra(){
