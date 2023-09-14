@@ -1,14 +1,14 @@
 import { Injectable } from '@angular/core';
 import { SQLite, SQLiteObject } from '@awesome-cordova-plugins/sqlite/ngx';
 import { AlertController, Platform } from '@ionic/angular';
+
 import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class DatabaseService {
-
-  //vriable de conexion a BD
+  //variable de conexion a BD
   public db!:SQLiteObject;
   
   //variables para la creacion de tablas
@@ -24,24 +24,20 @@ export class DatabaseService {
   //variables para los insert iniciales
 
   //observables de las tablas
+  observer = new BehaviorSubject([]);
 
+  //observable para la BD
+  private isDBReady: BehaviorSubject<boolean> = new BehaviorSubject(false);
+  
   nombre:string = '';
   apellido:string = '';
   
 
-  //Tablas
+  //Tablas?
   persona: string = 'CREATE IF NOT EXISTS TABLE persona ();'
 
-  //Datos tablas
+  //Datos tablas?
   datosPersona: string = 'INSERT OR IGNORE INTO persona values ()' 
-
-
-
-  //Observable de las tablas
-  observer = new BehaviorSubject([]);
-
-  //Observable de la base de datos
-  private isDBReady: BehaviorSubject<boolean> = new BehaviorSubject(false);
 
   constructor(private sqlite: SQLite, private platform: Platform, private alertController: AlertController) { 
 
