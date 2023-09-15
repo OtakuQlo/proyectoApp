@@ -31,7 +31,6 @@ export class DatabaseService {
   
   nombre:string = '';
   apellido:string = '';
-  
 
   //Tablas?
   persona: string = 'CREATE IF NOT EXISTS TABLE persona ();'
@@ -42,8 +41,6 @@ export class DatabaseService {
   constructor(private sqlite: SQLite, private platform: Platform, private alertController: AlertController) { 
 
   }
-
-
 
   crearDB(){
     this.platform.ready().then(() =>
@@ -59,8 +56,6 @@ export class DatabaseService {
     }));
   }
 
-
-
   async crearTablas(){
     try{
       await this.db.executeSql(this.persona,[]);
@@ -70,10 +65,6 @@ export class DatabaseService {
     }catch(error: any){
       this.presentAlert("Error en crear las tablas" + error)
     }
-
-
-
-
   }
 
   async presentAlert(msj:string) {
@@ -84,9 +75,7 @@ export class DatabaseService {
       buttons: ['OK'],
     });
 
-
     await alert.present();
   }
 
-  
 }
