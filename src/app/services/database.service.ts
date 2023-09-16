@@ -3,6 +3,7 @@ import { SQLite, SQLiteObject } from '@awesome-cordova-plugins/sqlite/ngx';
 import { AlertController, Platform } from '@ionic/angular';
 
 import { BehaviorSubject, Observable } from 'rxjs';
+import { Publicacion } from './publicacion';
 
 @Injectable({
   providedIn: 'root'
@@ -49,20 +50,6 @@ export class DatabaseService {
     return this.observer.asObservable();
   }
 
-  buscarPublicacion(){
-    return this.db.executeSql('SELECT * FROM publicacion',[]).then(res=>{
-      let items: Publicacion[] = [];
-      if(res.rows.length > 0){
-        for(var i=0; i < res.rows.length; i++){
-          items.push({
-
-          })
-
-        }
-      }
-      this.observer.next(items as any);
-    })
-  }
 
   crearDB(){
     this.platform.ready().then(() =>
@@ -107,6 +94,7 @@ export class DatabaseService {
     }
   }
 
+  //Alertas
   async presentAlert(msj:string) {
     const alert = await this.alertController.create({
       header: 'Alert',
@@ -117,5 +105,48 @@ export class DatabaseService {
 
     await alert.present();
   }
+
+
+
+  //Usuarios
+  crearUsuario(){
+
+  }
+
+
+
+  //Publicaciones
+
+
+  //Cuando ingresamos a la pagina principal esta funcion permite ver los autos
+  buscarPublicacion(){
+    return this.db.executeSql('SELECT * FROM publicacion',[]).then(res=>{
+      let items: Publicacion[] = [];
+      if(res.rows.length > 0){
+        for(var i=0; i < res.rows.length; i++){
+          items.push({
+            Id_publicacion: res.rows.item(i).Id_publicacion,
+            modelo: res.rows.item(i).modelo,
+            marca : res.rows.item(i).marca,
+            precio : res.rows.item(i).precio,
+            color : res.rows.item(i).color,
+            transmision : res.rows.item(i).transmision,
+            descripcion : res.rows.item(i).descripcion,
+            estado : res.rows.item(i).estado,
+            kilometraje : res.rows.item(i).kilometraje,
+            cantidad_de_uso : res.rows.item(i).cantidad_de_uso,
+            foto : res.rows.item(i).foto,
+            Id_usuario : res.rows.item(i).Id_usuario
+          })
+
+        }
+      }
+      this.observer.next(items as any);
+    })
+  }
+
+
+
+  //Administrador
 
 }
