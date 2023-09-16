@@ -35,7 +35,7 @@ export class PaginaPrincipalPage implements OnInit {
 
   ngOnInit() {
     this.menu.enable(true);
-     //me subscribo al observable de la BD
+    //me subscribo al observable de la BD
     this.db.bdState().subscribe(res=>{
       //verifico si el estatus es true
       if(res){
@@ -62,11 +62,11 @@ export class PaginaPrincipalPage implements OnInit {
         cantidad_de_usoE: x.cantidad_de_uso,
         fotoE: x.foto,
         nombreV: x.Id_usuario.nombre + x.Id_usuario.apellido,
-        direccion: x.Id_usuario.direccion.nombre,
+        direccion: x.Id_usuario.Id_direccion.nombre,
         numeroT: x.Id_usuario.telefono
       }
     }
-    this.router.navigate(['/pagina-producto'],navigationExtras)
+    this.router.navigate(['/pagina-producto'], navigationExtras);
   }
 
 }

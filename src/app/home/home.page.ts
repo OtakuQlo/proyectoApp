@@ -62,7 +62,7 @@ export class HomePage{
         }
   
         }
-        this.router.navigate(['/perfil'],navigationExtra);
+        this.router.navigate(['/pagina-principal'],navigationExtra);
         this.presentToast('bottom');
       }
     }else{

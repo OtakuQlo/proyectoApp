@@ -93,6 +93,7 @@ export class DatabaseService {
       await this.db.executeSql(this.registroPublicacion3,[])
       await this.db.executeSql(this.registroPublicacion4,[])
       this.isDBReady.next(true);
+      this.buscarPublicacion();
 
     }catch(error){
       this.presentAlert("Error en crear las tablas" + error)
@@ -155,6 +156,8 @@ export class DatabaseService {
         }
       }
       this.observer.next(items as any);
+    }).catch(e =>{
+      this.presentAlert("Error buscar" + e);
     })
   }
 
