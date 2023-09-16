@@ -15,16 +15,25 @@ export class PaginaProductoPage implements OnInit {
   verificador: string = '';
   tipoReporte: number = 0;
   errorLabel: string = '';
-  auto1: [string, string, string, string, number, string] = ["Alfa Romeo Giulia", "32.900.000", "Miguel Perez", "Avenida Generica 1234",
-    78784471, "La marca italiana regresa al segmento D de los sedanes con esta berlina de corte deportivo y tracción trasera, un vehículo premium muy agresivo y atractivo a la vista, a lo que debemos sumar la presencia de una cabina con estupendos acabados."];
-
   arrCarac: string[] = ["Rojo", "Alfa Romeo", "Semiautomatica"];
 
+  auto: any[] = []
+
   constructor(private router: Router, private activedRouter: ActivatedRoute, private alertController: AlertController, private toastController: ToastController, private animationCtrl: AnimationController) {
-    this.activedRouter.queryParams.subscribe(param => {
+    this.activedRouter.queryParams.subscribe(res => {
       if (this.router.getCurrentNavigation()?.extras.state) {
-        this.rol = this.router.getCurrentNavigation()?.extras.state?.['rol'];
-        this.verificador = this.router.getCurrentNavigation()?.extras.state?.['verificador'];
+        this.auto = this.router.getCurrentNavigation()?.extras?.state?.['modeloE'];
+        this.auto = this.router.getCurrentNavigation()?.extras?.state?.['marcaE'];
+        this.auto = this.router.getCurrentNavigation()?.extras?.state?.['precioE'];
+        this.auto = this.router.getCurrentNavigation()?.extras?.state?.['colorE'];
+        this.auto = this.router.getCurrentNavigation()?.extras?.state?.['transmisionE'];
+        this.auto = this.router.getCurrentNavigation()?.extras?.state?.['descripcionE'];
+        this.auto = this.router.getCurrentNavigation()?.extras?.state?.['kilometrajeE'];
+        this.auto = this.router.getCurrentNavigation()?.extras?.state?.['cantidad_de_usoE'];
+        this.auto = this.router.getCurrentNavigation()?.extras?.state?.['fotoE'];
+        this.auto = this.router.getCurrentNavigation()?.extras?.state?.['nombreV'];
+        this.auto = this.router.getCurrentNavigation()?.extras?.state?.['direccion'];
+        this.auto = this.router.getCurrentNavigation()?.extras?.state?.['numeroT'];
       }
     })
   }

@@ -7,6 +7,7 @@ export class Usuario {
     clave = "";
     respuesta = "";
     telefono = "";
+    direccion = "";
     foto = "";
     Id_pregunta = "";
     Id_rol = "";
