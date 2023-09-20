@@ -104,7 +104,7 @@ export class DatabaseService {
       await this.db.executeSql(this.registroPublicacion2,[])
       await this.db.executeSql(this.registroPublicacion3,[])
       await this.db.executeSql(this.registroPublicacion4,[])
-      await this.db.executeSql(this.registroPregunta2)
+      await this.db.executeSql(this.registroPregunta2,[])
       this.isDBReady.next(true);
       this.buscarPublicacion();
       this.pasarPregunta();
