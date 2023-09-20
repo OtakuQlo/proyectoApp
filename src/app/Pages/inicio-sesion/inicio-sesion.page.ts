@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { NavigationExtras, Router } from '@angular/router';
 import { validateRut } from '@fdograph/rut-utilities';
 import { MenuController, ToastController } from '@ionic/angular';
+import { DatabaseService } from 'src/app/services/database.service';
+import { Pregunta } from 'src/app/services/pregunta';
 
 @Component({
   selector: 'app-inicio-sesion',
@@ -10,10 +12,23 @@ import { MenuController, ToastController } from '@ionic/angular';
 })
 export class InicioSesionPage implements OnInit {
 
-  constructor(private router:Router,private toastController: ToastController, private menu: MenuController) { }
+  constructor(private router:Router,private toastController: ToastController, private menu: MenuController, private db: DatabaseService ) { 
 
+  }
+  
   ngOnInit() {
     this.menu.enable(false);
+    this.db.bdState().subscribe(
+      res => {
+        if(res){
+          this.db.fetchPregunta().subscribe(datos =>{
+            this.preguntas = datos;
+            this.db.presentAlert("preguntas agregadas");
+          })
+        }
+      }
+    )
+
   }
   ngAfterViewInit(){
     this.menu.enable(false);
@@ -37,6 +52,7 @@ export class InicioSesionPage implements OnInit {
   respuesta: string = '';
   pregunta: string = '0';
   direccion:string = '';
+  preguntas : Pregunta[] = []; 
 
   // variables label
   labelNombre: string = '';
@@ -153,22 +169,21 @@ export class InicioSesionPage implements OnInit {
         }
       }
       this.router.navigate(['/perfil'], navigationExtra);
-      this.presentToast('bottom');
+      // this.presentToast('bottom');
     }
     
 
     
 
   }
-  async presentToast(position: 'top' | 'middle' | 'bottom') {
-    const toast = await this.toastController.create({
-      message: 'Cuenta creada exitosamente',
-      duration: 1500,
-      position: position,
-    });
+  // async presentToast(position: 'top' | 'middle' | 'bottom') {
+  //   const toast = await this.toastController.create({
+  //     message: 'Cuenta creada exitosamente',
+  //     duration: 1500,
+  //     position: position,
+  //   });
 
-    await toast.present();
-  }
+   
 
   
   

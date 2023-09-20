@@ -4,6 +4,7 @@ import { AlertController, Platform } from '@ionic/angular';
 
 import { BehaviorSubject, Observable } from 'rxjs';
 import { Publicacion } from './publicacion';
+import { Pregunta } from './pregunta';
 
 @Injectable({
   providedIn: 'root'
@@ -23,17 +24,24 @@ export class DatabaseService {
   tablaReporte: string = "CREATE TABLE IF NOT EXISTS reporte (Id_reporte INTEGER PRIMARY KEY AUTOINCREMENT, tipo VARCHAR(255) NOT NULL, descripcion VARCHAR(255), Id_publicacion INTEGER NOT NULL, FOREIGN KEY (Id_publicacion) REFERENCES publicacion(Id_publicacion));";
 
   //variables para los insert iniciales
-  registroPregunta1: string = "INSERT or IGNORE INTO pregunta(Id_pregunta,nombre) VALUES (1,'¿Como se llamaba tu primera mascota?');";
+  registroPregunta1: string = "INSERT or IGNORE INTO pregunta(Id_pregunta,nombre) VALUES (1,'¿Cómo se llamaba tu primera mascota?');";
   registroRol1: string = "INSERT or IGNORE INTO rol(Id_rol,nombre) VALUES (1,'Admin');";
   registroRol2: string = "INSERT or IGNORE INTO rol(Id_rol,nombre) VALUES (2,'Usuario');";
+  
   registroRegion: string ="INSERT OR IGNORE INTO region(Id_region, nombre) VALUES (1,'METROPOLITANA');";
   registroComuna: string = "INSERT OR IGNORE INTO comuna(Id_comuna,nombre,Id_region) VALUES (1,'INDEPENDENCIA',(SELECT Id_region from region WHERE Id_region=1));";
   registroDireccion: string = "INSERT OR IGNORE INTO direccion(Id_direccion,nombre,numero,Id_comuna) VALUES (1,'AVENIDA GENERICA', 1234,(SELECT Id_comuna from comuna WHERE Id_comuna=1));";
+  
   registroUsuario1: string = "INSERT or IGNORE INTO usuario(Id_usuario,nombre,apellido,correo,clave,respuesta,telefono,Id_direccion,foto,Id_pregunta,Id_rol) VALUES (1,'Miguel','Pérez','correoreal@duocuc.cl','!Miguel123','AUTOMATICA','987653452', (SELECT Id_direccion from direccion WHERE Id_direccion=1) ,'',(SELECT Id_pregunta from pregunta WHERE Id_pregunta=1), (SELECT Id_rol from rol WHERE Id_rol=2));";
+  
   registroPublicacion1: string = "INSERT or IGNORE INTO publicacion(Id_publicacion,modelo,marca,precio,color,transmision,descripcion,estado,kilometraje,cantidad_de_uso,foto,id_usuario) VALUES (1,'2023 Silverado 3.0TD High Country Auto DC 4WD','Chevrolet',52000000,'gris','Automatica','asd','Revision',0,0,'',(SELECT Id_usuario from usuario WHERE Id_usuario=1));";
   registroPublicacion2: string = "INSERT or IGNORE INTO publicacion(Id_publicacion,modelo,marca,precio,color,transmision,descripcion,estado,kilometraje,cantidad_de_uso,foto,id_usuario) VALUES (2,'2010 Q5 2.0T FSI STRONIC QUATTRO','Audi',11500000,'blanco','Automatica','asd','Revision',159567,2,'',(SELECT Id_usuario from usuario WHERE Id_usuario=1));";
   registroPublicacion3: string = "INSERT or IGNORE INTO publicacion(Id_publicacion,modelo,marca,precio,color,transmision,descripcion,estado,kilometraje,cantidad_de_uso,foto,id_usuario) VALUES (3,'2009 147 2.0 TS 150 CV Sport Selespeed','Alfa Romeo',10900000,'negro','Automatica','asd','Revision',90000,3,'',(SELECT Id_usuario from usuario WHERE Id_usuario=1));";
   registroPublicacion4: string = "INSERT or IGNORE INTO publicacion(Id_publicacion,modelo,marca,precio,color,transmision,descripcion,estado,kilometraje,cantidad_de_uso,foto,id_usuario) VALUES (4,'EVOLTIS TOURING GARDX','Subaru',39490000,'gris','Automatica','asd','Revision',0,0,'',(SELECT Id_usuario from usuario WHERE Id_usuario=1));";
+  
+  registroPregunta2: string = "INSERT or IGNORE INTO pregunta(Id_pregunta,nombre) VALUES (2,'¿Cómo se llama el hospital donde naciste?');";
+  
+  
 
   //observables de las tablas
   observer = new BehaviorSubject([]);
@@ -50,6 +58,10 @@ export class DatabaseService {
   }
 
   fetchPublicacion(): Observable<Publicacion[]>{
+    return this.observer.asObservable();
+  }
+
+  fetchPregunta(): Observable<Pregunta[]>{
     return this.observer.asObservable();
   }
 
@@ -92,8 +104,10 @@ export class DatabaseService {
       await this.db.executeSql(this.registroPublicacion2,[])
       await this.db.executeSql(this.registroPublicacion3,[])
       await this.db.executeSql(this.registroPublicacion4,[])
+      await this.db.executeSql(this.registroPregunta2)
       this.isDBReady.next(true);
       this.buscarPublicacion();
+      this.pasarPregunta();
 
     }catch(error){
       this.presentAlert("Error en crear las tablas" + error)
@@ -117,15 +131,36 @@ export class DatabaseService {
   //Usuarios
 
   //falta poner los parametros
-  crearUsuario(nombre:any, apellido:any){
+  crearUsuario(nombre:any, apellido:any, correo:any, clave: any, respuesta:any,telefono:any,foto:any,Id_pregunta:any,Id_rol = 2){
     
-    this.db.executeSql('INSERT or IGNORE INTO usuario(nombre,apellido,correo,clave,respuesta,telefono,foto,Id_pregunta,Id_rol) VALUES (?,?,?,?,?,?,?,?,1)',[1,1,1,1,1,1,1])
+    return this.db.executeSql('INSERT or IGNORE INTO usuario(nombre,apellido,correo,clave,respuesta,telefono,foto,Id_pregunta,Id_rol) VALUES (?,?,?,?,?,?,?,?,?)',[nombre,apellido,correo,clave,respuesta,telefono,foto,Id_pregunta,Id_rol])
     .then(() => {
       this.presentAlert('Se ha ingresado los usuarios de forma correcta');
 
     }).catch((e) =>{ this.presentAlert('error en crear usuario: ' + JSON.stringify(e))
     })
   }
+
+  pasarPregunta(){
+    return this.db.executeSql('SELECT * FROM pregunta',[])
+    .then((res) => {
+      let pregunta: Pregunta[] = []; 
+      if (res.rows.length > 0){
+        for (let i = 0; i < res.rows.length; i++) {
+          pregunta.push({
+            Id_pregunta: res.rows.item(i).Id_pregunta,
+            nombre: res.rows.item(i).nombre
+          })
+        }
+        this.observer.next(pregunta as any);
+      }
+      })
+      .catch(e => {
+        this.presentAlert('Error en pasar pregunta ' + JSON.stringify(e))
+      })
+
+      }
+     
 
 
 

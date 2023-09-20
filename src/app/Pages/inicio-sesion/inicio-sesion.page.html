@@ -54,10 +54,12 @@
           <mat-label>Pregunta</mat-label>
           <mat-select [(ngModel)]="pregunta">
             <mat-option value="1">¿Como se llama tu primera mascota</mat-option>
-            <mat-option value="2">¿Como se llama el hospital donde naciste?</mat-option>
-            <mat-option value="3">¿Como se llama tu madre?</mat-option>
           </mat-select>
         </mat-form-field>
+
+        <div *ngFor = "let answers of preguntas">
+            <p>{{answers.nombre}}</p>
+        </div>
       
         <div>
         <ion-label class="labelpregunta">{{labelPregunta}}</ion-label>
