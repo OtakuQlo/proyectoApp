@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import {  ToastController } from '@ionic/angular';
+import { DatabaseService } from 'src/app/services/database.service';
 
 
 
@@ -12,7 +13,7 @@ import {  ToastController } from '@ionic/angular';
 
 export class AnadirProductoPage implements OnInit {
   
-  constructor(private router:Router,private toastController: ToastController) { }
+  constructor(private router:Router,private toastController: ToastController, private db: DatabaseService) { }
 
   modeloV: string = "";
   precioV : string = "";
@@ -109,7 +110,7 @@ export class AnadirProductoPage implements OnInit {
     }
 
     if(pass == 0){
-      this.router.navigate(['/pagina-principal']);
+      this.agregarPublicacion();
       this.presentToast('bottom');
     }
   };
@@ -124,5 +125,10 @@ export class AnadirProductoPage implements OnInit {
     await toast.present();
   }
   
+  agregarPublicacion(){
+    this.db.crearPublicacion(this.modeloV, this.marcaV, this.precioV, this.colorV, this.transmisionV, this.descrpV, 0, this.kilometrajeV, this.anosV, "Nada", 1);
+    this.db.presentAlert("Auto añadido");
+    this.router.navigate(['/pagina-principal'])
+  }
 
 }

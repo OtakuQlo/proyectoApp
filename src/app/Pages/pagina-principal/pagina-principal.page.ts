@@ -61,7 +61,7 @@ export class PaginaPrincipalPage implements OnInit {
         kilometrajeE: x.kilometraje,
         cantidad_de_usoE: x.cantidad_de_uso,
         fotoE: x.foto,
-        nombreV: x.Id_usuario.nombre + x.Id_usuario.apellido,
+        nombreV: x.Id_usuario.nombre,
         direccion: x.Id_usuario.Id_direccion.nombre,
         numeroT: x.Id_usuario.telefono
       }
