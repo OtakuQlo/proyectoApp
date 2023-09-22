@@ -1,6 +1,6 @@
 export class Usuario {
 
-    Id_usuario = "";
+    idusuario = "";
     nombre = "";
     apellido = "";
     correo = "";
@@ -9,7 +9,7 @@ export class Usuario {
     telefono = "";
     direccion = "";
     foto = "";
-    Id_pregunta = "";
-    Id_rol = "";
+    idpregunta = "";
+    idrol = "";
 
 }

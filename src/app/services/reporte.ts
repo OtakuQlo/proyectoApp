@@ -1,8 +1,8 @@
 export class Reporte {
 
-    Id_reporte = "";
+    idreporte = "";
     tipo = "";
     descripcion = "";
-    Id_publicacion = "";
+    idpublicacion = "";
 
 }

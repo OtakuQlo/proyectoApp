@@ -12,7 +12,7 @@ export class PaginaPrincipalPage implements OnInit {
   
   //Arreglo de autos
   arregloAutos: any = [{
-    Id_publicacion: '',
+    idpublicacion: '',
     modelo: '',
     marca: '',
     precio: '',
@@ -21,12 +21,13 @@ export class PaginaPrincipalPage implements OnInit {
     descripcion: '',
     estado: '',
     kilometraje: '',
-    cantidad_de_uso: '',
+    cantidaddeuso: '',
     foto: '',
-    Id_usuario: ''
+    idusuario: ''
   }];
 
   constructor(private router: Router, private menu: MenuController,private db: DatabaseService) {
+    this.db.buscarPublicacion();
   }
   
   ngAfterViewInit(){
@@ -49,7 +50,7 @@ export class PaginaPrincipalPage implements OnInit {
     })
   }
 
-  play(x:any) {
+  /*play(x:any) {
     let navigationExtras : NavigationExtras={
       state: {
         modeloE: x.modelo,
@@ -68,5 +69,6 @@ export class PaginaPrincipalPage implements OnInit {
     }
     this.router.navigate(['/pagina-producto'], navigationExtras);
   }
+  */
 
 }

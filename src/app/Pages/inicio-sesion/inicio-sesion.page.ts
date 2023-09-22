@@ -12,32 +12,38 @@ import { Pregunta } from 'src/app/services/pregunta';
 })
 export class InicioSesionPage implements OnInit {
 
-  constructor(private router:Router,private toastController: ToastController, private menu: MenuController, private db: DatabaseService ) { 
+  arregloPreguntas: any = [{
+    idpregunta: '',
+    nombre: ''
+  }];
 
+  constructor(private router: Router, private toastController: ToastController, private menu: MenuController, private db: DatabaseService) {
+    this.db.pasarPregunta();
   }
-  
+
   ngOnInit() {
     this.menu.enable(false);
+
     this.db.bdState().subscribe(
       res => {
-        if(res){
-          this.db.fetchPregunta().subscribe(datos =>{
-            this.preguntas = datos;
-            this.db.presentAlert("preguntas agregadas");
+        if (res) {
+          this.db.fetchPregunta().subscribe(datos => {
+            this.arregloPreguntas = datos;
+            //this.db.presentAlert("preguntas agregadas");
           })
         }
       }
     )
 
   }
-  ngAfterViewInit(){
+  ngAfterViewInit() {
     this.menu.enable(false);
   }
   // regex
   regexpass: RegExp = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%#*?^&])[A-Za-z\d@$!#%*^?&]{8,50}$/;
   regexname: RegExp = /^[a-zA-ZÀ-ÿ\u00f1\u00d1]+(\s*[a-zA-ZÀ-ÿ\u00f1\u00d1]*)*[a-zA-ZÀ-ÿ\u00f1\u00d1]{2,100}$/;
   regexCorreo: RegExp = /^[a-zA-Z0-9\._-]+@[a-zA-Z0-9-]{2,}[.][a-zA-Z]{2,4}$/;
-  regexTelefono: RegExp = new RegExp (/^[0-9]{8,8}$/);
+  regexTelefono: RegExp = new RegExp(/^[0-9]{8,8}$/);
 
 
 
@@ -45,14 +51,13 @@ export class InicioSesionPage implements OnInit {
   nombre: string = '';
   apellido: string = '';
   rut: string = '';
-  contra : string = '';
-  contra2 : string = '';
+  contra: string = '';
+  contra2: string = '';
   correo: string = '';
   telefono: string = '';
   respuesta: string = '';
   pregunta: string = '0';
-  direccion:string = '';
-  preguntas : Pregunta[] = []; 
+  direccion: string = '';
 
   // variables label
   labelNombre: string = '';
@@ -64,28 +69,28 @@ export class InicioSesionPage implements OnInit {
   labelRespuesta: string = '';
   labelContra: string = '';
   labelContra2: string = '';
-  labelDireccion:string = '';
- 
+  labelDireccion: string = '';
 
 
 
-  irPaginaPrincipal(){
+
+  irPaginaPrincipal() {
     // la bandera si está en verdadero permite que se envien los datos en caso contrario no lo permite
     let bandera = true;
 
     // validacion nombre
-    if(!this.regexname.test(this.nombre)){
+    if (!this.regexname.test(this.nombre)) {
       bandera = false;
       this.labelNombre = 'El nombre debe ser sin caracteres epeciales ni numeros.';
-    }else{
+    } else {
       this.labelNombre = '';
     }
 
     // validacion apellido
-    if(!this.regexname.test(this.apellido)){
+    if (!this.regexname.test(this.apellido)) {
       bandera = false;
       this.labelApellido = 'El Apellido debe ser sin caracteres especiales ni numeros.';
-    }else{
+    } else {
       this.labelApellido = '';
     }
 
@@ -93,71 +98,71 @@ export class InicioSesionPage implements OnInit {
     if (!validateRut(this.rut)) {
       bandera = false;
       this.labelRut = 'Debe ingresar un rut sin puntos y con guion';
-    }else{
+    } else {
       this.labelRut = '';
     }
 
     // validacion contraseña
-    if(!this.regexpass.test(this.contra)){
+    if (!this.regexpass.test(this.contra)) {
       bandera = false;
       this.contra = '';
       this.labelContra = 'Debe ingresar una contraseña con carateres especiales, mayuscula y numero con minimo de 8 y maximo de 50 caracteres';
 
-    }else{
+    } else {
       this.labelContra = '';
     }
 
     // validacion igualdad de las dos contraseñas
-    if(this.contra != this.contra2){
+    if (this.contra != this.contra2) {
       bandera = false;
       this.contra2 = '';
       this.labelContra2 = 'Deben coincidir las contraseñas';
-    }else{
-        this.labelContra2 = '';
+    } else {
+      this.labelContra2 = '';
     }
 
     // validacion correo
     if (!this.regexCorreo.test(this.correo)) {
       bandera = false;
       this.labelCorreo = 'Debe ingresar un correo valido';
-    }else{
+    } else {
       this.labelCorreo = '';
     }
-    
+
     // validacion pregunta
-    if(parseInt(this.pregunta) == 0){
+    if (parseInt(this.pregunta) == 0) {
       bandera = false;
       this.labelPregunta = 'Debe ingresar una opcion';
-    }else{
+    } else {
       this.labelPregunta = '';
       this.pregunta = 'coño';
     }
 
     // validacion respuesta
-    if(this.respuesta.length < 5 || this.respuesta.length > 200){
+    if (this.respuesta.length < 5 || this.respuesta.length > 200) {
       bandera = false;
       this.labelRespuesta = 'Debe ingresar una respuesta de minimo 5 caracteres y maximo 200';
-    }else{
+    } else {
       this.labelRespuesta = '';
     }
 
     // validacion telefono
-    if(!this.regexTelefono.test(this.telefono)){
+    if (!this.regexTelefono.test(this.telefono)) {
       bandera = false;
       this.labelTelefono = 'El telefono debe ser tener 8 numeros.';
-    }else{
+    } else {
       this.labelTelefono = '';
     }
 
     // Validar direccion
-    if(this.direccion.length < 5 || this.direccion.length > 200){
+    if (this.direccion.length < 5 || this.direccion.length > 200) {
       bandera = false;
       this.labelDireccion = 'La dirección debe ser de minimo 5 caracteres y maximo 20';
-    }else{
+    } else {
       this.labelDireccion = '';
     }
 
-    if(bandera){
+    if (bandera) {
       let navigationExtra: NavigationExtras = {
         state: {
           nombre: this.nombre,
@@ -171,9 +176,9 @@ export class InicioSesionPage implements OnInit {
       this.router.navigate(['/perfil'], navigationExtra);
       // this.presentToast('bottom');
     }
-    
 
-    
+
+
 
   }
   // async presentToast(position: 'top' | 'middle' | 'bottom') {
@@ -183,9 +188,9 @@ export class InicioSesionPage implements OnInit {
   //     position: position,
   //   });
 
-   
 
-  
-  
+
+
+
 
 }

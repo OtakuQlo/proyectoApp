@@ -52,8 +52,8 @@
         
         <ion-list>
           <ion-item>
-            <ion-select   [(ngModel)]= "pregunta" placeholder="Seleccione una opción">
-              <ion-select-option [value]="i.Id_pregunta" *ngFor = "let i of preguntas">{{i.nombre}}</ion-select-option>
+            <ion-select [(ngModel)]= "pregunta" placeholder="Seleccione una opción">
+              <ion-select-option value={{i.idpregunta}} *ngFor = "let i of arregloPreguntas">{{i.nombre}}</ion-select-option>
             </ion-select>
           </ion-item>
         </ion-list>

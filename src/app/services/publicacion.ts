@@ -1,6 +1,6 @@
 export class Publicacion {
 
-    Id_publicacion = "";
+    idpublicacion = "";
     modelo = "";
     marca = "";
     precio = "";
@@ -9,7 +9,7 @@ export class Publicacion {
     descripcion = "";
     estado = "";
     kilometraje = "";
-    cantidad_de_uso = "";
+    cantidaddeuso = "";
     foto = "";
-    Id_usuario = "";
+    idusuario = "";
 }
