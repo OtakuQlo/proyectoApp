@@ -29,7 +29,6 @@ export class InicioSesionPage implements OnInit {
         if (res) {
           this.db.fetchPregunta().subscribe(datos => {
             this.arregloPreguntas = datos;
-            //this.db.presentAlert("preguntas agregadas");
           })
         }
       }

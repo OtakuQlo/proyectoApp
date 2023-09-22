@@ -106,11 +106,6 @@ export class DatabaseService {
       await this.db.executeSql(this.registroPublicacion3,[])
       await this.db.executeSql(this.registroPublicacion4,[])
       this.isDBReady.next(true);
-      this.presentAlert("1");
-      this.buscarPublicacion();
-      this.presentAlert("2");
-      this.pasarPregunta();
-      this.presentAlert("3");
 
       
 
@@ -146,7 +141,6 @@ export class DatabaseService {
   }
 
   pasarPregunta(){
-    //this.presentAlert("Hola");
     this.presentAlert("3.1");
     return this.db.executeSql('SELECT * FROM pregunta',[])
     .then(res => {

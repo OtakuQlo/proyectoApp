@@ -3,6 +3,7 @@ import { NavigationExtras ,Router } from '@angular/router';
 import { AlertController, ToastController } from '@ionic/angular';
 
 import { MenuController } from '@ionic/angular';
+import { DatabaseService } from '../services/database.service';
 
 @Component({
   selector: 'app-home',
@@ -11,8 +12,7 @@ import { MenuController } from '@ionic/angular';
 })
 export class HomePage{
 
-  constructor(private router:Router,private toastController: ToastController,private alertController: AlertController,private menu: MenuController) {
-    
+  constructor(private router:Router,private toastController: ToastController,private alertController: AlertController,private menu: MenuController, private db: DatabaseService) {
   }
   rut: string = '';
   pass: string = '';
