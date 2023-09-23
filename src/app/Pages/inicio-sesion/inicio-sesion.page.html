@@ -10,13 +10,13 @@
 <ion-content>
   <ion-grid class=" ion-margin-top">
     <ion-row class="ion-justify-content-center" >
-          <ion-avatar class="avatar">
-            <img alt="persona" src="https://ionicframework.com/docs/img/demos/avatar.svg" />
+          <ion-avatar class=>
+            <img *ngIf="foto"  alt="persona" [src]="foto"/>
           </ion-avatar>
     </ion-row>
 
     <ion-row class="ion-justify-content-center  ion-margin-top">
-          <ion-fab-button>
+          <ion-fab-button (click) = "tomarfoto()">
             <ion-icon name="camera"></ion-icon>
           </ion-fab-button>
     </ion-row>

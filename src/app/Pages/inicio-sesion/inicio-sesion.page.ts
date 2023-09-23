@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { NavigationExtras, Router } from '@angular/router';
 import { validateRut } from '@fdograph/rut-utilities';
 import { MenuController, ToastController } from '@ionic/angular';
+import { CamaraService } from 'src/app/services/camara.service';
 import { DatabaseService } from 'src/app/services/database.service';
 import { Pregunta } from 'src/app/services/pregunta';
 
@@ -17,7 +18,7 @@ export class InicioSesionPage implements OnInit {
     nombre: ''
   }];
 
-  constructor(private router: Router, private toastController: ToastController, private menu: MenuController, private db: DatabaseService) {
+  constructor(private router: Router, private toastController: ToastController, private menu: MenuController, private db: DatabaseService, private camara: CamaraService) {
     this.db.pasarPregunta();
   }
 
@@ -57,6 +58,7 @@ export class InicioSesionPage implements OnInit {
   respuesta: string = '';
   pregunta: string = '0';
   direccion: string = '';
+  foto: any;
 
   // variables label
   labelNombre: string = '';
@@ -69,6 +71,10 @@ export class InicioSesionPage implements OnInit {
   labelContra: string = '';
   labelContra2: string = '';
   labelDireccion: string = '';
+
+  tomarfoto(){
+    this.foto = this.camara.takePicture();
+  }
 
 
 
@@ -173,21 +179,16 @@ export class InicioSesionPage implements OnInit {
         }
       }
       this.router.navigate(['/perfil'], navigationExtra);
-      // this.presentToast('bottom');
+      
     }
 
 
 
 
   }
-  // async presentToast(position: 'top' | 'middle' | 'bottom') {
-  //   const toast = await this.toastController.create({
-  //     message: 'Cuenta creada exitosamente',
-  //     duration: 1500,
-  //     position: position,
-  //   });
+  
 
-
+  
 
 
 
