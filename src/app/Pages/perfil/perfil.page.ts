@@ -14,7 +14,7 @@ export class PerfilPage implements OnInit {
   rut: string = "";
   correo: any = localStorage.getItem("correo");
   direccion: string = "";
-  rol: string = "";
+  rol: any = localStorage.getItem("rol");
 
   constructor(private router: Router,private activedRouter: ActivatedRoute,private menu: MenuController,) { 
     
