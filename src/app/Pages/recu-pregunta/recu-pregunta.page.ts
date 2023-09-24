@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AlertController } from '@ionic/angular';
+import { DatabaseService } from 'src/app/services/database.service';
 
 @Component({
   selector: 'app-recu-pregunta',
@@ -8,10 +9,25 @@ import { AlertController } from '@ionic/angular';
   styleUrls: ['./recu-pregunta.page.scss'],
 })
 export class RecuPreguntaPage implements OnInit {
+  preguntas: any = [{
+    idpregunta: '',
+    nombre: ''
+  }];
 
-  constructor(private router:Router,private alertController: AlertController) { }
+  constructor(private router:Router,private alertController: AlertController, private db: DatabaseService ) {
+    this.db.pasarPregunta();
+   }
 
   ngOnInit() {
+    this.db.bdState().subscribe(
+      res => {
+        if (res) {
+          this.db.fetchPregunta().subscribe(datos => {
+            this.preguntas = datos;
+          })
+        }
+      }
+    )
   }
 
   opcion: number = 0 ;
@@ -22,7 +38,6 @@ export class RecuPreguntaPage implements OnInit {
 
   irCambiarContra(){
     if (this.opcion != 1 || this.respuesta != this.res) {
-      this.presentAlert();
     }else{
       console.log();
       console.log();
@@ -30,13 +45,7 @@ export class RecuPreguntaPage implements OnInit {
     }
   }
 
-  async presentAlert() {
-    const alert = await this.alertController.create({
-      header: 'Datos erroneos',
-      message: 'Los datos ingresados no son validos',
-      buttons: ['Confirmar'],
-    });
+  
 
-    await alert.present();
-  }
+    
 }
