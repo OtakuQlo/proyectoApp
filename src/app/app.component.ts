@@ -13,5 +13,6 @@ export class AppComponent {
   constructor( private router: Router) {}
   irInicioSesion(){
     this.router.navigate(['/home']);
+    localStorage.clear();
   }
 }
