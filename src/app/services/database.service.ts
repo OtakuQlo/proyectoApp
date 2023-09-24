@@ -5,6 +5,7 @@ import { AlertController, Platform } from '@ionic/angular';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { Publicacion } from './publicacion';
 import { Pregunta } from './pregunta';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -19,7 +20,7 @@ export class DatabaseService {
   tablaDireccion: string = "CREATE TABLE IF NOT EXISTS direccion (iddireccion INTEGER PRIMARY KEY AUTOINCREMENT, nombre VARCHAR(255) NOT NULL, numero INTEGER NOT NULL, idcomuna INTEGER NOT NULL, FOREIGN KEY (idcomuna) REFERENCES region(idcomuna));";
   tablaPregunta: string = "CREATE TABLE IF NOT EXISTS pregunta (idpregunta INTEGER PRIMARY KEY AUTOINCREMENT, nombre VARCHAR(255) NOT NULL);";
   tablaRol: string = "CREATE TABLE IF NOT EXISTS rol (idrol INTEGER PRIMARY KEY AUTOINCREMENT, nombre VARCHAR(255) NOT NULL);";
-  tablaUsuario: string = "CREATE TABLE IF NOT EXISTS usuario (idusuario INTEGER PRIMARY KEY AUTOINCREMENT, nombre VARCHAR(255) NOT NULL, apellido VARCHAR(255) NOT NULL, correo VARCHAR(255) NOT NULL, clave VARCHAR(255) NOT NULL, respuesta VARCHAR(255) NOT NULL, telefono VARCHAR(255) NOT NULL, iddireccion INTEGER NOT NULL, foto VARCHAR(255), idpregunta INTEGER NOT NULL, idrol INTEGER NOT NULL, FOREIGN KEY (iddireccion) REFERENCES direccion(iddireccion), FOREIGN KEY (idpregunta) REFERENCES pregunta(idpregunta), FOREIGN KEY (idrol) REFERENCES rol(idrol));";
+  tablaUsuario: string = "CREATE TABLE IF NOT EXISTS usuario (idusuario INTEGER PRIMARY KEY AUTOINCREMENT, nombre VARCHAR(255) NOT NULL, apellido VARCHAR(255) NOT NULL, rut VARCHAR(12) UNIQUE NOT NULL,  correo VARCHAR(255) NOT NULL, clave VARCHAR(255) NOT NULL, respuesta VARCHAR(255) NOT NULL, telefono VARCHAR(255) NOT NULL, iddireccion INTEGER NOT NULL, foto VARCHAR(255), idpregunta INTEGER NOT NULL, idrol INTEGER NOT NULL, FOREIGN KEY (iddireccion) REFERENCES direccion(iddireccion), FOREIGN KEY (idpregunta) REFERENCES pregunta(idpregunta), FOREIGN KEY (idrol) REFERENCES rol(idrol));";
   tablaPublicacion: string = "CREATE TABLE IF NOT EXISTS publicacion (idpublicacion INTEGER PRIMARY KEY AUTOINCREMENT, modelo VARCHAR(255) NOT NULL, marca VARCHAR(255) NOT NULL, precio INTEGER NOT NULL, color VARCHAR(255) NOT NULL, transmision VARCHAR(255) NOT NULL, descripcion VARCHAR(255) NOT NULL, estado INTEGER NOT NULL, kilometraje INTEGER NOT NULL, cantidaddeuso INTEGER NOT NULL, foto VARCHAR(255), idusuario INTEGER NOT NULL, FOREIGN KEY (idusuario) REFERENCES usuario(idusuario));";
   tablaReporte: string = "CREATE TABLE IF NOT EXISTS reporte (idreporte INTEGER PRIMARY KEY AUTOINCREMENT, tipo VARCHAR(255) NOT NULL, descripcion VARCHAR(255), idpublicacion INTEGER NOT NULL, FOREIGN KEY (idpublicacion) REFERENCES publicacion(idpublicacion));";
 
@@ -32,7 +33,7 @@ export class DatabaseService {
   registroComuna: string = "INSERT OR IGNORE INTO comuna(idcomuna,nombre,idregion) VALUES (1,'INDEPENDENCIA',(SELECT idregion from region WHERE idregion=1));";
   registroDireccion: string = "INSERT OR IGNORE INTO direccion(iddireccion,nombre,numero,idcomuna) VALUES (1,'AVENIDA GENERICA', 1234,(SELECT idcomuna from comuna WHERE idcomuna=1));";
   
-  registroUsuario1: string = "INSERT or IGNORE INTO usuario(idusuario,nombre,apellido,correo,clave,respuesta,telefono,iddireccion,foto,idpregunta,idrol) VALUES (1,'Miguel','Pérez','correoreal@duocuc.cl','!Miguel123','AUTOMATICA','987653452', (SELECT iddireccion from direccion WHERE iddireccion=1) ,'',(SELECT idpregunta from pregunta WHERE idpregunta=1), (SELECT idrol from rol WHERE idrol=2));";
+  registroUsuario1: string = "INSERT or IGNORE INTO usuario(idusuario,nombre,apellido, rut ,correo,clave,respuesta,telefono,iddireccion,foto,idpregunta,idrol) VALUES (1,'Miguel','Pérez', '21294525-0','correoreal@duocuc.cl','!Miguel123','AUTOMATICA','987653452', (SELECT iddireccion from direccion WHERE iddireccion=1) ,'',(SELECT idpregunta from pregunta WHERE idpregunta=1), (SELECT idrol from rol WHERE idrol=2));";
   
   registroPublicacion1: string = "INSERT or IGNORE INTO publicacion(idpublicacion,modelo,marca,precio,color,transmision,descripcion,estado,kilometraje,cantidaddeuso,foto,idusuario) VALUES (1,'2023 Silverado 3.0TD High Country Auto DC 4WD','Chevrolet',52000000,'gris','Automatica','asd', 0 ,0,0,'',(SELECT idusuario from usuario WHERE idusuario=1));";
   registroPublicacion2: string = "INSERT or IGNORE INTO publicacion(idpublicacion,modelo,marca,precio,color,transmision,descripcion,estado,kilometraje,cantidaddeuso,foto,idusuario) VALUES (2,'2010 Q5 2.0T FSI STRONIC QUATTRO','Audi',11500000,'blanco','Automatica','asd', 0 ,159567,2,'',(SELECT idusuario from usuario WHERE idusuario=1));";
@@ -49,7 +50,7 @@ export class DatabaseService {
   //observable para la BD
   private isDBReady: BehaviorSubject<boolean> = new BehaviorSubject(false);
 
-  constructor(private sqlite: SQLite, private platform: Platform, private alertController: AlertController) { 
+  constructor(private sqlite: SQLite, private platform: Platform, private alertController: AlertController,private router:Router) { 
     this.crearDB();
   }
 
@@ -69,7 +70,7 @@ export class DatabaseService {
   crearDB(){
     this.platform.ready().then(() =>
     this.sqlite.create({
-      name: 'satiscar3.db',
+      name: 'satiscar4.db',
       location: 'default'
     }).then((db:SQLiteObject) =>{
       this.db = db
@@ -129,6 +130,43 @@ export class DatabaseService {
 
 
   //Usuarios
+
+  inicioSesion(rut:any, pass: any){
+
+    this.db.executeSql('select * from usuario where rut = ?',[rut])
+    .then((res) => {
+      
+      let idrol: any;
+      let pass1: any;
+      let nombre: any;
+      let correo: any;
+      let idper: any;
+      let apellido: any;
+
+      if(res.rows.length > 0){
+        idrol = res.rows.item(0).idrol,
+        pass1 = res.rows.item(0).clave,
+        nombre = res.rows.item(0).nombre,
+        correo = res.rows.item(0).correo,
+        idper = res.rows.item(0).idusuario,
+        apellido = res.rows.item(0).apellido
+        
+      }else{
+        this.presentAlert('datos erroneos1');
+        return
+      }
+      if (pass == pass1) {
+        localStorage.setItem("nombre", nombre);
+        localStorage.setItem("correo", correo);
+        localStorage.setItem("rol", idrol);
+        localStorage.setItem("idper", idper);
+        localStorage.setItem("apellido", apellido);
+        this.router.navigate(['/perfil']);
+      }else{
+        this.presentAlert('datos erroneos2');
+      }
+    })
+  }
 
   //falta poner los parametros
   crearUsuario(nombre:any, apellido:any, correo:any, clave: any, respuesta:any,telefono:any,foto:any,idpregunta:any,idrol = 2){

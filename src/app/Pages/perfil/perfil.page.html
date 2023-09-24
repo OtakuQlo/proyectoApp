@@ -23,14 +23,14 @@
       
         <ion-card>
           <ion-card-header>
-            <ion-card-title>{{nombre}} {{apellido}}</ion-card-title>
+            <ion-card-title>Perfil:</ion-card-title>
             
           </ion-card-header>
         
           <ion-card-content>
-            <ion-card-subtitle>Rut: {{rut}}</ion-card-subtitle>
+            <ion-card-subtitle>Nombre: {{nombre}}</ion-card-subtitle>
+            <ion-card-subtitle>Apellido: {{apellido}}</ion-card-subtitle>
             <ion-card-subtitle>Correo: {{correo}}</ion-card-subtitle>
-            <ion-card-subtitle>Dirección: {{direccion}}</ion-card-subtitle>
             <div class="ion-text-center">
               <p *ngIf="rol=='1'">
                 <ion-button fill="clear" (click)="irModificarPerfil()">Modificar datos</ion-button>

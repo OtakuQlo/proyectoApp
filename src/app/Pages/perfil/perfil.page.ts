@@ -8,25 +8,16 @@ import { MenuController } from '@ionic/angular';
   styleUrls: ['./perfil.page.scss'],
 })
 export class PerfilPage implements OnInit {
-  nombre: string =  '';
-  apellido: string = "";
+  nombre: any =  localStorage.getItem("nombre");
+  apellido: any = localStorage.getItem("apellido");
   imagen: string = "https://ionicframework.com/docs/img/demos/avatar.svg";
   rut: string = "";
-  correo: string = "";
+  correo: any = localStorage.getItem("correo");
   direccion: string = "";
   rol: string = "";
 
   constructor(private router: Router,private activedRouter: ActivatedRoute,private menu: MenuController,) { 
-    this.activedRouter.queryParams.subscribe(param =>{
-      if(this.router.getCurrentNavigation()?.extras.state){
-        this.nombre = this.router.getCurrentNavigation()?.extras.state?.['nombre'];
-        this.apellido = this.router.getCurrentNavigation()?.extras.state?.['apellido'];
-        this.rut = this.router.getCurrentNavigation()?.extras.state?.['rut'];
-        this.direccion = this.router.getCurrentNavigation()?.extras.state?.['direccion'];
-        this.correo = this.router.getCurrentNavigation()?.extras.state?.['correo'];
-        this.rol = this.router.getCurrentNavigation()?.extras.state?.['rol'];
-      }
-    })
+    
     this.menu.enable(true);
     
   }
