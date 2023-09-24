@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { SQLite, SQLiteObject } from '@awesome-cordova-plugins/sqlite/ngx';
-import { AlertController, Platform } from '@ionic/angular';
+import { AlertController, Platform, ToastController } from '@ionic/angular';
 
 import { BehaviorSubject, Observable } from 'rxjs';
 import { Publicacion } from './publicacion';
@@ -50,7 +50,7 @@ export class DatabaseService {
   //observable para la BD
   private isDBReady: BehaviorSubject<boolean> = new BehaviorSubject(false);
 
-  constructor(private sqlite: SQLite, private platform: Platform, private alertController: AlertController,private router:Router) { 
+  constructor(private sqlite: SQLite, private platform: Platform, private alertController: AlertController,private router:Router, private toastController: ToastController) { 
     this.crearDB();
   }
 
@@ -77,7 +77,7 @@ export class DatabaseService {
       this.crearTablas()
 
     }).catch((e) => {
-      this.presentAlert('error en la crearDB '+ e);
+      this.presentAlert("",'error en la crearDB '+ e);
     }));
   }
 
@@ -111,20 +111,31 @@ export class DatabaseService {
       
 
     }catch(error){
-      this.presentAlert("Error en crear las tablas" + error)
+      this.presentAlert("error de tablas","Error en crear las tablas" + error)
     }
   }
 
   //Alertas
-  async presentAlert(msj:string) {
+  async presentAlert(titulo: string, msj:string) {
     const alert = await this.alertController.create({
-      header: 'Alert',
-      subHeader: 'Important message',
+      header: titulo,
       message: msj,
-      buttons: ['OK'],
+      buttons: ['Aceptar'],
     });
 
     await alert.present();
+  }
+
+  //toast
+  
+  async presentToast(position: 'top' | 'middle' | 'bottom', msj: string) {
+    const toast = await this.toastController.create({
+      message: msj,
+      duration: 1500,
+      position: position,
+    });
+
+    await toast.present();
   }
 
 
@@ -152,7 +163,7 @@ export class DatabaseService {
         apellido = res.rows.item(0).apellido
         
       }else{
-        this.presentAlert('datos erroneos1');
+        this.presentAlert("Datos erroneos:","Los datos ingesados son erroneos.");
         return
       }
       if (pass == pass1) {
@@ -162,8 +173,11 @@ export class DatabaseService {
         localStorage.setItem("idper", idper);
         localStorage.setItem("apellido", apellido);
         this.router.navigate(['/perfil']);
+        this.presentToast('bottom','Bienvenido a satiscar');
+
+        
       }else{
-        this.presentAlert('datos erroneos2');
+        this.presentAlert("Datos erroneos:","Los datos ingesados son erroneos.");
       }
     })
   }
@@ -172,14 +186,13 @@ export class DatabaseService {
   crearUsuario(nombre:any, apellido:any, correo:any, clave: any, respuesta:any,telefono:any,foto:any,idpregunta:any,idrol = 2){
     return this.db.executeSql('INSERT or IGNORE INTO usuario(nombre,apellido,correo,clave,respuesta,telefono,foto,idpregunta,idrol) VALUES (?,?,?,?,?,?,?,?,?)',[nombre,apellido,correo,clave,respuesta,telefono,foto,idpregunta,idrol])
     .then(() => {
-      this.presentAlert('Se ha ingresado los usuarios de forma correcta');
+      this.presentAlert("",'Se ha ingresado los usuarios de forma correcta');
 
-    }).catch((e) =>{ this.presentAlert('error en crear usuario: ' + JSON.stringify(e))
+    }).catch((e) =>{ this.presentAlert("",'error en crear usuario: ' + JSON.stringify(e))
     })
   }
 
   pasarPregunta(){
-    this.presentAlert("3.1");
     return this.db.executeSql('SELECT * FROM pregunta',[])
     .then(res => {
       let pregunta: Pregunta[] = []; 
@@ -194,7 +207,7 @@ export class DatabaseService {
       this.observer.next(pregunta as any);
       })
       .catch(e => {
-        this.presentAlert('Error en pasar pregunta ' + JSON.stringify(e))
+        this.presentAlert("",'Error en pasar pregunta ' + JSON.stringify(e))
       })
 
       }
@@ -206,7 +219,6 @@ export class DatabaseService {
 
   //Cuando ingresamos a la pagina principal esta funcion permite ver los autos
   buscarPublicacion(){
-    this.presentAlert("2.1");
     return this.db.executeSql('SELECT * FROM publicacion',[]).then(res=>{
       let publi: Publicacion[] = [];
       if(res.rows.length > 0){
@@ -230,7 +242,7 @@ export class DatabaseService {
       }
       this.observer.next(publi as any);
     }).catch(e =>{
-      this.presentAlert("Error buscar" + e);
+      this.presentAlert("","Error buscar" + e);
     })
   }
 
@@ -239,7 +251,7 @@ export class DatabaseService {
     return this.db.executeSql('INSERT or IGNORE INTO publicacion(modelo,marca,precio,color,transmision,descripcion,estado,kilometraje,cantidaddeuso,foto,idusuario) VALUES (?,?,?,?,?,?,?,?,?,?,?)',[modelo,marca,precio, color, transmision, descripcion, estado, kilometraje, cantidaddeuso, foto, idusuario])
     .then(() => {
       this.buscarPublicacion();
-    }).catch((e) =>{ this.presentAlert('error en crear publicacion: ' + JSON.stringify(e))
+    }).catch((e) =>{ this.presentAlert("",'error en crear publicacion: ' + JSON.stringify(e))
     })
   }
 

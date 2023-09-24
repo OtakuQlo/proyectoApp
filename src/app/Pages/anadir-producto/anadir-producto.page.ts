@@ -127,7 +127,7 @@ export class AnadirProductoPage implements OnInit {
   
   agregarPublicacion(){
     this.db.crearPublicacion(this.modeloV, this.marcaV, this.precioV, this.colorV, this.transmisionV, this.descrpV, 0, this.kilometrajeV, this.anosV, "Nada", 1);
-    this.db.presentAlert("Auto añadido");
+    this.db.presentAlert("","Auto añadido");
     this.router.navigate(['/pagina-principal'])
   }
 
