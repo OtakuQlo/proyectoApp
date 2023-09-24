@@ -19,9 +19,11 @@ export class HomePage{
 
   ngOnInit() {
     this.menu.enable(false);
+    
   }
   ngAfterViewInit(){
     this.menu.enable(false);
+    
   }
   irCrearUsuario(){
     this.router.navigate(['/inicio-sesion']);
