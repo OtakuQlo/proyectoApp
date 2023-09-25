@@ -59,6 +59,7 @@ export class InicioSesionPage implements OnInit {
   pregunta: string = '0';
   direccion: string = '';
   foto: any;
+  rol = 2;
 
   // variables label
   labelNombre: string = '';
@@ -169,7 +170,7 @@ export class InicioSesionPage implements OnInit {
 
     if (bandera) {
       this.db.crearUsuario(this.nombre,this.apellido, this.rut,this.correo,this.contra,this.respuesta,this.telefono,this.direccion,"aaa",this.pregunta,2);
-      this.router.navigate(['/perfil']);
+      this.router.navigate(['/home']);
       
     }
 
