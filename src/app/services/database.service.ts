@@ -173,7 +173,7 @@ export class DatabaseService {
 
   //falta poner los parametros
   crearUsuario(nombre:any, apellido:any, rut:any, correo:any, clave: any, respuesta:any, telefono:any, direccion:any, foto:any, idpregunta:any, idrol:any){
-    return this.db.executeSql('INSERT or IGNORE INTO usuario(nombre,apellido,rut,correo,clave,respuesta,telefono,direccion,foto,idpregunta,idrol) VALUES (?,?,?,?,?,?,?,?,?,?,?)',[nombre,apellido,rut,correo,clave,respuesta,telefono,direccion,foto,idpregunta,idrol])
+    return this.db.executeSql('INSERT INTO usuario(nombre,apellido,rut,correo,clave,respuesta,telefono,direccion,foto,idpregunta,idrol) VALUES (?,?,?,?,?,?,?,?,?,?,?)',[nombre,apellido,rut,correo,clave,respuesta,telefono,direccion,foto,idpregunta,idrol])
     .then(() => {
       this.presentAlert("",'Se ha ingresado los usuarios de forma correcta');
 

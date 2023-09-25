@@ -168,17 +168,8 @@ export class InicioSesionPage implements OnInit {
     }
 
     if (bandera) {
-      let navigationExtra: NavigationExtras = {
-        state: {
-          nombre: this.nombre,
-          apellido: this.apellido,
-          rut: this.rut,
-          correo: this.correo,
-          direccion: this.direccion,
-          rol: 1
-        }
-      }
-      this.router.navigate(['/perfil'], navigationExtra);
+      this.db.crearUsuario(this.nombre,this.apellido, this.rut,this.correo,this.contra,this.respuesta,this.telefono,this.direccion,"aaa",this.pregunta,2);
+      this.router.navigate(['/perfil']);
       
     }
 
