@@ -7,11 +7,11 @@ import { DatabaseService } from 'src/app/services/database.service';
 import { Pregunta } from 'src/app/services/pregunta';
 
 @Component({
-  selector: 'app-inicio-sesion',
-  templateUrl: './inicio-sesion.page.html',
-  styleUrls: ['./inicio-sesion.page.scss'],
+  selector: 'app-crear-admin',
+  templateUrl: './crear-admin.page.html',
+  styleUrls: ['./crear-admin.page.scss'],
 })
-export class InicioSesionPage implements OnInit {
+export class CrearAdminPage implements OnInit  {
 
   arregloPreguntas: any = [{
     idpregunta: '',
@@ -37,7 +37,7 @@ export class InicioSesionPage implements OnInit {
 
   }
   ngAfterViewInit() {
-    this.menu.enable(false);
+    this.menu.enable(true);
   }
   // regex
   regexpass: RegExp = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%#*?^&])[A-Za-z\d@$!#%*^?&]{8,50}$/;
@@ -168,14 +168,10 @@ export class InicioSesionPage implements OnInit {
     }
 
     if (bandera) {
-      this.db.crearUsuario(this.nombre,this.apellido, this.rut,this.correo,this.contra,this.respuesta,this.telefono,this.direccion,"aaa",this.pregunta,2);
+      this.db.crearUsuario(this.nombre,this.apellido, this.rut,this.correo,this.contra,this.respuesta,this.telefono,this.direccion,"aaa",this.pregunta,1);
       this.router.navigate(['/perfil']);
       
     }
-
-
-
-
   }
-
+  
 }

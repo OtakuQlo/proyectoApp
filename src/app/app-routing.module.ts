@@ -75,10 +75,16 @@ const routes: Routes = [
     path: 'modificar-producto',
     loadChildren: () => import('./Pages/modificar-producto/modificar-producto.module').then( m => m.ModificarProductoPageModule)
   },
+  {
+    path: 'crear-admin',
+    loadChildren: () => import('./Pages/crear-admin/crear-admin.module').then( m => m.CrearAdminPageModule)
+  },
  {
     path: '**',
     loadChildren: () => import('./Pages/not-found/not-found.module').then(m => m.NotFoundPageModule)
   },
+
+
 
 ];
 

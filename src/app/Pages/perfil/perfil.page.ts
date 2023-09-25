@@ -48,4 +48,7 @@ export class PerfilPage implements OnInit {
   irAnadirAuto(){
     this.router.navigate(['/anadir-producto'])
   }
+  irCrearAdmin(){
+    this.router.navigate(['/crear-admin'])
+  }
 }

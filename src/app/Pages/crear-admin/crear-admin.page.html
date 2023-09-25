@@ -1,0 +1,78 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot = "start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content>
+  <ion-grid class=" ion-margin-top">
+    <ion-row class="ion-justify-content-center" >
+          <ion-avatar class=>
+            <img *ngIf="foto"  alt="persona" [src]="foto"/>
+          </ion-avatar>
+    </ion-row>
+
+    <ion-row class="ion-justify-content-center  ion-margin-top">
+          <ion-fab-button (click) = "tomarfoto()">
+            <ion-icon name="camera"></ion-icon>
+          </ion-fab-button>
+    </ion-row>
+
+    <ion-row>
+      <ion-col size="1"></ion-col>
+      <ion-col size="10" class="ion-margin-top" class="ion-text-center">
+        
+        <ion-input label="Nombre" labelPlacement="floating" [counter]="true" maxlength="100" [(ngModel)] = "nombre" placeholder="Ej: Miguel"></ion-input>
+        <ion-label >{{labelNombre}}</ion-label>
+
+        <ion-input label="Apellido" labelPlacement="floating" [counter]="true" maxlength="100" [(ngModel)] = "apellido" placeholder="Ej: Pérez"></ion-input>
+        <ion-label >{{labelApellido}}</ion-label>
+
+        <ion-input label="Rut" labelPlacement="floating" [counter]="true" maxlength="10" [(ngModel)] = "rut" placeholder="Ej: 21294525-0"></ion-input>
+        <ion-label >{{labelRut}}</ion-label>
+        
+        
+        <ion-input label="Correo electronico" labelPlacement="floating" [counter]="true"  [(ngModel)] = "correo" [counter]="true" maxlength="100" placeholder="ej: correoreal@duocuc.cl"></ion-input>
+        <ion-label >{{labelCorreo}}</ion-label>
+
+        <ion-input label="Dirección" labelPlacement="floating" [counter]="true" maxlength="200" type="text" [(ngModel)] = "direccion" placeholder="Ej: Yacaré #1185"></ion-input>
+        <ion-label >{{labelDireccion}}</ion-label>
+
+        <ion-input label="Telefono" labelPlacement="floating" [counter]="true" maxlength="8" [(ngModel)] = "telefono" placeholder="Ej: 12345678"></ion-input>
+        <ion-label >{{labelTelefono}}</ion-label>
+
+        <ion-input label="Contraseña" labelPlacement="floating" [counter]="true" maxlength="50" type="password" [(ngModel)] = "contra" placeholder="Ej: !Miguel123"></ion-input>
+        <ion-label >{{labelContra}}</ion-label>
+
+        <ion-input label="Contraseña contraseña" labelPlacement="floating" [counter]="true" maxlength="50" type="password" [(ngModel)] = "contra2" placeholder="Ej: !Miguel123"></ion-input>
+        <ion-label >{{labelContra2}}</ion-label>
+        
+        <ion-list>
+          <ion-item>
+            <ion-select [(ngModel)]= "pregunta" placeholder="Seleccione una opción" okText="confirmar" cancelText="Cancelar">
+              <ion-select-option value={{i.idpregunta}} *ngFor = "let i of arregloPreguntas">{{i.nombre}}</ion-select-option>
+            </ion-select>
+          </ion-item>
+        </ion-list>
+
+      
+        <div>
+        <ion-label class="labelpregunta">{{labelPregunta}}</ion-label>
+        </div>
+
+        <ion-input label="Respuesta" labelPlacement="floating" [counter]="true" maxlength="200" class="ion-margin-top" [(ngModel)] = "respuesta" placeholder="Ej: San Jose"></ion-input>
+        <ion-label >{{labelRespuesta}}</ion-label>
+        <ion-button shape="round" class="ion-margin-top" fill="outline" (click) = "irPaginaPrincipal()">Crear cuenta</ion-button>
+        
+        
+        
+        
+        
+      </ion-col>
+      <ion-col size="1"></ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>
