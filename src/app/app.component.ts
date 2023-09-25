@@ -18,6 +18,10 @@ export class AppComponent {
 
   irInicioSesion(){
     this.router.navigate(['/home']);
-    localStorage.clear();
+    localStorage.removeItem("nombre");
+    localStorage.removeItem("correo");
+    localStorage.removeItem("rol");
+    localStorage.removeItem("idper");
+    localStorage.removeItem("apellido");
   }
 }
