@@ -75,12 +75,12 @@
     </ion-row>
     <ion-row class="ion-justify-content-center">
 
-      <ion-col size="4">
+      <ion-col *ngIf="rol != '1'" size="4">
         <ion-button color="danger" style="font-size: 12px; width: 105px;" fill="outline" id="modal-trigger"
           shape="round">Reportar</ion-button>
       </ion-col>
 
-      <ion-row *ngIf="rol == '2' && verificador != 'solicitud'">
+      <ion-row *ngIf="rol == '1' && verificador != 'solicitud'">
         <ion-col size="12" class="ion-text-start">
           <ion-card color="light">
             <ion-card-content>
@@ -102,7 +102,7 @@
           </ion-card>
         </ion-col>
       </ion-row>
-      <ion-row *ngIf="rol == '2' && verificador != 'solicitud'">
+      <ion-row *ngIf="rol == '1' && verificador != 'solicitud'">
         <ion-col size="12" class="ion-text-start">
           <ion-card color="light">
             <ion-card-content>
@@ -116,7 +116,7 @@
           </ion-card>
         </ion-col>
       </ion-row>
-      <ion-row *ngIf="rol == '2' && verificador == 'solicitud'">
+      <ion-row *ngIf="rol == '1' && verificador == 'solicitud'">
         <ion-col size="12" class="ion-text-start">
           <ion-card color="light">
             <ion-card-content>
@@ -129,7 +129,7 @@
           </ion-card>
         </ion-col>
       </ion-row>
-      <ion-row *ngIf="rol == '2' && verificador == 'solicitud'">
+      <ion-row *ngIf="rol == '1' && verificador == 'solicitud'">
         <ion-col size="12" class="ion-text-start">
           <ion-card color="light">
             <ion-card-content>

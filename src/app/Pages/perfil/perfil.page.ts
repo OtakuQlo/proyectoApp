@@ -31,13 +31,7 @@ export class PerfilPage implements OnInit {
 
   
   irPanelAdmin(){
-    let navigationExtra: NavigationExtras = {
-      state: {
-      rol: this.rol
-  
-      }
-    }
-    this.router.navigate(['/panel-admin'],navigationExtra);
+    this.router.navigate(['/panel-admin']);
   }
   irModificarPerfil(){
     this.router.navigate(['/modificar-perfil']);

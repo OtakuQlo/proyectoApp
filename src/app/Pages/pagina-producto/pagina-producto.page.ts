@@ -12,7 +12,7 @@ import { DatabaseService } from 'src/app/services/database.service';
 })
 export class PaginaProductoPage implements OnInit {
   @ViewChild('modal', { static: true }) modal!: IonModal;
-  rol: string = '';
+  rol: any = localStorage.getItem("rol");
   verificador: string = '';
   tipoReporte: number = 0;
   errorLabel: string = '';
@@ -29,7 +29,6 @@ export class PaginaProductoPage implements OnInit {
   foto: string= '';
   idusuario!: any;
 
-
   constructor(private router: Router, private activedRouter: ActivatedRoute, private menu: MenuController, private db: DatabaseService) {
     this.activedRouter.queryParams.subscribe(res => {
       if (this.router.getCurrentNavigation()?.extras.state) {
@@ -45,6 +44,7 @@ export class PaginaProductoPage implements OnInit {
         this.cantidaddeuso = this.router.getCurrentNavigation()?.extras?.state?.['cantidaddeusoE'];
         this.foto = this.router.getCurrentNavigation()?.extras?.state?.['fotoE'];
         this.idusuario = this.router.getCurrentNavigation()?.extras?.state?.['idusuarioE'];
+        this.verificador = this.router.getCurrentNavigation()?.extras?.state?.['verificador'];
       }
     })
   }

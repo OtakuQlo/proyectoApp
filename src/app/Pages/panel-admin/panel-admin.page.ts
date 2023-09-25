@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, NavigationExtras, Router } from '@angular/router';
+import { MenuController } from '@ionic/angular';
+import { DatabaseService } from 'src/app/services/database.service';
 
 @Component({
   selector: 'app-panel-admin',
@@ -7,13 +9,21 @@ import { ActivatedRoute, NavigationExtras, Router } from '@angular/router';
   styleUrls: ['./panel-admin.page.scss'],
 })
 export class PanelAdminPage implements OnInit {
-  rol: string = '';
 
-  userRequests = [
-    { productName: 'Solicitud de Producto 1' },
-    { productName: 'Solicitud de Producto 2' },
-    // ... Más datos de ejemplo
-  ];
+  arregloAutos: any = [{
+    idpublicacion: '',
+    modelo: '',
+    marca: '',
+    precio: '',
+    color: '',
+    transmision: '',
+    descripcion: '',
+    estado: '',
+    kilometraje: '',
+    cantidaddeuso: '',
+    foto: '',
+    idusuario: ''
+  }];
 
   userReports = [
     { productName: 'Reporte de Producto 1' },
@@ -21,55 +31,63 @@ export class PanelAdminPage implements OnInit {
     // ... Más datos de ejemplo
   ];
 
-  constructor(private router: Router,private activedRouter: ActivatedRoute) { 
-    this.activedRouter.queryParams.subscribe(param =>{
-      if(this.router.getCurrentNavigation()?.extras.state){
-        this.rol = this.router.getCurrentNavigation()?.extras.state?.['rol'];
+  constructor(private router: Router, private menu: MenuController,private db: DatabaseService) {
+    this.db.buscarPublicacion();
+  }
+
+  ngOnInit() {
+    this.menu.enable(true);
+    this.db.bdState().subscribe(res=>{
+      if(res){
+        this.db.fetchPublicacion().subscribe(datos=>{
+          this.arregloAutos = datos;
+          this.db.presentAlert("","Datos agregados");
+        })
+
       }
     })
   }
 
-  ngOnInit() {
-  }
-
-  irPaginaProducto1(){
+  irPaginaProducto1(x:any){
     let navigationExtra: NavigationExtras = {
       state: {
-      rol: this.rol,
-      verificador: "solicitud"
+        idpublicacionE: x.idpublicacion,
+        modeloE: x.modelo,
+        marcaE: x.marca,
+        precioE: x.precio,
+        colorE: x.color,
+        transmisionE: x.transmision,
+        descripcionE: x.descripcion,
+        estadoE: x.estado,
+        kilometrajeE: x.kilometraje,
+        cantidaddeusoE: x.cantidaddeuso,
+        fotoE: x.foto,
+        idusuarioE: x.idusuario,
+        verificador: "solicitud"
       }
     }
     this.router.navigate(['/pagina-producto'],navigationExtra);
 
   }
 
-  irPaginaProducto(){
+  irPaginaProducto(x:any){
     let navigationExtra: NavigationExtras = {
       state: {
-      rol: this.rol
+        idpublicacionE: x.idpublicacion,
+        modeloE: x.modelo,
+        marcaE: x.marca,
+        precioE: x.precio,
+        colorE: x.color,
+        transmisionE: x.transmision,
+        descripcionE: x.descripcion,
+        estadoE: x.estado,
+        kilometrajeE: x.kilometraje,
+        cantidaddeusoE: x.cantidaddeuso,
+        fotoE: x.foto,
+        idusuarioE: x.idusuario
       }
     }
     this.router.navigate(['/pagina-producto'],navigationExtra);
 
-  }
-
-  acceptRequest(request: any) {
-    // Lógica para aceptar la solicitud y agregar el producto
-    // Por ejemplo: Agregar el producto a la lista de productos disponibles
-    // y luego eliminar la solicitud de la lista de solicitudes
-    // this.userRequests.splice(this.userRequests.indexOf(request), 1);
-  }
-
-  rejectRequest(request: any) {
-    // Lógica para rechazar la solicitud
-    // Por ejemplo: Eliminar la solicitud de la lista de solicitudes
-    // this.userRequests.splice(this.userRequests.indexOf(request), 1);
-  }
-
-  handleReport(report: any) {
-    // Lógica para manejar el reporte
-    // Por ejemplo: Tomar acciones basadas en el reporte recibido
-    // y luego eliminar el reporte de la lista de reportes
-    // this.userReports.splice(this.userReports.indexOf(report), 1);
   }
 }
