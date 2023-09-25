@@ -50,25 +50,24 @@ export class PaginaPrincipalPage implements OnInit {
     })
   }
 
-  /*play(x:any) {
+  play(x:any) {
     let navigationExtras : NavigationExtras={
       state: {
+        idpublicacionE: x.idpublicacion,
         modeloE: x.modelo,
         marcaE: x.marca,
         precioE: x.precio,
         colorE: x.color,
         transmisionE: x.transmision,
         descripcionE: x.descripcion,
+        estadoE: x.estado,
         kilometrajeE: x.kilometraje,
-        cantidad_de_usoE: x.cantidad_de_uso,
+        cantidaddeusoE: x.cantidaddeuso,
         fotoE: x.foto,
-        nombreV: x.Id_usuario.nombre,
-        direccion: x.Id_usuario.Id_direccion.nombre,
-        numeroT: x.Id_usuario.telefono
+        idusuarioE: x.idusuario
       }
     }
     this.router.navigate(['/pagina-producto'], navigationExtras);
   }
-  */
 
 }

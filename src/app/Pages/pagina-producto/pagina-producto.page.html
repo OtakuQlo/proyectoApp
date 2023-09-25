@@ -32,15 +32,15 @@
         <ion-card color="light">
           <ion-card-content>
             <ion-row>
-              <h1>{{auto[1]}} {{auto[0]}}</h1>
+              <h1>{{marca | uppercase}} {{modelo | uppercase}} </h1>
             </ion-row>
             <ion-row>
-              <h2>${{auto[2]}}</h2>
+              <h2>${{precio | currency : 'CLP' : '$'}}  </h2>
             </ion-row>
             <div>
-              <ion-row>Vendedor: {{auto[9]}}</ion-row>
-              <ion-row>{{auto[10]}}</ion-row>
-              <ion-row>Numero de contacto : +569{{auto[11]}}</ion-row>
+              <ion-row>Vendedor: {{idusuario.nombre | uppercase}} </ion-row>
+              <ion-row>{{idusuario.direccion | uppercase}} </ion-row>
+              <ion-row>Numero de contacto : +569{{idusuario.telefono}}</ion-row>
             </div>
           </ion-card-content>
         </ion-card>
@@ -53,9 +53,9 @@
             </ion-row>
 
             <div>
-              <ion-row>Color: {{auto[3]}}</ion-row>
-              <ion-row>Marca: {{auto[1]}}</ion-row>
-              <ion-row>Transmisión: {{auto[4]}}</ion-row>
+              <ion-row>Color: {{color | uppercase }}</ion-row>
+              <ion-row>Marca: {{marca | uppercase }}</ion-row>
+              <ion-row>Transmisión: {{transmision | uppercase }}</ion-row>
             </div>
           </ion-card-content>
         </ion-card>
@@ -67,7 +67,7 @@
               <ion-row>
                 <h2>Descripción</h2>
               </ion-row>
-              <ion-row>{{auto[5]}}</ion-row>
+              <ion-row>{{descripcion | uppercase }}</ion-row>
             </div>
           </ion-card-content>
         </ion-card>
@@ -79,70 +79,6 @@
         <ion-button color="danger" style="font-size: 12px; width: 105px;" fill="outline" id="modal-trigger"
           shape="round">Reportar</ion-button>
       </ion-col>
-
-      <ion-modal trigger="modal-trigger" #modal>
-        <ng-template>
-
-          <ion-content [fullscreen]="true">
-            <ion-grid style="margin-top: 50px;">
-              <ion-row class="ion-text-center">
-                <ion-col>
-                  <h3>¿Por qué quieres reportar el Auto?</h3>
-                </ion-col>
-              </ion-row>
-              <ion-row class="ion-justify-content-center">
-                <ion-card>
-                  <ion-card-content>
-                    <ion-radio-group value="end" id="tipoReporte" [(ngModel)]="tipoReporte">
-                      <ion-col>
-                        <ion-radio value="1" color="medium" labelPlacement="end">El vehículo es robado.</ion-radio>
-                      </ion-col>
-                      <ion-col>
-                        <ion-radio value="2" color="medium" labelPlacement="end">La publicación es
-                          inapropiada.</ion-radio>
-                      </ion-col>
-                      <ion-col>
-                        <ion-radio value="3" color="medium" labelPlacement="end">La publicación incita el
-                          odio.</ion-radio>
-                      </ion-col>
-                      <ion-col>
-                        <ion-radio value="4" color="medium" labelPlacement="end">La publicación denota ser
-                          falsa.</ion-radio>
-                      </ion-col>
-                      <ion-col>
-                        <ion-radio value="5" color="medium" labelPlacement="end">La publicación es spam.</ion-radio>
-                      </ion-col>
-                    </ion-radio-group>
-                  </ion-card-content>
-                </ion-card>
-                <ion-label color="danger">{{errorLabel}}</ion-label>
-                <ion-col class="textarea" size="10">
-                  <ion-textarea label="Descripción (opcional)" labelPlacement="stacked" [counter]="true" maxlength="500"
-                    helperText="Agregue una descripción a tu resporte" [autoGrow]="true"></ion-textarea>
-                </ion-col>
-              </ion-row>
-              <ion-row class="ion-justify-content-center">
-                <ion-button fill="outline" id="boton" shape="round" class="botonreporte"
-                  (click)="mandarReporte()">Enviar
-                  reporte</ion-button>
-              </ion-row>
-              <ion-row class="ion-justify-content-center">
-                <ion-button fill="outline" id="boton" shape="round" (click)="closeModal()" color="danger">Cancelar
-                  reporte</ion-button>
-              </ion-row>
-            </ion-grid>
-          </ion-content>
-        </ng-template>
-      </ion-modal>
-      <p *ngIf="rol!='2'">
-
-        <!-- <ion-col size="4">
-          <ion-button color="danger" style="font-size: 12px; width: 105px;" fill="outline"
-            id="modal-trigger" shape="round">Reportar</ion-button>
-        </ion-col> -->
-      </p>
-
-
 
       <ion-row *ngIf="rol == '2' && verificador != 'solicitud'">
         <ion-col size="12" class="ion-text-start">
@@ -158,7 +94,7 @@
                   </ion-col>
                   <ion-col>
                     <ion-button color="danger" fill="outline" shape="round"
-                      (click)="presentConfirmationAlert('reporte')">Eliminar Reporte</ion-button>
+                      >Eliminar Reporte</ion-button>
                   </ion-col>
                 </ion-row>
               </div>
@@ -173,7 +109,7 @@
               <ion-row>
                 <ion-col size="4">
                   <ion-button color="danger" fill="outline" shape="round"
-                    (click)="presentConfirmationAlert('producto')">Eliminar Producto</ion-button>
+                    >Eliminar Producto</ion-button>
                 </ion-col>
               </ion-row>
             </ion-card-content>
@@ -200,12 +136,12 @@
               <ion-row>
                 <ion-col size="4">
                   <ion-button color="success" fill="outline" shape="round"
-                    (click)="presentSolicitudAlert('aceptar')">Aceptar</ion-button>
+                    >Aceptar</ion-button>
                 </ion-col>
                 <ion-col size="2"></ion-col>
                 <ion-col size="4">
                   <ion-button color="danger" fill="outline" shape="round"
-                    (click)="presentSolicitudAlert('rechazar')">Rechazar</ion-button>
+                    >Rechazar</ion-button>
                 </ion-col>
               </ion-row>
             </ion-card-content>

@@ -234,6 +234,33 @@ export class DatabaseService {
       this.presentAlert("","Error buscar" + e);
     })
   }
+  
+  //Buscar autos del usuario
+  buscarAuto(id: any){
+    return this.db.executeSql('SELECT * FROM publicacion WHERE idpublicacion = ?',[id])
+    .then((res)=>{
+      let publicacion: Publicacion[] = [];
+      if(res.rows.length > 0){
+        publicacion.push({
+          idpublicacion: res.rows.item(0).idpublicacion,
+          modelo: res.rows.item(0).modelo,
+          marca : res.rows.item(0).marca,
+          precio : res.rows.item(0).precio,
+          color : res.rows.item(0).color,
+          transmision : res.rows.item(0).transmision,
+          descripcion : res.rows.item(0).descripcion,
+          estado : res.rows.item(0).estado,
+          kilometraje : res.rows.item(0).kilometraje,
+          cantidaddeuso : res.rows.item(0).cantidaddeuso,
+          foto : res.rows.item(0).foto,
+          idusuario : res.rows.item(0).idusuario
+        })
+      }
+      this.observer.next(publicacion as any);
+    }).catch(e => {
+      this.presentAlert("","Error publicacion" + e);
+    })
+  }
 
   //Añadir nuevos autos
   crearPublicacion(modelo:any, marca:any, precio: any, color:any, transmision:any, descripcion:any, estado:any, kilometraje:any, cantidaddeuso:any, foto:any, idusuario:any){
