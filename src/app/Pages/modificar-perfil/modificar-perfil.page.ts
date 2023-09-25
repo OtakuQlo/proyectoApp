@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ToastController } from '@ionic/angular';
+import { DatabaseService } from 'src/app/services/database.service';
 
 @Component({
   selector: 'app-modificar-perfil',
@@ -8,8 +9,6 @@ import { ToastController } from '@ionic/angular';
   styleUrls: ['./modificar-perfil.page.scss'],
 })
 export class ModificarPerfilPage implements OnInit {
-
-  constructor(private router:Router,private toastController: ToastController) { }
   nombre: string = '';
   apellido: string = '';
   correo: string = '';
@@ -20,15 +19,29 @@ export class ModificarPerfilPage implements OnInit {
    labelApellido: string = '';
    labelCorreo: string = '';
    labelTelefono: string = '';
+   
 
    //regex
   regexname: RegExp = /^[a-zA-ZÀ-ÿ\u00f1\u00d1]+(\s*[a-zA-ZÀ-ÿ\u00f1\u00d1]*)*[a-zA-ZÀ-ÿ\u00f1\u00d1]{2,100}$/;
   regexCorreo: RegExp = /^[a-zA-Z0-9\._-]+@[a-zA-Z0-9-]{2,}[.][a-zA-Z]{2,4}$/;
   regexTelefono: RegExp = new RegExp (/^[0-9]{8,8}$/);
 
+  constructor(private router:Router,private toastController: ToastController, private activedRouter: ActivatedRoute, private db: DatabaseService) { 
+    this.activedRouter.queryParams.subscribe(res => {
+      if (this.router.getCurrentNavigation()?.extras.state) {
+        this.nombre = this.router.getCurrentNavigation()?.extras?.state?.['nombre'];
+        this.apellido = this.router.getCurrentNavigation()?.extras?.state?.['apellido'];
+        this.correo = this.router.getCurrentNavigation()?.extras?.state?.['correo'];
+        this.telefono = this.router.getCurrentNavigation()?.extras?.state?.['telefono'];
+        
+      }
+    })
+  }
+  
    
 
   ngOnInit() {
+    
   }
   irPaginaPrinicipal(){
 
@@ -68,20 +81,16 @@ export class ModificarPerfilPage implements OnInit {
     }
 
     if(bandera){
+
+    this.db.editarPerfil(localStorage.getItem("idper"),this.nombre,this.apellido,this.correo,this.telefono);
+    let nombre:any = localStorage.getItem("nombre");
+    this.db.presentAlert("",nombre);
     this.router.navigate(['/perfil']);
-    this.presentToast('bottom');
+
     }
 
   }
 
-  async presentToast(position: 'top' | 'middle' | 'bottom') {
-    const toast = await this.toastController.create({
-      message: 'Datos cambiados exitosamente',
-      duration: 1500,
-      position: position,
-    });
-
-    await toast.present();
-  }
+  
 
 }

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, NavigationExtras, Router } from '@angular/router';
 import { MenuController } from '@ionic/angular';
+import { DatabaseService } from 'src/app/services/database.service';
 
 @Component({
   selector: 'app-perfil',
@@ -16,7 +17,7 @@ export class PerfilPage implements OnInit {
   direccion: string = "";
   rol: any = localStorage.getItem("rol");
 
-  constructor(private router: Router,private activedRouter: ActivatedRoute,private menu: MenuController,) { 
+  constructor(private router: Router,private activedRouter: ActivatedRoute,private menu: MenuController, private db:DatabaseService) { 
     
     this.menu.enable(true);
     
@@ -34,7 +35,7 @@ export class PerfilPage implements OnInit {
     this.router.navigate(['/panel-admin']);
   }
   irModificarPerfil(){
-    this.router.navigate(['/modificar-perfil']);
+    this.db.pasarPerfil(localStorage.getItem("idper"));
   }
   irIngresarContra(){
     this.router.navigate(['/ingresarcontra']);

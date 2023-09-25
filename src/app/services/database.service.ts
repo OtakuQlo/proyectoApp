@@ -5,7 +5,7 @@ import { AlertController, Platform, ToastController } from '@ionic/angular';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { Publicacion } from './publicacion';
 import { Pregunta } from './pregunta';
-import { Router } from '@angular/router';
+import { NavigationExtras, Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -171,7 +171,7 @@ export class DatabaseService {
     })
   }
 
-  //falta poner los parametros
+  
   crearUsuario(nombre:any, apellido:any, rut:any, correo:any, clave: any, respuesta:any, telefono:any, direccion:any, foto:any, idpregunta:any, idrol:any){
     return this.db.executeSql('INSERT INTO usuario(nombre,apellido,rut,correo,clave,respuesta,telefono,direccion,foto,idpregunta,idrol) VALUES (?,?,?,?,?,?,?,?,?,?,?)',[nombre,apellido,rut,correo,clave,respuesta,telefono,direccion,foto,idpregunta,idrol])
     .then(() => {
@@ -180,6 +180,37 @@ export class DatabaseService {
     }).catch((e) =>{ this.presentAlert("",'error en crear usuario: ' + JSON.stringify(e))
     })
   }
+
+
+  pasarPerfil(id:any){
+    let navigationExtras : NavigationExtras;
+    return this.db.executeSql('SELECT nombre, apellido, correo, telefono FROM usuario where idusuario = ?',[id])
+    .then((res) => {
+      if (res.rows.length > 0){
+        navigationExtras = {
+          state: {
+            nombre : res.rows.item(0).nombre,
+            apellido : res.rows.item(0).apellido,
+            correo : res.rows.item(0).correo,
+            telefono : res.rows.item(0).telefono
+          }
+        }
+      }
+      this.router.navigate(['/modificar-perfil'],navigationExtras);
+    })
+  }
+
+  editarPerfil(id: any,nombre: any, apellido: any, correo: any, telefono: any){
+    return this.db.executeSql('UPDATE usuario SET nombre = ?, apellido = ?, correo = ?, telefono = ? WHERE idusuario = ?;',[nombre,apellido,correo,telefono,id])
+    .then(() =>{
+      localStorage.setItem("nombre", nombre)
+      localStorage.setItem("correo", correo)
+      localStorage.setItem("apellido", apellido)
+      this.router.navigate(['/perfil']);
+    })
+    .catch(e => this.presentAlert("","Error en editar datos" + e));
+  }
+
 
   pasarPregunta(){
     return this.db.executeSql('SELECT * FROM pregunta',[])
