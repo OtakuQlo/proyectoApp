@@ -90,4 +90,8 @@ export class PanelAdminPage implements OnInit {
     this.router.navigate(['/pagina-producto'],navigationExtra);
 
   }
+
+  pasarPersona(id:any){
+    this.db.pasarUsuario(id);
+  }
 }

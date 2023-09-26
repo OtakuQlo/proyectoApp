@@ -128,7 +128,6 @@ export class DatabaseService {
   }
 
   //toast
-  
   async presentToast(position: 'top' | 'middle' | 'bottom', msj: string) {
     const toast = await this.toastController.create({
       message: msj,

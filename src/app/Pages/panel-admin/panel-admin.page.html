@@ -13,7 +13,7 @@
     <ion-item *ngFor="let x of arregloAutos"  class="request-item">
       <ion-label>{{x.modelo}}</ion-label>
       <ion-buttons slot="end">
-        <ion-button (click)="irPaginaProducto1(x)" color="warning">Ver</ion-button>
+        <ion-button (click)="irPaginaProducto1(x)" (click)="pasarPersona(x.idusuario)" color="warning">Ver</ion-button>
       </ion-buttons>
     </ion-item>
   </ion-list>
@@ -26,7 +26,7 @@
     <ion-item *ngFor="let x of arregloAutos" class="report-item">
       <ion-label>{{x.modelo}}</ion-label>
       <ion-buttons slot="end">
-        <ion-button (click)="irPaginaProducto(x)" color="warning">Ver</ion-button>
+        <ion-button (click)="irPaginaProducto(x)" (click)="pasarPersona(x.idusuario)" color="warning">Ver</ion-button>
       </ion-buttons>
     </ion-item>
   </ion-list>
