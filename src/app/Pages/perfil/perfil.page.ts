@@ -9,8 +9,8 @@ import { DatabaseService } from 'src/app/services/database.service';
   styleUrls: ['./perfil.page.scss'],
 })
 export class PerfilPage implements OnInit {
-  nombre: any =  localStorage.getItem("nombre");
-  apellido: any = localStorage.getItem("apellido");
+  nombre: any;
+  apellido: any;
   imagen: string = "https://ionicframework.com/docs/img/demos/avatar.svg";
   rut: string = "";
   correo: any;
@@ -42,6 +42,9 @@ export class PerfilPage implements OnInit {
           localStorage.setItem("ïdper",this.datosnuevos.idper);
           localStorage.setItem("rol",this.datosnuevos.rol);
           this.db.presentAlert("","Datos agregados");
+          this.correo = this.datosnuevos.correo;
+          this.apellido = this.datosnuevos.apellido;
+          this.nombre = this.datosnuevos.nombre;
         })
 
       }
