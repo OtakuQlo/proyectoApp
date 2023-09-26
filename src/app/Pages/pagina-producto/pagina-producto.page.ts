@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, NavigationExtras, Router } from '@angular/router';
-import { IonModal, MenuController} from '@ionic/angular';
+import { IonModal, MenuController, AlertController} from '@ionic/angular';
 import { DatabaseService } from 'src/app/services/database.service';
 
 
@@ -44,7 +44,7 @@ export class PaginaProductoPage implements OnInit {
     direccion: ''
   }];
 
-  constructor(private router: Router, private activedRouter: ActivatedRoute, private menu: MenuController, private db: DatabaseService) {
+  constructor(private router: Router, private activedRouter: ActivatedRoute, private menu: MenuController, private db: DatabaseService, private alertController: AlertController) {
     this.activedRouter.queryParams.subscribe(res => {
       if (this.router.getCurrentNavigation()?.extras.state) {
         this.idpublicacion = this.router.getCurrentNavigation()?.extras?.state?.['idpublicacionE'];
@@ -89,6 +89,54 @@ export class PaginaProductoPage implements OnInit {
 
     }
     this.router.navigate(['/reportar-auto'])
+  }
+
+  async presentDeleteConfirmation() {
+    const alert = await this.alertController.create({
+      header: 'Confirmación',
+      message: '¿Estás seguro de que deseas eliminar este producto?',
+      buttons: [
+        {
+          text: 'Cancelar',
+          role: 'cancel',
+          cssClass: 'secondary',
+        },
+        {
+          text: 'Eliminar',
+          handler: () => {
+            // Lógica para eliminar el producto aquí
+          },
+        },
+      ],
+    });
+
+    await alert.present();
+  }
+
+  // Función para mostrar la alerta de confirmación antes de aceptar o rechazar
+  async presentAcceptRejectConfirmation(action: string) {
+    const alert = await this.alertController.create({
+      header: 'Confirmación',
+      message:
+        action === 'aceptar'
+          ? '¿Estás seguro de que deseas aceptar esta solicitud?'
+          : '¿Estás seguro de que deseas rechazar esta solicitud?',
+      buttons: [
+        {
+          text: 'Cancelar',
+          role: 'cancel',
+          cssClass: 'secondary',
+        },
+        {
+          text: action === 'aceptar' ? 'Aceptar' : 'Rechazar',
+          handler: () => {
+            // Lógica para aceptar o rechazar aquí
+          },
+        },
+      ],
+    });
+
+    await alert.present();
   }
 
 }
