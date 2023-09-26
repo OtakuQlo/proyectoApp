@@ -75,7 +75,7 @@
     </ion-row>
     <ion-row class="ion-justify-content-center">
 
-      <ion-col *ngIf="rol != '1'" size="4">
+      <ion-col *ngIf="rol == '2'" size="4">
         <ion-button color="danger" style="font-size: 12px; width: 105px;" fill="outline" id="modal-trigger"
           shape="round">Reportar</ion-button>
       </ion-col>
@@ -108,8 +108,9 @@
             <ion-card-content>
               <ion-row>
                 <ion-col size="4">
-                  <ion-button color="danger" fill="outline" shape="round"
-                    >Eliminar Producto</ion-button>
+                  <ion-button color="danger" fill="outline" shape="round" (click)="presentDeleteConfirmation()">
+                    Eliminar Producto
+                  </ion-button>
                 </ion-col>
               </ion-row>
             </ion-card-content>
@@ -135,13 +136,15 @@
             <ion-card-content>
               <ion-row>
                 <ion-col size="4">
-                  <ion-button color="success" fill="outline" shape="round"
-                    >Aceptar</ion-button>
+                  <ion-button color="danger" fill="outline" shape="round" (click)="presentAcceptRejectConfirmation('rechazar')">
+                    Rechazar
+                  </ion-button>
                 </ion-col>
                 <ion-col size="2"></ion-col>
                 <ion-col size="4">
-                  <ion-button color="danger" fill="outline" shape="round"
-                    >Rechazar</ion-button>
+                  <ion-button color="success" fill="outline" shape="round" (click)="presentAcceptRejectConfirmation('aceptar')">
+                    Aceptar
+                  </ion-button>
                 </ion-col>
               </ion-row>
             </ion-card-content>
