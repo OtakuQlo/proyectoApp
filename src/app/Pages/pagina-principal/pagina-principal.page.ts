@@ -70,4 +70,8 @@ export class PaginaPrincipalPage implements OnInit {
     this.router.navigate(['/pagina-producto'], navigationExtras);
   }
 
+  pasarPersona(id:any){
+    this.db.pasarUsuario(id);
+  }
+
 }

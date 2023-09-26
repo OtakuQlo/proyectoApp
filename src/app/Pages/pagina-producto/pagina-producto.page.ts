@@ -29,6 +29,21 @@ export class PaginaProductoPage implements OnInit {
   foto: string= '';
   idusuario!: any;
 
+
+  nombre:any;
+  apellido:any;
+  direccion:any;
+  telefono:any;
+
+  datosnuevos: any = [{
+    rol: '',
+    nombre: '',
+    apellido: '',
+    correo: '',
+    telefono: '',
+    direccion: ''
+  }];
+
   constructor(private router: Router, private activedRouter: ActivatedRoute, private menu: MenuController, private db: DatabaseService) {
     this.activedRouter.queryParams.subscribe(res => {
       if (this.router.getCurrentNavigation()?.extras.state) {
@@ -51,6 +66,19 @@ export class PaginaProductoPage implements OnInit {
 
   ngOnInit() {
     this.menu.enable(true);
+    this.db.bdState().subscribe(res=>{
+      //verifico si el estatus es true
+      if(res){
+        //me subscribir al observable de la Tabla
+        this.db.fetchVendedores().subscribe(datos=>{
+          this.datosnuevos = datos;
+          this.nombre = this.datosnuevos.nombre;
+          this.telefono = this.datosnuevos.telefono;
+          this.direccion = this.datosnuevos.direccion;
+          this.apellido = this.datosnuevos.apellido;
+        })
+      }
+    })
   } 
 
   reportarAuto(){

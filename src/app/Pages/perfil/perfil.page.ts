@@ -24,7 +24,8 @@ export class PerfilPage implements OnInit {
       nombre: '',
       apellido: '',
       correo: '',
-      telefono: ''
+      telefono: '',
+      direccion: ''
   }];
 
   constructor(private router: Router,private activedRouter: ActivatedRoute,private menu: MenuController, private db:DatabaseService) { 

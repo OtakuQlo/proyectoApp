@@ -41,6 +41,7 @@ export class DatabaseService {
   //observables de las tablas
   observer = new BehaviorSubject([]);
   usuarios = new BehaviorSubject([]);
+  vendedores = new BehaviorSubject([]);
 
   //observable para la BD
   private isDBReady: BehaviorSubject<boolean> = new BehaviorSubject(false);
@@ -63,6 +64,10 @@ export class DatabaseService {
 
   fetchUser(): Observable<any[]>{
     return this.usuarios.asObservable();
+  }
+
+  fetchVendedores(): Observable<any[]>{
+    return this.vendedores.asObservable();
   }
 
   
@@ -146,7 +151,8 @@ export class DatabaseService {
       nombre: '',
       apellido: '',
       correo: '',
-      telefono: ''
+      telefono: '',
+      direccion: ''
     }];
     
     this.db.executeSql('select * from usuario where rut = ?',[rut])
@@ -219,7 +225,8 @@ export class DatabaseService {
       nombre: '',
       apellido: '',
       correo: '',
-      telefono: ''
+      telefono: '',
+      direccion: ''
     }];
     return this.db.executeSql('UPDATE usuario SET nombre = ?, apellido = ?, correo = ?, telefono = ? WHERE idusuario = ?;',[nombre,apellido,correo,telefono,id])
     .then(() =>{
@@ -237,6 +244,33 @@ export class DatabaseService {
       })
     })
     .catch(e => this.presentAlert("","Error en editar datos" + e));
+  }
+
+
+  pasarUsuario(id: any){
+    let datos: any = [{
+      idper: '',
+      rol: '',
+      nombre: '',
+      apellido: '',
+      correo: '',
+      telefono: '',
+      direccion: ''
+    }];
+    return this.db.executeSql('select * from usuario where idusuario = ?', [id])
+    .then((res) => {
+      if(res.rows.length > 0){
+        datos.idper = res.rows.item(0).idusuario,
+        datos.rol = res.rows.item(0).idrol,
+        datos.correo = res.rows.item(0).correo,
+        datos.nombre = res.rows.item(0).nombre,
+        datos.apellido = res.rows.item(0).apellido,
+        datos.direccion = res.rows.item(0).direccion,
+        datos.telefono = res.rows.item(0).telefono
+        this.presentAlert("","se pasaron los datos del manu");
+      }
+      this.vendedores.next(datos as any);
+    })
   }
 
 
@@ -293,6 +327,8 @@ export class DatabaseService {
       this.presentAlert("","Error buscar" + e);
     })
   }
+
+
   
   //Buscar autos del usuario
   buscarAuto(id: any){

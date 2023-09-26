@@ -21,7 +21,8 @@ export class AppComponent {
     nombre: '',
     apellido: '',
     correo: '',
-    telefono: ''
+    telefono: '',
+    direccion: ''
   }];
 
   constructor( private router: Router,private db: DatabaseService) {}
