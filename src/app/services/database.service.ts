@@ -40,6 +40,7 @@ export class DatabaseService {
 
   //observables de las tablas
   observer = new BehaviorSubject([]);
+  usuarios = new BehaviorSubject([]);
 
   //observable para la BD
   private isDBReady: BehaviorSubject<boolean> = new BehaviorSubject(false);
@@ -61,7 +62,7 @@ export class DatabaseService {
   }
 
   fetchUser(): Observable<any[]>{
-    return this.observer.asObservable();
+    return this.usuarios.asObservable();
   }
 
   
@@ -174,7 +175,7 @@ export class DatabaseService {
       if (pass == pass1) {
         this.router.navigate(['/perfil']);
         this.presentToast('bottom','Bienvenido a satiscar');
-        this.observer.next(datos as any); 
+        this.usuarios.next(datos as any); 
       }else{
         this.presentAlert("Datos erroneos:","Los datos ingesados son erroneos.");
       }
@@ -232,7 +233,7 @@ export class DatabaseService {
           datos.correo = res.rows.item(0).correo,
           datos.telefono = res.rows.item(0).telefono
         }
-        this.observer.next(datos as any); 
+        this.usuarios.next(datos as any); 
       })
     })
     .catch(e => this.presentAlert("","Error en editar datos" + e));
