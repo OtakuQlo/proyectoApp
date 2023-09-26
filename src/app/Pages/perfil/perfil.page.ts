@@ -13,9 +13,19 @@ export class PerfilPage implements OnInit {
   apellido: any = localStorage.getItem("apellido");
   imagen: string = "https://ionicframework.com/docs/img/demos/avatar.svg";
   rut: string = "";
-  correo: any = localStorage.getItem("correo");
+  correo: any;
   direccion: string = "";
-  rol: any = localStorage.getItem("rol");
+  rol = localStorage.getItem("rol") ;
+  idper = localStorage.getItem("idper");
+
+  datosnuevos: any = [{
+      idper: '',
+      rol: '',
+      nombre: '',
+      apellido: '',
+      correo: '',
+      telefono: ''
+  }];
 
   constructor(private router: Router,private activedRouter: ActivatedRoute,private menu: MenuController, private db:DatabaseService) { 
     
@@ -23,7 +33,19 @@ export class PerfilPage implements OnInit {
     
   }
   ngOnInit() {
-    
+    this.db.bdState().subscribe(res=>{
+      //verifico si el estatus es true
+      if(res){
+        //me subscribir al observable de la Tabla
+        this.db.fetchUser().subscribe(datos=>{
+          this.datosnuevos = datos;
+          localStorage.setItem("ïdper",this.datosnuevos.idper);
+          localStorage.setItem("rol",this.datosnuevos.rol);
+          this.db.presentAlert("","Datos agregados");
+        })
+
+      }
+    })
   }
 
   ngAfterViewInit(){
@@ -36,6 +58,7 @@ export class PerfilPage implements OnInit {
   }
   irModificarPerfil(){
     this.db.pasarPerfil(localStorage.getItem("idper"));
+    
   }
   irIngresarContra(){
     this.router.navigate(['/ingresarcontra']);

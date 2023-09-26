@@ -60,6 +60,12 @@ export class DatabaseService {
     return this.observer.asObservable();
   }
 
+  fetchUser(): Observable<any[]>{
+    return this.observer.asObservable();
+  }
+
+  
+
 
   crearDB(){
     this.platform.ready().then(() =>
@@ -132,39 +138,43 @@ export class DatabaseService {
   //Usuarios
 
   inicioSesion(rut:any, pass: any){
-
+    
+    let datos: any = [{
+      idper: '',
+      rol: '',
+      nombre: '',
+      apellido: '',
+      correo: '',
+      telefono: ''
+    }];
+    
     this.db.executeSql('select * from usuario where rut = ?',[rut])
     .then((res) => {
       
-      let idrol: any;
+      
       let pass1: any;
-      let nombre: any;
-      let correo: any;
-      let idper: any;
-      let apellido: any;
+      
 
       if(res.rows.length > 0){
-        idrol = res.rows.item(0).idrol,
+        datos.idper = res.rows.item(0).idusuario,
         pass1 = res.rows.item(0).clave,
-        nombre = res.rows.item(0).nombre,
-        correo = res.rows.item(0).correo,
-        idper = res.rows.item(0).idusuario,
-        apellido = res.rows.item(0).apellido
+
+        datos.nombre = res.rows.item(0).nombre,
+        datos.rol = res.rows.item(0).idrol,
+        datos.apellido = res.rows.item(0).apellido,
+        datos.correo = res.rows.item(0).correo,
+        datos.telefono = res.rows.item(0).telefono
         
       }else{
         this.presentAlert("Datos erroneos:","Los datos ingesados son erroneos.");
         return
       }
+      
+
       if (pass == pass1) {
-        localStorage.setItem("nombre", nombre);
-        localStorage.setItem("correo", correo);
-        localStorage.setItem("rol", idrol);
-        localStorage.setItem("idper", idper);
-        localStorage.setItem("apellido", apellido);
         this.router.navigate(['/perfil']);
         this.presentToast('bottom','Bienvenido a satiscar');
-
-        
+        this.observer.next(datos as any); 
       }else{
         this.presentAlert("Datos erroneos:","Los datos ingesados son erroneos.");
       }
@@ -180,6 +190,7 @@ export class DatabaseService {
     }).catch((e) =>{ this.presentAlert("",'error en crear usuario: ' + JSON.stringify(e))
     })
   }
+
 
 
   pasarPerfil(id:any){
@@ -201,12 +212,28 @@ export class DatabaseService {
   }
 
   editarPerfil(id: any,nombre: any, apellido: any, correo: any, telefono: any){
+    let datos: any = [{
+      idper: '',
+      rol: '',
+      nombre: '',
+      apellido: '',
+      correo: '',
+      telefono: ''
+    }];
     return this.db.executeSql('UPDATE usuario SET nombre = ?, apellido = ?, correo = ?, telefono = ? WHERE idusuario = ?;',[nombre,apellido,correo,telefono,id])
     .then(() =>{
-      localStorage.setItem("nombre", nombre)
-      localStorage.setItem("correo", correo)
-      localStorage.setItem("apellido", apellido)
-      this.router.navigate(['/perfil']);
+      this.db.executeSql('select * from usuario where idusuario = ?',[id])
+      .then((res) => {
+        if(res.rows.length > 0){
+          datos.idper = res.rows.item(0).idusuario,
+          datos.nombre = res.rows.item(0).nombre,
+          datos.rol = res.rows.item(0).idrol,
+          datos.apellido = res.rows.item(0).apellido,
+          datos.correo = res.rows.item(0).correo,
+          datos.telefono = res.rows.item(0).telefono
+        }
+        this.observer.next(datos as any); 
+      })
     })
     .catch(e => this.presentAlert("","Error en editar datos" + e));
   }
