@@ -34,6 +34,7 @@ export class PerfilPage implements OnInit {
     
   }
   ngOnInit() {
+    
     this.db.bdState().subscribe(res=>{
       //verifico si el estatus es true
       if(res){
@@ -52,8 +53,12 @@ export class PerfilPage implements OnInit {
     })
   }
 
-  ngAfterViewInit(){
+  ionViewWillEnter() {
     this.menu.enable(true);
+  }
+  
+  ngAfterViewInit(){
+    
   }
 
   
