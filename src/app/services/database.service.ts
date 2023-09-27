@@ -42,6 +42,7 @@ export class DatabaseService {
   observer = new BehaviorSubject([]);
   usuarios = new BehaviorSubject([]);
   vendedores = new BehaviorSubject([]);
+  mispublicaciones = new BehaviorSubject([]);
 
   //observable para la BD
   private isDBReady: BehaviorSubject<boolean> = new BehaviorSubject(false);
@@ -273,7 +274,6 @@ export class DatabaseService {
     })
   }
 
-
   pasarPregunta(){
     return this.db.executeSql('SELECT * FROM pregunta',[])
     .then(res => {
@@ -292,10 +292,7 @@ export class DatabaseService {
         this.presentAlert("",'Error en pasar pregunta ' + JSON.stringify(e))
       })
 
-      }
-     
-
-
+  }
 
   //Publicaciones
 
@@ -364,6 +361,46 @@ export class DatabaseService {
       this.buscarPublicacion();
     }).catch((e) =>{ this.presentAlert("",'error en crear publicacion: ' + JSON.stringify(e))
     })
+  }
+
+  //Editar Autos
+  editarPublicacion(id:any, modelo: any, marca: any, precio: any, color: any, transmision:any, descripcion:any, estado:any, kilometraje:any, cantidaddeuso:any, foto:any, idusuario:any){
+    let publicaciones: any = [{
+      idpubli: '',
+      modelo: '',
+      marca: '',
+      precio: '',
+      color: '',
+      transmision: '',
+      descripcion: '',
+      estado: '',
+      kilometraje: '',
+      cantidaddeuso: '',
+      foto: '',
+      idusuario: ''
+    }];
+    return this.db.executeSql('UPDATE publicacion SET modelo = ?, marca = ?, precio = ?, color = ?, transmision = ?, descripcion = ?, , estado = ?, kilometraje = ?, cantidaddeuso = ?, foto = ? WHERE idusuario = ? AND idpublicacion;',[modelo, marca, precio, color, transmision, descripcion, estado, kilometraje, cantidaddeuso, foto, idusuario, id])
+    .then(() =>{
+      this.db.executeSql('select * from publicacion where idusuario = ?;',[idusuario])
+      .then((res) => {
+        if(res.rows.length > 0){
+          publicaciones.idpubli = res.rows.item(0).idpublicacion,
+          publicaciones.modelo = res.rows.item(0).modelo,
+          publicaciones.marca = res.rows.item(0).marca,
+          publicaciones.precio = res.rows.item(0).precio,
+          publicaciones.color = res.rows.item(0).color,
+          publicaciones.transmision = res.rows.item(0).transmision,
+          publicaciones.descripcion = res.rows.item(0).descripcion,
+          publicaciones.estado = res.rows.item(0).estado,
+          publicaciones.kilometraje = res.rows.item(0).kilometraje,
+          publicaciones.cantidaddeuso = res.rows.item(0).cantidaddeuso,
+          publicaciones.foto = res.rows.item(0).foto,
+          publicaciones.idusuario = res.rows.item(0).idusuario
+        }
+        this.mispublicaciones.next(publicaciones as any); 
+      })
+    })
+    .catch(e => this.presentAlert("","Error en editar publicaciones" + e));
   }
 
 
