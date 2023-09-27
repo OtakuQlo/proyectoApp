@@ -35,7 +35,7 @@
               <h1>{{marca | uppercase}} {{modelo | uppercase}} </h1>
             </ion-row>
             <ion-row>
-              <h2>${{precio | currency : 'CLP' : '$'}}  </h2>
+              <h2>{{precio | currency : 'CLP' : '$'}}  </h2>
             </ion-row>
             <div>
               <ion-row>Vendedor: {{nombre| uppercase}} </ion-row>
@@ -67,7 +67,7 @@
               <ion-row>
                 <h2>Descripción</h2>
               </ion-row>
-              <ion-row>{{descripcion | uppercase }}</ion-row>
+              <ion-row>{{descripcion | uppercase }}{{estado}}</ion-row>
             </div>
           </ion-card-content>
         </ion-card>
@@ -93,8 +93,9 @@
                     <ion-label>La publicación es Spam Alfa Romeo Giulia</ion-label>
                   </ion-col>
                   <ion-col>
-                    <ion-button color="danger" fill="outline" shape="round"
-                      >Eliminar Reporte</ion-button>
+                    <ion-button color="danger" fill="outline" shape="round" (click)="presentDeleteReportConfirmation()">
+                      Eliminar Reporte
+                    </ion-button>
                   </ion-col>
                 </ion-row>
               </div>

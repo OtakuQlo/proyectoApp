@@ -91,36 +91,16 @@ export class PaginaProductoPage implements OnInit {
     this.router.navigate(['/reportar-auto'])
   }
 
-  async presentDeleteConfirmation() {
-    const alert = await this.alertController.create({
-      header: 'Confirmación',
-      message: '¿Estás seguro de que deseas eliminar este producto?',
-      buttons: [
-        {
-          text: 'Cancelar',
-          role: 'cancel',
-          cssClass: 'secondary',
-        },
-        {
-          text: 'Eliminar',
-          handler: () => {
-            // Lógica para eliminar el producto aquí
-          },
-        },
-      ],
-    });
-
-    await alert.present();
-  }
-
-  // Función para mostrar la alerta de confirmación antes de aceptar o rechazar
   async presentAcceptRejectConfirmation(action: string) {
+    const header = 'Confirmación';
+    const message =
+      action === 'aceptar'
+        ? '¿Estás seguro de que deseas aceptar esta solicitud?'
+        : '¿Estás seguro de que deseas rechazar esta solicitud?';
+  
     const alert = await this.alertController.create({
-      header: 'Confirmación',
-      message:
-        action === 'aceptar'
-          ? '¿Estás seguro de que deseas aceptar esta solicitud?'
-          : '¿Estás seguro de que deseas rechazar esta solicitud?',
+      header: header,
+      message: message,
       buttons: [
         {
           text: 'Cancelar',
@@ -129,14 +109,38 @@ export class PaginaProductoPage implements OnInit {
         },
         {
           text: action === 'aceptar' ? 'Aceptar' : 'Rechazar',
-          handler: () => {
-            // Lógica para aceptar o rechazar aquí
+          handler: async () => {
+            if (action === 'aceptar') {
+              const idPublicacion = this.idpublicacion;
+              await this.db.actualizarEstadoPublicacion(idPublicacion, 1);
+              this.router.navigate(['/pagina-principal']);
+              this.db.presentToast('bottom','Producto aceptado con exito');
+            } else if (action === 'rechazar') {
+              const idPublicacion = this.idpublicacion;
+              await this.db.actualizarEstadoPublicacion(idPublicacion, 0);
+              this.router.navigate(['/pagina-principal']);
+              this.db.presentToast('bottom','Producto rechazado con exito');
+            }
           },
         },
       ],
     });
-
+  
     await alert.present();
   }
 
+  async presentDeleteConfirmation() {
+    const header = 'Confirmación';
+    const message = '¿Estás seguro de que deseas eliminar este producto?';
+
+    this.db.presentConfirmationMessage(header, message, 'Eliminar');
+  }
+
+  async presentDeleteReportConfirmation() {
+    const header = 'Confirmación';
+    const message = '¿Estás seguro de que deseas eliminar este reporte?';
+  
+    this.db.presentConfirmationMessage(header, message, 'Eliminar Reporte');
+  }
+  
 }
