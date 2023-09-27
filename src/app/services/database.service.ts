@@ -216,6 +216,16 @@ export class DatabaseService {
     })
   }
 
+  validarRut(rut: any): Promise<boolean>{
+    return this.db.executeSql('select * from usuario where rut = ?', [rut])
+    .then((res) => {
+      if(res.rows.length > 0){
+        return false;
+      }else{
+        return true;
+      }
+    })
+  }
   
   crearUsuario(nombre:any, apellido:any, rut:any, correo:any, clave: any, respuesta:any, telefono:any, direccion:any, foto:any, idpregunta:any, idrol:any){
     return this.db.executeSql('INSERT INTO usuario(nombre,apellido,rut,correo,clave,respuesta,telefono,direccion,foto,idpregunta,idrol) VALUES (?,?,?,?,?,?,?,?,?,?,?)',[nombre,apellido,rut,correo,clave,respuesta,telefono,direccion,foto,idpregunta,idrol])

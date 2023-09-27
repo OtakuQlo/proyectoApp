@@ -60,11 +60,15 @@ export class InicioSesionPage implements OnInit {
   direccion: string = '';
   foto: any;
   rol = 2;
+  estadoRut! :boolean;
+  bandera = true;
+  
 
   // variables label
   labelNombre: string = '';
   labelApellido: string = '';
   labelRut: string = '';
+  labelRut2: string = '';
   labelCorreo: string = '';
   labelPregunta: string = '';
   labelTelefono: string = '';
@@ -72,6 +76,7 @@ export class InicioSesionPage implements OnInit {
   labelContra: string = '';
   labelContra2: string = '';
   labelDireccion: string = '';
+
 
   tomarfoto(){
     this.foto = this.camara.takePicture();
@@ -83,6 +88,9 @@ export class InicioSesionPage implements OnInit {
   irPaginaPrincipal() {
     // la bandera si está en verdadero permite que se envien los datos en caso contrario no lo permite
     let bandera = true;
+
+
+    
 
     // validacion nombre
     if (!this.regexname.test(this.nombre)) {
@@ -108,6 +116,20 @@ export class InicioSesionPage implements OnInit {
       this.labelRut = '';
     }
 
+    this.db.validarRut(this.rut)
+    .then((res) => {
+      this.estadoRut = res;
+      if(!res){
+        bandera = false;
+        this.labelRut2 = 'El rut ingresado ya esta registrado.';
+      }else{
+        this.labelRut2 = '';
+      }
+      
+    });
+    
+
+
     // validacion contraseña
     if (!this.regexpass.test(this.contra)) {
       bandera = false;
@@ -120,7 +142,7 @@ export class InicioSesionPage implements OnInit {
 
     // validacion igualdad de las dos contraseñas
     if (this.contra != this.contra2) {
-      bandera = false;
+      this.bandera = false;
       this.contra2 = '';
       this.labelContra2 = 'Deben coincidir las contraseñas';
     } else {
@@ -168,7 +190,8 @@ export class InicioSesionPage implements OnInit {
       this.labelDireccion = '';
     }
 
-    if (bandera) {
+
+    if (bandera && this.estadoRut) {
       this.db.crearUsuario(this.nombre,this.apellido, this.rut,this.correo,this.contra,this.respuesta,this.telefono,this.direccion,"aaa",this.pregunta,2);
       this.router.navigate(['/home']);
       
