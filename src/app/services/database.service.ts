@@ -43,6 +43,11 @@ export class DatabaseService {
   usuarios = new BehaviorSubject([]);
   vendedores = new BehaviorSubject([]);
   mispublicaciones = new BehaviorSubject([]);
+  ruts = new BehaviorSubject([]);
+
+
+
+
 
   //observable para la BD
   private isDBReady: BehaviorSubject<boolean> = new BehaviorSubject(false);
@@ -69,6 +74,9 @@ export class DatabaseService {
 
   fetchVendedores(): Observable<any[]>{
     return this.vendedores.asObservable();
+  }
+  fetchRut(): Observable<any[]>{
+    return this.ruts.asObservable();
   }
 
   
@@ -215,14 +223,16 @@ export class DatabaseService {
     })
   }
 
-  validarRut(rut: any): Promise<boolean>{
-    return this.db.executeSql('select * from usuario where rut = ?', [rut])
+  validarRut(){
+    let arrruts:any[] = [];
+    return this.db.executeSql('select * from usuario', [])
     .then((res) => {
       if(res.rows.length > 0){
-        return false;
-      }else{
-        return true;
+        for (let i = 0; i < res.rows.length; i++) {
+          arrruts.push(res.rows.item(i).rut);
+        }
       }
+      this.ruts.next(arrruts as any)
     })
   }
   

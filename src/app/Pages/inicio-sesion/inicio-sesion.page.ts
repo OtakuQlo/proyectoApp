@@ -11,7 +11,7 @@ import { DatabaseService } from 'src/app/services/database.service';
   styleUrls: ['./inicio-sesion.page.scss'],
 })
 export class InicioSesionPage implements OnInit {
-
+  arreglorut: any[] =[];
   arregloPreguntas: any = [{
     idpregunta: '',
     nombre: ''
@@ -23,16 +23,27 @@ export class InicioSesionPage implements OnInit {
 
   ngOnInit() {
     this.menu.enable(false);
+
     this.db.bdState().subscribe(
       res => {
-        if (res) {
+        if (res){
+          this.db.fetchRut().subscribe(ruts => {
+            this.arreglorut = ruts;
+          
+          })
+        }
+      }
+    )
+
+    this.db.bdState().subscribe(
+      res => {
+        if (res){
           this.db.fetchPregunta().subscribe(datos => {
             this.arregloPreguntas = datos;
           })
         }
       }
     )
-
   }
   ngAfterViewInit() {
     this.menu.enable(false);
@@ -58,7 +69,6 @@ export class InicioSesionPage implements OnInit {
   direccion: string = '';
   foto: any;
   rol = 2;
-  estadoRut! :boolean;
   bandera = true;
   
 
@@ -113,20 +123,16 @@ export class InicioSesionPage implements OnInit {
       this.labelRut = '';
     }
 
-    this.db.validarRut(this.rut)
-    .then((res) => {
-      this.estadoRut = res;
-      if(!res){
+    for (let i = 0; i < this.arreglorut.length; i++) {
+      if (this.rut == this.arreglorut[i]) {
         bandera = false;
-        this.labelRut2 = 'El rut ingresado ya esta registrado.';
+        this.labelRut2 = 'El rut ingresado ya esta registrado.'
+        break;
       }else{
-        this.labelRut2 = '';
+        this.labelRut2 = ''
       }
       
-    });
-    
-
-
+    }
     // validacion contraseña
     if (!this.regexpass.test(this.contra)) {
       bandera = false;
@@ -188,7 +194,7 @@ export class InicioSesionPage implements OnInit {
     }
 
 
-    if (bandera && this.estadoRut) {
+    if (bandera ) {
       this.db.crearUsuario(this.nombre,this.apellido, this.rut,this.correo,this.contra,this.respuesta,this.telefono,this.direccion,this.foto,this.pregunta,2);
       this.router.navigate(['/home']);
     }

@@ -34,6 +34,7 @@ export class HomePage{
   }
 
   irCrearCuenta(){
+    this.db.validarRut();
     this.router.navigate(['/inicio-sesion']);
   }
  
