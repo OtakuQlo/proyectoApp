@@ -34,6 +34,8 @@ export class PaginaPrincipalPage implements OnInit {
     this.menu.enable(true);
   }
 
+  
+
   ngOnInit() {
     this.menu.enable(true);
     //me subscribo al observable de la BD

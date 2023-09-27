@@ -22,6 +22,14 @@ export class HomePage{
     
     
   }
+
+  ionViewWillEnter() {
+    this.rut = '';
+    this.pass = '';
+    localStorage.removeItem("rol");
+    localStorage.removeItem("idper");
+  }
+
   ngAfterViewInit(){
     this.menu.enable(false);
     
