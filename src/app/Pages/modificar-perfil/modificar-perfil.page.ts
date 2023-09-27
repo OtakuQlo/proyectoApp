@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { ToastController } from '@ionic/angular';
+import { CamaraService } from 'src/app/services/camara.service';
 import { DatabaseService } from 'src/app/services/database.service';
 
 @Component({
@@ -13,12 +13,16 @@ export class ModificarPerfilPage implements OnInit {
   apellido: string = '';
   correo: string = '';
   telefono: string = '';
+  direccion: string = '';
+  foto: any;
 
-   // variables label
-   labelNombre: string = '';
-   labelApellido: string = '';
-   labelCorreo: string = '';
-   labelTelefono: string = '';
+  // variables label
+  labelNombre: string = '';
+  labelApellido: string = '';
+  labelCorreo: string = '';
+  labelTelefono: string = '';
+  labelDireccion: string = '';
+  labelFoto: string = '';
    
 
    //regex
@@ -26,14 +30,15 @@ export class ModificarPerfilPage implements OnInit {
   regexCorreo: RegExp = /^[a-zA-Z0-9\._-]+@[a-zA-Z0-9-]{2,}[.][a-zA-Z]{2,4}$/;
   regexTelefono: RegExp = new RegExp (/^[0-9]{8,8}$/);
 
-  constructor(private router:Router,private toastController: ToastController, private activedRouter: ActivatedRoute, private db: DatabaseService) { 
+  constructor(private router:Router, private activedRouter: ActivatedRoute, private db: DatabaseService, private camara: CamaraService) { 
     this.activedRouter.queryParams.subscribe(res => {
       if (this.router.getCurrentNavigation()?.extras.state) {
         this.nombre = this.router.getCurrentNavigation()?.extras?.state?.['nombre'];
         this.apellido = this.router.getCurrentNavigation()?.extras?.state?.['apellido'];
         this.correo = this.router.getCurrentNavigation()?.extras?.state?.['correo'];
         this.telefono = this.router.getCurrentNavigation()?.extras?.state?.['telefono'];
-        
+        this.direccion = this.router.getCurrentNavigation()?.extras?.state?.['direccion'];
+        this.foto = this.router.getCurrentNavigation()?.extras?.state?.['foto'];
       }
     })
   }
@@ -43,6 +48,12 @@ export class ModificarPerfilPage implements OnInit {
   ngOnInit() {
     
   }
+
+  async tomarfoto(){
+    await this.camara.takePicture();
+    this.foto = this.camara.foto;
+  }
+
   irPaginaPrinicipal(){
 
 
@@ -82,7 +93,7 @@ export class ModificarPerfilPage implements OnInit {
 
     if(bandera){
 
-    this.db.editarPerfil(localStorage.getItem("idper"),this.nombre,this.apellido,this.correo,this.telefono);
+    this.db.editarPerfil(localStorage.getItem("idper"),this.nombre,this.apellido,this.correo,this.telefono,this.direccion,this.foto);
     let nombre:any = localStorage.getItem("nombre");
     this.db.presentAlert("",nombre);
     this.router.navigate(['/perfil']);

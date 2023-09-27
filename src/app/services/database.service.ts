@@ -180,32 +180,31 @@ export class DatabaseService {
       apellido: '',
       correo: '',
       telefono: '',
-      direccion: ''
+      direccion: '',
+      foto: ''
     }];
     
     this.db.executeSql('select * from usuario where rut = ?',[rut])
     .then((res) => {
       
-      
       let pass1: any;
       
-
       if(res.rows.length > 0){
         datos.idper = res.rows.item(0).idusuario,
         pass1 = res.rows.item(0).clave,
-
         datos.nombre = res.rows.item(0).nombre,
         datos.rol = res.rows.item(0).idrol,
         datos.apellido = res.rows.item(0).apellido,
         datos.correo = res.rows.item(0).correo,
-        datos.telefono = res.rows.item(0).telefono
+        datos.telefono = res.rows.item(0).telefono,
+        datos.direccion = res.rows.item(0).direccion,
+        datos.foto = res.rows.item(0).foto
         
       }else{
         this.presentAlert("Datos erroneos:","Los datos ingesados son erroneos.");
         return
       }
       
-
       if (pass == pass1) {
         this.router.navigate(['/perfil']);
         this.presentToast('bottom','Bienvenido a satiscar');
@@ -240,7 +239,7 @@ export class DatabaseService {
 
   pasarPerfil(id:any){
     let navigationExtras : NavigationExtras;
-    return this.db.executeSql('SELECT nombre, apellido, correo, telefono FROM usuario where idusuario = ?',[id])
+    return this.db.executeSql('SELECT nombre, apellido, correo, telefono, direccion, foto FROM usuario where idusuario = ?',[id])
     .then((res) => {
       if (res.rows.length > 0){
         navigationExtras = {
@@ -248,7 +247,9 @@ export class DatabaseService {
             nombre : res.rows.item(0).nombre,
             apellido : res.rows.item(0).apellido,
             correo : res.rows.item(0).correo,
-            telefono : res.rows.item(0).telefono
+            telefono : res.rows.item(0).telefono,
+            direccion : res.rows.item(0).direccion,
+            foto : res.rows.item(0).foto
           }
         }
       }
@@ -256,7 +257,7 @@ export class DatabaseService {
     })
   }
 
-  editarPerfil(id: any,nombre: any, apellido: any, correo: any, telefono: any){
+  editarPerfil(id: any,nombre: any, apellido: any, correo: any, telefono: any, direccion:any, foto:any){
     let datos: any = [{
       idper: '',
       rol: '',
@@ -264,9 +265,10 @@ export class DatabaseService {
       apellido: '',
       correo: '',
       telefono: '',
-      direccion: ''
+      direccion: '',
+      foto: ''
     }];
-    return this.db.executeSql('UPDATE usuario SET nombre = ?, apellido = ?, correo = ?, telefono = ? WHERE idusuario = ?;',[nombre,apellido,correo,telefono,id])
+    return this.db.executeSql('UPDATE usuario SET nombre = ?, apellido = ?, correo = ?, telefono = ?, direccion = ?, foto = ? WHERE idusuario = ?;',[nombre,apellido,correo,telefono,direccion,foto, id])
     .then(() =>{
       this.db.executeSql('select * from usuario where idusuario = ?',[id])
       .then((res) => {
@@ -276,7 +278,9 @@ export class DatabaseService {
           datos.rol = res.rows.item(0).idrol,
           datos.apellido = res.rows.item(0).apellido,
           datos.correo = res.rows.item(0).correo,
-          datos.telefono = res.rows.item(0).telefono
+          datos.telefono = res.rows.item(0).telefono,
+          datos.direccion = res.rows.item(0).direccion,
+          datos.foto = res.rows.item(0).foto
         }
         this.usuarios.next(datos as any); 
       })
@@ -293,7 +297,7 @@ export class DatabaseService {
       apellido: '',
       correo: '',
       telefono: '',
-      direccion: ''
+      direccion: '',
     }];
     return this.db.executeSql('select * from usuario where idusuario = ?', [id])
     .then((res) => {

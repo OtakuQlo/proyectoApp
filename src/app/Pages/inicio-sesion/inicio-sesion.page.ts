@@ -4,7 +4,6 @@ import { validateRut } from '@fdograph/rut-utilities';
 import { MenuController, ToastController } from '@ionic/angular';
 import { CamaraService } from 'src/app/services/camara.service';
 import { DatabaseService } from 'src/app/services/database.service';
-import { Pregunta } from 'src/app/services/pregunta';
 
 @Component({
   selector: 'app-inicio-sesion',
@@ -18,13 +17,12 @@ export class InicioSesionPage implements OnInit {
     nombre: ''
   }];
 
-  constructor(private router: Router, private toastController: ToastController, private menu: MenuController, private db: DatabaseService, private camara: CamaraService) {
+  constructor(private router: Router, private menu: MenuController, private db: DatabaseService, private camara: CamaraService) {
     this.db.pasarPregunta();
   }
 
   ngOnInit() {
     this.menu.enable(false);
-
     this.db.bdState().subscribe(
       res => {
         if (res) {
@@ -65,6 +63,7 @@ export class InicioSesionPage implements OnInit {
   
 
   // variables label
+  labelFoto: string= '';
   labelNombre: string = '';
   labelApellido: string = '';
   labelRut: string = '';
@@ -78,8 +77,9 @@ export class InicioSesionPage implements OnInit {
   labelDireccion: string = '';
 
 
-  tomarfoto(){
-    this.foto = this.camara.takePicture();
+  async tomarfoto(){
+    await this.camara.takePicture();
+    this.foto = this.camara.foto;
   }
 
 
@@ -88,9 +88,6 @@ export class InicioSesionPage implements OnInit {
   irPaginaPrincipal() {
     // la bandera si está en verdadero permite que se envien los datos en caso contrario no lo permite
     let bandera = true;
-
-
-    
 
     // validacion nombre
     if (!this.regexname.test(this.nombre)) {
@@ -192,9 +189,8 @@ export class InicioSesionPage implements OnInit {
 
 
     if (bandera && this.estadoRut) {
-      this.db.crearUsuario(this.nombre,this.apellido, this.rut,this.correo,this.contra,this.respuesta,this.telefono,this.direccion,"aaa",this.pregunta,2);
+      this.db.crearUsuario(this.nombre,this.apellido, this.rut,this.correo,this.contra,this.respuesta,this.telefono,this.direccion,this.foto,this.pregunta,2);
       this.router.navigate(['/home']);
-      
     }
 
 

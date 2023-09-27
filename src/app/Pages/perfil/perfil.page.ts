@@ -11,7 +11,7 @@ import { DatabaseService } from 'src/app/services/database.service';
 export class PerfilPage implements OnInit {
   nombre: any;
   apellido: any;
-  imagen: string = "https://ionicframework.com/docs/img/demos/avatar.svg";
+  imagen: any;
   rut: string = "";
   correo: any;
   direccion: string = "";
@@ -25,7 +25,8 @@ export class PerfilPage implements OnInit {
       apellido: '',
       correo: '',
       telefono: '',
-      direccion: ''
+      direccion: '',
+      foto: ''
   }];
 
   constructor(private router: Router,private activedRouter: ActivatedRoute,private menu: MenuController, private db:DatabaseService) { 
@@ -47,6 +48,7 @@ export class PerfilPage implements OnInit {
           this.correo = this.datosnuevos.correo;
           this.apellido = this.datosnuevos.apellido;
           this.nombre = this.datosnuevos.nombre;
+          this.imagen = this.datosnuevos.foto;
         })
 
       }

@@ -12,7 +12,7 @@
     <ion-row class="ion-justify-content-center">
       <ion-col size="3">
         <ion-avatar>
-          <img alt="persona" src="{{imagen}}"/>
+          <img alt="persona" [src]="imagen"/>
         </ion-avatar>
       </ion-col>
     </ion-row>
@@ -42,11 +42,8 @@
               </p>
             </div>
           </ion-card-content>
-        </ion-card>
-      
+        </ion-card>    
       </ion-col>
-      
-
     </ion-row>
     <p *ngIf="rol=='2'">
       <ion-row class="ion-text-center">
