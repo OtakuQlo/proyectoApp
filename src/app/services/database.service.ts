@@ -28,10 +28,10 @@ export class DatabaseService {
   registroUsuario1: string = "INSERT or IGNORE INTO usuario(idusuario,nombre,apellido,rut,correo,clave,respuesta,telefono,direccion,foto,idpregunta,idrol) VALUES (1,'Miguel','Pérez','21294525-0','correoreal@duocuc.cl','!Miguel123','AUTOMATICA','87653452','Casa','',(SELECT idpregunta from pregunta WHERE idpregunta=1), (SELECT idrol from rol WHERE idrol=2));";
   registroUsuario2: string = "INSERT or IGNORE INTO usuario(idusuario,nombre,apellido,rut,correo,clave,respuesta,telefono,direccion,foto,idpregunta,idrol) VALUES (2,'Gabriel','Maneiro','21921084-1','ga.maneiro@duocuc.cl','!Miguel123','AUTOMATICA','96842823','Casa2','',(SELECT idpregunta from pregunta WHERE idpregunta=2), (SELECT idrol from rol WHERE idrol=1));";
 
-  registroPublicacion1: string = "INSERT or IGNORE INTO publicacion(idpublicacion,modelo,marca,precio,color,transmision,descripcion,estado,kilometraje,cantidaddeuso,foto,idusuario) VALUES (1,UPPER('2023 Silverado 3.0TD High Country Auto DC 4WD'),UPPER('Chevrolet'),52000000,'gris','Automatica','asd', 0 ,0,0,'',(SELECT idusuario from usuario WHERE idusuario=1));";
-  registroPublicacion2: string = "INSERT or IGNORE INTO publicacion(idpublicacion,modelo,marca,precio,color,transmision,descripcion,estado,kilometraje,cantidaddeuso,foto,idusuario) VALUES (2,UPPER('2010 Q5 2.0T FSI STRONIC QUATTRO'),UPPER('Audi'),11500000,'blanco','Automatica','asd', 0 ,159567,2,'',(SELECT idusuario from usuario WHERE idusuario=1));";
-  registroPublicacion3: string = "INSERT or IGNORE INTO publicacion(idpublicacion,modelo,marca,precio,color,transmision,descripcion,estado,kilometraje,cantidaddeuso,foto,idusuario) VALUES (3,UPPER('2009 147 2.0 TS 150 CV Sport Selespeed'),UPPER('Alfa Romeo'),10900000,'negro','Automatica','asd', 0 ,90000,3,'',(SELECT idusuario from usuario WHERE idusuario=1));";
-  registroPublicacion4: string = "INSERT or IGNORE INTO publicacion(idpublicacion,modelo,marca,precio,color,transmision,descripcion,estado,kilometraje,cantidaddeuso,foto,idusuario) VALUES (4,UPPER('EVOLTIS TOURING GARDX'),UPPER('Subaru'),39490000,'gris','Automatica','asd', 0 ,0,0,'',(SELECT idusuario from usuario WHERE idusuario=1));";
+  registroPublicacion1: string = "INSERT or IGNORE INTO publicacion(idpublicacion,modelo,marca,precio,color,transmision,descripcion,estado,kilometraje,cantidaddeuso,foto,idusuario) VALUES (1,UPPER('2023 Silverado 3.0TD High Country Auto DC 4WD'),UPPER('Chevrolet'),52000000,'gris','Automatica','asd',0,0,0,'',(SELECT idusuario from usuario WHERE idusuario=1));";
+  registroPublicacion2: string = "INSERT or IGNORE INTO publicacion(idpublicacion,modelo,marca,precio,color,transmision,descripcion,estado,kilometraje,cantidaddeuso,foto,idusuario) VALUES (2,UPPER('2010 Q5 2.0T FSI STRONIC QUATTRO'),UPPER('Audi'),11500000,'blanco','Automatica','asd',0,159567,2,'',(SELECT idusuario from usuario WHERE idusuario=1));";
+  registroPublicacion3: string = "INSERT or IGNORE INTO publicacion(idpublicacion,modelo,marca,precio,color,transmision,descripcion,estado,kilometraje,cantidaddeuso,foto,idusuario) VALUES (3,UPPER('2009 147 2.0 TS 150 CV Sport Selespeed'),UPPER('Alfa Romeo'),10900000,'negro','Automatica','asd',0,90000,3,'',(SELECT idusuario from usuario WHERE idusuario=1));";
+  registroPublicacion4: string = "INSERT or IGNORE INTO publicacion(idpublicacion,modelo,marca,precio,color,transmision,descripcion,estado,kilometraje,cantidaddeuso,foto,idusuario) VALUES (4,UPPER('EVOLTIS TOURING GARDX'),UPPER('Subaru'),39490000,'gris','Automatica','asd',0,0,0,'',(SELECT idusuario from usuario WHERE idusuario=1));";
   
   registroPregunta1: string = "INSERT or IGNORE INTO pregunta(idpregunta,nombre) VALUES (1,'¿Cómo se llamaba tu primera mascota?');";
   registroPregunta2: string = "INSERT or IGNORE INTO pregunta(idpregunta,nombre) VALUES (2,'¿Cómo se llama el hospital donde naciste?');";
@@ -138,7 +138,35 @@ export class DatabaseService {
     await toast.present();
   }
 
+  async presentConfirmationMessage(header: string, message: string, action: string) {
+    const alert = await this.alertController.create({
+      header: header,
+      message: message,
+      buttons: [
+        {
+          text: 'Cancelar',
+          role: 'cancel',
+          cssClass: 'secondary',
+        },
+        {
+          text: action,
+          handler: () => {
+            if (action === 'Aceptar') {
 
+            } else if (action === 'Rechazar') {
+              // Lógica para rechazar aquí
+            } else if (action === 'Eliminar') {
+              // Lógica para eliminar aquí
+            } else if (action === 'Eliminar Reporte') {
+              // Lógica para eliminar reporte aquí
+            }
+          },
+        },
+      ],
+    });
+  
+    await alert.present();
+  }
 
   //Usuarios
 
@@ -325,6 +353,10 @@ export class DatabaseService {
     }).catch(e =>{
       this.presentAlert("","Error buscar" + e);
     })
+  }
+
+  actualizarEstadoPublicacion(idpublicacion: string, nuevoEstado: number) {
+    return this.db.executeSql('UPDATE publicacion SET estado = ? WHERE idpublicacion = ?', [nuevoEstado, idpublicacion]);
   }
 
 
