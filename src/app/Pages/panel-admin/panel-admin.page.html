@@ -10,7 +10,7 @@
       <ion-label>Peticiones de Usuarios</ion-label>
     </ion-list-header>
     
-    <ion-item *ngFor="let x of arregloAutos"  class="request-item">
+    <ion-item *ngFor="let x of solicitudAutos"  class="request-item">
       <ion-label>{{x.modelo}}</ion-label>
       <ion-buttons slot="end">
         <ion-button (click)="irPaginaProducto1(x)" (click)="pasarPersona(x.idusuario)" color="warning">Ver</ion-button>
@@ -23,7 +23,7 @@
       <ion-label>Reportes de Usuarios</ion-label>
     </ion-list-header>
     
-    <ion-item *ngFor="let x of arregloAutos" class="report-item">
+    <ion-item *ngFor="let x of reporteAutos" class="report-item">
       <ion-label>{{x.modelo}}</ion-label>
       <ion-buttons slot="end">
         <ion-button (click)="irPaginaProducto(x)" (click)="pasarPersona(x.idusuario)" color="warning">Ver</ion-button>

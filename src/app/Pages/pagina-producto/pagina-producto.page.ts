@@ -133,7 +133,28 @@ export class PaginaProductoPage implements OnInit {
     const header = 'Confirmación';
     const message = '¿Estás seguro de que deseas eliminar este producto?';
 
-    this.db.presentConfirmationMessage(header, message, 'Eliminar');
+    const alert = await this.alertController.create({
+      header: header,
+      message: message,
+      buttons: [
+        {
+          text: 'Cancelar',
+          role: 'cancel',
+          cssClass: 'secondary',
+        },
+        {
+          text: 'Eliminar',
+          handler: async () => {
+            const idPublicacion = this.idpublicacion;
+            await this.db.eliminarProducto(idPublicacion);
+            this.router.navigate(['/pagina-principal']);
+            this.db.presentToast('bottom', 'Producto eliminado con éxito');
+          },
+        },
+      ],
+    });
+
+    await alert.present();
   }
 
   async presentDeleteReportConfirmation() {

@@ -10,7 +10,7 @@ import { DatabaseService } from 'src/app/services/database.service';
 })
 export class PanelAdminPage implements OnInit {
 
-  arregloAutos: any = [{
+  solicitudAutos: any = [{
     idpublicacion: '',
     modelo: '',
     marca: '',
@@ -25,11 +25,20 @@ export class PanelAdminPage implements OnInit {
     idusuario: ''
   }];
 
-  userReports = [
-    { productName: 'Reporte de Producto 1' },
-    { productName: 'Reporte de Producto 2' },
-    // ... Más datos de ejemplo
-  ];
+  reporteAutos: any = [{
+    idpublicacion: '',
+    modelo: '',
+    marca: '',
+    precio: '',
+    color: '',
+    transmision: '',
+    descripcion: '',
+    estado: '',
+    kilometraje: '',
+    cantidaddeuso: '',
+    foto: '',
+    idusuario: ''
+  }];
 
   constructor(private router: Router, private menu: MenuController,private db: DatabaseService) {
     this.db.buscarPublicacion();
@@ -40,7 +49,8 @@ export class PanelAdminPage implements OnInit {
     this.db.bdState().subscribe(res=>{
       if(res){
         this.db.fetchPublicacion().subscribe(datos=>{
-          this.arregloAutos = datos;
+          this.solicitudAutos = datos.filter(x => Number(x.estado) === 0);
+          this.reporteAutos = datos.filter(x => Number(x.estado) === 2);
           this.db.presentAlert("","Datos agregados");
         })
 

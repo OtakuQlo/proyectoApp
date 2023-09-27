@@ -366,6 +366,10 @@ export class DatabaseService {
     return this.db.executeSql('UPDATE publicacion SET estado = ? WHERE idpublicacion = ?', [nuevoEstado, idpublicacion]);
   }
 
+  eliminarProducto(idpublicacion: string) {
+    return this.db.executeSql('DELETE FROM publicacion WHERE idpublicacion = ?', [idpublicacion])
+  }
+
 
   
   //Buscar autos del usuario
