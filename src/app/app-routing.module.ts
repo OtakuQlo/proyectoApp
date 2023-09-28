@@ -32,20 +32,12 @@ const routes: Routes = [
     loadChildren: () => import('./Pages/modificar-perfil/modificar-perfil.module').then(m => m.ModificarPerfilPageModule)
   },
   {
-    path: 'perfil-admin',
-    loadChildren: () => import('./Pages/perfil-admin/perfil-admin.module').then( m => m.PerfilAdminPageModule)
-  },
-  {
     path: 'recu-contra',
     loadChildren: () => import('./Pages/recu-contra/recu-contra.module').then(m => m.RecuContraPageModule)
   },
   {
     path: 'cambiar-contra',
     loadChildren: () => import('./Pages/cambiar-contra/cambiar-contra.module').then(m => m.CambiarContraPageModule)
-  },
-  {
-    path: 'modificar-perfil-admin',
-    loadChildren: () => import('./Pages/modificar-perfil-admin/modificar-perfil-admin.module').then( m => m.ModificarPerfilAdminPageModule)
   },
   {
     path: 'panel-admin',

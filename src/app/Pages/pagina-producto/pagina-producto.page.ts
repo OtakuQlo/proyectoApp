@@ -147,6 +147,7 @@ export class PaginaProductoPage implements OnInit {
           handler: async () => {
             const idPublicacion = this.idpublicacion;
             await this.db.eliminarProducto(idPublicacion);
+            await this.db.buscarPublicacion();
             this.router.navigate(['/pagina-principal']);
             this.db.presentToast('bottom', 'Producto eliminado con éxito');
           },

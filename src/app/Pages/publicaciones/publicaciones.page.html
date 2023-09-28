@@ -20,7 +20,7 @@
               <p>{{x.marca | uppercase}} {{x.modelo | uppercase}}</p>
             </div>
             <ion-button fill="outline" shape="round" (click)="irModificarAuto()">Modificar</ion-button>
-            <ion-button color="danger" fill="outline" shape="round" (click)="eliminarAuto()">Eliminar</ion-button>
+            <ion-button color="danger" fill="outline" shape="round" (click)="eliminarAuto(x.idpublicacion)">Eliminar</ion-button>
           </ion-card-content>
         </ion-card>
       </ion-col>

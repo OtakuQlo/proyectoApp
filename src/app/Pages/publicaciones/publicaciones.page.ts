@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NavigationExtras,Router } from '@angular/router';
+import { AlertController } from '@ionic/angular';
 import { DatabaseService } from 'src/app/services/database.service';
 
 @Component({
@@ -27,7 +28,7 @@ export class PublicacionesPage implements OnInit {
 
   iduser = localStorage.getItem("idper")
 
-  constructor(private router:Router, private db: DatabaseService) {
+  constructor(private router:Router, private db: DatabaseService,  private alertController: AlertController) {
     this.db.publicacionUser(this.iduser);
    }
   
@@ -49,7 +50,30 @@ export class PublicacionesPage implements OnInit {
 
   }
 
-  eliminarAuto(){
-
+  async eliminarAuto(idpublicacion: string) {
+    const header = 'Confirmación';
+    const message = '¿Estás seguro de que deseas eliminar esta publicación?';
+  
+    const alert = await this.alertController.create({
+      header: header,
+      message: message,
+      buttons: [
+        {
+          text: 'Cancelar',
+          role: 'cancel',
+          cssClass: 'secondary',
+        },
+        {
+          text: 'Eliminar',
+          handler: async () => {
+            await this.db.eliminarProducto(idpublicacion);
+            await this.db.publicacionUser(this.iduser);
+            this.db.presentToast('bottom', 'Publicación eliminada con éxito');
+          },
+        },
+      ],
+    });
+  
+    await alert.present();
   }
 }
