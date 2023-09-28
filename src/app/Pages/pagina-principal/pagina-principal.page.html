@@ -17,62 +17,17 @@
         <ion-card (click)="play(x)" (click)="pasarPersona(x.idusuario)">
           <ion-card-header>
             <ion-img
-              src="https://acroadtrip.blob.core.windows.net/catalogo-imagenes/m/RT_V_6b8d809e846542f9a8b4ecf1114fdd33.jpg"
+              [src]="x.foto"
               alt="No Image"></ion-img>
           </ion-card-header>
           <ion-card-content>
             <div class="ion-text-center">
-              <p>{{x.modelo}}</p>
+              <p>{{x.modelo | uppercase}}</p>
               <p>{{x.marca | uppercase}}</p>
               <p>{{x.precio | currency : 'CLP' : '$'}}</p>
             </div>
           </ion-card-content>
         </ion-card>
-      </ion-col>
-    </ion-row>
-    <ion-row class="ion-text-center">
-      <ion-col>
-        <swiper-container>
-          <swiper-slide>
-            <ion-row class="ion-text-center ion-justify-content-center">
-              <ion-col size="2">
-                <img src="https://www.fierrosclasicos.com/wp-content/uploads/2015/03/2.png" alt="Logo Alfa Romeo">
-              </ion-col>
-              <ion-col size="2" offset="1">
-                <img src="https://www.pruebaderuta.com/wp-content/uploads/2015/11/Audi_logo.png" alt="Logo Alfa Romeo"
-                  style="margin-top: 15px;">
-              </ion-col>
-              <ion-col size="2" offset="1">
-                <img src="https://i.pinimg.com/originals/76/68/30/766830f3dc2cde506362d8a7ce5dcb19.png"
-                  alt="Logo Alfa Romeo">
-              </ion-col>
-              <ion-col size="2" offset="1">
-                <img
-                  src="https://arc-anglerfish-arc2-prod-copesa.s3.amazonaws.com/public/3DJA6Y4D4FFFRG44AEH345HFJE.png"
-                  alt="Logo Alfa Romeo" style="margin-top: 15px;">
-              </ion-col>
-            </ion-row>
-          </swiper-slide>
-          <swiper-slide>
-            <ion-row class="ion-text-center ion-justify-content-center">
-              <ion-col size="2">
-                <img src="https://assets.stickpng.com/images/580b57fcd9996e24bc43c46e.png" alt="Logo Alfa Romeo">
-              </ion-col>
-              <ion-col size="2" offset="1">
-                <img src="https://memolira.com/wp-content/uploads/2016/07/KIA-logo-e1596055381793.png"
-                  alt="Logo Alfa Romeo" style="margin-top: 18px;">
-              </ion-col>
-              <ion-col size="2" offset="1">
-                <img src="https://www.purosautos.com/wp-content/uploads/2017/11/toyota-.png" alt="Logo Alfa Romeo"
-                  style="margin-top: 7px;">
-              </ion-col>
-              <ion-col size="2" offset="1">
-                <img src="https://repuestos.dercocenter.cl/datos/marcas-autos/marca-auto-suzuki.png"
-                  alt="Logo Alfa Romeo">
-              </ion-col>
-            </ion-row>
-          </swiper-slide>
-        </swiper-container>
       </ion-col>
     </ion-row>
     <ion-row class="ion-justify-content-center">

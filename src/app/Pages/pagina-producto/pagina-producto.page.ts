@@ -26,7 +26,7 @@ export class PaginaProductoPage implements OnInit {
   estado: string= '';
   kilometraje!: number;
   cantidaddeuso!: number;
-  foto: string= '';
+  foto: any;
   idusuario!: any;
 
 

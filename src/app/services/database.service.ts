@@ -44,6 +44,7 @@ export class DatabaseService {
   vendedores = new BehaviorSubject([]);
   mispublicaciones = new BehaviorSubject([]);
   ruts = new BehaviorSubject([]);
+  publiUser = new BehaviorSubject([]);
 
 
 
@@ -75,10 +76,14 @@ export class DatabaseService {
   fetchVendedores(): Observable<any[]>{
     return this.vendedores.asObservable();
   }
+
   fetchRut(): Observable<any[]>{
     return this.ruts.asObservable();
   }
 
+  fetchPubliUser(): Observable<any[]>{
+    return this.publiUser.asObservable();
+  }
   
 
 
@@ -319,7 +324,6 @@ export class DatabaseService {
         datos.apellido = res.rows.item(0).apellido,
         datos.direccion = res.rows.item(0).direccion,
         datos.telefono = res.rows.item(0).telefono
-        this.presentAlert("","se pasaron los datos del manu");
       }
       this.vendedores.next(datos as any);
     })
@@ -347,6 +351,38 @@ export class DatabaseService {
 
   //Publicaciones
 
+  //Para obtener las publicaciones del usuario logeado
+  publicacionUser(id:any){
+    return this.db.executeSql('SELECT * FROM publicacion WHERE idusuario = ?',[id]).then(res=>{
+      let publiUser: Publicacion[] = [];
+      if(res.rows.length > 0){
+        for(var i=0; i < res.rows.length; i++){
+          publiUser.push({
+            idpublicacion: res.rows.item(i).idpublicacion,
+            modelo: res.rows.item(i).modelo,
+            marca : res.rows.item(i).marca,
+            precio : res.rows.item(i).precio,
+            color : res.rows.item(i).color,
+            transmision : res.rows.item(i).transmision,
+            descripcion : res.rows.item(i).descripcion,
+            estado : res.rows.item(i).estado,
+            kilometraje : res.rows.item(i).kilometraje,
+            cantidaddeuso : res.rows.item(i).cantidaddeuso,
+            foto : res.rows.item(i).foto,
+            idusuario : res.rows.item(i).idusuario
+          })
+
+        }
+      }
+      else{
+        this.presentToast('bottom','¡No existen publicaciones aun sube una!');
+      }
+      this.publiUser.next(publiUser as any);
+    }).catch(e =>{
+      this.presentAlert("","Ha ocurrido un error en la base de datos" + e);
+    })
+  }
+
   //Cuando ingresamos a la pagina principal esta funcion permite ver los autos
   buscarPublicacion(){
     return this.db.executeSql('SELECT * FROM publicacion',[]).then(res=>{
@@ -372,7 +408,7 @@ export class DatabaseService {
       }
       this.observer.next(publi as any);
     }).catch(e =>{
-      this.presentAlert("","Error buscar" + e);
+      this.presentAlert("","Error en la base de datos (Publicaciones)" + e);
     })
   }
 
@@ -409,7 +445,7 @@ export class DatabaseService {
       }
       this.observer.next(publicacion as any);
     }).catch(e => {
-      this.presentAlert("","Error publicacion" + e);
+      this.presentAlert("","Error al buscar la publicacion" + e);
     })
   }
 

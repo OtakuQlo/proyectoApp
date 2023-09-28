@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import {  ToastController } from '@ionic/angular';
+import { CamaraService } from 'src/app/services/camara.service';
 import { DatabaseService } from 'src/app/services/database.service';
 
 
@@ -13,8 +14,6 @@ import { DatabaseService } from 'src/app/services/database.service';
 
 export class AnadirProductoPage implements OnInit {
   
-  constructor(private router:Router,private toastController: ToastController, private db: DatabaseService) { }
-
   modeloV: string = "";
   precioV : string = "";
   colorV: string ="";
@@ -23,6 +22,7 @@ export class AnadirProductoPage implements OnInit {
   descrpV: string = "";
   kilometrajeV : string = ""; 
   transmisionV: string ="";
+  foto: any = './../assets/icon/boton-agregar.png';
 
   regexname: RegExp = /^[a-zA-ZÀ-ÿ\u00f1\u00d1]+(\s*[a-zA-ZÀ-ÿ\u00f1\u00d1]*)*[a-zA-ZÀ-ÿ\u00f1\u00d1]{1,100}$/;
 
@@ -34,18 +34,27 @@ export class AnadirProductoPage implements OnInit {
   labelTrans: string = '';
   labelColor: string = '';
   labelMarca: string = '';
+  labelFoto: string= '';
 
   arrTrans : string[] = ["Automatica", "Semiautomatica", "Manual"];
   arrMarca : string[] = ["Chevrolet","Audi","Alfa Romeo", "Subaru"];
   arrColor : string[] = ["Rojo","Azul","Gris", "Blanco", "Negro"];
 
+  constructor(private router:Router,private db: DatabaseService, private camara: CamaraService) { }
+
 
   ngOnInit() {
+
+  }
+
+  async tomarfoto(){
+    await this.camara.takePicture();
+    this.foto = this.camara.foto;
+    this.labelFoto = '';
   }
 
   irPaginaPrincipal(){
     let pass = 0;
-    
     console.log(pass)
 
     if(!this.regexname.test(this.modeloV)){
@@ -53,6 +62,13 @@ export class AnadirProductoPage implements OnInit {
       this.labelModelo = 'El modelo debe contener como minimo 2 caracteres no especiales.';
     }else{
       this.labelModelo = '';
+    }
+    
+    if(!this.camara.foto){
+      pass = 1;
+      this.labelFoto = 'Necesita agregar unicamente una foto a la publicacion'
+    }else{
+      this.labelFoto = '';
     }
 
     if(this.descrpV == "" || this.descrpV.length < 10){
@@ -111,23 +127,12 @@ export class AnadirProductoPage implements OnInit {
 
     if(pass == 0){
       this.agregarPublicacion();
-      this.presentToast('bottom');
     }
   };
-
-  async presentToast(position: 'top' | 'middle' | 'bottom') {
-    const toast = await this.toastController.create({
-      message: 'Tu auto ha sido publicado',
-      duration: 1500,
-      position: position,
-    });
-
-    await toast.present();
-  }
   
   agregarPublicacion(){
-    this.db.crearPublicacion(this.modeloV, this.marcaV, this.precioV, this.colorV, this.transmisionV, this.descrpV, 0, this.kilometrajeV, this.anosV, "Nada", 1);
-    this.db.presentAlert("","Auto añadido");
+    this.db.crearPublicacion(this.modeloV, this.marcaV, this.precioV, this.colorV, this.transmisionV, this.descrpV, 0, this.kilometrajeV, this.anosV, this.foto, 1);
+    this.db.presentToast('bottom','Publicacion creada correctamente');
     this.router.navigate(['/pagina-principal'])
   }
 

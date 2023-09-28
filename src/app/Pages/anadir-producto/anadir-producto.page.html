@@ -13,25 +13,15 @@
   <ion-grid>
     <ion-row>
       <ion-col size="12">
-        <ion-row>
-          <swiper-container style="width: 275px;">
-            <swiper-slide><ion-img
-                src="https://acroadtrip.blob.core.windows.net/catalogo-imagenes/m/RT_V_6b8d809e846542f9a8b4ecf1114fdd33.jpg"
-                alt="No image"></ion-img>
-            </swiper-slide>
-            <swiper-slide><ion-img
-                src="https://acroadtrip.blob.core.windows.net/catalogo-imagenes/m/RT_V_6b8d809e846542f9a8b4ecf1114fdd33.jpg"
-                alt="No image"></ion-img>
-            </swiper-slide>
-            <swiper-slide><ion-img
-                src="https://acroadtrip.blob.core.windows.net/catalogo-imagenes/m/RT_V_6b8d809e846542f9a8b4ecf1114fdd33.jpg"
-                alt="No image"></ion-img>
-            </swiper-slide>
-          </swiper-container>
+        <ion-row class="ion-justify-content-center">
+          <div>
+            <img [src]="foto" alt="No image" style="width: 300px; height: 300px;"/>
+          </div>
         </ion-row>
         <ion-row class="ion-justify-content-center">
           <ion-button type="file" style="font-size: 13px; width: 150px;" fill="outline" id="botonAgregarImg"
-            shape="round">Agregar Imagen</ion-button>
+            shape="round" (click)="tomarfoto()">Agregar Imagen</ion-button>
+            <ion-label color="danger" style="font-size: 11px;">{{labelFoto}}</ion-label>
         </ion-row>
       </ion-col>
     </ion-row>
