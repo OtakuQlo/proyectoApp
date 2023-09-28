@@ -24,6 +24,10 @@ export class AppComponent {
     telefono: '',
     direccion: ''
   }];
+  ionViewWillEnter() {
+    
+    this.rol = localStorage.getItem("rol");
+  }
 
   constructor( private router: Router,private db: DatabaseService) {}
 
@@ -39,6 +43,7 @@ export class AppComponent {
           this.rol = this.datosnuevos.rol;
           this.apellido = this.datosnuevos.apellido;
           localStorage.setItem("idper",this.datosnuevos.idper);
+          localStorage.setItem("rol",this.datosnuevos.rol);
         })
       }
     })
@@ -49,5 +54,13 @@ export class AppComponent {
     localStorage.removeItem("rol");
     localStorage.removeItem("idper");
    
+  }
+
+  irCrearAdmin(){
+    this.router.navigate(['/crear-admin']);
+  }
+
+  irPanelAdmin(){
+    this.router.navigate(['/panel-admin']);
   }
 }

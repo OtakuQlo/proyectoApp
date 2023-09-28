@@ -1,6 +1,6 @@
 <ion-app>
   <ion-menu-toggle>
-    <ion-menu contentId="menu">
+    <ion-menu contentId="menu" *ngIf="rol == 2">
       <ion-content>
         <ion-header>
           <ion-toolbar>
@@ -34,6 +34,37 @@
       </ion-footer>
   
     </ion-menu>
+
+
+
+    <ion-menu contentId="menu" *ngIf="rol == 1">
+      <ion-content>
+        <ion-header>
+          <ion-toolbar>
+            <ion-item [routerLink]="['/perfil']">
+              <ion-avatar slot="start" style="height: 15%; width: 15%;">
+                <img alt="Silhouette of a person's head" src="https://ionicframework.com/docs/img/demos/avatar.svg" />
+              </ion-avatar>
+              <ion-label><h2>{{nombre}} {{apellido}} {{id}}</h2></ion-label>
+            </ion-item>
+          </ion-toolbar>
+        </ion-header>
+        <ion-item [routerLink]="['/pagina-principal']">
+          <ion-img alt="Icono de Inicio" src="./../assets/icon/hogar.png" style="height: 25px; width: 30px;"></ion-img>
+          <ion-label style="font-size: 15px; margin-left: 5px;">Inicio</ion-label>
+        </ion-item>
+        <ion-item (click) = "irPanelAdmin()">
+          <ion-img alt="Icono de Inicio" src="./../assets/icon/etiqueta-de-precio.png" style="height: 30px; width: 30px;"></ion-img>
+          <ion-label style="font-size: 15px; margin-left: 5px;">Peticiones</ion-label>
+        </ion-item>
+      </ion-content>
+      <ion-footer>
+        <ion-item  [routerLink]="['/home']">
+          <ion-img alt="Icono de Inicio" src="./../assets/icon/cerrar-sesion.png" style="height: 25px; width: 30px;" ></ion-img>
+          <ion-label style="font-size: 15px; margin-left: 5px;">Cerrar sesión</ion-label>
+        </ion-item>
+      </ion-footer>
+      </ion-menu>
   
   </ion-menu-toggle>
   
