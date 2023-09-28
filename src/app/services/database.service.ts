@@ -351,6 +351,24 @@ export class DatabaseService {
 
   //Publicaciones
 
+  //Obtener reporte
+  obtenerReportes(){
+    return this.db.executeSql('SELECT * FROM reporte WHERE estado = 2',[]).then(res=>{
+
+    })
+  }
+
+  //Reportes de publicación
+  reportarPublicacion(idpublicacion:any, tipo:any, descripcion:any){
+    return this.db.executeSql('INSERT INTO reporte (tipo, descripcion, idpublicacion) VALUES(?, ? , ?);',[tipo, descripcion, idpublicacion])
+    .then(res =>{
+      this.db.executeSql('UPDATE publicacion SET estado = 2 WHERE idpublicacion = ?',[idpublicacion])
+      this.obtenerReportes();  
+    }).catch(e =>{
+      this.presentAlert("",'Error al generar el reporte intente nuevamente más tarde' + JSON.stringify(e))
+    })
+  }
+
   //Para obtener las publicaciones del usuario logeado
   publicacionUser(id:any){
     return this.db.executeSql('SELECT * FROM publicacion WHERE idusuario = ?',[id]).then(res=>{

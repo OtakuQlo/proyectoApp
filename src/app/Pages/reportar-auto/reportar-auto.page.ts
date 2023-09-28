@@ -7,7 +7,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ReportarAutoPage implements OnInit {
 
-  tipoReporte: number = 0;
+  tipoReporte: string= '';
+
   constructor() { }
 
   ngOnInit() {

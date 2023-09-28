@@ -24,9 +24,9 @@
               <h2>{{precio | currency : 'CLP' : '$'}}  </h2>
             </ion-row>
             <div>
-              <ion-row>Vendedor: {{nombre| uppercase}} </ion-row>
+              <ion-row>VENDEDOR: {{nombre| uppercase}} </ion-row>
               <ion-row>{{direccion | uppercase}} </ion-row>
-              <ion-row>Numero de contacto : +569{{telefono}}</ion-row>
+              <ion-row>CONTACTO : +569{{telefono}}</ion-row>
             </div>
           </ion-card-content>
         </ion-card>
@@ -39,9 +39,9 @@
             </ion-row>
 
             <div>
-              <ion-row>Color: {{color | uppercase }}</ion-row>
-              <ion-row>Marca: {{marca | uppercase }}</ion-row>
-              <ion-row>Transmisión: {{transmision | uppercase }}</ion-row>
+              <ion-row>COLOR: {{color | uppercase }}</ion-row>
+              <ion-row>MARCA: {{marca | uppercase }}</ion-row>
+              <ion-row>TRANSMISIÓN: {{transmision | uppercase }}</ion-row>
             </div>
           </ion-card-content>
         </ion-card>
@@ -63,7 +63,7 @@
 
       <ion-col *ngIf="rol == '2'" size="4">
         <ion-button color="danger" style="font-size: 12px; width: 105px;" fill="outline" id="modal-trigger"
-          shape="round">Reportar</ion-button>
+          shape="round" (Click)="reportarAuto()">Reportar</ion-button>
       </ion-col>
 
       <ion-row *ngIf="rol == '1' && verificador != 'solicitud'">

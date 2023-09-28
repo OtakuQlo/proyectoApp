@@ -86,7 +86,6 @@ export class PaginaProductoPage implements OnInit {
       state: {
         publicacion: this.idpublicacion
       }
-
     }
     this.router.navigate(['/reportar-auto'])
   }
