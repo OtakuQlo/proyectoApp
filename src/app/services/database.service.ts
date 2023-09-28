@@ -374,9 +374,6 @@ export class DatabaseService {
 
         }
       }
-      else{
-        this.presentToast('bottom','¡No existen publicaciones aun sube una!');
-      }
       this.publiUser.next(publiUser as any);
     }).catch(e =>{
       this.presentAlert("","Ha ocurrido un error en la base de datos" + e);
@@ -422,9 +419,9 @@ export class DatabaseService {
 
 
   
-  //Buscar autos del usuario
-  buscarAuto(id: any){
-    return this.db.executeSql('SELECT * FROM publicacion WHERE idpublicacion = ?',[id])
+  //Buscador de autos
+  buscarAuto(marca: any, modelo:any){
+    return this.db.executeSql('SELECT * FROM publicacion WHERE marca = ? OR modelo = ?',[marca, modelo])
     .then((res)=>{
       let publicacion: Publicacion[] = [];
       if(res.rows.length > 0){

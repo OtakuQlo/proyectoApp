@@ -45,7 +45,6 @@ export class PaginaPrincipalPage implements OnInit {
         //me subscribir al observable de la Tabla
         this.db.fetchPublicacion().subscribe(datos=>{
           this.arregloAutos = datos;
-          this.db.presentAlert("","Datos agregados");
         })
 
       }

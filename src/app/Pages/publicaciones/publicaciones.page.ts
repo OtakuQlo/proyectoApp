@@ -36,14 +36,13 @@ export class PublicacionesPage implements OnInit {
       if(res){
         this.db.fetchPubliUser().subscribe(datos =>{
           this.arregloAutos = datos;
-          this.db.presentAlert("","Datos encontrados");
         })
       }
     })
   }
 
   verMiPubli(){
-    
+
   }
 
   irModificarAuto(){
