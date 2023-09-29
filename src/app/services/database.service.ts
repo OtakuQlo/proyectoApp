@@ -59,6 +59,7 @@ export class DatabaseService {
   publiUser = new BehaviorSubject([]);
   preguntas = new BehaviorSubject([]);
   pass = new BehaviorSubject([]);
+  datosCambioPass = new BehaviorSubject([]);
 
   //observable para la BD
   private isDBReady: BehaviorSubject<boolean> = new BehaviorSubject(false);
@@ -102,6 +103,9 @@ export class DatabaseService {
   }
   fetchpass(): Observable<any[]> {
     return this.pass.asObservable();
+  }
+  fetchDatosPass(): Observable<any[]> {
+    return this.datosCambioPass.asObservable();
   }
 
   crearDB() {
@@ -455,6 +459,23 @@ export class DatabaseService {
       .catch((e) => {
         this.presentAlert('', 'error pasar datos preguntas y resp');
       });
+  }
+
+  pasarDatosPass(id: any) {
+    let datos: any = [
+      {
+        id: '',
+      },
+    ];
+    return this.db
+      .executeSql('select * from usuario where idusuario = ?', [id])
+      .then((res) => {
+        if (res.rows.length > 0) {
+          datos.id = res.rows.item(0).idusuario;
+        }
+        this.datosCambioPass.next(datos as any);
+      })
+      .catch((e) => JSON.stringify(e));
   }
 
   habilitarPass(id: any) {

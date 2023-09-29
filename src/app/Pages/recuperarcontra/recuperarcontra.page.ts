@@ -9,20 +9,13 @@ import { DatabaseService } from 'src/app/services/database.service';
   styleUrls: ['./recuperarcontra.page.scss'],
 })
 export class RecuperarcontraPage implements OnInit {
-  idper: string = '';
+  idper:any;
   constructor(
     private router: Router,
     private menu: MenuController,
     private db: DatabaseService,
     private activedRouter: ActivatedRoute
-  ) {
-    this.activedRouter.queryParams.subscribe((res) => {
-      if (this.router.getCurrentNavigation()?.extras.state) {
-        this.idper =
-          this.router.getCurrentNavigation()?.extras?.state?.['idper'];
-      }
-    });
-  }
+  ) {}
   // variables
   contra1: string = '';
   contra2: string = '';
@@ -31,12 +24,26 @@ export class RecuperarcontraPage implements OnInit {
   labelContra: string = '';
   labelContra2: string = '';
 
+  datosnuevos: any = [
+    {
+      id: '',
+    },
+  ];
   // regex
   regexpass: RegExp =
     /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%#*?^&])[A-Za-z\d@$!#%*^?&]{8,50}$/;
 
   ngOnInit() {
     this.menu.enable(false);
+
+    this.db.bdState().subscribe((res) => {
+      if (res) {
+        this.db.fetchDatosPass().subscribe((datos) => {
+          this.datosnuevos = datos;
+          this.idper = this.datosnuevos.id;
+        });
+      }
+    });
   }
   ngAfterViewInit() {
     this.menu.enable(false);
@@ -62,7 +69,7 @@ export class RecuperarcontraPage implements OnInit {
     if (bandera == true) {
       this.db.cambiarContra(this.contra1, this.idper);
       this.router.navigate(['/home']);
-      alert(this.idper);
+      
     }
   }
 }

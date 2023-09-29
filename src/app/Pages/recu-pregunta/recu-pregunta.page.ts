@@ -54,21 +54,13 @@ export class RecuPreguntaPage implements OnInit {
 
   irCambiarContra() {
     if (this.opcion == this.opcion1 && this.respuesta == this.respuesta2) {
-      let navigationExtras: NavigationExtras;
-      navigationExtras = {
-        state: {
-          idper: this.idper
-        },
-      };
-        
-      this.router.navigate(['/recuperarcontra', navigationExtras]);
+      this.db.pasarDatosPass(this.idper);
+      this.router.navigate(['/recuperarcontra']);
     } else {
       this.db.presentAlert(
         'Datos erroneos:',
         'Los datos ingresados no son correctos.'
       );
-      alert(this.idper)
     }
-
   }
 }
