@@ -31,12 +31,13 @@
             </ion-radio-group>
           </ion-card-content>
         </ion-card>
+        <ion-label color="danger" style="font-size: 11px;">{{labelReporte}}</ion-label>
         <ion-col class="textarea" size="10">
-          <ion-textarea label="Descripción" labelPlacement="stacked" [counter]="true" maxlength="500" helperText="Agregue una descripción a tu resporte" [autoGrow]="true"></ion-textarea>
+          <ion-textarea label="Descripción" [(ngModel)]="descripcion" labelPlacement="stacked" [counter]="true" maxlength="500" helperText="Agregue una descripción a tu resporte" [autoGrow]="true"></ion-textarea>
         </ion-col>
 
-        <ion-col size="7">
-          <ion-button fill="outline" id="boton" shape="round" class="botonreporte" >Enviar reporte</ion-button>
+        <ion-col size="6">
+          <ion-button fill="outline" id="boton" shape="round" class="botonreporte" (click)="reportar()">Enviar reporte</ion-button>
         </ion-col>
       
     </ion-row>

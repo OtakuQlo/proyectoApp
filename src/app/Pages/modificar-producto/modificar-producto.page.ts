@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { AlertController,ToastController } from '@ionic/angular';
-import { __param } from 'tslib';
+import { CamaraService } from 'src/app/services/camara.service';
+import { DatabaseService } from 'src/app/services/database.service';
+
 
 @Component({
   selector: 'app-modificar-producto',
@@ -10,64 +11,142 @@ import { __param } from 'tslib';
 })
 export class ModificarProductoPage implements OnInit {
 
-  modeloV: string = "";
-  precioV: number = 0;
-  colorV: string ="";
-  marcaV: string ="";
-  anosV: number= 0;
-  descrpV: string = "";
-  kilometrajeV: number = 0; 
-  transmisionV: string ="";
+  idpublicacion: string= "";
+  modelo: string = "";
+  precio : string = "";
+  color: string ="";
+  marca: string ="";
+  anos: string = "";
+  descrp: string = "";
+  kilometraje: string = ""; 
+  transmision: string ="";
+  foto: any = './../assets/icon/boton-agregar.png';
+  idusuario: string="";
+  estado: string="";
 
-  pass: number = 0;
+  regexname: RegExp = /^[a-zA-ZÀ-ÿ\u00f1\u00d1]+(\s*[a-zA-ZÀ-ÿ\u00f1\u00d1]*)*[a-zA-ZÀ-ÿ\u00f1\u00d1]{1,100}$/;
 
-  arrTrans : any[] = ["Automatica", "Semiautomatica", "Manual"];
+  labelModelo: string = '';
+  labelPrecio: string = '';
+  labelAnos: string = '';
+  labelDescrp: string = '';
+  labelKilometraje: string = '';
+  labelTrans: string = '';
+  labelColor: string = '';
+  labelMarca: string = '';
+  labelFoto: string= '';
 
-  auto: [string,number,string,string,number,string] = ["",0,"","",0,""]
+  arrTrans : string[] = ["Automatica", "Semiautomatica", "Manual"];
+  arrMarca : string[] = ["Chevrolet","Audi","Alfa Romeo", "Subaru"];
+  arrColor : string[] = ["Rojo","Azul","Gris", "Blanco", "Negro"];
 
-  constructor(private router:Router,private toastController: ToastController,private AlertController:AlertController,private activedRouter: ActivatedRoute) { 
-    this.activedRouter.queryParams.subscribe(param =>{
+  constructor(private router:Router,private db: DatabaseService, private camara: CamaraService, private activatedRouter: ActivatedRoute) { 
+    this.activatedRouter.queryParams.subscribe(param =>{
       if(this.router.getCurrentNavigation()?.extras.state){
-        this.auto = this.router.getCurrentNavigation()?.extras.state?.['auto'];
+        this.idpublicacion = this.router.getCurrentNavigation()?.extras?.state?.['idpubliE'];
+        this.modelo = this.router.getCurrentNavigation()?.extras?.state?.['modeloE'];
+        this.marca = this.router.getCurrentNavigation()?.extras?.state?.['marcaE'];
+        this.precio = this.router.getCurrentNavigation()?.extras?.state?.['precioE'];
+        this.color = this.router.getCurrentNavigation()?.extras?.state?.['colorE'];
+        this.transmision = this.router.getCurrentNavigation()?.extras?.state?.['transmisionE'];
+        this.descrp = this.router.getCurrentNavigation()?.extras?.state?.['descripcionE'];
+        this.estado = this.router.getCurrentNavigation()?.extras?.state?.['estadoE'];
+        this.kilometraje = this.router.getCurrentNavigation()?.extras?.state?.['kilometrajeE'];
+        this.anos = this.router.getCurrentNavigation()?.extras?.state?.['cantidaddeusoE'];
+        this.foto = this.router.getCurrentNavigation()?.extras?.state?.['fotoE'];
+        this.idusuario = this.router.getCurrentNavigation()?.extras?.state?.['idusuarioE'];
       }
-    })
+    });
   }
 
   ngOnInit() {
   }
 
-  irPaginaPrincipal(){
-    if(this.modeloV != ""  && this.descrpV != "" ){
-      if(this.modeloV.length > 2){
-        this.pass = 0;
-      }
-      if(this.descrpV.length < 10){
-        this.pass = 1;
-      }
-    }else{
-      this.pass = 1;
-    }
-    if (this.transmisionV != "" && this.colorV != "" && this.marcaV != "") {
-      this.pass = 0;
-    }
-    if( this.precioV != 0 && this.precioV > 0 && this.anosV != 0 && this.anosV > 0 && this.kilometrajeV != 0 && this.kilometrajeV > 0){
-      this.pass = 0;
-      if (this.kilometrajeV > 320000 ) {
-        this.pass = 1;
-      }
-    }
-    if(this.pass == 0){
-      this.router.navigate(['/pagina-principal']);
-      this.presentToast('bottom');
-    }
-  };
-
-  async presentToast(position: 'top' | 'middle' | 'bottom') {
-    const toast = await this.toastController.create({
-      message: 'Los datos modificados del Auto fueron actualizados',
-      duration: 1500,
-      position: position,
-    });
+  async tomarfoto(){
+    await this.camara.takePicture();
+    this.foto = this.camara.foto;
+    this.labelFoto = '';
   }
 
+  irPaginaPublicaciones(){
+    let pass = 0;
+
+    if(!this.regexname.test(this.modelo)){
+      pass = 1;
+      this.labelModelo = 'El modelo debe contener como minimo 2 caracteres no especiales.';
+    }else{
+      this.labelModelo = '';
+    }
+    
+    if(!this.camara.foto){
+      pass = 1;
+      this.labelFoto = 'Necesita agregar unicamente una foto a la publicacion'
+    }else{
+      this.labelFoto = '';
+    }
+
+    if(this.descrp == "" || this.descrp.length < 10){
+      pass = 1;
+      this.labelDescrp = 'La descripcion debe contener como minimo 10 caracteres.';
+    }else{
+      this.labelDescrp = '';
+    }
+
+    if (this.transmision == "") {
+      pass = 1;
+      this.labelTrans = 'Porfavor seleccione una opción.'
+    }else{
+      this.labelTrans = '';
+    }
+
+    if (this.color == "") {
+      pass = 1;
+      this.labelColor = 'Porfavor seleccione una opción.'
+    }else{
+      this.labelColor = '';
+    }
+
+    if (this.marca == "") {
+      pass = 1;
+      this.labelMarca = 'Porfavor seleccione una opción.'
+    }else{
+      this.labelMarca = '';
+    }
+
+    if (parseInt(this.kilometraje) == 0 || this.kilometraje == "" || this.regexname.test(this.kilometraje) ) {
+      pass = 1;
+      this.labelKilometraje = 'Ingrese el kilometraje del Auto.';
+      if(parseInt(this.kilometraje) > 320000){
+        pass = 1;
+        this.labelKilometraje = 'El auto no puede ser publicado si su kilometraje pasa los 320000.';
+      }
+    }
+    else{
+      this.labelKilometraje = '';
+    }
+
+    if(parseInt(this.anos) == 0 || this.anos == "" || this.regexname.test(this.anos)){
+      pass = 1;
+      this.labelAnos = 'Debe ingresar como minimo 1 año.';
+    }else{
+      this.labelAnos = '';
+    }
+
+    if(parseInt(this.precio) == 0 || this.precio == "" || this.regexname.test(this.precio)){
+      pass = 1;
+      this.labelPrecio = 'Ingrese un precio para su Auto en venta.';
+    }else{
+      this.labelPrecio = '';
+    }
+
+    if(pass == 0){
+      this.modificarPublicacion();
+    }
+  };
+  
+  modificarPublicacion(){
+    this.db.editarPublicacion(this.modelo, this.marca, this.precio, this.color, this.transmision, this.descrp, this.estado, this.kilometraje, this.anos, this.foto, this.idusuario, this.idpublicacion);
+    this.db.presentToast('top','Publicacion actualizada correctamente');
+    this.router.navigate(['/publicaciones'])
+  }
 }

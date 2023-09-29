@@ -42,7 +42,6 @@ export class DatabaseService {
   observer = new BehaviorSubject([]);
   usuarios = new BehaviorSubject([]);
   vendedores = new BehaviorSubject([]);
-  mispublicaciones = new BehaviorSubject([]);
   ruts = new BehaviorSubject([]);
   publiUser = new BehaviorSubject([]);
 
@@ -250,8 +249,6 @@ export class DatabaseService {
     })
   }
 
-
-
   pasarPerfil(id:any){
     let navigationExtras : NavigationExtras;
     return this.db.executeSql('SELECT nombre, apellido, correo, telefono, direccion, foto FROM usuario where idusuario = ?',[id])
@@ -351,10 +348,36 @@ export class DatabaseService {
 
   //Publicaciones
 
+  //Modificar Publicacion
+  pasarmodificarPublicacion(idpubli:any, idusuario:any){
+    let navigationExtras : NavigationExtras;
+    return this.db.executeSql('SELECT modelo, marca, precio, color, transmision, descripcion, estado, kilometraje, cantidaddeuso, foto FROM publicacion where idpublicacion = ? AND idusuario = ?',[idpubli, idusuario])
+    .then((res) => {
+      if (res.rows.length > 0){
+        navigationExtras = {
+          state: {
+            idpubliE: res.rows.item(0).idpublicacion,
+            modeloE: res.rows.item(0).modelo,
+            marcaE: res.rows.item(0).marca,
+            precioE: res.rows.item(0).precio,
+            colorE: res.rows.item(0).color,
+            transmisionE: res.rows.item(0).transmision,
+            descripcionE: res.rows.item(0).descripcion,
+            estadoE: res.rows.item(0).estado,
+            kilometrajeE: res.rows.item(0).kilometraje,
+            cantidaddeusoE: res.rows.item(0).transmision,
+            fotoE: res.rows.item(0).foto,
+            idusuarioE: res.rows.item(0).idusuario
+          }
+        }
+      }
+      this.router.navigate(['/modificar-producto'],navigationExtras);
+    })
+  }
+
   //Obtener reporte
   obtenerReportes(){
-    return this.db.executeSql('SELECT * FROM reporte WHERE estado = 2',[]).then(res=>{
-
+    return this.db.executeSql('SELECT * FROM publicacion WHERE estado = 2',[]).then(res=>{
     })
   }
 
@@ -362,8 +385,7 @@ export class DatabaseService {
   reportarPublicacion(idpublicacion:any, tipo:any, descripcion:any){
     return this.db.executeSql('INSERT INTO reporte (tipo, descripcion, idpublicacion) VALUES(?, ? , ?);',[tipo, descripcion, idpublicacion])
     .then(res =>{
-      this.db.executeSql('UPDATE publicacion SET estado = 2 WHERE idpublicacion = ?',[idpublicacion])
-      this.obtenerReportes();  
+      this.db.executeSql('UPDATE publicacion SET estado = 2 WHERE idpublicacion = ?;',[idpublicacion])
     }).catch(e =>{
       this.presentAlert("",'Error al generar el reporte intente nuevamente más tarde' + JSON.stringify(e))
     })
@@ -474,7 +496,7 @@ export class DatabaseService {
   }
 
   //Editar Autos
-  editarPublicacion(id:any, modelo: any, marca: any, precio: any, color: any, transmision:any, descripcion:any, estado:any, kilometraje:any, cantidaddeuso:any, foto:any, idusuario:any){
+  editarPublicacion(modelo: any, marca: any, precio: any, color: any, transmision:any, descripcion:any, estado:any, kilometraje:any, cantidaddeuso:any, foto:any, idusuario:any,id:any, ){
     let publicaciones: any = [{
       idpubli: '',
       modelo: '',
@@ -489,7 +511,7 @@ export class DatabaseService {
       foto: '',
       idusuario: ''
     }];
-    return this.db.executeSql('UPDATE publicacion SET modelo = ?, marca = ?, precio = ?, color = ?, transmision = ?, descripcion = ?, , estado = ?, kilometraje = ?, cantidaddeuso = ?, foto = ? WHERE idusuario = ? AND idpublicacion;',[modelo, marca, precio, color, transmision, descripcion, estado, kilometraje, cantidaddeuso, foto, idusuario, id])
+    return this.db.executeSql('UPDATE publicacion SET modelo = ?, marca = ?, precio = ?, color = ?, transmision = ?, descripcion = ?, , estado = ?, kilometraje = ?, cantidaddeuso = ?, foto = ? WHERE idusuario = ? AND idpublicacion = ?;',[modelo, marca, precio, color, transmision, descripcion, estado, kilometraje, cantidaddeuso, foto, idusuario, id])
     .then(() =>{
       this.db.executeSql('select * from publicacion where idusuario = ?;',[idusuario])
       .then((res) => {
@@ -507,14 +529,10 @@ export class DatabaseService {
           publicaciones.foto = res.rows.item(0).foto,
           publicaciones.idusuario = res.rows.item(0).idusuario
         }
-        this.mispublicaciones.next(publicaciones as any); 
+        this.publiUser.next(publicaciones as any); 
       })
     })
     .catch(e => this.presentAlert("","Error en editar publicaciones" + e));
   }
-
-
-
-  //Administrador
 
 }

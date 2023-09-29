@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { NavigationExtras,Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { AlertController } from '@ionic/angular';
 import { DatabaseService } from 'src/app/services/database.service';
 
@@ -46,8 +46,8 @@ export class PublicacionesPage implements OnInit {
 
   }
 
-  irModificarAuto(){
-
+  irModificarAuto(id:any){
+    this.db.pasarmodificarPublicacion(id,localStorage.getItem("idper"));
   }
 
   async eliminarAuto(idpublicacion: string) {

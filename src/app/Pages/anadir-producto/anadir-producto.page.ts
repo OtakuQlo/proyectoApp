@@ -55,7 +55,6 @@ export class AnadirProductoPage implements OnInit {
 
   irPaginaPrincipal(){
     let pass = 0;
-    console.log(pass)
 
     if(!this.regexname.test(this.modeloV)){
       pass = 1;
