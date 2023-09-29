@@ -71,10 +71,15 @@ const routes: Routes = [
     path: 'crear-admin',
     loadChildren: () => import('./Pages/crear-admin/crear-admin.module').then( m => m.CrearAdminPageModule)
   },
- {
+  {
+    path: 'recuperarcontra',
+    loadChildren: () => import('./Pages/recuperarcontra/recuperarcontra.module').then( m => m.RecuperarcontraPageModule)
+  },
+  {
     path: '**',
     loadChildren: () => import('./Pages/not-found/not-found.module').then(m => m.NotFoundPageModule)
   },
+
 
 
 

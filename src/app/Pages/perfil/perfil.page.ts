@@ -12,13 +12,14 @@ export class PerfilPage implements OnInit {
   nombre: any;
   apellido: any;
   imagen: any;
-  rut: string = "";
+  rut: string = '';
   correo: any;
-  direccion: string = "";
-  rol = localStorage.getItem("rol") ;
-  idper = localStorage.getItem("idper");
+  direccion: string = '';
+  rol = localStorage.getItem('rol');
+  idper = localStorage.getItem('idper');
 
-  datosnuevos: any = [{
+  datosnuevos: any = [
+    {
       idper: '',
       rol: '',
       nombre: '',
@@ -26,58 +27,56 @@ export class PerfilPage implements OnInit {
       correo: '',
       telefono: '',
       direccion: '',
-      foto: ''
-  }];
+      foto: '',
+    },
+  ];
 
-  constructor(private router: Router,private activedRouter: ActivatedRoute,private menu: MenuController, private db:DatabaseService) { 
-    
+  constructor(
+    private router: Router,
+    private activedRouter: ActivatedRoute,
+    private menu: MenuController,
+    private db: DatabaseService
+  ) {
     this.menu.enable(true);
-    
   }
   ngOnInit() {
-    
-    this.db.bdState().subscribe(res=>{
+    this.db.bdState().subscribe((res) => {
       //verifico si el estatus es true
-      if(res){
+      if (res) {
         //me subscribir al observable de la Tabla
-        this.db.fetchUser().subscribe(datos=>{
+        this.db.fetchUser().subscribe((datos) => {
           this.datosnuevos = datos;
-          localStorage.setItem("ïdper",this.datosnuevos.idper);
-          localStorage.setItem("rol",this.datosnuevos.rol);
-          this.db.presentAlert("","Datos agregados");
+          localStorage.setItem('ïdper', this.datosnuevos.idper);
+          localStorage.setItem('rol', this.datosnuevos.rol);
+          this.db.presentAlert('', 'Datos agregados');
           this.correo = this.datosnuevos.correo;
           this.apellido = this.datosnuevos.apellido;
           this.nombre = this.datosnuevos.nombre;
           this.imagen = this.datosnuevos.foto;
-        })
-
+        });
       }
-    })
+    });
   }
 
   ionViewWillEnter() {
     this.menu.enable(true);
   }
-  
-  ngAfterViewInit(){
-    
-  }
 
-  
-  irPanelAdmin(){
+  ngAfterViewInit() {}
+
+  irPanelAdmin() {
     this.router.navigate(['/panel-admin']);
   }
-  irModificarPerfil(){
-    this.db.pasarPerfil(localStorage.getItem("idper"));
-    
+  irModificarPerfil() {
+    this.db.pasarPerfil(localStorage.getItem('idper'));
   }
-  irIngresarContra(){
-    this.router.navigate(['/ingresarcontra']);
+  irIngresarContra() {
+    this.db.habilitarPass(localStorage.getItem('idper'));
   }
-  irAnadirAuto(){
-    this.router.navigate(['/anadir-producto'])
+  irAnadirAuto() {
+    this.router.navigate(['/anadir-producto']);
   }
-  irCrearAdmin(){
-    this.router.navigate(['/crear-admin'])
+  irCrearAdmin() {
+    this.router.navigate(['/crear-admin']);
   }
 }

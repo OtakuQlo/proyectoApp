@@ -1,25 +1,28 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import {
-  AlertController,
-  MenuController,
-  ToastController,
-} from '@ionic/angular';
+import { ActivatedRoute, Router } from '@angular/router';
+import { MenuController } from '@ionic/angular';
 import { DatabaseService } from 'src/app/services/database.service';
 
 @Component({
-  selector: 'app-cambiar-contra',
-  templateUrl: './cambiar-contra.page.html',
-  styleUrls: ['./cambiar-contra.page.scss'],
+  selector: 'app-recuperarcontra',
+  templateUrl: './recuperarcontra.page.html',
+  styleUrls: ['./recuperarcontra.page.scss'],
 })
-export class CambiarContraPage implements OnInit {
+export class RecuperarcontraPage implements OnInit {
+  idper: string = '';
   constructor(
     private router: Router,
-    private toastController: ToastController,
-    private alertController: AlertController,
     private menu: MenuController,
-    private db: DatabaseService
-  ) {}
+    private db: DatabaseService,
+    private activedRouter: ActivatedRoute
+  ) {
+    this.activedRouter.queryParams.subscribe((res) => {
+      if (this.router.getCurrentNavigation()?.extras.state) {
+        this.idper =
+          this.router.getCurrentNavigation()?.extras?.state?.['idper'];
+      }
+    });
+  }
   // variables
   contra1: string = '';
   contra2: string = '';
@@ -57,8 +60,9 @@ export class CambiarContraPage implements OnInit {
     }
 
     if (bandera == true) {
-      this.db.cambiarContra(this.contra1, localStorage.getItem('idper'));
-      this.router.navigate(['/perfil']);
+      this.db.cambiarContra(this.contra1, this.idper);
+      this.router.navigate(['/home']);
+      alert(this.idper);
     }
   }
 }

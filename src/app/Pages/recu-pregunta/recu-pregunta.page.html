@@ -1,35 +1,60 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-buttons slot = "start">
+    <ion-buttons slot="start">
       <ion-back-button></ion-back-button>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  
-  <ion-grid style="margin-top: 50%;">
+  <ion-grid style="margin-top: 50%">
     <ion-row>
       <ion-col size="1"></ion-col>
       <ion-col size="10">
-        <div style="margin-bottom: 50px;">
-          <ion-label style="font-size: 14px;">Ingrese su pregunta con respuesta para continuar con recuperación de contraseña.</ion-label>
+        <div style="margin-bottom: 50px">
+          <ion-label style="font-size: 14px"
+            >Ingrese su pregunta con respuesta para continuar con recuperación
+            de contraseña.</ion-label
+          >
         </div>
         <ion-item class="ion-margin-top">
-          <ion-select label="Pregunta" label-placement="stacked" [(ngModel)] = "opcion" okText="confirmar" cancelText="Cancelar" >
-            <ion-select-option [value]="i.idpregunta" *ngFor = "let i of preguntas"> {{i.nombre}}</ion-select-option>
-            
+          <ion-select
+            label="Pregunta"
+            label-placement="stacked"
+            [(ngModel)]="opcion"
+            okText="confirmar"
+            cancelText="Cancelar"
+          >
+            <ion-select-option
+              [value]="i.idpregunta"
+              *ngFor="let i of preguntas"
+            >
+              {{i.nombre}}</ion-select-option
+            >
           </ion-select>
         </ion-item>
 
         <ion-item>
-          <ion-input label="Respuesta" labelPlacement="floating" class="ion-margin-top" [(ngModel)] = "respuesta"></ion-input>
+          <ion-input
+            label="Respuesta"
+            labelPlacement="floating"
+            class="ion-margin-top"
+            [(ngModel)]="respuesta"
+          ></ion-input>
         </ion-item>
-        
+
         <div class="ion-text-center">
-          <ion-button fill="outline" id="boton" class="ion-margin-top" shape="round" class="ion-margin-top" (click) = "irCambiarContra()">Confirmar</ion-button>
+          <ion-button
+            fill="outline"
+            id="boton"
+            class="ion-margin-top"
+            shape="round"
+            class="ion-margin-top"
+            (click)="irCambiarContra()"
+            >Confirmar</ion-button
+          >
         </div>
-        </ion-col>
+      </ion-col>
       <ion-col size="1"></ion-col>
     </ion-row>
   </ion-grid>

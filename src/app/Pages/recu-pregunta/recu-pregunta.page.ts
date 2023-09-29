@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { NavigationExtras, Router } from '@angular/router';
 import { AlertController } from '@ionic/angular';
 import { DatabaseService } from 'src/app/services/database.service';
 
@@ -9,43 +9,66 @@ import { DatabaseService } from 'src/app/services/database.service';
   styleUrls: ['./recu-pregunta.page.scss'],
 })
 export class RecuPreguntaPage implements OnInit {
-  preguntas: any = [{
-    idpregunta: '',
-    nombre: ''
-  }];
+  preguntas: any = [
+    {
+      idpregunta: '',
+      nombre: '',
+    },
+  ];
+  opcion: any;
+  respuesta: any;
+  opcion1: any;
+  respuesta2: any;
+  idper: any;
+  datosnuevos: any = [
+    {
+      idpregunta: '',
+      respuesta: '',
+      idper: '',
+    },
+  ];
 
-  constructor(private router:Router,private alertController: AlertController, private db: DatabaseService ) {
+  constructor(
+    private router: Router,
+    private alertController: AlertController,
+    private db: DatabaseService
+  ) {
     this.db.pasarPregunta();
-   }
+  }
 
   ngOnInit() {
-    this.db.bdState().subscribe(
-      res => {
-        if (res) {
-          this.db.fetchPregunta().subscribe(datos => {
-            this.preguntas = datos;
-          })
-        }
+    this.db.bdState().subscribe((res) => {
+      if (res) {
+        this.db.fetchPregunta().subscribe((datos) => {
+          this.preguntas = datos;
+        });
+        this.db.fetchRecuperar().subscribe((datos) => {
+          this.datosnuevos = datos;
+          this.opcion1 = this.datosnuevos.idpregunta;
+          this.respuesta2 = this.datosnuevos.respuesta;
+          this.idper = this.datosnuevos.idper;
+        });
       }
-    )
+    });
   }
 
-  opcion: number = 0 ;
-  respuesta: string = '';
-  op: number = 1;
-  res: string = "perrito";
-
-
-  irCambiarContra(){
-    if (this.opcion != 1 || this.respuesta != this.res) {
-    }else{
-      console.log();
-      console.log();
-      this.router.navigate(['/cambiar-contra']);
+  irCambiarContra() {
+    if (this.opcion == this.opcion1 && this.respuesta == this.respuesta2) {
+      let navigationExtras: NavigationExtras;
+      navigationExtras = {
+        state: {
+          idper: this.idper
+        },
+      };
+        
+      this.router.navigate(['/recuperarcontra', navigationExtras]);
+    } else {
+      this.db.presentAlert(
+        'Datos erroneos:',
+        'Los datos ingresados no son correctos.'
+      );
+      alert(this.idper)
     }
+
   }
-
-  
-
-    
 }

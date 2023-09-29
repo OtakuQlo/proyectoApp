@@ -44,6 +44,12 @@ export class DatabaseService {
   vendedores = new BehaviorSubject([]);
   ruts = new BehaviorSubject([]);
   publiUser = new BehaviorSubject([]);
+  preguntas = new BehaviorSubject([]);
+  pass = new BehaviorSubject([]);
+  
+
+
+
 
 
 
@@ -65,7 +71,7 @@ export class DatabaseService {
   }
 
   fetchPregunta(): Observable<Pregunta[]>{
-    return this.observer.asObservable();
+    return this.preguntas.asObservable();
   }
 
   fetchUser(): Observable<any[]>{
@@ -82,6 +88,9 @@ export class DatabaseService {
 
   fetchPubliUser(): Observable<any[]>{
     return this.publiUser.asObservable();
+  }
+  fetchpass(): Observable<any[]> {
+    return this.pass.asObservable();
   }
   
 
@@ -344,6 +353,77 @@ export class DatabaseService {
         this.presentAlert("",'Error en pasar pregunta ' + JSON.stringify(e))
       })
 
+  }
+
+
+  recuperar = new BehaviorSubject([]);
+  fetchRecuperar(): Observable<Publicacion[]> {
+    return this.recuperar.asObservable();
+  }
+
+  irRecuperarPregunta(rut: any) {
+    let datos: any = [
+      {
+        idpregunta: '',
+        respuesta: '',
+        idper: '',
+      },
+    ];
+    return this.db
+      .executeSql('SELECT * FROM usuario WHERE rut = ? AND idrol = 2', [rut])
+      .then((res) => {
+        if (res.rows.length > 0) {
+          (datos.idpregunta = res.rows.item(0).idpregunta),
+            (datos.respuesta = res.rows.item(0).respuesta);
+          datos.idper = res.rows.item(0).idusuario;
+          this.recuperar.next(datos as any);
+          this.router.navigate(['/recu-pregunta']);
+        } else {
+          this.presentAlert(
+            'Datos erroneos:',
+            'El Rut ingresado no es valido.'
+          );
+        }
+      })
+      .catch((e) => {
+        this.presentAlert('', 'error pasar datos preguntas y resp');
+      });
+  }
+
+  habilitarPass(id: any) {
+    let datos: any = [
+      {
+        id: '',
+        pass: '',
+      },
+    ];
+    return this.db
+      .executeSql('SELECT * FROM usuario WHERE idusuario = ? ', [id])
+      .then((res) => {
+        if (res.rows.length > 0) {
+          (datos.id = res.rows.item(0).idusuario),
+            (datos.pass = res.rows.item(0).clave);
+        }
+        this.pass.next(datos as any);
+        this.router.navigate(['/ingresarcontra']);
+      })
+      .catch((e) => {
+        this.presentAlert('', 'error de pasar contra');
+      });
+  }
+
+  cambiarContra(pass: any, id: any) {
+    return this.db
+      .executeSql('UPDATE usuario set clave = ? where idusuario = ?', [
+        pass,
+        id,
+      ])
+      .then(() => {
+        this.presentToast('bottom', 'Contraseña cambiada con exito.');
+      })
+      .catch((e) => {
+        this.presentAlert('', 'error en cambiar contra');
+      });
   }
 
   //Publicaciones
