@@ -84,8 +84,8 @@ export class PaginaProductoPage implements OnInit {
           this.direccion = this.datosnuevos.direccion;
           this.apellido = this.datosnuevos.apellido;
         })
-        this.db.fetchReportes().subscribe(datos=>{
-          this.reportes = datos;
+        this.db.fetchReportes().subscribe(datosreportes=>{
+          this.reportes = datosreportes;
           this.db.presentAlert("","Datos agregados");
         })
       }
