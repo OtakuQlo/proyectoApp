@@ -31,11 +31,11 @@ export class ReportarAutoPage implements OnInit {
       pass = 1
       this.labelReporte = 'Debe seleccionar una opcion para reportar'
     }else{
-      this.labelReporte= '';
+      this.labelReporte = '';
     }
 
     if (pass == 0){
-      this.db.reportarPublicacion(this.idpubli,this.tipoReporte, this.descripcion);
+      this.db.reportarPublicacion(this.idpubli,this.tipoReporte,this.descripcion);
       this.router.navigate(['/pagina-principal']);
     }
   }

@@ -74,9 +74,10 @@
                 <ion-row>
                   <h2>Reportes</h2>
                 </ion-row>
-                <ion-row>
+                <ion-row *ngFor="let report of reportes">
                   <ion-col>
-                    <ion-label>La publicación es Spam Alfa Romeo Giulia</ion-label>
+                    <p>Tipo: {{ report.tipo }}</p>
+                    <p>Descripción: {{ report.descripcion }}</p>
                   </ion-col>
                   <ion-col>
                     <ion-button color="danger" fill="outline" shape="round" (click)="presentDeleteReportConfirmation()">

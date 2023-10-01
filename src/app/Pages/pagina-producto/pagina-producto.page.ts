@@ -35,6 +35,13 @@ export class PaginaProductoPage implements OnInit {
   direccion:any;
   telefono:any;
 
+  reportes: any[] = [{
+    idreporte: '',
+    tipo: '',
+    descripcion: '',
+    idpublicacion: ''
+  }];
+
   datosnuevos: any = [{
     rol: '',
     nombre: '',
@@ -77,6 +84,10 @@ export class PaginaProductoPage implements OnInit {
           this.direccion = this.datosnuevos.direccion;
           this.apellido = this.datosnuevos.apellido;
         })
+        this.db.fetchReportes().subscribe(datos=>{
+          this.reportes = datos;
+          this.db.presentAlert("","Datos agregados");
+        })
       }
     })
   } 
@@ -87,7 +98,7 @@ export class PaginaProductoPage implements OnInit {
         publicacion: this.idpublicacion
       }
     }
-    this.router.navigate(['/reportar-auto'])
+    this.router.navigate(['/reportar-auto'], navigationExtras)
   }
 
   async presentAcceptRejectConfirmation(action: string) {

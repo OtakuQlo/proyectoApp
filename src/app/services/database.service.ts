@@ -6,6 +6,7 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import { Publicacion } from './publicacion';
 import { Pregunta } from './pregunta';
 import { NavigationExtras, Router } from '@angular/router';
+import { Reporte } from './reporte';
 
 @Injectable({
   providedIn: 'root',
@@ -51,6 +52,11 @@ export class DatabaseService {
   registroPregunta2: string =
     "INSERT or IGNORE INTO pregunta(idpregunta,nombre) VALUES (2,'¿Cómo se llama el hospital donde naciste?');";
 
+  registroReporte1: string =
+    "INSERT or IGNORE INTO reporte(idreporte,tipo,descripcion,idpublicacion) VALUES (1,'La publicación es inapropiada.','como tan muchachos',(SELECT idpublicacion from publicacion WHERE idpublicacion=2));";
+  registroReporte2: string =
+    "INSERT or IGNORE INTO reporte(idreporte,tipo,descripcion,idpublicacion) VALUES (2,'La publicación incita el odio.','asdfsdafsadf',(SELECT idpublicacion from publicacion WHERE idpublicacion=2));";
+
   //observables de las tablas
   observer = new BehaviorSubject([]);
   usuarios = new BehaviorSubject([]);
@@ -60,6 +66,7 @@ export class DatabaseService {
   preguntas = new BehaviorSubject([]);
   pass = new BehaviorSubject([]);
   datosCambioPass = new BehaviorSubject([]);
+  reportes = new BehaviorSubject([]);
 
   //observable para la BD
   private isDBReady: BehaviorSubject<boolean> = new BehaviorSubject(false);
@@ -84,6 +91,10 @@ export class DatabaseService {
 
   fetchPregunta(): Observable<Pregunta[]> {
     return this.preguntas.asObservable();
+  }
+
+  fetchReportes(): Observable<Reporte[]> {
+    return this.reportes.asObservable();
   }
 
   fetchUser(): Observable<any[]> {
@@ -112,7 +123,7 @@ export class DatabaseService {
     this.platform.ready().then(() =>
       this.sqlite
         .create({
-          name: 'satiscar5.db',
+          name: 'satiscar6.db',
           location: 'default',
         })
         .then((db: SQLiteObject) => {
@@ -145,6 +156,8 @@ export class DatabaseService {
       await this.db.executeSql(this.registroPublicacion2, []);
       await this.db.executeSql(this.registroPublicacion3, []);
       await this.db.executeSql(this.registroPublicacion4, []);
+      await this.db.executeSql(this.registroReporte1, []);
+      await this.db.executeSql(this.registroReporte2, []);
       this.isDBReady.next(true);
       this.pasarPregunta();
     } catch (error) {
