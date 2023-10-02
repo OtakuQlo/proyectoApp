@@ -14,7 +14,7 @@ export class AppComponent {
   nombre: string = '';
   apellido: any ;
   rol: any;
-  id:any;
+  id: any;
 
   datosnuevos: any = [{
     rol: '',
@@ -24,6 +24,7 @@ export class AppComponent {
     telefono: '',
     direccion: ''
   }];
+  
   ionViewWillEnter() {
     
     this.rol = localStorage.getItem("rol");
@@ -53,7 +54,7 @@ export class AppComponent {
     this.router.navigate(['/home']);
     localStorage.removeItem("rol");
     localStorage.removeItem("idper");
-   
+    localStorage.removeItem("nombre");
   }
 
   irCrearAdmin(){

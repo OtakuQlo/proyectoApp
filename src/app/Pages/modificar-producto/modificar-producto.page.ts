@@ -21,7 +21,7 @@ export class ModificarProductoPage implements OnInit {
   kilometraje!: number; 
   transmision: string ='';
   foto: any = './../assets/icon/boton-agregar.png';
-  idusuario: string='';
+  idusuario: string= '';
   estado: string='';
 
   regexname: RegExp = /^[a-zA-ZÀ-ÿ\u00f1\u00d1]+(\s*[a-zA-ZÀ-ÿ\u00f1\u00d1]*)*[a-zA-ZÀ-ÿ-0-9\u00f1\u00d1]{1,100}$/;
@@ -78,13 +78,6 @@ export class ModificarProductoPage implements OnInit {
     }else{
       this.labelModelo = '';
     }
-    
-    if(!this.camara.foto){
-      pass = 1;
-      this.labelFoto = 'Necesita agregar unicamente una foto a la publicacion'
-    }else{
-      this.labelFoto = '';
-    }
 
     if(this.descrp == "" || this.descrp.length < 10){
       pass = 1;
@@ -140,13 +133,13 @@ export class ModificarProductoPage implements OnInit {
       this.labelPrecio = '';
     }
 
-    if(pass == 0 && localStorage.getItem('idper') == this.idusuario){
+    if(pass == 0){
       this.modificarPublicacion();
     }
   };
-  
+   
   modificarPublicacion(){
-    this.db.editarPublicacion(this.modelo, this.marca, this.precio, this.color, this.transmision, this.descrp, this.estado, this.kilometraje, this.anos, this.foto, this.idusuario, localStorage.getItem('idper'));
+    this.db.editarPublicacion(this.idpublicacion, this.idusuario,this.modelo, this.marca, this.precio, this.color, this.transmision, this.descrp, this.estado, this.kilometraje, this.anos, this.foto);
     this.db.presentToast('top','Publicacion actualizada correctamente');
     this.router.navigate(['/publicaciones'])
   }

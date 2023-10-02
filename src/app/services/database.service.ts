@@ -530,12 +530,12 @@ export class DatabaseService {
   //Publicaciones
 
   //Modificar Publicacion
-  pasarmodificarPublicacion(idpubli: any, idusuario: any) {
+  pasarmodificarPublicacion(idpubli: any) {
     let navigationExtras: NavigationExtras;
     return this.db
       .executeSql(
-        'SELECT modelo, marca, precio, color, transmision, descripcion, estado, kilometraje, cantidaddeuso, foto FROM publicacion where idpublicacion = ? AND idusuario = ?',
-        [idpubli, idusuario]
+        'SELECT * FROM publicacion WHERE idpublicacion = ?',
+        [idpubli]
       )
       .then((res) => {
         if (res.rows.length > 0) {
@@ -746,7 +746,7 @@ export class DatabaseService {
   ) {
     return this.db
       .executeSql(
-        'INSERT or IGNORE INTO publicacion(modelo,marca,precio,color,transmision,descripcion,estado,kilometraje,cantidaddeuso,foto,idusuario) VALUES (UPPER(?),UPPER(?),?,?,?,?,?,?,?,?,?)',
+        'INSERT or IGNORE INTO publicacion(modelo,marca,precio,color,transmision,descripcion,estado,kilometraje,cantidaddeuso,foto,idusuario) VALUES (UPPER(?),?,?,?,?,?,?,?,?,?,?)',
         [
           modelo,
           marca,
@@ -774,6 +774,8 @@ export class DatabaseService {
 
   //Editar Autos
   editarPublicacion(
+    idpublicacion: any,
+    iduser: any,
     modelo: any,
     marca: any,
     precio: any,
@@ -784,14 +786,11 @@ export class DatabaseService {
     kilometraje: any,
     cantidaddeuso: any,
     foto: any,
-    idusuario: any,
-    id: any
   ) {
     return this.db
       .executeSql(
-        'UPDATE publicacion SET modelo = ?, marca = ?, precio = ?, color = ?, transmision = ?, descripcion = ?, estado = ?, kilometraje = ?, cantidaddeuso = ?, foto = ? WHERE idusuario = ? AND idpublicacion = ?;',
-        [
-          modelo,
+        'UPDATE publicacion SET modelo = ?, marca = ?, precio = ?, color = ?, transmision = ?, descripcion = ?, estado = ?, kilometraje = ?, cantidaddeuso = ?, foto = ? WHERE idpublicacion = ?;',
+        [modelo,
           marca,
           precio,
           color,
@@ -801,13 +800,12 @@ export class DatabaseService {
           kilometraje,
           cantidaddeuso,
           foto,
-          idusuario,
-          id,
+          idpublicacion
         ]
-      )
-      .then(() => {
-        this.publicacionUser(idusuario);
+      ).then( ()=>{
+        this.publicacionUser(iduser);
       })
-      .catch((e) => this.presentAlert('', 'Error en editar publicaciones' + e));
-  }
-}
+      .catch( e =>{
+        this.presentAlert("","error updatear publicacion" + JSON.stringify(e))
+      })}
+    }

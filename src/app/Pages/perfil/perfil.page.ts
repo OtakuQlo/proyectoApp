@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, NavigationExtras, Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { MenuController } from '@ionic/angular';
 import { DatabaseService } from 'src/app/services/database.service';
 
@@ -33,7 +33,6 @@ export class PerfilPage implements OnInit {
 
   constructor(
     private router: Router,
-    private activedRouter: ActivatedRoute,
     private menu: MenuController,
     private db: DatabaseService
   ) {

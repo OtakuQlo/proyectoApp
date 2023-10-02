@@ -130,7 +130,7 @@ export class AnadirProductoPage implements OnInit {
   };
   
   agregarPublicacion(){
-    this.db.crearPublicacion(this.modeloV, this.marcaV, this.precioV, this.colorV, this.transmisionV, this.descrpV, 0, this.kilometrajeV, this.anosV, this.foto, 1);
+    this.db.crearPublicacion(this.modeloV, this.marcaV, this.precioV, this.colorV, this.transmisionV, this.descrpV, 0, this.kilometrajeV, this.anosV, this.foto, localStorage.getItem("idper"));
     this.db.presentToast('bottom','Publicacion creada correctamente');
     this.router.navigate(['/pagina-principal'])
   }

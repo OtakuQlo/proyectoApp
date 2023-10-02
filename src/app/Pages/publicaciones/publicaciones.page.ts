@@ -26,9 +26,9 @@ export class PublicacionesPage implements OnInit {
     idusuario: ''
   }];
 
-  iduser = localStorage.getItem("idper")
+  iduser = localStorage.getItem("idper");
 
-  constructor(private router:Router, private db: DatabaseService,  private alertController: AlertController) {
+  constructor(private db: DatabaseService,  private alertController: AlertController) {
     this.db.publicacionUser(this.iduser);
    }
   
@@ -44,7 +44,7 @@ export class PublicacionesPage implements OnInit {
 
 
   irModificarAuto(id:any){
-    this.db.pasarmodificarPublicacion(id,localStorage.getItem('idper'));
+    this.db.pasarmodificarPublicacion(id);
   }
 
   async eliminarAuto(idpublicacion: string) {
