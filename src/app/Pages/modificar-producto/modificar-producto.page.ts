@@ -11,20 +11,18 @@ import { DatabaseService } from 'src/app/services/database.service';
 })
 export class ModificarProductoPage implements OnInit {
 
-  idpublicacion: string= "";
-  modelo: string = "";
-  precio : string = "";
-  color: string ="";
-  marca: string ="";
-  anos: string = "";
-  descrp: string = "";
-  kilometraje: string = ""; 
-  transmision: string ="";
+  idpublicacion: string= '';
+  modelo: string = '';
+  precio : string = '';
+  color: string ='';
+  marca: string ='';
+  anos: string = '';
+  descrp: string = '';
+  kilometraje: string = ''; 
+  transmision: string ='';
   foto: any = './../assets/icon/boton-agregar.png';
-  idusuario: string="";
-  estado: string="";
-
-  regexname: RegExp = /^[a-zA-ZÀ-ÿ\u00f1\u00d1]+(\s*[a-zA-ZÀ-ÿ\u00f1\u00d1]*)*[a-zA-ZÀ-ÿ\u00f1\u00d1]{1,100}$/;
+  idusuario: string='';
+  estado: string='';
 
   labelModelo: string = '';
   labelPrecio: string = '';
@@ -57,6 +55,7 @@ export class ModificarProductoPage implements OnInit {
         this.idusuario = this.router.getCurrentNavigation()?.extras?.state?.['idusuarioE'];
       }
     });
+
   }
 
   ngOnInit() {
@@ -71,7 +70,7 @@ export class ModificarProductoPage implements OnInit {
   irPaginaPublicaciones(){
     let pass = 0;
 
-    if(!this.regexname.test(this.modelo)){
+    if(this.modelo.length < 1){
       pass = 1;
       this.labelModelo = 'El modelo debe contener como minimo 2 caracteres no especiales.';
     }else{

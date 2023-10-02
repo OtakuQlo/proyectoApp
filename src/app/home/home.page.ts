@@ -30,6 +30,7 @@ export class HomePage {
     this.pass = '';
     localStorage.removeItem('rol');
     localStorage.removeItem('idper');
+    this.menu.enable(false);
   }
 
   ngAfterViewInit() {

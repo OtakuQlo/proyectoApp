@@ -14,7 +14,7 @@
           </div>
         </ion-row>
         <ion-row class="ion-justify-content-center">
-          <ion-button type="file" style="font-size: 13px; width: 150px;" fill="outline" id="botonAgregarImg"
+          <ion-button type="file" style="font-size: 13px; width: 150px;" fill="outline"
             shape="round" (click)="tomarfoto()">Agregar Imagen</ion-button>
             <ion-label color="danger" style="font-size: 11px;">{{labelFoto}}</ion-label>
         </ion-row>
@@ -25,21 +25,21 @@
         <ion-card>
           <ion-card-content style="font-size: 15px;">
             <ion-item>
-              <ion-input label="Ingrese el modelo del Vehiculo" labelPlacement="floating" id="modeloV"
+              <ion-input label="Ingrese el modelo del Vehiculo" labelPlacement="floating"
                 [clearInput]="true" [(ngModel)]="modelo">
               </ion-input>
             </ion-item>
             <ion-label color="danger" style="font-size: 11px;">{{labelModelo}}</ion-label>
 
             <ion-item>
-              <ion-input label="Ingrese el precio" labelPlacement="floating" id="precioV" [(ngModel)]="precio"
+              <ion-input label="Ingrese el precio" labelPlacement="floating"  [(ngModel)]="precio"
                 [clearInput]="true"></ion-input>
             </ion-item>
             <ion-label color="danger" style="font-size: 11px;">{{labelPrecio}}</ion-label>
 
             <ion-item style="margin-top: 10px;">
               <mat-label>Seleccione un color</mat-label>
-              <mat-select interface="action-sheet" id="colorV" [(ngModel)]="color">
+              <mat-select interface="action-sheet" [(ngModel)]="color" value="{{color}}">
                 <mat-option value="{{i}}" *ngFor="let i of arrColor">{{i}}</mat-option>
               </mat-select>
             </ion-item>
@@ -47,7 +47,7 @@
 
             <ion-item style="margin-top: 10px;">
               <mat-label>Seleccione una marca</mat-label>
-              <mat-select interface="action-sheet" id="marcaV" [(ngModel)]="marca">
+              <mat-select interface="action-sheet" [(ngModel)]="marca">
                 <mat-option value="{{x}}" *ngFor="let x of arrMarca">{{x}}</mat-option>
               </mat-select>
             </ion-item>
@@ -55,27 +55,27 @@
 
             <ion-item style="margin-top: 10px;">
               <mat-label>Tipo de transmisión</mat-label>
-              <mat-select interface="action-sheet" id="transmisionV" [(ngModel)]="transmision">
+              <mat-select interface="action-sheet" [(ngModel)]="transmision">
                 <mat-option value="{{a}}" *ngFor="let a of arrTrans ">{{a}}</mat-option>
               </mat-select>
             </ion-item>
             <ion-label color="danger" style="font-size: 11px;">{{labelTrans}}</ion-label>
 
             <ion-item>
-              <ion-input label="Ingrese los años de uso" labelPlacement="floating" id="anos" [(ngModel)]="anos"
+              <ion-input label="Ingrese los años de uso" labelPlacement="floating" [(ngModel)]="anos"
                 [clearInput]="true"></ion-input>
             </ion-item>
             <ion-label color="danger" style="font-size: 11px;">{{labelAnos}}</ion-label>
 
             <ion-item>
-              <ion-input label="Ingrese el kilometraje del vehiculo" labelPlacement="floating" id="kilometrajeV"
+              <ion-input label="Ingrese el kilometraje del vehiculo" labelPlacement="floating"
                 [(ngModel)]="kilometraje" [clearInput]="true"></ion-input>
             </ion-item>
             <ion-label color="danger" style="font-size: 11px;">{{labelKilometraje}}</ion-label>
 
             <ion-textarea label="Descripción" labelPlacement="floating" [counter]="true" maxlength="500"
               helperText="Agregue una descripción" [autoGrow]="true" [Grow]="1"
-              errorText="Porfavor escriba una descripción minima de 10 caracteres" id="descrpV"
+              errorText="Porfavor escriba una descripción minima de 10 caracteres"
               [(ngModel)]="descrp"></ion-textarea>
             <ion-label color="danger" style="font-size: 11px;">{{labelDescrp}}</ion-label>
 
