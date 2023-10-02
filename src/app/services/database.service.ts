@@ -37,6 +37,10 @@ export class DatabaseService {
     "INSERT or IGNORE INTO usuario(idusuario,nombre,apellido,rut,correo,clave,respuesta,telefono,direccion,foto,idpregunta,idrol) VALUES (1,'Miguel','Pérez','21294525-0','correoreal@duocuc.cl','!Miguel123','AUTOMATICA','87653452','Casa','',(SELECT idpregunta from pregunta WHERE idpregunta=1), (SELECT idrol from rol WHERE idrol=2));";
   registroUsuario2: string =
     "INSERT or IGNORE INTO usuario(idusuario,nombre,apellido,rut,correo,clave,respuesta,telefono,direccion,foto,idpregunta,idrol) VALUES (2,'Gabriel','Maneiro','21921084-1','ga.maneiro@duocuc.cl','!Miguel123','AUTOMATICA','96842823','Casa2','',(SELECT idpregunta from pregunta WHERE idpregunta=2), (SELECT idrol from rol WHERE idrol=1));";
+  registroUsuario3: string =
+    "INSERT or IGNORE INTO usuario(idusuario,nombre,apellido,rut,correo,clave,respuesta,telefono,direccion,foto,idpregunta,idrol) VALUES (3,'Carlos','Pérez','11111111-1','Carlos1@gmail.com','!Miguel123','AUTOMATICA','53487652','Hogar','',(SELECT idpregunta from pregunta WHERE idpregunta=1), (SELECT idrol from rol WHERE idrol=1));";
+  registroUsuario4: string =
+    "INSERT or IGNORE INTO usuario(idusuario,nombre,apellido,rut,correo,clave,respuesta,telefono,direccion,foto,idpregunta,idrol) VALUES (4,'Javier','Montez','22222222-2','Ja.Montez@duocuc.cl','!Miguel123','AUTOMATICA','94282369','Hogar2','',(SELECT idpregunta from pregunta WHERE idpregunta=2), (SELECT idrol from rol WHERE idrol=2));";
 
   registroPublicacion1: string =
     "INSERT or IGNORE INTO publicacion(idpublicacion,modelo,marca,precio,color,transmision,descripcion,estado,kilometraje,cantidaddeuso,foto,idusuario) VALUES (1,UPPER('2023 Silverado 3.0TD High Country Auto DC 4WD'),'Chevrolet',52000000,'gris','Automatica','asd',0,0,0,'',(SELECT idusuario from usuario WHERE idusuario=1));";
@@ -51,11 +55,6 @@ export class DatabaseService {
     "INSERT or IGNORE INTO pregunta(idpregunta,nombre) VALUES (1,'¿Cómo se llamaba tu primera mascota?');";
   registroPregunta2: string =
     "INSERT or IGNORE INTO pregunta(idpregunta,nombre) VALUES (2,'¿Cómo se llama el hospital donde naciste?');";
-
-  registroReporte1: string =
-    "INSERT or IGNORE INTO reporte(idreporte,tipo,descripcion,idpublicacion) VALUES (1,'La publicación es inapropiada.','como tan muchachos',(SELECT idpublicacion from publicacion WHERE idpublicacion=2));";
-  registroReporte2: string =
-    "INSERT or IGNORE INTO reporte(idreporte,tipo,descripcion,idpublicacion) VALUES (2,'La publicación incita el odio.','asdfsdafsadf',(SELECT idpublicacion from publicacion WHERE idpublicacion=2));";
 
   //observables de las tablas
   observer = new BehaviorSubject([]);
@@ -123,7 +122,7 @@ export class DatabaseService {
     this.platform.ready().then(() =>
       this.sqlite
         .create({
-          name: 'satiscar6.db',
+          name: 'satiscar7.db',
           location: 'default',
         })
         .then((db: SQLiteObject) => {
@@ -152,12 +151,12 @@ export class DatabaseService {
       await this.db.executeSql(this.registroRol2, []);
       await this.db.executeSql(this.registroUsuario1, []);
       await this.db.executeSql(this.registroUsuario2, []);
+      await this.db.executeSql(this.registroUsuario3, []);
+      await this.db.executeSql(this.registroUsuario4, []);
       await this.db.executeSql(this.registroPublicacion1, []);
       await this.db.executeSql(this.registroPublicacion2, []);
       await this.db.executeSql(this.registroPublicacion3, []);
       await this.db.executeSql(this.registroPublicacion4, []);
-      await this.db.executeSql(this.registroReporte1, []);
-      await this.db.executeSql(this.registroReporte2, []);
       this.isDBReady.next(true);
       this.pasarPregunta();
     } catch (error) {
