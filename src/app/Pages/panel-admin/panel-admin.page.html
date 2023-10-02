@@ -9,24 +9,35 @@
     <ion-list-header>
       <ion-label>Peticiones de Usuarios</ion-label>
     </ion-list-header>
-    
-    <ion-item *ngFor="let x of solicitudAutos"  class="request-item">
+
+    <ion-item *ngFor="let x of solicitudAutos" class="request-item">
       <ion-label>{{x.modelo}}</ion-label>
       <ion-buttons slot="end">
-        <ion-button (click)="irPaginaProducto1(x)" (click)="pasarPersona(x.idusuario)" color="warning">Ver</ion-button>
+        <ion-button
+          (click)="irPaginaProducto1(x)"
+          (click)="pasarPersona(x.idusuario)"
+          color="warning"
+          >Ver</ion-button
+        >
       </ion-buttons>
     </ion-item>
   </ion-list>
-  
+
   <ion-list>
     <ion-list-header>
       <ion-label>Reportes de Usuarios</ion-label>
     </ion-list-header>
-    
+
     <ion-item *ngFor="let x of reporteAutos" class="report-item">
       <ion-label>{{x.modelo}}</ion-label>
       <ion-buttons slot="end">
-        <ion-button (click)="irPaginaProducto(x)" (click)="pasarPersona(x.idusuario)" color="warning">Ver</ion-button>
+        <ion-button
+          (click)="irPaginaProducto(x)"
+          (click)="pasarPersona(x.idusuario)"
+          (click)="pasarReportes(x)"
+          color="warning"
+          >Ver</ion-button
+        >
       </ion-buttons>
     </ion-item>
   </ion-list>

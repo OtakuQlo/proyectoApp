@@ -620,6 +620,39 @@ export class DatabaseService {
       });
   }
 
+  reportesDatos = new BehaviorSubject([]);
+  fetchReporteAuto(): Observable<any[]> {
+    return this.reportesDatos.asObservable();
+  }
+
+  pasarReportes(id: any) {
+    let reportes: any = [
+      {
+        idreporte: '',
+        tipo: '',
+        descripcion: '',
+        idpublicacion: '',
+      },
+    ];
+
+    this.db
+      .executeSql('select * from reporte where idpublicacion = ?', [id])
+      .then((res) => {
+        if (res.rows.length > 0) {
+          for (let i = 0; i < res.rows.length; i++) {
+            reportes.push({
+              idreporte: res.rows.item(i).idreporte,
+              tipo: res.rows.item(i).tipo,
+              descripcion: res.rows.item(i).descripcion,
+              idpublicacion: res.rows.item(i).idpublicacion,
+            });
+          }
+        }
+        this.reportesDatos.next(reportes as any);
+      })
+      .catch((e) => 'error funcion 1');
+  }
+
   //Cuando ingresamos a la pagina principal esta funcion permite ver los autos
   buscarPublicacion() {
     return this.db

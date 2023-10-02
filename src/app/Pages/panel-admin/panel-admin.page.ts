@@ -9,56 +9,62 @@ import { DatabaseService } from 'src/app/services/database.service';
   styleUrls: ['./panel-admin.page.scss'],
 })
 export class PanelAdminPage implements OnInit {
+  solicitudAutos: any = [
+    {
+      idpublicacion: '',
+      modelo: '',
+      marca: '',
+      precio: '',
+      color: '',
+      transmision: '',
+      descripcion: '',
+      estado: '',
+      kilometraje: '',
+      cantidaddeuso: '',
+      foto: '',
+      idusuario: '',
+    },
+  ];
 
-  solicitudAutos: any = [{
-    idpublicacion: '',
-    modelo: '',
-    marca: '',
-    precio: '',
-    color: '',
-    transmision: '',
-    descripcion: '',
-    estado: '',
-    kilometraje: '',
-    cantidaddeuso: '',
-    foto: '',
-    idusuario: ''
-  }];
+  reporteAutos: any = [
+    {
+      idpublicacion: '',
+      modelo: '',
+      marca: '',
+      precio: '',
+      color: '',
+      transmision: '',
+      descripcion: '',
+      estado: '',
+      kilometraje: '',
+      cantidaddeuso: '',
+      foto: '',
+      idusuario: '',
+    },
+  ];
 
-  reporteAutos: any = [{
-    idpublicacion: '',
-    modelo: '',
-    marca: '',
-    precio: '',
-    color: '',
-    transmision: '',
-    descripcion: '',
-    estado: '',
-    kilometraje: '',
-    cantidaddeuso: '',
-    foto: '',
-    idusuario: ''
-  }];
-
-  constructor(private router: Router, private menu: MenuController,private db: DatabaseService) {
+  constructor(
+    private router: Router,
+    private menu: MenuController,
+    private db: DatabaseService
+  ) {
     this.db.buscarPublicacion();
   }
 
   ngOnInit() {
     this.menu.enable(true);
-    this.db.bdState().subscribe(res=>{
-      if(res){
-        this.db.fetchPublicacion().subscribe(datos=>{
-          this.solicitudAutos = datos.filter(x => Number(x.estado) === 0);
-          this.reporteAutos = datos.filter(x => Number(x.estado) === 2);
-          this.db.presentAlert("","Datos agregados");
-        })
-
+    this.db.bdState().subscribe((res) => {
+      if (res) {
+        this.db.fetchPublicacion().subscribe((datos) => {
+          this.solicitudAutos = datos.filter((x) => Number(x.estado) === 0);
+          this.reporteAutos = datos.filter((x) => Number(x.estado) === 2);
+          this.db.presentAlert('', 'Datos agregados');
+        });
       }
-    })
+    });
   }
 
-  irPaginaProducto1(x:any){
+  irPaginaProducto1(x: any) {
     let navigationExtra: NavigationExtras = {
       state: {
         idpublicacionE: x.idpublicacion,
@@ -73,14 +79,18 @@ export class PanelAdminPage implements OnInit {
         cantidaddeusoE: x.cantidaddeuso,
         fotoE: x.foto,
         idusuarioE: x.idusuario,
-        verificador: "solicitud"
-      }
-    }
-    this.router.navigate(['/pagina-producto'],navigationExtra);
-
+        verificador: 'solicitud',
+      },
+    };
+    this.router.navigate(['/pagina-producto'], navigationExtra);
   }
 
-  irPaginaProducto(x:any){
+  pasarReportes(x: any) {
+    this.db.pasarReportes(x.idpublicacion);
+    alert(x.idpublicacion);
+  }
+
+  irPaginaProducto(x: any) {
     let navigationExtra: NavigationExtras = {
       state: {
         idpublicacionE: x.idpublicacion,
@@ -94,14 +104,13 @@ export class PanelAdminPage implements OnInit {
         kilometrajeE: x.kilometraje,
         cantidaddeusoE: x.cantidaddeuso,
         fotoE: x.foto,
-        idusuarioE: x.idusuario
-      }
-    }
-    this.router.navigate(['/pagina-producto'],navigationExtra);
-
+        idusuarioE: x.idusuario,
+      },
+    };
+    this.router.navigate(['/pagina-producto'], navigationExtra);
   }
 
-  pasarPersona(id:any){
+  pasarPersona(id: any) {
     this.db.pasarUsuario(id);
   }
 }

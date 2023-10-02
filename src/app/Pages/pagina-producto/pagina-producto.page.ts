@@ -1,9 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, NavigationExtras, Router } from '@angular/router';
-import { IonModal, MenuController, AlertController} from '@ionic/angular';
+import { IonModal, MenuController, AlertController } from '@ionic/angular';
 import { DatabaseService } from 'src/app/services/database.service';
-
-
 
 @Component({
   selector: 'app-pagina-producto',
@@ -12,93 +10,122 @@ import { DatabaseService } from 'src/app/services/database.service';
 })
 export class PaginaProductoPage implements OnInit {
   @ViewChild('modal', { static: true }) modal!: IonModal;
-  rol: any = localStorage.getItem("rol");
+  rol: any = localStorage.getItem('rol');
   verificador: string = '';
   tipoReporte: number = 0;
   errorLabel: string = '';
-  idpublicacion: string= '';
-  modelo: string= '';
-  marca: string= '';
+  idpublicacion: string = '';
+  modelo: string = '';
+  marca: string = '';
   precio!: number;
-  color: string= '';
-  transmision: string= '';
-  descripcion: string= '';
-  estado: string= '';
+  color: string = '';
+  transmision: string = '';
+  descripcion: string = '';
+  estado: string = '';
   kilometraje!: number;
   cantidaddeuso!: number;
   foto: any;
   idusuario!: any;
 
+  nombre: any;
+  apellido: any;
+  direccion: any;
+  telefono: any;
 
-  nombre:any;
-  apellido:any;
-  direccion:any;
-  telefono:any;
+  auto1: any;
 
-  reportes: any[] = [{
-    idreporte: '',
-    tipo: '',
-    descripcion: '',
-    idpublicacion: ''
-  }];
+  reportes: any = [
+    {
+      idreporte: '',
+      tipo: '',
+      descripcion: '',
+      idpublicacion: '',
+    },
+  ];
 
-  datosnuevos: any = [{
-    rol: '',
-    nombre: '',
-    apellido: '',
-    correo: '',
-    telefono: '',
-    direccion: ''
-  }];
+  datosnuevos: any = [
+    {
+      rol: '',
+      nombre: '',
+      apellido: '',
+      correo: '',
+      telefono: '',
+      direccion: '',
+    },
+  ];
 
-  constructor(private router: Router, private activedRouter: ActivatedRoute, private menu: MenuController, private db: DatabaseService, private alertController: AlertController) {
-    this.activedRouter.queryParams.subscribe(res => {
+  constructor(
+    private router: Router,
+    private activedRouter: ActivatedRoute,
+    private menu: MenuController,
+    private db: DatabaseService,
+    private alertController: AlertController
+  ) {
+    this.activedRouter.queryParams.subscribe((res) => {
       if (this.router.getCurrentNavigation()?.extras.state) {
-        this.idpublicacion = this.router.getCurrentNavigation()?.extras?.state?.['idpublicacionE'];
-        this.modelo = this.router.getCurrentNavigation()?.extras?.state?.['modeloE'];
-        this.marca = this.router.getCurrentNavigation()?.extras?.state?.['marcaE'];
-        this.precio = this.router.getCurrentNavigation()?.extras?.state?.['precioE'];
-        this.color = this.router.getCurrentNavigation()?.extras?.state?.['colorE'];
-        this.transmision = this.router.getCurrentNavigation()?.extras?.state?.['transmisionE'];
-        this.descripcion = this.router.getCurrentNavigation()?.extras?.state?.['descripcionE'];
-        this.estado = this.router.getCurrentNavigation()?.extras?.state?.['estadoE'];
-        this.kilometraje = this.router.getCurrentNavigation()?.extras?.state?.['kilometrajeE'];
-        this.cantidaddeuso = this.router.getCurrentNavigation()?.extras?.state?.['cantidaddeusoE'];
-        this.foto = this.router.getCurrentNavigation()?.extras?.state?.['fotoE'];
-        this.idusuario = this.router.getCurrentNavigation()?.extras?.state?.['idusuarioE'];
-        this.verificador = this.router.getCurrentNavigation()?.extras?.state?.['verificador'];
+        this.idpublicacion =
+          this.router.getCurrentNavigation()?.extras?.state?.['idpublicacionE'];
+        this.modelo =
+          this.router.getCurrentNavigation()?.extras?.state?.['modeloE'];
+        this.marca =
+          this.router.getCurrentNavigation()?.extras?.state?.['marcaE'];
+        this.precio =
+          this.router.getCurrentNavigation()?.extras?.state?.['precioE'];
+        this.color =
+          this.router.getCurrentNavigation()?.extras?.state?.['colorE'];
+        this.transmision =
+          this.router.getCurrentNavigation()?.extras?.state?.['transmisionE'];
+        this.descripcion =
+          this.router.getCurrentNavigation()?.extras?.state?.['descripcionE'];
+        this.estado =
+          this.router.getCurrentNavigation()?.extras?.state?.['estadoE'];
+        this.kilometraje =
+          this.router.getCurrentNavigation()?.extras?.state?.['kilometrajeE'];
+        this.cantidaddeuso =
+          this.router.getCurrentNavigation()?.extras?.state?.['cantidaddeusoE'];
+        this.foto =
+          this.router.getCurrentNavigation()?.extras?.state?.['fotoE'];
+        this.idusuario =
+          this.router.getCurrentNavigation()?.extras?.state?.['idusuarioE'];
+        this.verificador =
+          this.router.getCurrentNavigation()?.extras?.state?.['verificador'];
       }
-    })
+    });
   }
 
   ngOnInit() {
     this.menu.enable(true);
-    this.db.bdState().subscribe(res=>{
+    this.db.bdState().subscribe((res) => {
       //verifico si el estatus es true
-      if(res){
+      if (res) {
         //me subscribir al observable de la Tabla
-        this.db.fetchVendedores().subscribe(datos=>{
+        this.db.fetchVendedores().subscribe((datos) => {
           this.datosnuevos = datos;
           this.nombre = this.datosnuevos.nombre;
           this.telefono = this.datosnuevos.telefono;
           this.direccion = this.datosnuevos.direccion;
           this.apellido = this.datosnuevos.apellido;
-        })
-        this.db.fetchReportes().subscribe(datosreportes=>{
-          this.reportes = datosreportes;
-          this.db.presentAlert("","Datos agregados");
-        })
-      }
-    })
-  } 
+        });
 
-  reportarAuto(){
+        this.db.fetchReporteAuto().subscribe((datosreportes) => {
+          this.reportes = datosreportes;
+          this.auto1 = datosreportes[0].idpublicacion;
+        });
+      }
+    });
+  }
+
+  testFoto() {
+    alert(this.reportes.idpublicacion);
+  }
+
+  reportarAuto() {
     let navigationExtras: NavigationExtras = {
       state: {
-        publicacion: this.idpublicacion
-      }
-    }
-    this.router.navigate(['/reportar-auto'], navigationExtras)
+        publicacion: this.idpublicacion,
+      },
+    };
+    this.router.navigate(['/reportar-auto'], navigationExtras);
   }
 
   async presentAcceptRejectConfirmation(action: string) {
@@ -107,7 +134,7 @@ export class PaginaProductoPage implements OnInit {
       action === 'aceptar'
         ? '¿Estás seguro de que deseas aceptar esta solicitud?'
         : '¿Estás seguro de que deseas rechazar esta solicitud?';
-  
+
     const alert = await this.alertController.create({
       header: header,
       message: message,
@@ -124,18 +151,18 @@ export class PaginaProductoPage implements OnInit {
               const idPublicacion = this.idpublicacion;
               await this.db.actualizarEstadoPublicacion(idPublicacion, 1);
               this.router.navigate(['/pagina-principal']);
-              this.db.presentToast('bottom','Producto aceptado con exito');
+              this.db.presentToast('bottom', 'Producto aceptado con exito');
             } else if (action === 'rechazar') {
               const idPublicacion = this.idpublicacion;
               await this.db.actualizarEstadoPublicacion(idPublicacion, 0);
               this.router.navigate(['/pagina-principal']);
-              this.db.presentToast('bottom','Producto rechazado con exito');
+              this.db.presentToast('bottom', 'Producto rechazado con exito');
             }
           },
         },
       ],
     });
-  
+
     await alert.present();
   }
 
@@ -171,8 +198,7 @@ export class PaginaProductoPage implements OnInit {
   async presentDeleteReportConfirmation() {
     const header = 'Confirmación';
     const message = '¿Estás seguro de que deseas eliminar este reporte?';
-  
+
     this.db.presentConfirmationMessage(header, message, 'Eliminar Reporte');
   }
-  
 }
