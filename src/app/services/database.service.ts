@@ -39,13 +39,13 @@ export class DatabaseService {
     "INSERT or IGNORE INTO usuario(idusuario,nombre,apellido,rut,correo,clave,respuesta,telefono,direccion,foto,idpregunta,idrol) VALUES (2,'Gabriel','Maneiro','21921084-1','ga.maneiro@duocuc.cl','!Miguel123','AUTOMATICA','96842823','Casa2','',(SELECT idpregunta from pregunta WHERE idpregunta=2), (SELECT idrol from rol WHERE idrol=1));";
 
   registroPublicacion1: string =
-    "INSERT or IGNORE INTO publicacion(idpublicacion,modelo,marca,precio,color,transmision,descripcion,estado,kilometraje,cantidaddeuso,foto,idusuario) VALUES (1,UPPER('2023 Silverado 3.0TD High Country Auto DC 4WD'),UPPER('Chevrolet'),52000000,'gris','Automatica','asd',0,0,0,'',(SELECT idusuario from usuario WHERE idusuario=1));";
+    "INSERT or IGNORE INTO publicacion(idpublicacion,modelo,marca,precio,color,transmision,descripcion,estado,kilometraje,cantidaddeuso,foto,idusuario) VALUES (1,UPPER('2023 Silverado 3.0TD High Country Auto DC 4WD'),'Chevrolet',52000000,'gris','Automatica','asd',0,0,0,'',(SELECT idusuario from usuario WHERE idusuario=1));";
   registroPublicacion2: string =
-    "INSERT or IGNORE INTO publicacion(idpublicacion,modelo,marca,precio,color,transmision,descripcion,estado,kilometraje,cantidaddeuso,foto,idusuario) VALUES (2,UPPER('2010 Q5 2.0T FSI STRONIC QUATTRO'),UPPER('Audi'),11500000,'blanco','Automatica','asd',0,159567,2,'',(SELECT idusuario from usuario WHERE idusuario=1));";
+    "INSERT or IGNORE INTO publicacion(idpublicacion,modelo,marca,precio,color,transmision,descripcion,estado,kilometraje,cantidaddeuso,foto,idusuario) VALUES (2,UPPER('2010 Q5 2.0T FSI STRONIC QUATTRO'),'Audi',11500000,'blanco','Automatica','asd',0,159567,2,'',(SELECT idusuario from usuario WHERE idusuario=1));";
   registroPublicacion3: string =
-    "INSERT or IGNORE INTO publicacion(idpublicacion,modelo,marca,precio,color,transmision,descripcion,estado,kilometraje,cantidaddeuso,foto,idusuario) VALUES (3,UPPER('2009 147 2.0 TS 150 CV Sport Selespeed'),UPPER('Alfa Romeo'),10900000,'negro','Automatica','asd',0,90000,3,'',(SELECT idusuario from usuario WHERE idusuario=1));";
+    "INSERT or IGNORE INTO publicacion(idpublicacion,modelo,marca,precio,color,transmision,descripcion,estado,kilometraje,cantidaddeuso,foto,idusuario) VALUES (3,UPPER('2009 147 2.0 TS 150 CV Sport Selespeed'),'Alfa Romeo',10900000,'negro','Automatica','asd',0,90000,3,'',(SELECT idusuario from usuario WHERE idusuario=1));";
   registroPublicacion4: string =
-    "INSERT or IGNORE INTO publicacion(idpublicacion,modelo,marca,precio,color,transmision,descripcion,estado,kilometraje,cantidaddeuso,foto,idusuario) VALUES (4,UPPER('EVOLTIS TOURING GARDX'),UPPER('Subaru'),39490000,'gris','Automatica','asd',0,0,0,'',(SELECT idusuario from usuario WHERE idusuario=1));";
+    "INSERT or IGNORE INTO publicacion(idpublicacion,modelo,marca,precio,color,transmision,descripcion,estado,kilometraje,cantidaddeuso,foto,idusuario) VALUES (4,UPPER('EVOLTIS TOURING GARDX'),'Subaru',39490000,'gris','Automatica','asd',0,0,0,'',(SELECT idusuario from usuario WHERE idusuario=1));";
 
   registroPregunta1: string =
     "INSERT or IGNORE INTO pregunta(idpregunta,nombre) VALUES (1,'¿Cómo se llamaba tu primera mascota?');";
@@ -550,7 +550,7 @@ export class DatabaseService {
               descripcionE: res.rows.item(0).descripcion,
               estadoE: res.rows.item(0).estado,
               kilometrajeE: res.rows.item(0).kilometraje,
-              cantidaddeusoE: res.rows.item(0).transmision,
+              cantidaddeusoE: res.rows.item(0).cantidaddeuso,
               fotoE: res.rows.item(0).foto,
               idusuarioE: res.rows.item(0).idusuario,
             },
@@ -754,25 +754,9 @@ export class DatabaseService {
     idusuario: any,
     id: any
   ) {
-    let publicaciones: any = [
-      {
-        idpubli: '',
-        modelo: '',
-        marca: '',
-        precio: '',
-        color: '',
-        transmision: '',
-        descripcion: '',
-        estado: '',
-        kilometraje: '',
-        cantidaddeuso: '',
-        foto: '',
-        idusuario: '',
-      },
-    ];
     return this.db
       .executeSql(
-        'UPDATE publicacion SET modelo = ?, marca = ?, precio = ?, color = ?, transmision = ?, descripcion = ?, , estado = ?, kilometraje = ?, cantidaddeuso = ?, foto = ? WHERE idusuario = ? AND idpublicacion = ?;',
+        'UPDATE publicacion SET modelo = ?, marca = ?, precio = ?, color = ?, transmision = ?, descripcion = ?, estado = ?, kilometraje = ?, cantidaddeuso = ?, foto = ? WHERE idusuario = ? AND idpublicacion = ?;',
         [
           modelo,
           marca,
@@ -789,27 +773,7 @@ export class DatabaseService {
         ]
       )
       .then(() => {
-        this.db
-          .executeSql('select * from publicacion where idusuario = ?;', [
-            idusuario,
-          ])
-          .then((res) => {
-            if (res.rows.length > 0) {
-              (publicaciones.idpubli = res.rows.item(0).idpublicacion),
-                (publicaciones.modelo = res.rows.item(0).modelo),
-                (publicaciones.marca = res.rows.item(0).marca),
-                (publicaciones.precio = res.rows.item(0).precio),
-                (publicaciones.color = res.rows.item(0).color),
-                (publicaciones.transmision = res.rows.item(0).transmision),
-                (publicaciones.descripcion = res.rows.item(0).descripcion),
-                (publicaciones.estado = res.rows.item(0).estado),
-                (publicaciones.kilometraje = res.rows.item(0).kilometraje),
-                (publicaciones.cantidaddeuso = res.rows.item(0).cantidaddeuso),
-                (publicaciones.foto = res.rows.item(0).foto),
-                (publicaciones.idusuario = res.rows.item(0).idusuario);
-            }
-            this.publiUser.next(publicaciones as any);
-          });
+        this.publicacionUser(idusuario);
       })
       .catch((e) => this.presentAlert('', 'Error en editar publicaciones' + e));
   }

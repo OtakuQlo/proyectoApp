@@ -16,13 +16,15 @@ export class ModificarProductoPage implements OnInit {
   precio : string = '';
   color: string ='';
   marca: string ='';
-  anos: string = '';
+  anos!: number;
   descrp: string = '';
-  kilometraje: string = ''; 
+  kilometraje!: number; 
   transmision: string ='';
   foto: any = './../assets/icon/boton-agregar.png';
   idusuario: string='';
   estado: string='';
+
+  regexname: RegExp = /^[a-zA-ZÀ-ÿ\u00f1\u00d1]+(\s*[a-zA-ZÀ-ÿ\u00f1\u00d1]*)*[a-zA-ZÀ-ÿ-0-9\u00f1\u00d1]{1,100}$/;
 
   labelModelo: string = '';
   labelPrecio: string = '';
@@ -70,7 +72,7 @@ export class ModificarProductoPage implements OnInit {
   irPaginaPublicaciones(){
     let pass = 0;
 
-    if(this.modelo.length < 1){
+    if(this.modelo.length < 1 ){
       pass = 1;
       this.labelModelo = 'El modelo debe contener como minimo 2 caracteres no especiales.';
     }else{
@@ -112,10 +114,10 @@ export class ModificarProductoPage implements OnInit {
       this.labelMarca = '';
     }
 
-    if (parseInt(this.kilometraje) == 0 || this.kilometraje == "" || this.regexname.test(this.kilometraje) ) {
+    if (this.kilometraje == 0 || this.kilometraje < 0 || !this.kilometraje) {
       pass = 1;
       this.labelKilometraje = 'Ingrese el kilometraje del Auto.';
-      if(parseInt(this.kilometraje) > 320000){
+      if(this.kilometraje > 320000){
         pass = 1;
         this.labelKilometraje = 'El auto no puede ser publicado si su kilometraje pasa los 320000.';
       }
@@ -124,7 +126,7 @@ export class ModificarProductoPage implements OnInit {
       this.labelKilometraje = '';
     }
 
-    if(parseInt(this.anos) == 0 || this.anos == "" || this.regexname.test(this.anos)){
+    if(this.anos == 0 || this.anos < 0 || !this.anos){
       pass = 1;
       this.labelAnos = 'Debe ingresar como minimo 1 año.';
     }else{
@@ -138,13 +140,13 @@ export class ModificarProductoPage implements OnInit {
       this.labelPrecio = '';
     }
 
-    if(pass == 0){
+    if(pass == 0 && localStorage.getItem('idper') == this.idusuario){
       this.modificarPublicacion();
     }
   };
   
   modificarPublicacion(){
-    this.db.editarPublicacion(this.modelo, this.marca, this.precio, this.color, this.transmision, this.descrp, this.estado, this.kilometraje, this.anos, this.foto, this.idusuario, this.idpublicacion);
+    this.db.editarPublicacion(this.modelo, this.marca, this.precio, this.color, this.transmision, this.descrp, this.estado, this.kilometraje, this.anos, this.foto, this.idusuario, localStorage.getItem('idper'));
     this.db.presentToast('top','Publicacion actualizada correctamente');
     this.router.navigate(['/publicaciones'])
   }

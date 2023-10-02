@@ -38,29 +38,26 @@
             <ion-label color="danger" style="font-size: 11px;">{{labelPrecio}}</ion-label>
 
             <ion-item style="margin-top: 10px;">
-              <mat-label>Seleccione un color</mat-label>
-              <mat-select interface="action-sheet" [(ngModel)]="color" value="{{color}}">
-                <mat-option value="{{i}}" *ngFor="let i of arrColor">{{i}}</mat-option>
-              </mat-select>
+              <ion-select [(ngModel)]="color" interface="popover" placeholder="Seleccionar color">
+                <ion-select-option value="{{i}}" *ngFor="let i of arrColor">{{i}}</ion-select-option>
+              </ion-select>
             </ion-item>
             <ion-label color="danger" style="font-size: 11px;">{{labelColor}}</ion-label>
 
             <ion-item style="margin-top: 10px;">
-              <mat-label>Seleccione una marca</mat-label>
-              <mat-select interface="action-sheet" [(ngModel)]="marca">
-                <mat-option value="{{x}}" *ngFor="let x of arrMarca">{{x}}</mat-option>
-              </mat-select>
+              <ion-select [(ngModel)]="marca" interface="popover" placeholder="Seleccionar marca">
+                <ion-select-option value="{{x}}" *ngFor="let x of arrMarca">{{x}}</ion-select-option>
+              </ion-select>
             </ion-item>
             <ion-label color="danger" style="font-size: 11px;">{{labelMarca}}</ion-label>
 
             <ion-item style="margin-top: 10px;">
-              <mat-label>Tipo de transmisión</mat-label>
-              <mat-select interface="action-sheet" [(ngModel)]="transmision">
-                <mat-option value="{{a}}" *ngFor="let a of arrTrans ">{{a}}</mat-option>
-              </mat-select>
+              <ion-select [(ngModel)]="transmision" interface="popover" placeholder="Seleccionar transmision">
+                <ion-select-option value="{{a}}" *ngFor="let a of arrTrans">{{a}}</ion-select-option>
+              </ion-select>
             </ion-item>
             <ion-label color="danger" style="font-size: 11px;">{{labelTrans}}</ion-label>
-
+          
             <ion-item>
               <ion-input label="Ingrese los años de uso" labelPlacement="floating" [(ngModel)]="anos"
                 [clearInput]="true"></ion-input>

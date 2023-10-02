@@ -42,12 +42,9 @@ export class PublicacionesPage implements OnInit {
     })
   }
 
-  verMiPubli(){
-
-  }
 
   irModificarAuto(id:any){
-    this.db.pasarmodificarPublicacion(id,localStorage.getItem("idper"));
+    this.db.pasarmodificarPublicacion(id,localStorage.getItem('idper'));
   }
 
   async eliminarAuto(idpublicacion: string) {

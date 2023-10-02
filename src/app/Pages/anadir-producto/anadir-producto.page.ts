@@ -56,7 +56,7 @@ export class AnadirProductoPage implements OnInit {
   irPaginaPrincipal(){
     let pass = 0;
 
-    if(!this.regexname.test(this.modeloV)){
+    if(this.modeloV.length < 1 ){
       pass = 1;
       this.labelModelo = 'El modelo debe contener como minimo 2 caracteres no especiales.';
     }else{
