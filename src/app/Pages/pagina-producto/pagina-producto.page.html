@@ -1,4 +1,4 @@
-<ion-header [translucent]="true" style="height: 50px;">
+<ion-header [translucent]="true" style="height: 50px">
   <ion-toolbar>
     <app-top-bar></app-top-bar>
   </ion-toolbar>
@@ -8,9 +8,7 @@
   <ion-grid>
     <ion-row>
       <ion-col size="12">
-        <ion-img 
-          [src]="foto"
-          alt="No image"></ion-img>
+        <ion-img [src]="foto" alt="No image"></ion-img>
       </ion-col>
     </ion-row>
     <ion-row>
@@ -18,15 +16,17 @@
         <ion-card color="light">
           <ion-card-content>
             <ion-row>
-              <h1>{{marca | uppercase}} {{modelo | uppercase}} </h1>
+              <h1>{{marca | uppercase}} {{modelo | uppercase}}</h1>
             </ion-row>
             <ion-row>
-              <h2>{{precio | currency : 'CLP' : '$'}}  </h2>
+              <h2>{{precio | currency : 'CLP' : '$'}}</h2>
             </ion-row>
             <div>
               <ion-row>VENDEDOR: {{nombre| uppercase}} </ion-row>
               <ion-row>{{direccion | uppercase}} </ion-row>
-              <ion-row>CONTACTO : +569{{telefono}}</ion-row>
+              <ion-row (click)="showNumber(telefono)"
+                >CONTACTO : +569{{telefono}}</ion-row
+              >
             </div>
           </ion-card-content>
         </ion-card>
@@ -49,7 +49,7 @@
       <ion-col size="12" class="ion-text-start">
         <ion-card color="light">
           <ion-card-content>
-            <div style="font-size: 13px;">
+            <div style="font-size: 13px">
               <ion-row>
                 <h2>Descripción</h2>
               </ion-row>
@@ -60,17 +60,22 @@
       </ion-col>
     </ion-row>
     <ion-row class="ion-justify-content-center">
-
       <ion-col *ngIf="rol == '2'" size="4">
-        <ion-button color="danger" style="font-size: 12px; width: 105px;" fill="outline"
-          shape="round" (click)="reportarAuto()">Reportar</ion-button>
+        <ion-button
+          color="danger"
+          style="font-size: 12px; width: 105px"
+          fill="outline"
+          shape="round"
+          (click)="reportarAuto()"
+          >Reportar</ion-button
+        >
       </ion-col>
 
       <ion-row *ngIf="rol == '1' && verificador == 'reporte'">
         <ion-col size="12" class="ion-text-start">
           <ion-card color="light">
             <ion-card-content>
-              <div style="font-size: 13px;">
+              <div style="font-size: 13px">
                 <ion-row>
                   <h2>Reportes</h2>
                 </ion-row>
@@ -80,7 +85,12 @@
                     <p>Descripción: {{ report.descripcion }}</p>
                   </ion-col>
                   <ion-col>
-                    <ion-button color="danger" fill="outline" shape="round" (click)="presentDeleteReportConfirmation(report.idreporte)">
+                    <ion-button
+                      color="danger"
+                      fill="outline"
+                      shape="round"
+                      (click)="presentDeleteReportConfirmation(report.idreporte)"
+                    >
                       Eliminar
                     </ion-button>
                   </ion-col>
@@ -96,7 +106,12 @@
             <ion-card-content>
               <ion-row>
                 <ion-col size="4">
-                  <ion-button color="danger" fill="outline" shape="round" (click)="presentDeleteConfirmation()">
+                  <ion-button
+                    color="danger"
+                    fill="outline"
+                    shape="round"
+                    (click)="presentDeleteConfirmation()"
+                  >
                     Eliminar Producto
                   </ion-button>
                 </ion-col>
@@ -109,9 +124,9 @@
         <ion-col size="12" class="ion-text-start">
           <ion-card color="light">
             <ion-card-content>
-              <div style="font-size: 13px;">
+              <div style="font-size: 13px">
                 <ion-row class="ion-justify-content-center">
-                    <h2>Solicitud</h2>
+                  <h2>Solicitud</h2>
                 </ion-row>
               </div>
             </ion-card-content>
@@ -124,13 +139,23 @@
             <ion-card-content>
               <ion-row>
                 <ion-col size="4">
-                  <ion-button color="danger" fill="outline" shape="round" (click)="presentAcceptRejectConfirmation('rechazar')">
+                  <ion-button
+                    color="danger"
+                    fill="outline"
+                    shape="round"
+                    (click)="presentAcceptRejectConfirmation('rechazar')"
+                  >
                     Rechazar
                   </ion-button>
                 </ion-col>
                 <ion-col size="2"></ion-col>
                 <ion-col size="4">
-                  <ion-button color="success" fill="outline" shape="round" (click)="presentAcceptRejectConfirmation('aceptar')">
+                  <ion-button
+                    color="success"
+                    fill="outline"
+                    shape="round"
+                    (click)="presentAcceptRejectConfirmation('aceptar')"
+                  >
                     Aceptar
                   </ion-button>
                 </ion-col>
