@@ -14,7 +14,7 @@
       <ion-label>{{x.modelo}}</ion-label>
       <ion-buttons slot="end">
         <ion-button
-          (click)="irPaginaProducto1(x)"
+          (click)="irPaginaProducto(x,'solicitud')"
           (click)="pasarPersona(x.idusuario)"
           color="warning"
           >Ver</ion-button
@@ -32,7 +32,7 @@
       <ion-label>{{x.modelo}}</ion-label>
       <ion-buttons slot="end">
         <ion-button
-          (click)="irPaginaProducto(x)"
+          (click)="irPaginaProducto(x,'reporte')"
           (click)="pasarPersona(x.idusuario)"
           (click)="pasarReportes(x)"
           color="warning"

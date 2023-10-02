@@ -64,7 +64,7 @@ export class PanelAdminPage implements OnInit {
     });
   }
 
-  irPaginaProducto1(x: any) {
+  irPaginaProducto(x: any, verificador: string) {
     let navigationExtra: NavigationExtras = {
       state: {
         idpublicacionE: x.idpublicacion,
@@ -79,7 +79,7 @@ export class PanelAdminPage implements OnInit {
         cantidaddeusoE: x.cantidaddeuso,
         fotoE: x.foto,
         idusuarioE: x.idusuario,
-        verificador: 'solicitud',
+        verificador: verificador, // Pasa 'solicitud' o 'reporte' según corresponda
       },
     };
     this.router.navigate(['/pagina-producto'], navigationExtra);
@@ -88,26 +88,6 @@ export class PanelAdminPage implements OnInit {
   pasarReportes(x: any) {
     this.db.pasarReportes(x.idpublicacion);
     alert(x.idpublicacion);
-  }
-
-  irPaginaProducto(x: any) {
-    let navigationExtra: NavigationExtras = {
-      state: {
-        idpublicacionE: x.idpublicacion,
-        modeloE: x.modelo,
-        marcaE: x.marca,
-        precioE: x.precio,
-        colorE: x.color,
-        transmisionE: x.transmision,
-        descripcionE: x.descripcion,
-        estadoE: x.estado,
-        kilometrajeE: x.kilometraje,
-        cantidaddeusoE: x.cantidaddeuso,
-        fotoE: x.foto,
-        idusuarioE: x.idusuario,
-      },
-    };
-    this.router.navigate(['/pagina-producto'], navigationExtra);
   }
 
   pasarPersona(id: any) {
