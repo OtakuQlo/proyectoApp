@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, NavigationExtras, Router } from '@angular/router';
 import { IonModal, MenuController, AlertController } from '@ionic/angular';
+import { CallnumberService } from 'src/app/services/callnumber.service';
 import { DatabaseService } from 'src/app/services/database.service';
 
 @Component({
@@ -59,7 +60,8 @@ export class PaginaProductoPage implements OnInit {
     private activedRouter: ActivatedRoute,
     private menu: MenuController,
     private db: DatabaseService,
-    private alertController: AlertController
+    private alertController: AlertController,
+    private callNumber: CallnumberService
   ) {
     this.activedRouter.queryParams.subscribe((res) => {
       if (this.router.getCurrentNavigation()?.extras.state) {
@@ -200,5 +202,9 @@ export class PaginaProductoPage implements OnInit {
     const message = '¿Estás seguro de que deseas eliminar este reporte?';
 
     this.db.presentConfirmationMessage(header, message, 'Eliminar Reporte');
+  }
+
+  showNumber(telefono: any) {
+    this.callNumber.showNumber('+569' + telefono);
   }
 }
