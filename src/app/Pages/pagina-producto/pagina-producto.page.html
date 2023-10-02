@@ -66,7 +66,7 @@
           shape="round" (click)="reportarAuto()">Reportar</ion-button>
       </ion-col>
 
-      <ion-row *ngIf="rol == '1' && verificador != 'solicitud'">
+      <ion-row *ngIf="rol == '1' && verificador == 'reporte'">
         <ion-col size="12" class="ion-text-start">
           <ion-card color="light">
             <ion-card-content>
@@ -80,8 +80,8 @@
                     <p>Descripción: {{ report.descripcion }}</p>
                   </ion-col>
                   <ion-col>
-                    <ion-button color="danger" fill="outline" shape="round" (click)="presentDeleteReportConfirmation()">
-                      Eliminar Reporte
+                    <ion-button color="danger" fill="outline" shape="round" (click)="presentDeleteReportConfirmation(report.idreporte)">
+                      Eliminar
                     </ion-button>
                   </ion-col>
                 </ion-row>
@@ -90,13 +90,13 @@
           </ion-card>
         </ion-col>
       </ion-row>
-      <ion-row *ngIf="rol == '1' && verificador != 'solicitud'">
+      <ion-row *ngIf="rol == '1' && verificador == 'reporte'">
         <ion-col size="12" class="ion-text-start">
           <ion-card color="light">
             <ion-card-content>
               <ion-row>
                 <ion-col size="4">
-                  <ion-button color="danger" fill="outline" shape="round" (click) = "testFoto()">
+                  <ion-button color="danger" fill="outline" shape="round" (click)="presentDeleteConfirmation()">
                     Eliminar Producto
                   </ion-button>
                 </ion-col>

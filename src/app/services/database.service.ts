@@ -122,7 +122,7 @@ export class DatabaseService {
     this.platform.ready().then(() =>
       this.sqlite
         .create({
-          name: 'satiscar7.db',
+          name: 'satiscar8.db',
           location: 'default',
         })
         .then((db: SQLiteObject) => {
@@ -650,6 +650,20 @@ export class DatabaseService {
         this.reportesDatos.next(reportes as any);
       })
       .catch((e) => 'error funcion 1');
+  }
+
+  eliminarReporte(idreporte: string) {
+    return this.db.executeSql(
+      'DELETE FROM reporte WHERE idreporte = ?',
+      [idreporte]
+    );
+  }
+
+  eliminarTodosReportes(idpublicacion: string) {
+    return this.db.executeSql(
+      'DELETE FROM reporte WHERE idpublicacion = ?',
+      [idpublicacion]
+    );
   }
 
   //Cuando ingresamos a la pagina principal esta funcion permite ver los autos

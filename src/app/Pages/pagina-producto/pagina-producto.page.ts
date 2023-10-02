@@ -183,6 +183,7 @@ export class PaginaProductoPage implements OnInit {
           text: 'Eliminar',
           handler: async () => {
             const idPublicacion = this.idpublicacion;
+            await this.db.eliminarTodosReportes(idPublicacion);
             await this.db.eliminarProducto(idPublicacion);
             await this.db.buscarPublicacion();
             this.router.navigate(['/pagina-principal']);
@@ -195,10 +196,30 @@ export class PaginaProductoPage implements OnInit {
     await alert.present();
   }
 
-  async presentDeleteReportConfirmation() {
+  async presentDeleteReportConfirmation(idreporte: string) {
     const header = 'Confirmación';
     const message = '¿Estás seguro de que deseas eliminar este reporte?';
-
-    this.db.presentConfirmationMessage(header, message, 'Eliminar Reporte');
+  
+    const alert = await this.alertController.create({
+      header: header,
+      message: message,
+      buttons: [
+        {
+          text: 'Cancelar',
+          role: 'cancel',
+          cssClass: 'secondary',
+        },
+        {
+          text: 'Eliminar',
+          handler: async () => {
+            await this.db.eliminarReporte(idreporte);
+            await this.db.buscarPublicacion();
+            this.db.presentToast('bottom', 'Reporte eliminado con éxito');
+          },
+        },
+      ],
+    });
+  
+    await alert.present();
   }
 }
