@@ -33,16 +33,7 @@ export class PaginaProductoPage implements OnInit {
   direccion: any;
   telefono: any;
 
-  auto1: any;
-
-  reportes: any = [
-    {
-      idreporte: '',
-      tipo: '',
-      descripcion: '',
-      idpublicacion: '',
-    },
-  ];
+  reportes: any;
 
   datosnuevos: any = [
     {
@@ -111,14 +102,9 @@ export class PaginaProductoPage implements OnInit {
 
         this.db.fetchReporteAuto().subscribe((datosreportes) => {
           this.reportes = datosreportes;
-          this.auto1 = datosreportes[0].idpublicacion;
         });
       }
     });
-  }
-
-  testFoto() {
-    alert(this.reportes.idpublicacion);
   }
 
   reportarAuto() {
