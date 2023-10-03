@@ -122,7 +122,7 @@ export class DatabaseService {
     this.platform.ready().then(() =>
       this.sqlite
         .create({
-          name: 'satiscar8.db',
+          name: 'satiscar9.db',
           location: 'default',
         })
         .then((db: SQLiteObject) => {
@@ -625,15 +625,7 @@ export class DatabaseService {
   }
 
   pasarReportes(id: any) {
-    let reportes: any = [
-      {
-        idreporte: '',
-        tipo: '',
-        descripcion: '',
-        idpublicacion: '',
-      },
-    ];
-
+    let reportes: any[] = [];
     this.db
       .executeSql('select * from reporte where idpublicacion = ?', [id])
       .then((res) => {
