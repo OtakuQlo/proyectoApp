@@ -115,7 +115,7 @@ export class InicioSesionPage implements OnInit {
     }
 
     // validacion this.rut
-    if (!validateRut(this.rut)) {
+    if (!validateRut(this.rut) || this.rut.charAt(this.rut.length - 2) != '-') {
       bandera = false;
       this.labelRut = 'Debe ingresar un rut sin puntos y con guion';
     } else {
@@ -164,7 +164,6 @@ export class InicioSesionPage implements OnInit {
       this.labelPregunta = 'Debe ingresar una opcion';
     } else {
       this.labelPregunta = '';
-      this.pregunta = 'coño';
     }
 
     // validacion respuesta

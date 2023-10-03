@@ -12,56 +12,58 @@ register();
 })
 export class AppComponent {
   nombre: string = '';
-  apellido: any ;
+  apellido: any;
   rol: any;
   id: any;
+  foto: any;
 
-  datosnuevos: any = [{
-    rol: '',
-    nombre: '',
-    apellido: '',
-    correo: '',
-    telefono: '',
-    direccion: ''
-  }];
-  
+  datosnuevos: any = [
+    {
+      rol: '',
+      nombre: '',
+      apellido: '',
+      correo: '',
+      telefono: '',
+      direccion: '',
+    },
+  ];
+
   ionViewWillEnter() {
-    
-    this.rol = localStorage.getItem("rol");
+    this.rol = localStorage.getItem('rol');
   }
 
-  constructor( private router: Router,private db: DatabaseService) {}
+  constructor(private router: Router, private db: DatabaseService) {}
 
-  ngOnInit(){
-
-    this.db.bdState().subscribe(res=>{
+  ngOnInit() {
+    this.db.bdState().subscribe((res) => {
       //verifico si el estatus es true
-      if(res){
+      if (res) {
         //me subscribir al observable de la Tabla
-        this.db.fetchUser().subscribe(datos=>{
+        this.db.fetchUser().subscribe((datos) => {
           this.datosnuevos = datos;
           this.nombre = this.datosnuevos.nombre;
           this.rol = this.datosnuevos.rol;
           this.apellido = this.datosnuevos.apellido;
-          localStorage.setItem("idper",this.datosnuevos.idper);
-          localStorage.setItem("rol",this.datosnuevos.rol);
-        })
+          localStorage.setItem('idper', this.datosnuevos.idper);
+          localStorage.setItem('rol', this.datosnuevos.rol);
+          this.foto = this.datosnuevos.foto;
+        });
       }
-    })
+    });
   }
 
-  irInicioSesion(){
+  irInicioSesion() {
     this.router.navigate(['/home']);
-    localStorage.removeItem("rol");
-    localStorage.removeItem("idper");
-    localStorage.removeItem("nombre");
+    localStorage.removeItem('rol');
+    localStorage.removeItem('idper');
+    localStorage.removeItem('nombre');
   }
 
-  irCrearAdmin(){
+  irCrearAdmin() {
     this.router.navigate(['/crear-admin']);
   }
 
-  irPanelAdmin(){
+  irPanelAdmin() {
     this.router.navigate(['/panel-admin']);
   }
 }
