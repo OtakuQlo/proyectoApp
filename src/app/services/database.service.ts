@@ -658,6 +658,30 @@ export class DatabaseService {
     );
   }
 
+  async cambiarEstadoPublicacion(idpublicacion: string) {
+    try {
+      // Verificar si la publicación tiene reportes
+      const reportesCount = await this.db.executeSql(
+        'SELECT COUNT(*) AS count FROM reporte WHERE idpublicacion = ?',
+        [idpublicacion]
+      );
+
+      if (reportesCount.rows.item(0).count === 0) {
+        // Si no tiene reportes, actualiza el estado de la publicación a 1
+        await this.db.executeSql(
+          'UPDATE publicacion SET estado = 1 WHERE idpublicacion = ?',
+          [idpublicacion]
+        );
+        return true; // Estado cambiado con éxito
+      } else {
+        return false; // La publicación tiene reportes, no se cambió el estado
+      }
+    } catch (error) {
+      console.error('Error al cambiar el estado de la publicación:', error);
+      return false; // Error al cambiar el estado
+    }
+  }
+
   //Cuando ingresamos a la pagina principal esta funcion permite ver los autos
   buscarPublicacion() {
     return this.db

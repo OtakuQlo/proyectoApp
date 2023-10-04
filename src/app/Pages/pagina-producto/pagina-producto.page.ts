@@ -138,11 +138,13 @@ export class PaginaProductoPage implements OnInit {
             if (action === 'aceptar') {
               const idPublicacion = this.idpublicacion;
               await this.db.actualizarEstadoPublicacion(idPublicacion, 1);
+              await this.db.buscarPublicacion();
               this.router.navigate(['/pagina-principal']);
               this.db.presentToast('bottom', 'Producto aceptado con exito');
             } else if (action === 'rechazar') {
               const idPublicacion = this.idpublicacion;
               await this.db.actualizarEstadoPublicacion(idPublicacion, 0);
+              await this.db.buscarPublicacion();
               this.router.navigate(['/pagina-principal']);
               this.db.presentToast('bottom', 'Producto rechazado con exito');
             }
@@ -184,7 +186,7 @@ export class PaginaProductoPage implements OnInit {
     await alert.present();
   }
 
-  async presentDeleteReportConfirmation(idreporte: string) {
+  async presentDeleteReportConfirmation(idreporte: string){
     const header = 'Confirmación';
     const message = '¿Estás seguro de que deseas eliminar este reporte?';
   
@@ -200,7 +202,9 @@ export class PaginaProductoPage implements OnInit {
         {
           text: 'Eliminar',
           handler: async () => {
+            const idPublicacion = this.idpublicacion;
             await this.db.eliminarReporte(idreporte);
+            await this.db.cambiarEstadoPublicacion(idPublicacion);
             await this.db.buscarPublicacion();
             this.db.presentToast('bottom', 'Reporte eliminado con éxito');
           },
