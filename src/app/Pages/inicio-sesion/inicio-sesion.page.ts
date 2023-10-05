@@ -192,6 +192,10 @@ export class InicioSesionPage implements OnInit {
       this.labelDireccion = '';
     }
 
+    if (!this.foto) {
+      this.foto = "./../assets/icon/cerrar-sesion.png"
+    }
+
     if (bandera) {
       this.db.crearUsuario(
         this.nombre,
