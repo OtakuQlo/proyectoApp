@@ -43,13 +43,13 @@ export class DatabaseService {
     "INSERT or IGNORE INTO usuario(idusuario,nombre,apellido,rut,correo,clave,respuesta,telefono,direccion,foto,idpregunta,idrol) VALUES (4,'Javier','Montez','22222222-2','Ja.Montez@duocuc.cl','!Miguel123','AUTOMATICA','94282369','Hogar2','',(SELECT idpregunta from pregunta WHERE idpregunta=2), (SELECT idrol from rol WHERE idrol=2));";
 
   registroPublicacion1: string =
-    "INSERT or IGNORE INTO publicacion(idpublicacion,modelo,marca,precio,color,transmision,descripcion,estado,kilometraje,cantidaddeuso,foto,idusuario) VALUES (1,UPPER('2023 Silverado 3.0TD High Country Auto DC 4WD'),'Chevrolet',52000000,'gris','Automatica','asd',0,0,0,'',(SELECT idusuario from usuario WHERE idusuario=1));";
+    "INSERT or IGNORE INTO publicacion(idpublicacion,modelo,marca,precio,color,transmision,descripcion,estado,kilometraje,cantidaddeuso,foto,idusuario) VALUES (1,'2023 Silverado 3.0TD High Country Auto DC 4WD','Chevrolet',52000000,'gris','Automatica','asd',1,0,0,'',(SELECT idusuario from usuario WHERE idusuario=1));";
   registroPublicacion2: string =
-    "INSERT or IGNORE INTO publicacion(idpublicacion,modelo,marca,precio,color,transmision,descripcion,estado,kilometraje,cantidaddeuso,foto,idusuario) VALUES (2,UPPER('2010 Q5 2.0T FSI STRONIC QUATTRO'),'Audi',11500000,'blanco','Automatica','asd',0,159567,2,'',(SELECT idusuario from usuario WHERE idusuario=1));";
+    "INSERT or IGNORE INTO publicacion(idpublicacion,modelo,marca,precio,color,transmision,descripcion,estado,kilometraje,cantidaddeuso,foto,idusuario) VALUES (2,'2010 Q5 2.0T FSI STRONIC QUATTRO','Audi',11500000,'blanco','Automatica','asd',1,159567,2,'',(SELECT idusuario from usuario WHERE idusuario=1));";
   registroPublicacion3: string =
-    "INSERT or IGNORE INTO publicacion(idpublicacion,modelo,marca,precio,color,transmision,descripcion,estado,kilometraje,cantidaddeuso,foto,idusuario) VALUES (3,UPPER('2009 147 2.0 TS 150 CV Sport Selespeed'),'Alfa Romeo',10900000,'negro','Automatica','asd',0,90000,3,'',(SELECT idusuario from usuario WHERE idusuario=1));";
+    "INSERT or IGNORE INTO publicacion(idpublicacion,modelo,marca,precio,color,transmision,descripcion,estado,kilometraje,cantidaddeuso,foto,idusuario) VALUES (3,'2009 147 2.0 TS 150 CV Sport Selespeed','Alfa Romeo',10900000,'negro','Automatica','asd',1,90000,3,'',(SELECT idusuario from usuario WHERE idusuario=1));";
   registroPublicacion4: string =
-    "INSERT or IGNORE INTO publicacion(idpublicacion,modelo,marca,precio,color,transmision,descripcion,estado,kilometraje,cantidaddeuso,foto,idusuario) VALUES (4,UPPER('EVOLTIS TOURING GARDX'),'Subaru',39490000,'gris','Automatica','asd',0,0,0,'',(SELECT idusuario from usuario WHERE idusuario=1));";
+    "INSERT or IGNORE INTO publicacion(idpublicacion,modelo,marca,precio,color,transmision,descripcion,estado,kilometraje,cantidaddeuso,foto,idusuario) VALUES (4,'EVOLTIS TOURING GARDX','Subaru',39490000,'gris','Automatica','asd',1,0,0,'',(SELECT idusuario from usuario WHERE idusuario=1));";
 
   registroPregunta1: string =
     "INSERT or IGNORE INTO pregunta(idpregunta,nombre) VALUES (1,'¿Cómo se llamaba tu primera mascota?');";

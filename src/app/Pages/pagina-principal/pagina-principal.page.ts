@@ -26,6 +26,17 @@ export class PaginaPrincipalPage implements OnInit {
     idusuario: ''
   }];
 
+  resultados: any;
+
+  handleInput(event:any){
+    const query = event.target.value;
+    this.resultados = this.arregloAutos;
+    if(query && query.trim() != ''){
+      this.resultados = this.resultados.filter((d:any) => {
+        return (d.marca.toLowerCase().indexOf(query.toLowerCase()) > -1)});
+    }
+  }
+
   constructor(private router: Router, private menu: MenuController,private db: DatabaseService) {
     this.db.buscarPublicacion();
   }
@@ -33,8 +44,6 @@ export class PaginaPrincipalPage implements OnInit {
   ngAfterViewInit(){
     this.menu.enable(true);
   }
-
-  
 
   ngOnInit() {
     this.menu.enable(true);
@@ -44,9 +53,9 @@ export class PaginaPrincipalPage implements OnInit {
       if(res){
         //me subscribir al observable de la Tabla
         this.db.fetchPublicacion().subscribe(datos=>{
-          this.arregloAutos = datos.filter((x) => Number(x.estado) === 1 || Number(x.estado) === 2);
+          this.arregloAutos = datos;
+          this.resultados = this.arregloAutos;
         })
-
       }
     })
   }
