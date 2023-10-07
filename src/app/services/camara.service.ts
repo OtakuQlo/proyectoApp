@@ -13,6 +13,7 @@ export class CamaraService {
       quality: 90,
       allowEditing: false,
       resultType: CameraResultType.DataUrl,
+      source: CameraSource.Prompt,
     });
     this.foto = image.dataUrl;
   };
