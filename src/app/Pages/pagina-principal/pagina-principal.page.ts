@@ -53,7 +53,7 @@ export class PaginaPrincipalPage implements OnInit {
       if(res){
         //me subscribir al observable de la Tabla
         this.db.fetchPublicacion().subscribe(datos=>{
-          this.arregloAutos = datos;
+          this.arregloAutos = datos.filter((x) => Number(x.estado) === 1 || Number(x.estado) === 2);
           this.resultados = this.arregloAutos;
         })
       }
