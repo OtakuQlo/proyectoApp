@@ -58,7 +58,6 @@ export class PanelAdminPage implements OnInit {
         this.db.fetchPublicacion().subscribe((datos) => {
           this.solicitudAutos = datos.filter((x) => Number(x.estado) === 0);
           this.reporteAutos = datos.filter((x) => Number(x.estado) === 2);
-          this.db.presentAlert('', 'Datos agregados');
         });
       }
     });

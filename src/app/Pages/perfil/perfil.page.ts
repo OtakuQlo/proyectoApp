@@ -47,7 +47,6 @@ export class PerfilPage implements OnInit {
           this.datosnuevos = datos;
           localStorage.setItem('ïdper', this.datosnuevos.idper);
           localStorage.setItem('rol', this.datosnuevos.rol);
-          this.db.presentAlert('', 'Datos agregados');
           this.correo = this.datosnuevos.correo;
           this.apellido = this.datosnuevos.apellido;
           this.nombre = this.datosnuevos.nombre;

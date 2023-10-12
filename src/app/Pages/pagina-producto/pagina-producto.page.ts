@@ -206,7 +206,14 @@ export class PaginaProductoPage implements OnInit {
             const idPublicacion = this.idpublicacion;
             await this.db.eliminarReporte(idreporte);
             await this.db.cambiarEstadoPublicacion(idPublicacion);
-            await this.db.buscarPublicacion();
+            await this.db.buscarPublicacion();          
+            const remainingReportCount = await this.db.getRemainingReportCount(this.idpublicacion);
+            if (remainingReportCount === 0) {
+              // Redirige a la página del panel de administrador si no quedan más reportes
+              this.router.navigate(['/panel-admin']); // Asegúrate de ajustar la ruta según tu configuración.
+            } else {
+              await this.db.pasarReportes(this.idpublicacion);
+            }
             await this.db.pasarReportes(this.idpublicacion);
             this.db.presentToast('bottom', 'Reporte eliminado con éxito');
           },

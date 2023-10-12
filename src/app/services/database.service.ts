@@ -186,39 +186,6 @@ export class DatabaseService {
     await toast.present();
   }
 
-  async presentConfirmationMessage(
-    header: string,
-    message: string,
-    action: string
-  ) {
-    const alert = await this.alertController.create({
-      header: header,
-      message: message,
-      buttons: [
-        {
-          text: 'Cancelar',
-          role: 'cancel',
-          cssClass: 'secondary',
-        },
-        {
-          text: action,
-          handler: () => {
-            if (action === 'Aceptar') {
-            } else if (action === 'Rechazar') {
-              // Lógica para rechazar aquí
-            } else if (action === 'Eliminar') {
-              // Lógica para eliminar aquí
-            } else if (action === 'Eliminar Reporte') {
-              // Lógica para eliminar reporte aquí
-            }
-          },
-        },
-      ],
-    });
-
-    await alert.present();
-  }
-
   //Usuarios
 
   inicioSesion(rut: any, pass: any) {
@@ -658,29 +625,40 @@ export class DatabaseService {
     );
   }
 
-  async cambiarEstadoPublicacion(idpublicacion: string) {
+  async getRemainingReportCount(idpublicacion: string) {
     try {
-      // Verificar si la publicación tiene reportes
       const reportesCount = await this.db.executeSql(
         'SELECT COUNT(*) AS count FROM reporte WHERE idpublicacion = ?',
         [idpublicacion]
       );
+  
+      return reportesCount.rows.item(0).count;
+    } catch (error) {
+      console.error('Error al obtener el número de reportes:', error);
+    }
+  }
 
-      if (reportesCount.rows.item(0).count === 0) {
-        // Si no tiene reportes, actualiza el estado de la publicación a 1
+  async cambiarEstadoPublicacion(idpublicacion: string) {
+    try {
+      // Obtener el número de reportes restantes
+      const remainingReportCount = await this.getRemainingReportCount(idpublicacion);
+  
+      if (remainingReportCount === 0) {
+        // Si no quedan reportes, actualiza el estado de la publicación a 1
         await this.db.executeSql(
           'UPDATE publicacion SET estado = 1 WHERE idpublicacion = ?',
           [idpublicacion]
         );
         return true; // Estado cambiado con éxito
       } else {
-        return false; // La publicación tiene reportes, no se cambió el estado
+        return false; // La publicación tiene reportes restantes, no se cambió el estado
       }
     } catch (error) {
       console.error('Error al cambiar el estado de la publicación:', error);
       return false; // Error al cambiar el estado
     }
   }
+  
 
   //Cuando ingresamos a la pagina principal esta funcion permite ver los autos
   buscarPublicacion() {
