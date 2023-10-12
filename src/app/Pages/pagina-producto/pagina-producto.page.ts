@@ -139,6 +139,7 @@ export class PaginaProductoPage implements OnInit {
               const idPublicacion = this.idpublicacion;
               await this.db.actualizarEstadoPublicacion(idPublicacion, 1);
               await this.db.buscarPublicacion();
+          
               this.router.navigate(['/pagina-principal']);
               this.db.presentToast('bottom', 'Producto aceptado con exito');
             } else if (action === 'rechazar') {
@@ -186,10 +187,10 @@ export class PaginaProductoPage implements OnInit {
     await alert.present();
   }
 
-  async presentDeleteReportConfirmation(idreporte: string){
+  async presentDeleteReportConfirmation(idreporte: string) {
     const header = 'Confirmación';
     const message = '¿Estás seguro de que deseas eliminar este reporte?';
-  
+
     const alert = await this.alertController.create({
       header: header,
       message: message,
@@ -206,16 +207,21 @@ export class PaginaProductoPage implements OnInit {
             await this.db.eliminarReporte(idreporte);
             await this.db.cambiarEstadoPublicacion(idPublicacion);
             await this.db.buscarPublicacion();
+            await this.db.pasarReportes(this.idpublicacion);
             this.db.presentToast('bottom', 'Reporte eliminado con éxito');
           },
         },
       ],
     });
-  
+
     await alert.present();
   }
 
   showNumber(telefono: any) {
     this.callNumber.showNumber('+569' + telefono);
+  }
+
+  pasarReportes(id: any) {
+    this.db.pasarReportes(id);
   }
 }

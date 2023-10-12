@@ -122,7 +122,7 @@ export class DatabaseService {
     this.platform.ready().then(() =>
       this.sqlite
         .create({
-          name: 'satiscar9.db',
+          name: 'satiscar777.db',
           location: 'default',
         })
         .then((db: SQLiteObject) => {

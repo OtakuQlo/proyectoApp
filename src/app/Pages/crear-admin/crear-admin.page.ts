@@ -11,41 +11,55 @@ import { Pregunta } from 'src/app/services/pregunta';
   templateUrl: './crear-admin.page.html',
   styleUrls: ['./crear-admin.page.scss'],
 })
-export class CrearAdminPage implements OnInit  {
+export class CrearAdminPage implements OnInit {
+  arreglorut: any[] = [];
+  arregloPreguntas: any = [
+    {
+      idpregunta: '',
+      nombre: '',
+    },
+  ];
 
-  arregloPreguntas: any = [{
-    idpregunta: '',
-    nombre: ''
-  }];
-
-  constructor(private router: Router, private toastController: ToastController, private menu: MenuController, private db: DatabaseService, private camara: CamaraService) {
+  constructor(
+    private router: Router,
+    private toastController: ToastController,
+    private menu: MenuController,
+    private db: DatabaseService,
+    private camara: CamaraService
+  ) {
     this.db.pasarPregunta();
+    this.db.validarRut();
   }
 
   ngOnInit() {
     this.menu.enable(false);
 
-    this.db.bdState().subscribe(
-      res => {
-        if (res) {
-          this.db.fetchPregunta().subscribe(datos => {
-            this.arregloPreguntas = datos;
-          })
-        }
+    this.db.bdState().subscribe((res) => {
+      if (res) {
+        this.db.fetchRut().subscribe((ruts) => {
+          this.arreglorut = ruts;
+        });
       }
-    )
+    });
 
+    this.db.bdState().subscribe((res) => {
+      if (res) {
+        this.db.fetchPregunta().subscribe((datos) => {
+          this.arregloPreguntas = datos;
+        });
+      }
+    });
   }
   ngAfterViewInit() {
     this.menu.enable(true);
   }
   // regex
-  regexpass: RegExp = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%#*?^&])[A-Za-z\d@$!#%*^?&]{8,50}$/;
-  regexname: RegExp = /^[a-zA-ZÀ-ÿ\u00f1\u00d1]+(\s*[a-zA-ZÀ-ÿ\u00f1\u00d1]*)*[a-zA-ZÀ-ÿ\u00f1\u00d1]{2,100}$/;
+  regexpass: RegExp =
+    /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%#*?^&])[A-Za-z\d@$!#%*^?&]{8,50}$/;
+  regexname: RegExp =
+    /^[a-zA-ZÀ-ÿ\u00f1\u00d1]+(\s*[a-zA-ZÀ-ÿ\u00f1\u00d1]*)*[a-zA-ZÀ-ÿ\u00f1\u00d1]{2,100}$/;
   regexCorreo: RegExp = /^[a-zA-Z0-9\._-]+@[a-zA-Z0-9-]{2,}[.][a-zA-Z]{2,4}$/;
   regexTelefono: RegExp = new RegExp(/^[0-9]{8,8}$/);
-
-
 
   // variables
   nombre: string = '';
@@ -64,6 +78,7 @@ export class CrearAdminPage implements OnInit  {
   labelNombre: string = '';
   labelApellido: string = '';
   labelRut: string = '';
+  labelRut2: string = '';
   labelCorreo: string = '';
   labelPregunta: string = '';
   labelTelefono: string = '';
@@ -72,12 +87,10 @@ export class CrearAdminPage implements OnInit  {
   labelContra2: string = '';
   labelDireccion: string = '';
 
-  tomarfoto(){
-    this.foto = this.camara.takePicture();
+  async tomarfoto() {
+    await this.camara.takePicture();
+    this.foto = this.camara.foto;
   }
-
-
-
 
   irPaginaPrincipal() {
     // la bandera si está en verdadero permite que se envien los datos en caso contrario no lo permite
@@ -86,7 +99,8 @@ export class CrearAdminPage implements OnInit  {
     // validacion nombre
     if (!this.regexname.test(this.nombre)) {
       bandera = false;
-      this.labelNombre = 'El nombre debe ser sin caracteres epeciales ni numeros.';
+      this.labelNombre =
+        'El nombre debe ser sin caracteres epeciales ni numeros.';
     } else {
       this.labelNombre = '';
     }
@@ -94,25 +108,36 @@ export class CrearAdminPage implements OnInit  {
     // validacion apellido
     if (!this.regexname.test(this.apellido)) {
       bandera = false;
-      this.labelApellido = 'El Apellido debe ser sin caracteres especiales ni numeros.';
+      this.labelApellido =
+        'El Apellido debe ser sin caracteres especiales ni numeros.';
     } else {
       this.labelApellido = '';
     }
 
     // validacion this.rut
-    if (!validateRut(this.rut)) {
+    if (!validateRut(this.rut) || this.rut.charAt(this.rut.length - 2) != '-') {
       bandera = false;
       this.labelRut = 'Debe ingresar un rut sin puntos y con guion';
     } else {
       this.labelRut = '';
     }
 
+    for (let i = 0; i < this.arreglorut.length; i++) {
+      if (this.rut == this.arreglorut[i]) {
+        bandera = false;
+        this.labelRut2 = 'El rut ingresado ya esta registrado.';
+        break;
+      } else {
+        this.labelRut2 = '';
+      }
+    }
+
     // validacion contraseña
     if (!this.regexpass.test(this.contra)) {
       bandera = false;
       this.contra = '';
-      this.labelContra = 'Debe ingresar una contraseña con carateres especiales, mayuscula y numero con minimo de 8 y maximo de 50 caracteres';
-
+      this.labelContra =
+        'Debe ingresar una contraseña con carateres especiales, mayuscula y numero con minimo de 8 y maximo de 50 caracteres';
     } else {
       this.labelContra = '';
     }
@@ -146,7 +171,8 @@ export class CrearAdminPage implements OnInit  {
     // validacion respuesta
     if (this.respuesta.length < 5 || this.respuesta.length > 200) {
       bandera = false;
-      this.labelRespuesta = 'Debe ingresar una respuesta de minimo 5 caracteres y maximo 200';
+      this.labelRespuesta =
+        'Debe ingresar una respuesta de minimo 5 caracteres y maximo 200';
     } else {
       this.labelRespuesta = '';
     }
@@ -162,16 +188,31 @@ export class CrearAdminPage implements OnInit  {
     // Validar direccion
     if (this.direccion.length < 5 || this.direccion.length > 200) {
       bandera = false;
-      this.labelDireccion = 'La dirección debe ser de minimo 5 caracteres y maximo 20';
+      this.labelDireccion =
+        'La dirección debe ser de minimo 5 caracteres y maximo 20';
     } else {
       this.labelDireccion = '';
     }
 
+    if (!this.foto) {
+      this.foto = './../assets/icon/cerrar-sesion.png';
+    }
+
     if (bandera) {
-      this.db.crearUsuario(this.nombre,this.apellido, this.rut,this.correo,this.contra,this.respuesta,this.telefono,this.direccion,"aaa",this.pregunta,1);
+      this.db.crearUsuario(
+        this.nombre,
+        this.apellido,
+        this.rut,
+        this.correo,
+        this.contra,
+        this.respuesta,
+        this.telefono,
+        this.direccion,
+        this.foto,
+        this.pregunta,
+        1
+      );
       this.router.navigate(['/perfil']);
-      
     }
   }
-  
 }

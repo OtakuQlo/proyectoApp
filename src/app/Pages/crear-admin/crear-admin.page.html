@@ -11,7 +11,12 @@
   <ion-grid class=" ion-margin-top">
     <ion-row class="ion-justify-content-center" >
           <ion-avatar class=>
-            <img *ngIf="foto"  alt="persona" [src]="foto"/>
+            <img *ngIf="foto" alt="persona" [src]="foto" />
+        <img
+          *ngIf="!foto"
+          alt="persona"
+          src="./../assets/icon/cerrar-sesion.png"
+        />
           </ion-avatar>
     </ion-row>
 
@@ -33,6 +38,7 @@
 
         <ion-input label="Rut" labelPlacement="floating" [counter]="true" maxlength="10" [(ngModel)] = "rut" placeholder="Ej: 21294525-0"></ion-input>
         <ion-label >{{labelRut}}</ion-label>
+        <ion-label>{{labelRut2}}</ion-label>
         
         
         <ion-input label="Correo electronico" labelPlacement="floating" [counter]="true"  [(ngModel)] = "correo" [counter]="true" maxlength="100" placeholder="ej: correoreal@duocuc.cl"></ion-input>
