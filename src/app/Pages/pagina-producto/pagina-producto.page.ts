@@ -144,7 +144,7 @@ export class PaginaProductoPage implements OnInit {
               this.db.presentToast('bottom', 'Producto aceptado con exito');
             } else if (action === 'rechazar') {
               const idPublicacion = this.idpublicacion;
-              await this.db.actualizarEstadoPublicacion(idPublicacion, 0);
+              await this.db.actualizarEstadoPublicacion(idPublicacion, 3);
               await this.db.buscarPublicacion();
               this.router.navigate(['/pagina-principal']);
               this.db.presentToast('bottom', 'Producto rechazado con exito');

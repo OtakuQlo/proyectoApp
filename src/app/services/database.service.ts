@@ -794,6 +794,7 @@ export class DatabaseService {
     cantidaddeuso: any,
     foto: any,
   ) {
+    const nuevoEstado = estado == '3' ? '0' : estado;
     return this.db
       .executeSql(
         'UPDATE publicacion SET modelo = ?, marca = ?, precio = ?, color = ?, transmision = ?, descripcion = ?, estado = ?, kilometraje = ?, cantidaddeuso = ?, foto = ? WHERE idpublicacion = ?;',
@@ -803,7 +804,7 @@ export class DatabaseService {
           color,
           transmision,
           descripcion,
-          estado,
+          nuevoEstado,
           kilometraje,
           cantidaddeuso,
           foto,

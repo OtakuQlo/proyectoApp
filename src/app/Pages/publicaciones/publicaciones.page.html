@@ -19,6 +19,9 @@
             <div class="ion-text-center">
               <p>{{x.marca | uppercase}} {{x.modelo | uppercase}}</p>
             </div>
+            <div *ngIf="x.estado == '3'">
+              <p class="rechazada-mensaje">Tu publicación fue rechazada. Por favor, modifícala antes de volver a publicar.</p>
+            </div>
             <ion-button fill="outline" shape="round" (click)="irModificarAuto(x.idpublicacion)">Modificar</ion-button>
             <ion-button color="danger" fill="outline" shape="round" (click)="eliminarAuto(x.idpublicacion)">Eliminar</ion-button>
           </ion-card-content>
