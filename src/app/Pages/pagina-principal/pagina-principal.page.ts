@@ -33,7 +33,7 @@ export class PaginaPrincipalPage implements OnInit {
     this.resultados = this.arregloAutos;
     if(query && query.trim() != ''){
       this.resultados = this.resultados.filter((d:any) => {
-        return (d.marca.toLowerCase().indexOf(query.toLowerCase()) > -1)});
+        return (d.marca.toLowerCase().indexOf(query.toLowerCase()) > -1 || d.modelo.toLowerCase().indexOf(query.toLowerCase()) > -1)});
     }
   }
 
