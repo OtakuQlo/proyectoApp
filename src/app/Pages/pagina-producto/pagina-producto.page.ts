@@ -231,4 +231,5 @@ export class PaginaProductoPage implements OnInit {
   pasarReportes(id: any) {
     this.db.pasarReportes(id);
   }
+  
 }
