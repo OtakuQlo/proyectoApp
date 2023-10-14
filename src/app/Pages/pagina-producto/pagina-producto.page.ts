@@ -12,6 +12,7 @@ import { DatabaseService } from 'src/app/services/database.service';
 export class PaginaProductoPage implements OnInit {
   @ViewChild('modal', { static: true }) modal!: IonModal;
   rol: any = localStorage.getItem('rol');
+  idActivo: any = localStorage.getItem('idper')
   verificador: string = '';
   tipoReporte: number = 0;
   errorLabel: string = '';

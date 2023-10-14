@@ -16,15 +16,15 @@ export class ModificarProductoPage implements OnInit {
   precio : string = '';
   color: string ='';
   marca: string ='';
-  anos!: number;
+  anos: string='';
   descrp: string = '';
-  kilometraje!: number; 
+  kilometraje: string = ''; 
   transmision: string ='';
   foto: any = './../assets/icon/boton-agregar.png';
   idusuario: string= '';
   estado: string='';
 
-  regexname: RegExp = /^[a-zA-ZÀ-ÿ\u00f1\u00d1]+(\s*[a-zA-ZÀ-ÿ\u00f1\u00d1]*)*[a-zA-ZÀ-ÿ-0-9\u00f1\u00d1]{1,100}$/;
+  regexnumber: RegExp = /^\d+$/
 
   labelModelo: string = '';
   labelPrecio: string = '';
@@ -107,10 +107,10 @@ export class ModificarProductoPage implements OnInit {
       this.labelMarca = '';
     }
 
-    if (this.kilometraje == 0 || this.kilometraje < 0 || !this.kilometraje) {
+    if (!this.regexnumber.test(this.kilometraje) || this.kilometraje == "" || parseInt(this.kilometraje) == 0) {
       pass = 1;
       this.labelKilometraje = 'Ingrese el kilometraje del Auto.';
-      if(this.kilometraje > 320000){
+      if(parseInt(this.kilometraje) > 320000){
         pass = 1;
         this.labelKilometraje = 'El auto no puede ser publicado si su kilometraje pasa los 320000.';
       }
@@ -119,14 +119,14 @@ export class ModificarProductoPage implements OnInit {
       this.labelKilometraje = '';
     }
 
-    if(this.anos == 0 || this.anos < 0 || !this.anos){
+    if(parseInt(this.anos) == 0 || this.anos == "" || !this.regexnumber.test(this.anos)){
       pass = 1;
       this.labelAnos = 'Debe ingresar como minimo 1 año.';
     }else{
       this.labelAnos = '';
     }
 
-    if(parseInt(this.precio) == 0 || this.precio == "" || this.regexname.test(this.precio)){
+    if(parseInt(this.precio) == 0 || this.precio == "" || !this.regexnumber.test(this.precio)){
       pass = 1;
       this.labelPrecio = 'Ingrese un precio para su Auto en venta.';
     }else{

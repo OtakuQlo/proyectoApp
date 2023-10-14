@@ -60,7 +60,7 @@
       </ion-col>
     </ion-row>
     <ion-row class="ion-justify-content-center">
-      <ion-col *ngIf="rol == '2' && idusuario != localStorage.getItem('idper')" size="4">
+      <ion-col *ngIf="rol == '2' && idusuario != idActivo" size="4">
         <ion-button
           color="danger"
           style="font-size: 12px; width: 105px"

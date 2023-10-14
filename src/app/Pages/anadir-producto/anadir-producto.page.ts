@@ -24,7 +24,7 @@ export class AnadirProductoPage implements OnInit {
   transmisionV: string ="";
   foto: any = './../assets/icon/boton-agregar.png';
 
-  regexname: RegExp = /^[a-zA-ZÀ-ÿ\u00f1\u00d1]+(\s*[a-zA-ZÀ-ÿ\u00f1\u00d1]*)*[a-zA-ZÀ-ÿ\u00f1\u00d1]{1,100}$/;
+  regexnumber: RegExp = /^\d+$/
 
   labelModelo: string = '';
   labelPrecio: string = '';
@@ -98,7 +98,7 @@ export class AnadirProductoPage implements OnInit {
       this.labelMarca = '';
     }
 
-    if (parseInt(this.kilometrajeV) == 0 || this.kilometrajeV == "" || this.regexname.test(this.kilometrajeV) ) {
+    if (!this.regexnumber.test(this.kilometrajeV) || this.kilometrajeV == "" || parseInt(this.kilometrajeV) == 0) {
       pass = 1;
       this.labelKilometraje = 'Ingrese el kilometraje del Auto.';
       if(parseInt(this.kilometrajeV) > 320000){
@@ -110,14 +110,14 @@ export class AnadirProductoPage implements OnInit {
       this.labelKilometraje = '';
     }
 
-    if(parseInt(this.anosV) == 0 || this.anosV == "" || this.regexname.test(this.anosV)){
+    if(parseInt(this.anosV) == 0 || this.anosV == "" || !this.regexnumber.test(this.anosV)){
       pass = 1;
       this.labelAnos = 'Debe ingresar como minimo 1 año.';
     }else{
       this.labelAnos = '';
     }
 
-    if(parseInt(this.precioV) == 0 || this.precioV == "" || this.regexname.test(this.precioV)){
+    if(parseInt(this.precioV) == 0 || this.precioV == "" || !this.regexnumber.test(this.precioV)){
       pass = 1;
       this.labelPrecio = 'Ingrese un precio para su Auto en venta.';
     }else{
