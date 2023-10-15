@@ -66,7 +66,6 @@ export class DatabaseService {
   pass = new BehaviorSubject([]);
   datosCambioPass = new BehaviorSubject([]);
   reportes = new BehaviorSubject([]);
-  filtro = new BehaviorSubject([]);
 
   //observable para la BD
   private isDBReady: BehaviorSubject<boolean> = new BehaviorSubject(false);
@@ -107,10 +106,6 @@ export class DatabaseService {
 
   fetchRut(): Observable<any[]> {
     return this.ruts.asObservable();
-  }
-
-  fetchFiltro(): Observable<any[]> {
-    return this.filtro.asObservable();
   }
 
   fetchPubliUser(): Observable<any[]> {
@@ -711,7 +706,7 @@ export class DatabaseService {
   }
 
   //Buscador de autos
-  buscarAuto(query:any) {
+  /*buscarAuto(query:any) {
     return this.db
       .executeSql('SELECT * FROM publicacion WHERE marca LIKE %?% OR modelo LIKE %?%;', [
         query, query
@@ -736,12 +731,11 @@ export class DatabaseService {
             });
           }
         }
-        this.filtro.next(publicacion as any);
       })
       .catch((e) => {
         this.presentAlert('', 'Error al buscar la publicacion' + e);
       });
-  }
+  }*/
 
   //Añadir nuevos autos
   crearPublicacion(
