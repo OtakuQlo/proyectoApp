@@ -66,6 +66,7 @@ export class DatabaseService {
   pass = new BehaviorSubject([]);
   datosCambioPass = new BehaviorSubject([]);
   reportes = new BehaviorSubject([]);
+  filtro = new BehaviorSubject([]);
 
   //observable para la BD
   private isDBReady: BehaviorSubject<boolean> = new BehaviorSubject(false);
@@ -106,6 +107,10 @@ export class DatabaseService {
 
   fetchRut(): Observable<any[]> {
     return this.ruts.asObservable();
+  }
+
+  fetchFiltro(): Observable<any[]> {
+    return this.filtro.asObservable();
   }
 
   fetchPubliUser(): Observable<any[]> {
@@ -706,31 +711,32 @@ export class DatabaseService {
   }
 
   //Buscador de autos
-  buscarAuto(marca: any, modelo: any) {
+  buscarAuto(query:any) {
     return this.db
-      .executeSql('SELECT * FROM publicacion WHERE marca = ? OR modelo = ?', [
-        marca,
-        modelo,
+      .executeSql('SELECT * FROM publicacion WHERE marca LIKE %?% OR modelo LIKE %?%;', [
+        query, query
       ])
       .then((res) => {
-        let publicacion: Publicacion[] = [];
+        let publicacion: any;
         if (res.rows.length > 0) {
-          publicacion.push({
-            idpublicacion: res.rows.item(0).idpublicacion,
-            modelo: res.rows.item(0).modelo,
-            marca: res.rows.item(0).marca,
-            precio: res.rows.item(0).precio,
-            color: res.rows.item(0).color,
-            transmision: res.rows.item(0).transmision,
-            descripcion: res.rows.item(0).descripcion,
-            estado: res.rows.item(0).estado,
-            kilometraje: res.rows.item(0).kilometraje,
-            cantidaddeuso: res.rows.item(0).cantidaddeuso,
-            foto: res.rows.item(0).foto,
-            idusuario: res.rows.item(0).idusuario,
-          });
+          for (var i = 0; i < res.rows.length; i++) {
+            publicacion.push({
+              idpublicacion: res.rows.item(i).idpublicacion,
+              modelo: res.rows.item(i).modelo,
+              marca: res.rows.item(i).marca,
+              precio: res.rows.item(i).precio,
+              color: res.rows.item(i).color,
+              transmision: res.rows.item(i).transmision,
+              descripcion: res.rows.item(i).descripcion,
+              estado: res.rows.item(i).estado,
+              kilometraje: res.rows.item(i).kilometraje,
+              cantidaddeuso: res.rows.item(i).cantidaddeuso,
+              foto: res.rows.item(i).foto,
+              idusuario: res.rows.item(i).idusuario,
+            });
+          }
         }
-        this.observer.next(publicacion as any);
+        this.filtro.next(publicacion as any);
       })
       .catch((e) => {
         this.presentAlert('', 'Error al buscar la publicacion' + e);
@@ -753,7 +759,7 @@ export class DatabaseService {
   ) {
     return this.db
       .executeSql(
-        'INSERT or IGNORE INTO publicacion(modelo,marca,precio,color,transmision,descripcion,estado,kilometraje,cantidaddeuso,foto,idusuario) VALUES (UPPER(?),?,?,?,?,?,?,?,?,?,?)',
+        'INSERT or IGNORE INTO publicacion(modelo,marca,precio,color,transmision,descripcion,estado,kilometraje,cantidaddeuso,foto,idusuario) VALUES (UPPER(?),UPPER(?),?,?,?,?,?,?,?,?,?)',
         [
           modelo,
           marca,

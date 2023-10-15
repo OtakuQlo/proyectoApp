@@ -34,17 +34,8 @@ export class PaginaPrincipalPage implements OnInit {
     this.resultados = this.arregloAutos;
     if(query && query.trim() != ''){
       this.resultados = this.resultados.filter((d:any) => {
-        /*if (query.toLowerCase().includes(d.marca.toLowerCase() || d.modelo.toLowerCase())){
-          return (d.modelo.marca.toLowerCase().indexOf(query.toLowerCase()) > -1 || d.marca.toLowerCase().indexOf(query.toLowerCase()) > -1)
-        }else if(query.toLowerCase().includes(d.marca.toLowerCase() && d.modelo.toLowerCase())){
-          
-          return (d.indexOf()) 
-        }
-        else{
-          this.db.presentToast('bottom','No se encontro ningun producto :(')
-        }*/
-        return (d.modelo.marca.toLowerCase().indexOf(query.toLowerCase()) > -1)
-      });
+        return (d.marca.toLowerCase().indexOf(query.toLowerCase())) > -1 || (d.modelo.toLowerCase().indexOf(query.toLowerCase())) > -1
+      })
     }
   }
 
