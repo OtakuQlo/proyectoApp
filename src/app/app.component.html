@@ -5,12 +5,12 @@
         <ion-header>
           <ion-toolbar>
             <ion-item [routerLink]="['/perfil']">
-              <ion-avatar slot="start" style="height: 15%; width: 20%">
+              <ion-avatar>
                 <img alt="Silhouette of a person's head" [src]="foto" />
               </ion-avatar>
-              <ion-label
-                ><h2>{{ nombre }} {{ apellido }} {{ id }}</h2></ion-label
-              >
+              <ion-label style="margin-left: 10px; margin-top: 20px">
+                <h2>{{ nombre }} {{ apellido }} {{ id }}</h2>
+              </ion-label>
             </ion-item>
           </ion-toolbar>
         </ion-header>

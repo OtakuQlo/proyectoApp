@@ -95,7 +95,6 @@ export class ModificarPerfilPage implements OnInit {
 
     this.db.editarPerfil(localStorage.getItem("idper"),this.nombre,this.apellido,this.correo,this.telefono,this.direccion,this.foto);
     let nombre:any = localStorage.getItem("nombre");
-    this.db.presentAlert("",nombre);
     this.router.navigate(['/perfil']);
 
     }

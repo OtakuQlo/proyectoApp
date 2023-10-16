@@ -11,11 +11,7 @@
     <ion-row class="ion-justify-content-center">
       <ion-avatar>
         <img *ngIf="foto" alt="persona" [src]="foto" />
-        <img
-          *ngIf="!foto"
-          alt="persona"
-          src="./../assets/icon/cerrar-sesion.png"
-        />
+        <img *ngIf="!foto" alt="persona" src="./../assets/icon/avatar.png" />
       </ion-avatar>
       <ion-label>{{labelFoto}}</ion-label>
     </ion-row>

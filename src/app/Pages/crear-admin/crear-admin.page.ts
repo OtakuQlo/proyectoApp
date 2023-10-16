@@ -195,7 +195,7 @@ export class CrearAdminPage implements OnInit {
     }
 
     if (!this.foto) {
-      this.foto = './../assets/icon/cerrar-sesion.png';
+      this.foto = './../assets/icon/avatar.png';
     }
 
     if (bandera) {

@@ -354,8 +354,7 @@ export class DatabaseService {
             }
             this.usuarios.next(datos as any);
           });
-      })
-      .catch((e) => this.presentAlert('', 'Error en editar datos' + e));
+      });
   }
 
   pasarUsuario(id: any) {
@@ -499,10 +498,9 @@ export class DatabaseService {
   pasarmodificarPublicacion(idpubli: any) {
     let navigationExtras: NavigationExtras;
     return this.db
-      .executeSql(
-        'SELECT * FROM publicacion WHERE idpublicacion = ?',
-        [idpubli]
-      )
+      .executeSql('SELECT * FROM publicacion WHERE idpublicacion = ?', [
+        idpubli,
+      ])
       .then((res) => {
         if (res.rows.length > 0) {
           navigationExtras = {
@@ -545,6 +543,7 @@ export class DatabaseService {
           'UPDATE publicacion SET estado = 2 WHERE idpublicacion = ?;',
           [idpublicacion]
         );
+        this.presentToast('bottom', 'La publicación ha sido reportada.');
       })
       .catch((e) => {
         this.presentAlert(
@@ -612,17 +611,15 @@ export class DatabaseService {
   }
 
   eliminarReporte(idreporte: string) {
-    return this.db.executeSql(
-      'DELETE FROM reporte WHERE idreporte = ?',
-      [idreporte]
-    );
+    return this.db.executeSql('DELETE FROM reporte WHERE idreporte = ?', [
+      idreporte,
+    ]);
   }
 
   eliminarTodosReportes(idpublicacion: string) {
-    return this.db.executeSql(
-      'DELETE FROM reporte WHERE idpublicacion = ?',
-      [idpublicacion]
-    );
+    return this.db.executeSql('DELETE FROM reporte WHERE idpublicacion = ?', [
+      idpublicacion,
+    ]);
   }
 
   async getRemainingReportCount(idpublicacion: string) {
@@ -631,7 +628,7 @@ export class DatabaseService {
         'SELECT COUNT(*) AS count FROM reporte WHERE idpublicacion = ?',
         [idpublicacion]
       );
-  
+
       return reportesCount.rows.item(0).count;
     } catch (error) {
       console.error('Error al obtener el número de reportes:', error);
@@ -641,8 +638,10 @@ export class DatabaseService {
   async cambiarEstadoPublicacion(idpublicacion: string) {
     try {
       // Obtener el número de reportes restantes
-      const remainingReportCount = await this.getRemainingReportCount(idpublicacion);
-  
+      const remainingReportCount = await this.getRemainingReportCount(
+        idpublicacion
+      );
+
       if (remainingReportCount === 0) {
         // Si no quedan reportes, actualiza el estado de la publicación a 1
         await this.db.executeSql(
@@ -658,7 +657,6 @@ export class DatabaseService {
       return false; // Error al cambiar el estado
     }
   }
-  
 
   //Cuando ingresamos a la pagina principal esta funcion permite ver los autos
   buscarPublicacion() {
@@ -792,13 +790,14 @@ export class DatabaseService {
     estado: any,
     kilometraje: any,
     cantidaddeuso: any,
-    foto: any,
+    foto: any
   ) {
     const nuevoEstado = estado == '3' ? '0' : estado;
     return this.db
       .executeSql(
         'UPDATE publicacion SET modelo = ?, marca = ?, precio = ?, color = ?, transmision = ?, descripcion = ?, estado = ?, kilometraje = ?, cantidaddeuso = ?, foto = ? WHERE idpublicacion = ?;',
-        [modelo,
+        [
+          modelo,
           marca,
           precio,
           color,
@@ -808,12 +807,14 @@ export class DatabaseService {
           kilometraje,
           cantidaddeuso,
           foto,
-          idpublicacion
+          idpublicacion,
         ]
-      ).then( ()=>{
+      )
+      .then(() => {
         this.publicacionUser(iduser);
       })
-      .catch( e =>{
-        this.presentAlert("","error updatear publicacion" + JSON.stringify(e))
-      })}
-    }
+      .catch((e) => {
+        this.presentAlert('', 'error updatear publicacion' + JSON.stringify(e));
+      });
+  }
+}
