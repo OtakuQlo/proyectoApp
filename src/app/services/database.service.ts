@@ -812,6 +812,7 @@ export class DatabaseService {
       )
       .then(() => {
         this.publicacionUser(iduser);
+        this.buscarPublicacion();
       })
       .catch((e) => {
         this.presentAlert('', 'error updatear publicacion' + JSON.stringify(e));
