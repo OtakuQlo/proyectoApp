@@ -16,12 +16,12 @@ export class AnadirProductoPage implements OnInit {
   
   modeloV: string = "";
   precioV : string = "";
-  colorV: string ="";
-  marcaV: string ="";
+  colorV: string = "";
+  marcaV: string = "";
   anosV : string = "";
   descrpV: string = "";
   kilometrajeV : string = ""; 
-  transmisionV: string ="";
+  transmisionV: string = "";
   foto: any = './../assets/icon/boton-agregar.png';
 
   regexnumber: RegExp = /^\d+$/
@@ -40,7 +40,17 @@ export class AnadirProductoPage implements OnInit {
   arrMarca : string[] = ["Chevrolet","Audi","Alfa Romeo", "Subaru"];
   arrColor : string[] = ["Rojo","Azul","Gris", "Blanco", "Negro"];
 
-  constructor(private router:Router,private db: DatabaseService, private camara: CamaraService) { }
+  constructor(private router:Router,private db: DatabaseService, private camara: CamaraService) {
+    this.modeloV = "";
+    this.precioV  = "";
+    this.colorV = "";
+    this.marcaV = "";
+    this.anosV = "";
+    this.descrpV = "";
+    this.kilometrajeV = ""; 
+    this.transmisionV = "";
+    this.foto = './../assets/icon/boton-agregar.png';
+   }
 
 
   ngOnInit() {
@@ -63,7 +73,7 @@ export class AnadirProductoPage implements OnInit {
       this.labelModelo = '';
     }
     
-    if(!this.camara.foto){
+    if(!this.camara.foto && this.foto === './../assets/icon/boton-agregar.png'){
       pass = 1;
       this.labelFoto = 'Necesita agregar unicamente una foto a la publicacion'
     }else{
