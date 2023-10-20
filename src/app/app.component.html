@@ -66,10 +66,7 @@
           <ion-toolbar>
             <ion-item [routerLink]="['/perfil']">
               <ion-avatar slot="start" style="height: 15%; width: 15%">
-                <img
-                  alt="Silhouette of a person's head"
-                  src="https://ionicframework.com/docs/img/demos/avatar.svg"
-                />
+                <img alt="Silhouette of a person's head" [src]="foto" />
               </ion-avatar>
               <ion-label
                 ><h2>{{ nombre }} {{ apellido }} {{ id }}</h2></ion-label

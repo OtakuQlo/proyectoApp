@@ -160,22 +160,10 @@ export class CrearAdminPage implements OnInit {
     }
 
     // validacion pregunta
-    if (parseInt(this.pregunta) == 0) {
-      bandera = false;
-      this.labelPregunta = 'Debe ingresar una opcion';
-    } else {
-      this.labelPregunta = '';
-      this.pregunta = 'coño';
-    }
+    
 
     // validacion respuesta
-    if (this.respuesta.length < 5 || this.respuesta.length > 200) {
-      bandera = false;
-      this.labelRespuesta =
-        'Debe ingresar una respuesta de minimo 5 caracteres y maximo 200';
-    } else {
-      this.labelRespuesta = '';
-    }
+    
 
     // validacion telefono
     if (!this.regexTelefono.test(this.telefono)) {
@@ -205,11 +193,11 @@ export class CrearAdminPage implements OnInit {
         this.rut,
         this.correo,
         this.contra,
-        this.respuesta,
+        1,
         this.telefono,
         this.direccion,
         this.foto,
-        this.pregunta,
+        "12345",
         1
       );
       this.router.navigate(['/perfil']);

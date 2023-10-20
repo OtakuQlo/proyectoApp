@@ -34,9 +34,9 @@ export class DatabaseService {
     "INSERT or IGNORE INTO rol(idrol,nombre) VALUES (2,'Usuario');";
 
   registroUsuario1: string =
-    "INSERT or IGNORE INTO usuario(idusuario,nombre,apellido,rut,correo,clave,respuesta,telefono,direccion,foto,idpregunta,idrol) VALUES (1,'Miguel','Pérez','21294525-0','correoreal@duocuc.cl','!Miguel123','AUTOMATICA','87653452','Casa','',(SELECT idpregunta from pregunta WHERE idpregunta=1), (SELECT idrol from rol WHERE idrol=2));";
+    "INSERT or IGNORE INTO usuario(idusuario,nombre,apellido,rut,correo,clave,respuesta,telefono,direccion,foto,idpregunta,idrol) VALUES (1,'Miguel','Pérez','21294525-0','correoreal@duocuc.cl','!Miguel123','AUTOMATICA','87653452','Casa','./../assets/icon/avatar.png',(SELECT idpregunta from pregunta WHERE idpregunta=1), (SELECT idrol from rol WHERE idrol=2));";
   registroUsuario2: string =
-    "INSERT or IGNORE INTO usuario(idusuario,nombre,apellido,rut,correo,clave,respuesta,telefono,direccion,foto,idpregunta,idrol) VALUES (2,'Gabriel','Maneiro','21921084-1','ga.maneiro@duocuc.cl','!Miguel123','AUTOMATICA','96842823','Casa2','',(SELECT idpregunta from pregunta WHERE idpregunta=2), (SELECT idrol from rol WHERE idrol=1));";
+    "INSERT or IGNORE INTO usuario(idusuario,nombre,apellido,rut,correo,clave,respuesta,telefono,direccion,foto,idpregunta,idrol) VALUES (2,'Gabriel','Maneiro','21921084-1','ga.maneiro@duocuc.cl','!Miguel123','AUTOMATICA','96842823','Casa2','./../assets/icon/avatar.png',(SELECT idpregunta from pregunta WHERE idpregunta=2), (SELECT idrol from rol WHERE idrol=1));";
   registroUsuario3: string =
     "INSERT or IGNORE INTO usuario(idusuario,nombre,apellido,rut,correo,clave,respuesta,telefono,direccion,foto,idpregunta,idrol) VALUES (3,'Carlos','Pérez','11111111-1','Carlos1@gmail.com','!Miguel123','AUTOMATICA','53487652','Hogar','',(SELECT idpregunta from pregunta WHERE idpregunta=1), (SELECT idrol from rol WHERE idrol=1));";
   registroUsuario4: string =
@@ -122,7 +122,7 @@ export class DatabaseService {
     this.platform.ready().then(() =>
       this.sqlite
         .create({
-          name: 'satis.db',
+          name: 'bd.db',
           location: 'default',
         })
         .then((db: SQLiteObject) => {
