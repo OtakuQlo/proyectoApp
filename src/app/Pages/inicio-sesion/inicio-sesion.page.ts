@@ -142,8 +142,8 @@ export class InicioSesionPage implements OnInit {
     }
 
     // validacion igualdad de las dos contraseñas
-    if (this.contra != this.contra2) {
-      this.bandera = false;
+    if (this.contra2 != this.contra) {
+      bandera = false;
       this.contra2 = '';
       this.labelContra2 = 'Deben coincidir las contraseñas';
     } else {
