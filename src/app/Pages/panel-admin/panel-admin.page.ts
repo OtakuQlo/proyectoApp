@@ -86,7 +86,6 @@ export class PanelAdminPage implements OnInit {
 
   pasarReportes(x: any) {
     this.db.pasarReportes(x.idpublicacion);
-    alert(x.idpublicacion);
   }
 
   pasarPersona(id: any) {
