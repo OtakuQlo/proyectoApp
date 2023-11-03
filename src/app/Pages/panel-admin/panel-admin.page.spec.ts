@@ -5,11 +5,11 @@ describe('PanelAdminPage', () => {
   let component: PanelAdminPage;
   let fixture: ComponentFixture<PanelAdminPage>;
 
-  beforeEach(async(() => {
+  beforeEach(async() => {
     fixture = TestBed.createComponent(PanelAdminPage);
     component = fixture.componentInstance;
     fixture.detectChanges();
-  }));
+  });
 
   it('should create', () => {
     expect(component).toBeTruthy();

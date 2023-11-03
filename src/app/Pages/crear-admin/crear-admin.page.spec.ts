@@ -5,11 +5,11 @@ describe('CrearAdminPage', () => {
   let component: CrearAdminPage;
   let fixture: ComponentFixture<CrearAdminPage>;
 
-  beforeEach(async(() => {
+  beforeEach(async() => {
     fixture = TestBed.createComponent(CrearAdminPage);
     component = fixture.componentInstance;
     fixture.detectChanges();
-  }));
+  });
 
   it('should create', () => {
     expect(component).toBeTruthy();

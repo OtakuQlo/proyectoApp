@@ -5,11 +5,11 @@ describe('ReportarAutoPage', () => {
   let component: ReportarAutoPage;
   let fixture: ComponentFixture<ReportarAutoPage>;
 
-  beforeEach(async(() => {
+  beforeEach(async() => {
     fixture = TestBed.createComponent(ReportarAutoPage);
     component = fixture.componentInstance;
     fixture.detectChanges();
-  }));
+  });
 
   it('should create', () => {
     expect(component).toBeTruthy();

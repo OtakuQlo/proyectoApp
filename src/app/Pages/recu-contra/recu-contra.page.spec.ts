@@ -5,11 +5,11 @@ describe('RecuContraPage', () => {
   let component: RecuContraPage;
   let fixture: ComponentFixture<RecuContraPage>;
 
-  beforeEach(async(() => {
+  beforeEach(async() => {
     fixture = TestBed.createComponent(RecuContraPage);
     component = fixture.componentInstance;
     fixture.detectChanges();
-  }));
+  });
 
   it('should create', () => {
     expect(component).toBeTruthy();

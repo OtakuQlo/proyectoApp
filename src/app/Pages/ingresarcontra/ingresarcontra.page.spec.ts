@@ -5,11 +5,11 @@ describe('IngresarcontraPage', () => {
   let component: IngresarcontraPage;
   let fixture: ComponentFixture<IngresarcontraPage>;
 
-  beforeEach(async(() => {
+  beforeEach(async() => {
     fixture = TestBed.createComponent(IngresarcontraPage);
     component = fixture.componentInstance;
     fixture.detectChanges();
-  }));
+  });
 
   it('should create', () => {
     expect(component).toBeTruthy();

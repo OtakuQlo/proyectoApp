@@ -5,11 +5,11 @@ describe('AnadirProductoPage', () => {
   let component: AnadirProductoPage;
   let fixture: ComponentFixture<AnadirProductoPage>;
 
-  beforeEach(async(() => {
+  beforeEach(async() => {
     fixture = TestBed.createComponent(AnadirProductoPage);
     component = fixture.componentInstance;
     fixture.detectChanges();
-  }));
+  });
 
   it('should create', () => {
     expect(component).toBeTruthy();
