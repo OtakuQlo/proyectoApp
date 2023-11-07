@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import {Router } from '@angular/router';
 import { AlertController, MenuController } from '@ionic/angular';
 import { DatabaseService } from 'src/app/services/database.service';
 
@@ -20,16 +20,8 @@ export class IngresarcontraPage implements OnInit {
     private router: Router,
     private alertController: AlertController,
     private menu: MenuController,
-    private activedRouter: ActivatedRoute,
     private db: DatabaseService
   ) {
-    // this.activedRouter.queryParams.subscribe((res) => {
-    //   if (this.router.getCurrentNavigation()?.extras.state) {
-    //     this.contra =
-    //       this.router.getCurrentNavigation()?.extras?.state?.['clave'];
-    //     this.id = this.router.getCurrentNavigation()?.extras?.state?.['id'];
-    //   }
-    // });
 
     this.db.bdState().subscribe((res) => {
       this.db.fetchpass().subscribe((datos) => {
