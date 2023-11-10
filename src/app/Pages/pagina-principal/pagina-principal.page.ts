@@ -1,6 +1,7 @@
 import { Component, OnInit} from '@angular/core';
 import { NavigationExtras, Router } from '@angular/router';
 import { MenuController } from '@ionic/angular';
+import { ApiServiceService } from 'src/app/services/api-service.service';
 import { DatabaseService } from 'src/app/services/database.service';
 
 @Component({
@@ -27,6 +28,7 @@ export class PaginaPrincipalPage implements OnInit {
     idusuario: ''
   }];
 
+  dolar: number = 0;
   resultados: any;
 
   handleInput(event:any){
@@ -39,8 +41,9 @@ export class PaginaPrincipalPage implements OnInit {
     }
   }
 
-  constructor(private router: Router, private menu: MenuController,private db: DatabaseService) {
-    this.db.buscarPublicacion();
+  constructor(private router: Router, private menu: MenuController,private db: DatabaseService, private api:ApiServiceService) {
+    // this.db.buscarPublicacion();
+    
   }
   
   ngAfterViewInit(){
@@ -59,6 +62,10 @@ export class PaginaPrincipalPage implements OnInit {
           this.resultados = this.arregloAutos;
         })
       }
+    })
+    this.api.getPost().subscribe((res)=>{
+      this.dolar = res.serie[0].valor;
+      console.log(this.dolar)
     })
   }
 
