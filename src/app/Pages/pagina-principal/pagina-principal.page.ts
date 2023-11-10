@@ -42,7 +42,7 @@ export class PaginaPrincipalPage implements OnInit {
   }
 
   constructor(private router: Router, private menu: MenuController,private db: DatabaseService, private api:ApiServiceService) {
-    // this.db.buscarPublicacion();
+    this.db.buscarPublicacion();
     
   }
   
@@ -63,10 +63,7 @@ export class PaginaPrincipalPage implements OnInit {
         })
       }
     })
-    this.api.getPost().subscribe((res)=>{
-      this.dolar = res.serie[0].valor;
-      console.log(this.dolar)
-    })
+    
   }
 
   play(x:any) {

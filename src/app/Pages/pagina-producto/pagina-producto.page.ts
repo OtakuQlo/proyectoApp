@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, NavigationExtras, Router } from '@angular/router';
 import { IonModal, MenuController, AlertController } from '@ionic/angular';
+import { ApiServiceService } from 'src/app/services/api-service.service';
 import { CallnumberService } from 'src/app/services/callnumber.service';
 import { DatabaseService } from 'src/app/services/database.service';
 
@@ -29,6 +30,8 @@ export class PaginaProductoPage implements OnInit {
   foto: any;
   idusuario!: any;
 
+  dolar: any;
+
   nombre: any;
   apellido: any;
   direccion: any;
@@ -53,7 +56,8 @@ export class PaginaProductoPage implements OnInit {
     private menu: MenuController,
     private db: DatabaseService,
     private alertController: AlertController,
-    private callNumber: CallnumberService
+    private callNumber: CallnumberService,
+    private api:ApiServiceService
   ) {
     this.activedRouter.queryParams.subscribe((res) => {
       if (this.router.getCurrentNavigation()?.extras.state) {
@@ -106,6 +110,10 @@ export class PaginaProductoPage implements OnInit {
         });
       }
     });
+    this.api.getPost().subscribe((res)=>{
+      this.dolar = res.serie[0].valor;
+      this.dolar = Math.trunc(this.precio/this.dolar);
+    })
   }
 
   reportarAuto() {
