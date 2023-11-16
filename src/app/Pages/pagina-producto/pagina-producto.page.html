@@ -16,15 +16,15 @@
         <ion-card color="light">
           <ion-card-content>
             <ion-row>
-              <h1>{{marca | uppercase}} {{modelo | uppercase}}</h1>
+              <h1>{{marca | uppercase}} {{modelo | uppercase }}</h1>
             </ion-row>
             <ion-row>
               <h2>{{precio | currency : 'CLP' : '$'}}</h2>
               <h2>{{dolar | currency : '$'}} (Precio en dolares)</h2>
             </ion-row>
             <div>
-              <ion-row>VENDEDOR: {{nombre| uppercase}} </ion-row>
-              <ion-row>DIRECCIÓN: {{direccion | uppercase}} </ion-row>
+              <ion-row>VENDEDOR: {{nombre| uppercase }} </ion-row>
+              <ion-row>DIRECCIÓN: {{direccion | uppercase }} </ion-row>
               <ion-row  (click)="showNumber(telefono)"
                 >CONTACTO : <u style="color: blue;">+569{{telefono}}</u></ion-row
               >

@@ -11,7 +11,8 @@ import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { TopBarComponent } from './Components/top-bar/top-bar.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SQLite } from '@awesome-cordova-plugins/sqlite/ngx';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule} from '@angular/common/http';
+
 
 
 
