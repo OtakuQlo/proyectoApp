@@ -65,6 +65,7 @@ export class PublicacionesPage implements OnInit {
           handler: async () => {
             await this.db.eliminarProducto(idpublicacion);
             await this.db.publicacionUser(this.iduser);
+            await this.db.buscarPublicacion();
             this.db.presentToast('bottom', 'Publicación eliminada con éxito');
           },
         },

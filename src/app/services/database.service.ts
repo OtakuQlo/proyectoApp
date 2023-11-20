@@ -703,38 +703,6 @@ export class DatabaseService {
     );
   }
 
-  //Buscador de autos
-  /*buscarAuto(query:any) {
-    return this.db
-      .executeSql('SELECT * FROM publicacion WHERE marca LIKE %?% OR modelo LIKE %?%;', [
-        query, query
-      ])
-      .then((res) => {
-        let publicacion: any;
-        if (res.rows.length > 0) {
-          for (var i = 0; i < res.rows.length; i++) {
-            publicacion.push({
-              idpublicacion: res.rows.item(i).idpublicacion,
-              modelo: res.rows.item(i).modelo,
-              marca: res.rows.item(i).marca,
-              precio: res.rows.item(i).precio,
-              color: res.rows.item(i).color,
-              transmision: res.rows.item(i).transmision,
-              descripcion: res.rows.item(i).descripcion,
-              estado: res.rows.item(i).estado,
-              kilometraje: res.rows.item(i).kilometraje,
-              cantidaddeuso: res.rows.item(i).cantidaddeuso,
-              foto: res.rows.item(i).foto,
-              idusuario: res.rows.item(i).idusuario,
-            });
-          }
-        }
-      })
-      .catch((e) => {
-        this.presentAlert('', 'Error al buscar la publicacion' + e);
-      });
-  }*/
-
   //Añadir nuevos autos
   crearPublicacion(
     modelo: any,
